@@ -9,10 +9,19 @@ dotenv.config();
 const mssql_config: my_interface['mssql']['config'] = {
     host: process.env.MSSQL_SERVER_HOST || '127.0.0.1',
     port: Number(process.env.MSSQL_SERVER_POST) || 1434,
-    database: process.env.MSSQL_SERVER_DATABASE || 'shopm', 
+    database: process.env.MSSQL_SERVER_DATABASE || 'shopm_dev', 
     username: process.env.MSSQL_SERVER_USERNAME || 'sa',
     password: process.env.MSSQL_SERVER_PASSWORD || '201195laducHai'
 }
+
+const mssql_change_history_config: my_interface['mssql']['config'] = {
+    host: process.env.MSSQL_CHANGE_HISTORY_SERVER_HOST || '127.0.0.1',
+    port: Number(process.env.MSSQL_CHANGE_HISTORY_SERVER_POST) || 1434,
+    database: process.env.MSSQL_CHANGE_HISTORY_SERVER_DATABASE || 'shopm_change_history_dev', 
+    username: process.env.MSSQL_CHANGE_HISTORY_SERVER_USERNAME || 'sa',
+    password: process.env.MSSQL_CHANGE_HISTORY_SERVER_PASSWORD || '201195laducHai'
+}
+
 
 const redis_config: my_interface['redis']['config'] = {
     host: process.env.REDIS_SERVER_HOST || '127.0.0.1',
@@ -21,4 +30,4 @@ const redis_config: my_interface['redis']['config'] = {
     password: process.env.REDIS_SERVER_PASSWORD || ''
 }
 
-export { mssql_config, redis_config }
+export { mssql_config, mssql_change_history_config, redis_config }
