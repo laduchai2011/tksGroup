@@ -3,18 +3,5 @@ node_modules/
 dist/
 build/
 
-# Ignore TypeScript output (if applicable)
-*.js
-*.jsx
-*.d.ts
-
-# Ignore test snapshots and coverage
-coverage/
-*.snap
-
 # Ignore configuration and environment files
 .env
-*.config.js
-*.config.cjs
-
-eslint.config.mjs

@@ -16,14 +16,18 @@ export default [
         plugins: {
             import: importPlugin,
         },
-        files: ['src/**/*.js'],
+        ignores: ['dist/**', 'node_modules/**'],
+        files: ['src/**/*.ts'],
         rules: {
             '@typescript-eslint/no-unused-vars': 'warn',
-            '@typescript-eslint/no-console': 'error',
+            // 'no-console': 'warn',
             'import/no-unused-modules': [
-                2,
+                'warn',
                 {
-                    unusedExports: true,
+                    unusedExports: true, // Cảnh báo nếu có export không được sử dụng
+                    missingExports: true, // Cảnh báo nếu import từ module không export gì cả
+                    src: ['src/**/*.ts'], // Chỉ áp dụng cho thư mục src
+                    // ignoreExports: ['node_modules/**'], // Bỏ qua index files
                 },
             ],
         },
