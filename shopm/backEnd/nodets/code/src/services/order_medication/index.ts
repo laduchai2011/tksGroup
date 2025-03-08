@@ -1,10 +1,10 @@
-import express, { Express } from "express";
-import dotenv from "dotenv";
+import express, { Express } from 'express';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
-import router_get_order_medication from "./get";
-import router_post_order_medication from "./post";
+import router_get_order_medication from './get';
+import router_post_order_medication from './post';
 
 const service_order_medication: Express = express();
 

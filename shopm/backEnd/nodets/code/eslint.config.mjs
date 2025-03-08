@@ -16,6 +16,7 @@ export default [
         rules: {
             'no-unused-vars': 'warn',
             'no-console': 'error',
+            'import/no-unused-modules': [2, { unusedExports: true }],
         },
     },
 ];

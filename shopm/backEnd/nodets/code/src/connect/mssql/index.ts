@@ -1,16 +1,14 @@
-import dotenv from "dotenv";
-import sql, { config } from "mssql";
-import { mssql_config } from "src/config";
-import my_interface from "src/interface";
+import dotenv from 'dotenv';
+import sql, { config } from 'mssql';
+import { mssql_config } from 'src/config';
+import my_interface from 'src/interface';
 
 dotenv.config();
 
-
 class MSSQL_Server {
-
     private static instance: MSSQL_Server;
 
-    constructor () {
+    constructor() {
         if (!MSSQL_Server.instance) {
             const sqlConfig: config = {
                 user: mssql_config?.username,
@@ -21,26 +19,27 @@ class MSSQL_Server {
                 pool: {
                     max: 10,
                     min: 0,
-                    idleTimeoutMillis: 30000
+                    idleTimeoutMillis: 30000,
                 },
                 // options: {
                 //     encrypt: true, // for azure
                 //     trustServerCertificate: false // change to true for local dev / self-signed certs
                 // }
-            }
-    
+            };
+
             sql.connect(sqlConfig)
-            .then(() => {
-                console.log('MSSQL_Server connected successly !')
-            }).catch((err) => {
-                console.error(err)
-            })
-        
+                .then(() => {
+                    console.log('MSSQL_Server connected successly !');
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+
             MSSQL_Server.instance = this;
         }
-       
+
         return MSSQL_Server.instance;
-    } 
+    }
 
     get_myConfig(): my_interface['mssql']['config'] {
         return mssql_config;
