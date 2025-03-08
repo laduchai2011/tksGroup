@@ -29,6 +29,4 @@ const redis_config: my_interface['redis']['config'] = {
     password: process.env.REDIS_SERVER_PASSWORD || '',
 };
 
-const a: string = 'fgsdfsdf';
-
-export { mssql_config, mssql_change_history_config, redis_config, a };
+export { mssql_config, mssql_change_history_config, redis_config };

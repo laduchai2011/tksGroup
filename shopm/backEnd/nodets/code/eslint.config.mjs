@@ -1,6 +1,7 @@
 import globals from 'globals';
 import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
+import importPlugin from 'eslint-plugin-import';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -12,11 +13,19 @@ export default [
         ignores: ['dist/**', 'node_modules/**'],
     },
     {
+        plugins: {
+            import: importPlugin,
+        },
         files: ['src/**/*.js'],
         rules: {
-            'no-unused-vars': 'warn',
-            'no-console': 'error',
-            'import/no-unused-modules': [2, { unusedExports: true }],
+            '@typescript-eslint/no-unused-vars': 'warn',
+            '@typescript-eslint/no-console': 'error',
+            'import/no-unused-modules': [
+                2,
+                {
+                    unusedExports: true,
+                },
+            ],
         },
     },
 ];
