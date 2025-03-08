@@ -10,10 +10,14 @@ CREATE TABLE account (
     updateTime DATETIMEOFFSET(7) NOT NULL,
     createTime DATETIMEOFFSET(7) NOT NULL
 );
+
 GO
-CREATE NONCLUSTERED INDEX idx_id ON account(id);
+    CREATE NONCLUSTERED INDEX idx_id ON account(id);
+
 GO
-CREATE NONCLUSTERED INDEX idx_userName ON account(userName);
+    CREATE NONCLUSTERED INDEX idx_userName ON account(userName);
+
 GO
-CREATE NONCLUSTERED INDEX idx_phone ON account(phone);
+    CREATE NONCLUSTERED INDEX idx_phone ON account(phone);
+
 GO

@@ -17,12 +17,13 @@ CREATE TABLE medical_post (
     cabinet_id INT UNIQUE,
     updateTime DATETIMEOFFSET(7) NOT NULL,
     createTime DATETIMEOFFSET(7) NOT NULL,
-
     FOREIGN KEY (medication_id) REFERENCES medication(id),
     FOREIGN KEY (cabinet_id) REFERENCES cabinet(id)
 )
 GO
-CREATE NONCLUSTERED INDEX idx_medication_id ON medical_post(medication_id);
+    CREATE NONCLUSTERED INDEX idx_medication_id ON medical_post(medication_id);
+
 GO
-CREATE NONCLUSTERED INDEX idx_cabinet_id ON medical_post(cabinet_id);
+    CREATE NONCLUSTERED INDEX idx_cabinet_id ON medical_post(cabinet_id);
+
 GO

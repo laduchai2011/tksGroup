@@ -10,5 +10,6 @@ CREATE TABLE cabinet (
     updateTime DATETIMEOFFSET(7) NOT NULL
 )
 GO
-CREATE NONCLUSTERED INDEX idx_id ON cabinet(id);
+    CREATE NONCLUSTERED INDEX idx_id ON cabinet(id);
+
 GO

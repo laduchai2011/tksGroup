@@ -9,9 +9,9 @@ CREATE TABLE cabinet (
     store_id INT NOT NULL,
     updateTime DATETIMEOFFSET(7) NOT NULL,
     createTime DATETIMEOFFSET(7) NOT NULL,
-
     FOREIGN KEY (store_id) REFERENCES store(id)
 )
 GO
-CREATE NONCLUSTERED INDEX idx_store_id ON cabinet(store_id);
+    CREATE NONCLUSTERED INDEX idx_store_id ON cabinet(store_id);
+
 GO
