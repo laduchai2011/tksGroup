@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import sql, { config } from 'mssql';
-import { mssql_config } from 'src/config';
-import my_interface from 'src/interface';
+import { mssql_config } from '@src/config';
+import my_interface from '@src/interface';
 
 dotenv.config();
 

@@ -1,11 +1,11 @@
 import { config as mssql_config } from './mssql';
 import { config as redis_config } from './redis';
 
-export interface mssql_interface {
+interface mssql_interface {
     config?: mssql_config;
 }
 
-export interface redis_interface {
+interface redis_interface {
     config?: redis_config;
 }
 

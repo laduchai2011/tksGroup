@@ -4,10 +4,10 @@ import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
-import service_order_medication from 'src/services/order_medication';
+import service_order_medication from '@src/services/order_medication';
 
 const app: Express = express();
-const port = process.env.PORT || 3009;
+const port = process.env.PORT || 3008;
 
 app.use(cookieParser());
 app.use(`/api`, express.json());

@@ -2,6 +2,7 @@ import globals from 'globals';
 import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import importPlugin from 'eslint-plugin-import';
+import typescript from '@typescript-eslint/eslint-plugin';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -9,12 +10,33 @@ export default [
     { languageOptions: { globals: globals.browser } },
     pluginJs.configs.recommended,
     ...tseslint.configs.recommended,
-    // {
-    //     ignores: ['dist/**', 'node_modules/**'],
-    // },
+    {
+        ignores: ['dist/**', 'node_modules/**'],
+    },
+    {
+        settings: {
+            'import/parsers': {
+                '@typescript-eslint/parser': ['.ts'],
+            },
+            'import/resolver': {
+                // node: {
+                //     extensions: ['.js', '.jsx', '.ts', '.tsx'], // Ensure ESLint recognizes these extensions
+                // },
+                // alias: {
+                //     map: [['src', './src']],
+                //     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+                // },
+                typescript: {
+                    alwaysTryTypes: true, // Cố gắng resolve cả file `.d.ts`
+                    project: ['tsconfig.json'], // Đường dẫn đến tsconfig.json
+                },
+            },
+        },
+    },
     {
         plugins: {
             import: importPlugin,
+            typescript: typescript,
         },
         // ignores: ['dist/**', 'node_modules/**'],
         files: ['src/**/*.ts'],

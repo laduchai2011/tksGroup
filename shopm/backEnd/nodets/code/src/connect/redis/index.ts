@@ -1,7 +1,7 @@
 import dotevn from 'dotenv';
 import { createClient } from 'redis';
-import { redis_config } from 'src/config';
-import my_interface from 'src/interface';
+import { redis_config } from '@src/config';
+import my_interface from '@src/interface';
 
 dotevn.config();
 
