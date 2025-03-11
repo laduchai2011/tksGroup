@@ -7,6 +7,7 @@ dotenv.config();
 
 class MSSQL_Server {
     private static instance: MSSQL_Server;
+    private _connectionPool: sql.ConnectionPool | undefined;
 
     constructor() {
         if (!MSSQL_Server.instance) {
@@ -21,15 +22,18 @@ class MSSQL_Server {
                     min: 0,
                     idleTimeoutMillis: 30000,
                 },
-                // options: {
-                //     encrypt: true, // for azure
-                //     trustServerCertificate: false // change to true for local dev / self-signed certs
-                // }
+                options: {
+                    // encrypt: true, // for azure
+                    // trustServerCertificate: false // change to true for local dev / self-signed certs
+                    encrypt: false, // Tắt mã hóa
+                    trustServerCertificate: true, // Bỏ qua kiểm tra chứng chỉ
+                },
             };
 
             sql.connect(sqlConfig)
-                .then(() => {
+                .then((ConnectionPool: sql.ConnectionPool) => {
                     console.log('MSSQL_Server connected successly !');
+                    this._connectionPool = ConnectionPool;
                 })
                 .catch((err) => {
                     console.error(err);
@@ -43,6 +47,10 @@ class MSSQL_Server {
 
     get_myConfig(): my_interface['mssql']['config'] {
         return mssql_config;
+    }
+
+    get_connectionPool(): sql.ConnectionPool | undefined {
+        return this._connectionPool;
     }
 }
 
