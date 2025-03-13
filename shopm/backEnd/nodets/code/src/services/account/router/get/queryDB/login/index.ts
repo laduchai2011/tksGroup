@@ -1,6 +1,6 @@
 import sql from 'mssql';
 import { QueryDB } from '@src/services/account/interface';
-import { login_infor_type } from '../../middleware/login/type';
+import { login_infor_type } from '../../handle/login/type';
 
 class QueryDB_Login extends QueryDB {
     private _connectionPool: sql.ConnectionPool | undefined;

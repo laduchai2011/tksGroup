@@ -9,16 +9,17 @@ interface redis_interface {
     config?: redis_config;
 }
 
-interface my_interface {
-    mssql: mssql_interface;
-    redis: redis_interface;
-}
-
-export type router_res_type = {
+interface router_res_type {
     message: string;
     status: string;
     error: unknown;
     data: unknown;
-};
+}
+
+interface my_interface {
+    mssql: mssql_interface;
+    redis: redis_interface;
+    router_res_type: router_res_type;
+}
 
 export default my_interface;
