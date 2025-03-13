@@ -2,6 +2,7 @@ import dotevn from 'dotenv';
 import { createClient } from 'redis';
 import { redis_config } from '@src/config';
 import my_interface from '@src/interface';
+import { my_log } from '@src/log';
 
 dotevn.config();
 
@@ -23,7 +24,7 @@ class REDIS_Server {
             redisClient
                 .connect()
                 .then(() => {
-                    console.log('REDIS_Server connected successly !');
+                    my_log.withGreen('REDIS_Server connected successly !');
                 })
                 .catch((err) => {
                     console.error(err);

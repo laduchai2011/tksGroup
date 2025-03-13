@@ -8,7 +8,7 @@ import service_account from './services/account';
 import service_order_medication from '@src/services/order_medication';
 
 const app: Express = express();
-const port = process.env.PORT || 3009;
+const port = process.env.PORT || 3007;
 
 app.use(cookieParser());
 app.use(`/api`, express.json());

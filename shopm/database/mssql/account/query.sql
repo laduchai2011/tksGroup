@@ -13,4 +13,4 @@ GO
 SELECT
     *
 FROM
-    dbo.Login('userName', 'password');
+    Login('laduchai', '123');

@@ -1,20 +1,25 @@
 import sql from 'mssql';
-import { mssql_server } from '@src/connect';
-
 import { login_method_type } from './type';
+// import { my_log } from '@src/log';
 
 class Query_Account {
-    private _connectionPool: sql.ConnectionPool | undefined;
+    constructor() {}
 
-    constructor() {
-        this._connectionPool = mssql_server.get_connectionPool();
-    }
-
-    login(login_infor: login_method_type) {
-        if (this._connectionPool) {
-            this._connectionPool.query(
-                `SELECT * FROM dbo.Login('${login_infor.username}', '${login_infor.password}');`
-            );
+    async login(
+        connectionPool: sql.ConnectionPool | undefined,
+        login_infor: login_method_type
+    ) {
+        if (connectionPool !== undefined) {
+            console.log(login_infor);
+            try {
+                const result = await connectionPool.query(
+                    `SELECT * FROM Login('${login_infor.username}', '${login_infor.password}')`
+                );
+                // my_log.withMagenta(result.recordsets);
+                console.log(result);
+            } catch (error) {
+                console.error(error);
+            }
         }
     }
 }

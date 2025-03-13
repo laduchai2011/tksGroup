@@ -14,4 +14,11 @@ interface my_interface {
     redis: redis_interface;
 }
 
+export type router_res_type = {
+    message: string;
+    status: string;
+    error: unknown;
+    data: unknown;
+};
+
 export default my_interface;

@@ -7,6 +7,7 @@ INSERT INTO
         firstName,
         lastName,
         avatar,
+        status,
         updateTime,
         createTime
     )
@@ -19,6 +20,7 @@ VALUES
         'la',
         'hai',
         NULL,
+        'normal',
         TODATETIMEOFFSET(SYSUTCDATETIME(), -5),
         TODATETIMEOFFSET(SYSUTCDATETIME(), -5)
     );

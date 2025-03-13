@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import sql, { config } from 'mssql';
 import { mssql_config } from '@src/config';
 import my_interface from '@src/interface';
+import { my_log } from '@src/log';
 
 dotenv.config();
 
@@ -32,7 +33,7 @@ class MSSQL_Server {
 
             sql.connect(sqlConfig)
                 .then((ConnectionPool: sql.ConnectionPool) => {
-                    console.log('MSSQL_Server connected successly !');
+                    my_log.withGreen('MSSQL_Server connected successly !');
                     this._connectionPool = ConnectionPool;
                 })
                 .catch((err) => {

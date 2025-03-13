@@ -13,9 +13,8 @@ const router_get_account: Router = express.Router();
 router_get_account.get('/', (req: Request, res: Response) => {
     const username = req.query.username;
     const password = req.query.password;
-    console.log(111111111, typeof username);
     if (typeof username === 'string' && typeof password === 'string') {
-        query_account.login({
+        query_account.login(query_mssql.get_connectionPool(), {
             username: username,
             password: password,
         });
