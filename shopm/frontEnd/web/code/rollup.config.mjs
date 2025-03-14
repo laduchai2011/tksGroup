@@ -13,6 +13,24 @@ import copy from 'rollup-plugin-copy';
 import json from '@rollup/plugin-json';
 import replace from '@rollup/plugin-replace';
 // import html from '@rollup/plugin-html';
+import os from 'os';
+
+const getLocalIp = () => {
+    const interfaces = os.networkInterfaces();
+    for (const name in interfaces) {
+        for (const net of interfaces[name] || []) {
+            if (net.family === 'IPv4' && !net.internal) {
+                return net.address;
+            }
+        }
+    }
+    return 'localhost';
+};
+
+const PORT = 3000;
+const HOST = getLocalIp();
+
+console.log(`🚀 Dev server running at: http://${HOST}:${PORT}`);
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -58,7 +76,8 @@ export default [
             serve({
                 open: true, // Tự động mở trình duyệt
                 contentBase: 'dist', // Thư mục chứa file được phục vụ
-                port: 3000, // Cổng chạy server
+                host: HOST,
+                port: PORT, // Cổng chạy server
             }),
             livereload('dist'), // Theo dõi thư mục "dist" và reload khi có thay đổi
             copy({
