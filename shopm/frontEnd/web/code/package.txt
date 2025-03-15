@@ -1,0 +1,3 @@
+  "dev-rollup-eslint": "concurrently \"rollup -c --watch\" \"eslint . --ext .js,.jsx,.ts,.tsx --watch\""
+
+  --logLevel debug
