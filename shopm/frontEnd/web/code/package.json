@@ -7,11 +7,12 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
         "lint:fix": "npx eslint . --ext .js,.jsx,.ts,.tsx --fix",
+        "lint:css": "npx stylelint '**/*.{css,pcss}'",
         "build:dev": "cross-env NODE_ENV=development rollup --config",
         "build:prod": "cross-env NODE_ENV=production rollup --config",
         "rollup:watch": "rollup -c --watch",
-        "lint:dev": "concurrently \"npm run lint:fix\" \"node watch-eslint.js\"",
-        "dev": "run-p lint:dev build:dev",
+        "lint:dev": "concurrently \"npm run lint:fix\" \"npm run lint:css\" \"node watch-eslint.js\"",
+        "dev": "run-p lint:dev lint:css build:dev",
         "build": "npm run build:prod"
     },
     "keywords": [],
@@ -20,7 +21,8 @@
     "description": "",
     "dependencies": {
         "react": "^19.0.0",
-        "react-dom": "^19.0.0"
+        "react-dom": "^19.0.0",
+        "react-router-dom": "^6.30.0"
     },
     "devDependencies": {
         "@babel/core": "^7.26.10",
@@ -50,6 +52,8 @@
         "eslint-plugin-react-hooks": "^5.2.0",
         "globals": "^16.0.0",
         "npm-run-all": "^4.1.5",
+        "postcss-preset-env": "^10.1.5",
+        "postcss-syntax": "^0.36.2",
         "prettier": "^3.5.3",
         "rollup": "^4.35.0",
         "rollup-plugin-copy": "^3.5.0",
@@ -58,6 +62,9 @@
         "rollup-plugin-peer-deps-external": "^2.2.4",
         "rollup-plugin-postcss": "^4.0.2",
         "rollup-plugin-serve": "^3.0.0",
+        "sass": "^1.85.1",
+        "stylelint": "^16.16.0",
+        "stylelint-config-standard": "^37.0.0",
         "tslib": "^2.8.1",
         "typescript": "^5.8.2"
     }

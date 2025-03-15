@@ -8,11 +8,10 @@ const isProd = process.env.NODE_ENV === 'production';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
-// import external from 'rollup-plugin-peer-deps-external';
+import external from 'rollup-plugin-peer-deps-external';
 import babel from '@rollup/plugin-babel';
 import terser from '@rollup/plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import postcss from 'rollup-plugin-postcss';
 import alias from '@rollup/plugin-alias';
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
@@ -21,7 +20,9 @@ import json from '@rollup/plugin-json';
 import replace from '@rollup/plugin-replace';
 // import html from '@rollup/plugin-html';
 import os from 'os';
-// import { exec } from 'child_process';
+import postcss from 'rollup-plugin-postcss';
+import postcssPresetEnv from 'postcss-preset-env';
+import autoprefixer from 'autoprefixer';
 
 const getLocalIp = () => {
     const interfaces = os.networkInterfaces();
@@ -60,15 +61,19 @@ const rollup_dev = isDev && [
         ],
         plugins: [
             peerDepsExternal(),
-            // external(),
+            external(),
             resolve(),
             commonjs(),
-            postcss(),
+            postcss({
+                plugins: [postcssPresetEnv(), autoprefixer()],
+                minimize: true, // Nén CSS
+                modules: true, // Hỗ trợ CSS Modules
+                extract: true, // Xuất CSS ra file riêng
+            }),
             typescript({
                 tsconfig: './tsconfig.json',
                 // declarationDir: 'dist/types',
             }),
-            postcss(),
             babel({
                 babelHelpers: 'bundled',
                 extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -119,15 +124,19 @@ const rollup_prod = isProd && [
         ],
         plugins: [
             peerDepsExternal(),
-            // external(),
+            external(),
             resolve(),
             commonjs(),
-            postcss(),
+            postcss({
+                plugins: [postcssPresetEnv(), autoprefixer()],
+                minimize: true, // Nén CSS
+                modules: true, // Hỗ trợ CSS Modules
+                extract: true, // Xuất CSS ra file riêng
+            }),
             typescript({
                 tsconfig: './tsconfig.json',
                 // declarationDir: 'dist/types',
             }),
-            postcss(),
             babel({
                 babelHelpers: 'bundled',
                 extensions: ['.js', '.jsx', '.ts', '.tsx'],
