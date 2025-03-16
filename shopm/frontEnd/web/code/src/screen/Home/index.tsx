@@ -1,8 +1,7 @@
-import React from 'react';
+import './styles.css';
 
-const Home: React.FC<{}> = () => {
-    const a = 1;
-    return <div>Home15</div>;
+const Home = () => {
+    return <div>Home20</div>;
 };
 
 export default Home;

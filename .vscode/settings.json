@@ -1,4 +1,12 @@
 {
+  // "eslint.enable": true,
+  // "eslint.validate": [
+  //   "javascript",
+  //   "typescript",
+  //   "javascriptreact",
+  //   "typescriptreact"
+  // ],
+  // "eslint.experimental.useFlatConfig": true,
   // "notebook.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",

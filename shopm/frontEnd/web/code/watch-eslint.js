@@ -24,23 +24,7 @@ const watcher = chokidar.watch('src/**/*.{js,ts,tsx,css,pcss}', {
 
 watcher.on('change', (path) => {
     console.log(`File changed: ${path}`);
-    exec(`npm run lint:fix`, (err, stdout, stderr) => {
-        if (err) {
-            console.error(stderr);
-        } else {
-            console.log(`🚀 (chokidar) Dev server running at: http://${HOST}:${PORT}`);
-            console.warn(stdout);
-        }
-    });
-    exec(`npm run lint:css`, (err, stdout, stderr) => {
-        if (err) {
-            console.error(stderr);
-        } else {
-            console.log(`🚀 (chokidar) Dev server running at: http://${HOST}:${PORT}`);
-            console.warn(stdout);
-        }
-    });
-    exec(`npm run build:dev`, (err, stdout, stderr) => {
+    exec(`npm run re-lint:dev`, (err, stdout, stderr) => {
         if (err) {
             console.error(stderr);
         } else {

@@ -39,9 +39,9 @@ const getLocalIp = () => {
 const PORT = 3000;
 const HOST = getLocalIp();
 
-const entries = [{ find: 'src', replacement: './src' }];
+const entries = [{ find: '@src', replacement: './src' }];
 const customResolver = resolve({
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.pcss'],
 });
 
 const rollup_dev = isDev && [
@@ -76,7 +76,7 @@ const rollup_dev = isDev && [
             }),
             babel({
                 babelHelpers: 'bundled',
-                extensions: ['.js', '.jsx', '.ts', '.tsx'],
+                extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.pcss'],
                 exclude: 'node_modules/**',
             }),
             alias({
@@ -139,7 +139,7 @@ const rollup_prod = isProd && [
             }),
             babel({
                 babelHelpers: 'bundled',
-                extensions: ['.js', '.jsx', '.ts', '.tsx'],
+                extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.pcss'],
                 exclude: 'node_modules/**',
             }),
             alias({
@@ -206,63 +206,3 @@ switch (process.env.NODE_ENV) {
 }
 
 export default rollup_final;
-
-// export default [
-//     {
-//         input: 'src/index.tsx',
-//         output: [
-//             // {
-//             //     file: 'dist/index.cjs',
-//             //     format: 'cjs',
-//             //     sourcemap: isDev,
-//             // },
-//             {
-//                 file: 'dist/index.mjs',
-//                 format: 'es',
-//                 sourcemap: isDev,
-//             },
-//         ],
-//         plugins: [
-//             peerDepsExternal(),
-//             external(),
-//             resolve(),
-//             commonjs(),
-//             postcss(),
-//             typescript({
-//                 tsconfig: './tsconfig.json',
-//                 // declarationDir: 'dist/types',
-//             }),
-//             babel({
-//                 babelHelpers: 'bundled',
-//                 extensions: ['.js', '.jsx', '.ts', '.tsx'],
-//                 exclude: 'node_modules/**',
-//             }),
-//             alias({
-//                 entries: entries,
-//                 customResolver,
-//             }),
-//             isDev &&
-//                 serve({
-//                     open: true, // Tự động mở trình duyệt
-//                     contentBase: 'dist', // Thư mục chứa file được phục vụ
-//                     host: HOST,
-//                     port: PORT, // Cổng chạy server
-//                 }),
-//             isDev && livereload('dist'), // Theo dõi thư mục "dist" và reload khi có thay đổi
-//             copy({
-//                 targets: [{ src: 'public/index.html', dest: 'dist' }],
-//             }),
-//             json(),
-//             replace({
-//                 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-//                 preventAssignment: true, // Cần thiết cho Rollup 3+
-//             }),
-//             // html({
-//             //     fileName: 'index.html',
-//             // }),
-//             isDev && terser(), // Chỉ nén code khi ở production
-//         ],
-//         // external: ['react', 'react-dom'], // chỉ dùng khi build thư viện
-//         treeshake: true,
-//     },
-// ];
