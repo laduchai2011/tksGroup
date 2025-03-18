@@ -1,7 +1,13 @@
-import './styles.css';
+import React from 'react';
 
 const Home = () => {
-    return <div>Home20</div>;
+    const [a, setA] = React.useState<number>(1);
+
+    React.useEffect(() => {
+        setA((pre) => pre + 1);
+    }, []);
+
+    return <div>{`Home ${a}`}</div>;
 };
 
 export default Home;

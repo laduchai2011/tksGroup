@@ -8,7 +8,7 @@ export default {
     ignoreFiles: ['dist/index.css'],
     overrides: [
         {
-            files: ['src/**/*.css', 'src/**/*.pcss'],
+            files: ['src/**/*.css', 'src/**/*.pcss', 'src/**/*.scss'],
             customSyntax: 'postcss-syntax',
         },
     ],

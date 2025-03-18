@@ -11,10 +11,10 @@
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
-        "moduleResolution": "Node",
+        "moduleResolution": "Bundler",
         "importHelpers": true,
         "resolveJsonModule": true,
-        "baseUrl": ".",
+        "baseUrl": "./",
         "paths": {
             "@src/*": ["src/*"]
         }

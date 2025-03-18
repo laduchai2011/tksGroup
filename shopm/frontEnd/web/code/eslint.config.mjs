@@ -15,17 +15,28 @@ export default [
     js.configs.recommended,
     ...tseslint.configs.recommended,
     {
-        ignores: ['dist/**', 'node_modules/**', 'rollup.config.mjs'],
+        ignores: [
+            'eslint.config.mjs',
+            'dist/**',
+            'node_modules/**',
+            'rollup.config.mjs',
+            'watch-eslint.js',
+            'postcss.config.mjs',
+            '.stylelintrc.mjs',
+        ],
     },
     {
         settings: {
             'import/parsers': {
-                '@typescript-eslint/parser': ['.js', '.jsx', '.ts', '.tsx'],
+                '@typescript-eslint/parser': ['.tsx'],
             },
             'import/resolver': {
+                node: {
+                    extensions: ['.jsx', '.tsx'],
+                },
                 typescript: {
                     alwaysTryTypes: true, // Cố gắng resolve cả file `.d.ts`
-                    project: ['tsconfig.json'], // Đường dẫn đến tsconfig.json
+                    project: './tsconfig.json',
                 },
             },
         },
@@ -33,7 +44,14 @@ export default [
     {
         // files: ['**/*.{js,mjs,cjs,ts,tsx}', 'src/**/*.tsx', 'src/**/*.css', 'src/**/*.pcss'],
         files: ['**/*.{js,jsx,mjs,cjs,ts,tsx}'],
-        ignores: ['dist/**', 'node_modules/**', 'rollup.config.mjs'],
+        ignores: [
+            'dist/**',
+            'node_modules/**',
+            // 'rollup.config.mjs',
+            'watch-eslint.js',
+            'postcss.config.mjs',
+            '.stylelintrc.mjs',
+        ],
         languageOptions: {
             globals: globals.browser,
             parser: tsParser,
@@ -42,10 +60,27 @@ export default [
             parserOptions: {
                 ecmaFeatures: {
                     jsx: true, // Đặt hỗ trợ JSX ở đây
+                    tsx: true,
+                },
+                project: './tsconfig.json',
+                ecmaVersion: 'latest',
+                sourceType: 'module',
+            },
+        },
+        settings: {
+            'import/parsers': {
+                '@typescript-eslint/parser': ['.jsx', '.tsx'],
+            },
+            'import/resolver': {
+                node: {
+                    extensions: ['.jsx', '.tsx'],
+                },
+                typescript: {
+                    alwaysTryTypes: true, // Cố gắng resolve cả file `.d.ts`
+                    project: './tsconfig.json',
                 },
             },
         },
-
         plugins: {
             ts: ts,
             '@typescript-eslint': ts,
@@ -56,15 +91,19 @@ export default [
         },
         rules: {
             // TypeScript rules
+            ...ts.configs.recommended.rules,
             'no-unused-vars': 'off',
             '@typescript-eslint/no-unused-vars': 'warn',
+            '@typescript-eslint/no-explicit-any': 'warn', // hoặc "warn" nếu bạn chỉ muốn cảnh báo
             'import/no-unused-modules': [
                 'warn',
                 {
                     unusedExports: true, // Cảnh báo nếu có export không được sử dụng
                     missingExports: true, // Cảnh báo nếu import từ module không export gì cả
-                    src: ['@src/**/*.{js,jsx,ts,tsx}'], // Bao quát tất cả file
-                    // ignoreExports: ['src/index.tsx'], // Bỏ qua file index
+                    src: ['src/**/*.{js,jsx,ts,tsx}'], // Bao quát tất cả file
+                    ignoreExports: ['src/index.tsx'], // Bỏ qua file index
+                    // ignoredExports: ['**/*.tsx'], // Bỏ qua tất cả các file TSX
+                    // extensions: ['.js', '.jsx', '.ts', '.tsx'],
                 },
             ],
 

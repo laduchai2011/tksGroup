@@ -68,7 +68,10 @@ const rollup_dev = isDev && [
                 plugins: [postcssPresetEnv(), autoprefixer()],
                 minimize: true, // Nén CSS
                 modules: true, // Hỗ trợ CSS Modules
-                extract: true, // Xuất CSS ra file riêng
+                extract: true, // Xuất CSS ra file riêng,
+                use: {
+                    sass: true, // Kích hoạt hỗ trợ SCSS
+                },
             }),
             typescript({
                 tsconfig: './tsconfig.json',
@@ -131,7 +134,10 @@ const rollup_prod = isProd && [
                 plugins: [postcssPresetEnv(), autoprefixer()],
                 minimize: true, // Nén CSS
                 modules: true, // Hỗ trợ CSS Modules
-                extract: true, // Xuất CSS ra file riêng
+                extract: true, // Xuất CSS ra file riêng,
+                use: {
+                    sass: true, // Kích hoạt hỗ trợ SCSS
+                },
             }),
             typescript({
                 tsconfig: './tsconfig.json',

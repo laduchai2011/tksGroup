@@ -14,12 +14,9 @@ const mssql_config: my_interface['mssql']['config'] = {
 const mssql_change_history_config: my_interface['mssql']['config'] = {
     host: process.env.MSSQL_CHANGE_HISTORY_SERVER_HOST || '127.0.0.1',
     port: Number(process.env.MSSQL_CHANGE_HISTORY_SERVER_POST) || 1434,
-    database:
-        process.env.MSSQL_CHANGE_HISTORY_SERVER_DATABASE ||
-        'shopm_change_history_dev',
+    database: process.env.MSSQL_CHANGE_HISTORY_SERVER_DATABASE || 'shopm_change_history_dev',
     username: process.env.MSSQL_CHANGE_HISTORY_SERVER_USERNAME || 'sa',
-    password:
-        process.env.MSSQL_CHANGE_HISTORY_SERVER_PASSWORD || '201195laducHai',
+    password: process.env.MSSQL_CHANGE_HISTORY_SERVER_PASSWORD || '201195laducHai',
 };
 
 const redis_config: my_interface['redis']['config'] = {
