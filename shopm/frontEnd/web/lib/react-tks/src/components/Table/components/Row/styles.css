@@ -1,0 +1,21 @@
+.TKS-Row {
+    --background-color: white;
+}
+
+.TKS-Row {
+    width: max-content;
+}
+.TKS-Row.hover,
+.TKS-Row.selected {
+    background-color: var(--background-color);
+}
+
+.TKS-Row:not(:nth-child(1)) {
+    cursor: pointer;
+}
+
+.TKS-Row-column {
+    display: flex;
+    justify-content: center;
+    z-index: 4;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
-import Top from './Top';
-import styles from './styles.module.scss';
+import Top from './component/Top';
+import style from './style.module.scss';
 import { Header__interface } from './interface';
 
 interface Header__Props extends React.HTMLProps<HTMLDivElement> {
@@ -12,7 +12,7 @@ const Header: React.FC<Header__Props> = ({ header__interface, className, ...prop
     const top_isShow: boolean | undefined = header__interface?.top_isShow;
 
     return (
-        <div className={`${styles.header} ${className || ''}`} {...props}>
+        <div className={`${style.header} ${className || ''}`} {...props}>
             {top_isShow && <Top />}
         </div>
     );

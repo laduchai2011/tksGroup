@@ -1,0 +1,107 @@
+.TKS-Rows {
+    --background-color: white;
+    --Cell-width: 150px;
+    --Cell-height: 30px;
+    --customColumn-maxWidth: 350px
+}
+
+.TKS-Rows {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.TKS-Rows-left,
+.TKS-Rows-right {
+    position: absolute;
+    top: 0;
+    background-color: white;
+    z-index: 5;
+}
+
+.TKS-Rows-left {
+    left: 0;
+}
+.TKS-Rows-right {
+    right: 0;
+    overflow: hidden;
+    width: max-content;
+    max-width: var(--customColumn-maxWidth);
+    border: 1px solid gray;
+
+    transition: width 1s linear;  
+    overflow-x: scroll;
+}
+
+.TKS-Rows-left > div,
+.TKS-Rows-right > div {
+    height: var(--Cell-height);
+    box-sizing: border-box;
+    border: 1px solid gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.TKS-Rows-left > div {
+    width: 50px;
+}
+.TKS-Rows-right > div {
+    width: max-content;
+}
+
+.TKS-Rows-left-row:not(:nth-child(1)),
+.TKS-Rows-right-row:not(:nth-child(1)) {
+    cursor: pointer;
+    position: relative;
+}
+
+.TKS-Rows-right-row:not(:nth-child(1)) > div:nth-child(1) {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.TKS-Rows-right-row:not(:nth-child(1)) > div:nth-child(2) {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.TKS-Rows-left-row.hover,
+.TKS-Rows-right-row.hover,
+.TKS-Rows-left-row.selected,
+.TKS-Rows-right-row.selected {
+    background-color: var(--background-color);
+}
+
+/* .TKS-Rows-right > div.selected {
+    background-color: rgb(233, 233, 233);
+} */
+
+.TKS-Rows-right-header {
+    width: 100%;
+    position: relative;
+}
+
+.TKS-Rows-right-header > svg {
+    height: 100%;
+    width: 20px;
+    cursor: pointer;
+    background-color: rgb(235, 235, 235);
+    position: absolute;
+    left: 0;
+}
+
+.TKS-Rows-right-header > svg:hover {
+    background-color: white;
+    scale: 0.9;
+}
+
+.TKS-Rows-center {
+    width: 100%;
+    padding-left: 50px;
+    overflow-x: scroll;
+    z-index: 4;
+
+    transition: padding-right 1s linear;
+}

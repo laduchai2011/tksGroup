@@ -39,9 +39,9 @@ const getLocalIp = () => {
 const PORT = 3000;
 const HOST = getLocalIp();
 
-const entries = [{ find: '@src', replacement: './src' }];
+const entries = [{ find: '@src', replacement: 'src' }];
 const customResolver = resolve({
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.pcss'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.pcss', '.scss'],
 });
 
 const rollup_dev = isDev && [
@@ -136,9 +136,10 @@ const rollup_prod = isProd && [
                 modules: true, // Hỗ trợ CSS Modules
                 extract: true, // Xuất CSS ra file riêng,
                 use: {
-                    sass: true, // Kích hoạt hỗ trợ SCSS
+                    sass: true,
                 },
             }),
+
             typescript({
                 tsconfig: './tsconfig.json',
                 // declarationDir: 'dist/types',

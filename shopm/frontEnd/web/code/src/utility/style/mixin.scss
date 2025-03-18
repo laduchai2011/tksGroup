@@ -1,0 +1,15 @@
+@mixin center-of-rectangle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin center-of-row {
+    display: flex;
+    align-items: center;
+}
+
+@mixin center-of-column {
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,29 @@
+// @use '../../../utility//style//mixin.scss' as *;
+@use 'src/utility/style/mixin.scss' as *;
+
+.top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 50px;
+    border-bottom: 1px solid gray;
+    z-index: 2000;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > div {
+        height: 100%;
+        @include center-of-row;
+    }
+
+    > .left {
+        background-color: rgb(255, 159, 159);
+    }
+
+    > .right {
+        background-color: rgb(128, 128, 255);
+    }
+}
