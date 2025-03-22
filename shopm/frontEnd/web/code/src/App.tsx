@@ -5,7 +5,7 @@ const App = () => {
     return (
         <div>
             <AppRouter />
-            <Header header__interface={{ top_isShow: true }} />
+            <Header header__interface={{ top_isShow: true, left_isShow: true }} />
         </div>
     );
 };

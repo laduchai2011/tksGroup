@@ -95,7 +95,7 @@ const DynamicBigRowArrow: FC<MyDynamicBigRowArrowProps> = ({ dynamicBigRowArrowP
             } else {
                 clearTimeout(timeout);
             }
-        }, 1000);
+        }, 300);
 
         return () => {
             clearTimeout(timeout);

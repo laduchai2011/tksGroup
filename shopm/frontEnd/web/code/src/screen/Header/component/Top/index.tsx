@@ -7,6 +7,7 @@ const Top = () => {
             <div className={style.left}>
                 <Left />
             </div>
+            <div className={style.center}>center</div>
             <div className={style.right}>right</div>
         </div>
     );

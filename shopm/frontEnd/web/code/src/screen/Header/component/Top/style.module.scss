@@ -13,6 +13,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 900;
 
     > div {
         height: 100%;
@@ -20,6 +21,10 @@
     }
 
     > .left {
+        background-color: white;
+    }
+
+    > .center {
         background-color: white;
     }
 
