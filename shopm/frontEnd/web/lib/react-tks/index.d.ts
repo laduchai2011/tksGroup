@@ -191,6 +191,13 @@ interface BigUpArrowProps {
     stroke?: string;
     stroke_width?: number;
 }
+interface DynamicBigRowArrowProps {
+    fill?: string;
+    stroke?: string;
+    stroke_width?: number;
+    direct?: 'left' | 'right';
+    during_time_animation?: number;
+}
 interface ThreeDotHorizontalProps {
 }
 interface ThreeDotVerticalProps {
@@ -302,85 +309,91 @@ interface MyTableProps extends React.HTMLProps<HTMLDivElement> {
     table?: TableProps;
     [key: string]: any;
 }
-declare const _default$h: React.NamedExoticComponent<MyTableProps>;
+declare const _default$i: React.NamedExoticComponent<MyTableProps>;
 
 interface MyTable1Props extends React.HTMLProps<HTMLDivElement> {
     table1?: Table1_Props;
     [key: string]: any;
 }
-declare const _default$g: React.NamedExoticComponent<MyTable1Props>;
+declare const _default$h: React.NamedExoticComponent<MyTable1Props>;
 
 interface MyDialogProps extends React.HTMLProps<HTMLDivElement> {
     dialog?: DialogProps;
     [key: string]: any;
 }
-declare const _default$f: React.NamedExoticComponent<MyDialogProps>;
+declare const _default$g: React.NamedExoticComponent<MyDialogProps>;
 
 interface MyLoadProps extends React.HTMLProps<HTMLDivElement> {
     load: LoadProps;
     [key: string]: any;
 }
-declare const _default$e: React.NamedExoticComponent<MyLoadProps>;
+declare const _default$f: React.NamedExoticComponent<MyLoadProps>;
 
 interface MyOverlayProps extends React.HTMLProps<HTMLDivElement> {
     overlay?: OverlayProps;
     [key: string]: any;
 }
-declare const _default$d: React.NamedExoticComponent<MyOverlayProps>;
+declare const _default$e: React.NamedExoticComponent<MyOverlayProps>;
 
 interface MyToastMessageProps extends React.HTMLProps<HTMLDivElement> {
     toastMessage?: ToastMessageProps;
     [key: string]: any;
 }
-declare const _default$c: React.NamedExoticComponent<MyToastMessageProps>;
+declare const _default$d: React.NamedExoticComponent<MyToastMessageProps>;
 
 interface MyTickSymbolProps extends React.HTMLProps<SVGSVGElement> {
     tickSymbol?: TickSymbolProps;
     [key: string]: any;
 }
-declare const _default$b: React.NamedExoticComponent<MyTickSymbolProps>;
+declare const _default$c: React.NamedExoticComponent<MyTickSymbolProps>;
 
 interface MyWarnTriangleProps extends React.HTMLProps<SVGSVGElement> {
     warnTriangle?: WarnTriangleProps;
     [key: string]: any;
 }
-declare const _default$a: React.NamedExoticComponent<MyWarnTriangleProps>;
+declare const _default$b: React.NamedExoticComponent<MyWarnTriangleProps>;
 
 interface MyErrorCircleProps extends React.HTMLProps<SVGSVGElement> {
     errorCircle?: ErrorCircleProps;
     [key: string]: any;
 }
-declare const _default$9: React.NamedExoticComponent<MyErrorCircleProps>;
+declare const _default$a: React.NamedExoticComponent<MyErrorCircleProps>;
 
 interface MyDeleteCircleProps extends React.HTMLProps<SVGSVGElement> {
     deleteCircle?: DeleteCircleProps;
     [key: string]: any;
 }
-declare const _default$8: React.NamedExoticComponent<MyDeleteCircleProps>;
+declare const _default$9: React.NamedExoticComponent<MyDeleteCircleProps>;
 
 interface MyBigLeftArrowProps extends React.HTMLProps<SVGSVGElement> {
     bigLeftArrow?: BigLeftArrowProps;
     [key: string]: any;
 }
-declare const _default$7: React.NamedExoticComponent<MyBigLeftArrowProps>;
+declare const _default$8: React.NamedExoticComponent<MyBigLeftArrowProps>;
 
 interface MyBigRightArrowProps extends React.HTMLProps<SVGSVGElement> {
     bigRightArrow?: BigRightArrowProps;
     [key: string]: any;
 }
-declare const _default$6: React.NamedExoticComponent<MyBigRightArrowProps>;
+declare const _default$7: React.NamedExoticComponent<MyBigRightArrowProps>;
 
 interface MyBigDownArrowProps extends React.HTMLProps<SVGSVGElement> {
     bigDownArrow?: BigDownArrowProps;
     [key: string]: any;
 }
-declare const _default$5: React.NamedExoticComponent<MyBigDownArrowProps>;
+declare const _default$6: React.NamedExoticComponent<MyBigDownArrowProps>;
 
 interface MyBigUpArrowProps extends React.HTMLProps<SVGSVGElement> {
     bigUpArrow?: BigUpArrowProps;
     [key: string]: any;
 }
-declare const _default$4: React.NamedExoticComponent<MyBigUpArrowProps>;
+declare const _default$5: React.NamedExoticComponent<MyBigUpArrowProps>;
+
+interface MyDynamicBigRowArrowProps extends React.HTMLProps<SVGSVGElement> {
+    dynamicBigRowArrowProps?: DynamicBigRowArrowProps;
+    [key: string]: any;
+}
+declare const _default$4: React.NamedExoticComponent<MyDynamicBigRowArrowProps>;
 
 interface MyAddCircleProps extends React.HTMLProps<SVGSVGElement> {
     addCircle?: AddCircleProps;
@@ -407,7 +420,27 @@ interface MyThreeDotHorizontalProps extends React.HTMLProps<SVGSVGElement> {
 declare const _default: React.NamedExoticComponent<MyThreeDotHorizontalProps>;
 
 declare namespace components {
-  export { _default$3 as AddCircle, _default$5 as BigDownArrow, _default$7 as BigLeftArrow, _default$6 as BigRightArrow, _default$4 as BigUpArrow, _default$8 as DeleteCircle, _default$f as Dialog, _default$9 as ErrorCircle, _default$e as Loading, _default$d as Overlay, _default$2 as SubCircle, _default$h as Table, _default$g as Table1, _default$1 as ThreeDotHorizontal, _default as ThreeDotVertical, _default$b as TickSymbol, _default$c as ToastMessage, _default$a as WarnTriangle };
+  export {
+    _default$3 as AddCircle,
+    _default$6 as BigDownArrow,
+    _default$8 as BigLeftArrow,
+    _default$7 as BigRightArrow,
+    _default$5 as BigUpArrow,
+    _default$9 as DeleteCircle,
+    _default$g as Dialog,
+    _default$4 as DynamicBigRowArrow,
+    _default$a as ErrorCircle,
+    _default$f as Loading,
+    _default$e as Overlay,
+    _default$2 as SubCircle,
+    _default$i as Table,
+    _default$h as Table1,
+    _default$1 as ThreeDotHorizontal,
+    _default as ThreeDotVertical,
+    _default$c as TickSymbol,
+    _default$d as ToastMessage,
+    _default$b as WarnTriangle,
+  };
 }
 
 type inputProps = {
@@ -417,13 +450,17 @@ type inputProps = {
 declare function useFollowState(input?: inputProps): FollowStateProps;
 
 declare namespace hooks {
-  export { useFollowState as FollowState };
+  export {
+    useFollowState as FollowState,
+  };
 }
 
 declare function handleNext<T>(...args: ((data: T | undefined, next: () => void) => void)[]): void;
 
 declare namespace handles {
-  export { handleNext as Next };
+  export {
+    handleNext as Next,
+  };
 }
 
 type cluster_for_string_Props = {
@@ -481,7 +518,13 @@ declare const utils_isNumberString: typeof isNumberString;
 declare const utils_moneyString: typeof moneyString;
 declare const utils_round_numberString: typeof round_numberString;
 declare namespace utils {
-  export { utils_alias_for_string as alias_for_string, utils_cluster_for_string as cluster_for_string, utils_isNumberString as isNumberString, utils_moneyString as moneyString, utils_round_numberString as round_numberString };
+  export {
+    utils_alias_for_string as alias_for_string,
+    utils_cluster_for_string as cluster_for_string,
+    utils_isNumberString as isNumberString,
+    utils_moneyString as moneyString,
+    utils_round_numberString as round_numberString,
+  };
 }
 
 export { components as Components, handles as Handles, hooks as Hooks, utils as Utils };

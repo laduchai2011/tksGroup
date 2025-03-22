@@ -41,7 +41,7 @@ export default [
       }),
       replace({
         preventAssignment: true,
-        "process.env.REACT_APP_NODE_ENV": JSON.stringify("production"),
+        "process.env.NODE_ENV": JSON.stringify("production"),
       }),
     ],
     external: ["react", "react-dom"],
@@ -88,7 +88,7 @@ export default [
       }),
       replace({
         preventAssignment: true,
-        "process.env.REACT_APP_NODE_ENV": JSON.stringify("production"),
+        "process.env.NODE_ENV": JSON.stringify("production"),
       }),
     ],
     external: ["react", "react-dom"],
@@ -136,7 +136,7 @@ export default [
       }),
       replace({
         preventAssignment: true,
-        "process.env.REACT_APP_NODE_ENV": JSON.stringify("production"),
+        "process.env.NODE_ENV": JSON.stringify("production"),
       }),
     ],
     external: ["react", "react-dom"],
@@ -183,7 +183,7 @@ export default [
       }),
       replace({
         preventAssignment: true,
-        "process.env.REACT_APP_NODE_ENV": JSON.stringify("production"),
+        "process.env.NODE_ENV": JSON.stringify("production"),
       }),
     ],
     external: ["react", "react-dom", "src/myHooks/interface"],
@@ -230,7 +230,7 @@ export default [
       }),
       replace({
         preventAssignment: true,
-        "process.env.REACT_APP_NODE_ENV": JSON.stringify("production"),
+        "process.env.NODE_ENV": JSON.stringify("production"),
       }),
     ],
     external: ["react", "react-dom"],
