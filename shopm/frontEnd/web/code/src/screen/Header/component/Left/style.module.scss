@@ -1,10 +1,47 @@
+@use 'src/utility/style/mixin.scss' as *;
+
 .parent {
     background-color: white;
     z-index: 901;
-    border: 1px solid gray;
+    border-right: 1px solid gray;
     width: 250px;
     height: 100vh;
     position: fixed;
     top: 0;
-    left: 0;
+    left: -250px;
+
+    transition: left 0.3s linear;
+
+    &.parent_show {
+        left: 0;
+    }
+
+    > .top {
+        height: 60px;
+        width: 100%;
+        border-bottom: 1px solid gray;
+        box-sizing: border-box;
+        position: relative;
+
+        > .logo {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            @include center-of-rectangle;
+        }
+
+        > .icon {
+            height: 100%;
+            width: 20px;
+            position: absolute;
+            right: 0px;
+            cursor: pointer;
+
+            transition: right 0.3s linear;
+
+            &.icon_show {
+                right: -20px;
+            }
+        }
+    }
 }

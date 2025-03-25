@@ -1,23 +1,14 @@
-import { useState } from 'react';
 import style from './style.module.scss';
-import { DynamicBigRowArrow } from 'react-tks/components';
+import { IoSearch } from 'react-icons/io5';
+import { SEARCH } from '@src/const/text';
 
 const Left = () => {
-    const [show, set_show] = useState<boolean>(false);
-
-    const handleShow = () => {
-        set_show(!show);
-    };
-
     return (
-        <div className={style.left}>
-            <DynamicBigRowArrow
-                onClick={() => handleShow()}
-                dynamicBigRowArrowProps={{
-                    during_time_animation: 300,
-                    direct: show ? 'left' : 'right',
-                }}
-            />
+        <div className={style.parent}>
+            <div>
+                <input placeholder={SEARCH} />
+                <IoSearch size={30} />
+            </div>
         </div>
     );
 };

@@ -1,12 +1,12 @@
 // @use '../../../utility//style//mixin.scss' as *;
 @use 'src/utility/style/mixin.scss' as *;
 
-.top {
+.parent {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 50px;
+    height: 60px;
     border-bottom: 1px solid gray;
     z-index: 2000;
     background-color: white;
@@ -21,14 +21,15 @@
     }
 
     > .left {
-        background-color: white;
+        width: 20%;
     }
 
     > .center {
         background-color: white;
+        width: 60%;
     }
 
     > .right {
-        background-color: rgb(128, 128, 255);
+        width: 20%;
     }
 }

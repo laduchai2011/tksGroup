@@ -1,15 +1,10 @@
-import React from 'react';
+import { useEffect } from 'react';
 import style from './style.module.scss';
 
 const Home = () => {
-    const [a, setA] = React.useState<number>(1);
+    useEffect(() => {}, []);
 
-    return (
-        <div>
-            <div className={style.home}>{`Home ${a}`}</div>
-            <button onClick={() => setA((pre) => pre + 1)}>Click</button>
-        </div>
-    );
+    return <div className={style.parent}>Home</div>;
 };
 
 export default Home;

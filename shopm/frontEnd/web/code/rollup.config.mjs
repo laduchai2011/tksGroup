@@ -23,6 +23,7 @@ import os from 'os';
 import postcss from 'rollup-plugin-postcss';
 import postcssPresetEnv from 'postcss-preset-env';
 import autoprefixer from 'autoprefixer';
+import url from '@rollup/plugin-url';
 
 const getLocalIp = () => {
     const interfaces = os.networkInterfaces();
@@ -41,7 +42,7 @@ const HOST = getLocalIp();
 
 const entries = [{ find: '@src', replacement: 'src' }];
 const customResolver = resolve({
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.pcss', '.scss'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.pcss', '.scss', '.png'],
 });
 
 const rollup_dev = isDev && [
@@ -79,7 +80,7 @@ const rollup_dev = isDev && [
             }),
             babel({
                 babelHelpers: 'bundled',
-                extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.pcss'],
+                extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.pcss', '.scss'],
                 exclude: 'node_modules/**',
             }),
             alias({
@@ -104,9 +105,14 @@ const rollup_dev = isDev && [
             // html({
             //     fileName: 'index.html',
             // }),
+            url({
+                include: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.svg', '**/*.gif'],
+                limit: 0, // Đặt 0 để luôn xuất file, không chuyển thành base64
+                fileName: '[name]-[hash][extname]', // Định dạng tên file đầu ra
+            }),
         ],
         // external: ['react', 'react-dom'], // chỉ dùng khi build thư viện
-        treeshake: false,
+        // treeshake: false,
     },
 ];
 
@@ -146,7 +152,7 @@ const rollup_prod = isProd && [
             }),
             babel({
                 babelHelpers: 'bundled',
-                extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.pcss'],
+                extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.pcss', '.scss'],
                 exclude: 'node_modules/**',
             }),
             alias({
@@ -164,13 +170,18 @@ const rollup_prod = isProd && [
             // html({
             //     fileName: 'index.html',
             // }),
+            url({
+                include: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.svg', '**/*.gif'],
+                limit: 0, // Đặt 0 để luôn xuất file, không chuyển thành base64
+                fileName: '[name]-[hash][extname]', // Định dạng tên file đầu ra
+            }),
             terser(), // Chỉ nén code khi ở production
         ],
         // external: ['react', 'react-dom'], // chỉ dùng khi build thư viện
-        treeshake: {
-            pureExternalModules: true, // Xử lý các module ngoài có annotation __PURE__
-            annotations: true, // Bật tính năng nhận diện annotation
-        },
+        // treeshake: {
+        //     pureExternalModules: true, // Xử lý các module ngoài có annotation __PURE__
+        //     annotations: true, // Bật tính năng nhận diện annotation
+        // },
     },
 ];
 
