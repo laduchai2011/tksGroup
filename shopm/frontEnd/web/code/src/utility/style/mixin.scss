@@ -13,3 +13,13 @@
     display: flex;
     justify-content: center;
 }
+
+@mixin line-clamp($lines) {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    // Chuẩn (khi được hỗ trợ)
+    line-clamp: $lines;
+}

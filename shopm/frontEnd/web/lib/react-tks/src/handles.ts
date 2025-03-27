@@ -1,1 +1,1 @@
-export { default as Next } from './handles/Components/Next';
+export { default as handleConsecutive } from "./handles/Components/consecutive";
