@@ -2,6 +2,11 @@
 
 .parent {
     background-color: white;
-    width: 100%;
+    width: 200%;
     height: 100%;
+    display: flex;
+
+    > div {
+        width: calc(100% / 2);
+    }
 }

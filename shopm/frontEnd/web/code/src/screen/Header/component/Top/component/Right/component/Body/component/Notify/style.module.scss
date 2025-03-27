@@ -1,23 +1,36 @@
 @use 'src/utility/style/mixin.scss' as *;
 
 .parent {
+    width: 100%;
+
     > div:nth-child(1) {
         display: flex;
         justify-content: flex-end;
         margin-bottom: 10px;
+
+        > svg {
+            cursor: pointer;
+        }
     }
 
     > div:nth-child(2) {
         width: 100%;
         max-height: 600px;
         overflow-y: auto;
+        cursor: pointer;
 
         &::-webkit-scrollbar {
             width: 3px;
         }
 
         &::-webkit-scrollbar-thumb {
-            background: #888;
+            background: white;
+        }
+
+        &:hover {
+            &::-webkit-scrollbar-thumb {
+                background: #888;
+            }
         }
 
         > div:nth-child(1) {
