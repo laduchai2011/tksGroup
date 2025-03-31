@@ -19,4 +19,5 @@ export type context_type = {
     set_selected: React.Dispatch<React.SetStateAction<selections_type>>;
     isShow: boolean;
     set_isShow: React.Dispatch<React.SetStateAction<boolean>>;
+    isLoading: boolean;
 };

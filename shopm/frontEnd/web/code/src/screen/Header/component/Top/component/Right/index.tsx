@@ -9,12 +9,12 @@ import Body from './component/Body';
 import { selections_type, selections_enum } from './type';
 import { Context } from './context';
 import { context_type } from './type';
-import { Loading } from 'react-tks/components';
 
 const Right = () => {
     const parent_element = useRef<HTMLDivElement | null>(null);
     const [selected, set_selected] = useState<selections_type>(selections_enum.NOTIFY);
     const [isShow, set_isShow] = useState<boolean>(false);
+    const [isLoading, set_isLoading] = useState(false);
 
     useEffect(() => {
         if (parent_element.current) {
@@ -22,11 +22,20 @@ const Right = () => {
 
             if (isShow) {
                 (show_box as HTMLDivElement).style.display = 'block';
+                fetchData(selected);
             } else {
                 (show_box as HTMLDivElement).style.display = 'none';
             }
         }
-    }, [isShow]);
+    }, [isShow, selected]);
+
+    const fetchData = (selected: selections_type) => {
+        set_isLoading(true);
+        setTimeout(() => {
+            set_isLoading(false);
+            console.log('fetchData', selected);
+        }, 3000);
+    };
 
     const handle_del_show = () => {
         set_isShow(false);
@@ -56,21 +65,11 @@ const Right = () => {
     };
 
     const context_value: context_type = {
-        selected: selected,
-        set_selected: set_selected,
-        isShow: isShow,
-        set_isShow: set_isShow,
-    };
-
-    const lineCircleLoad = {
-        lineSize: 10,
-        lineBackgroundColor: 'brown',
-        circleSize: 150,
-    };
-
-    const load = {
-        type: 'LINE_CIRCLE',
-        infor: lineCircleLoad,
+        selected,
+        set_selected,
+        isShow,
+        set_isShow,
+        isLoading,
     };
 
     return (

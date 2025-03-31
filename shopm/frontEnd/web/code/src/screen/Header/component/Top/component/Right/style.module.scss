@@ -49,9 +49,9 @@
     }
 
     > div:nth-child(2) {
-        position: absolute;
         width: 300px;
         height: auto;
+        position: absolute;
         border: 1px solid gray;
         top: 50px;
         background-color: white;
@@ -79,7 +79,8 @@
         }
 
         > div:nth-child(3) {
-            padding: 10px 0;
+            box-sizing: border-box;
+            padding-top: 10px;
             overflow: hidden;
         }
     }

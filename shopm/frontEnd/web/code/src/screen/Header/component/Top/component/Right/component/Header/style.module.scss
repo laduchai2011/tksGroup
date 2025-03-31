@@ -1,7 +1,7 @@
 @use 'src/utility/style/mixin.scss' as *;
 
 .parent {
-    --pos-selected-header: 0;
+    --pos-selected: 0;
 }
 
 .parent {
@@ -69,7 +69,7 @@
         background-color: rgba(174, 219, 255, 0.3);
         position: absolute;
         top: 0;
-        left: calc((100% / 3) * var(--pos-selected-header));
+        left: calc((100% / 3) * var(--pos-selected));
         z-index: 9;
 
         transition: left 0.5s linear;
