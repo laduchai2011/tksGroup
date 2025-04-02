@@ -14,6 +14,7 @@ import BigUpArrow from 'src/components/Icon/BigUpArrow';
 import ThreeDotHorizontal from 'src/components/Icon/ThreeDotHorizontal';
 import ThreeDotVertical from 'src/components/Icon/ThreeDotVertical';
 import DynamicBigRowArrow from 'src/components/Icon/DynamicBigRowArrow';
+import OneStar from 'src/components/Icon/OneStar';
 
 const IconScreen: FC<{}> = () => {
     const [direct, setDirect] = useState<'left' | 'right' | undefined>('right');
@@ -60,6 +61,10 @@ const IconScreen: FC<{}> = () => {
             </div>
             <div>
                 <button onClick={() => handleDirect()}>DynamicBigRowArrow_Click</button>
+            </div>
+
+            <div>
+                <OneStar />
             </div>
         </div>
     );

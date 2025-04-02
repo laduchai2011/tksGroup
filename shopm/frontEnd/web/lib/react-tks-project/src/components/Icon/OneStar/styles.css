@@ -1,0 +1,8 @@
+.TKS-OneStar {
+    fill: red;
+    stroke-width: 1px;
+    /* stroke: white; */
+    width: 100px;
+    height: 100px;
+    mask: has;
+}

@@ -178,6 +178,8 @@ export interface ErrorCircleProps {
     stroke_width?: number;
 }
 
+export interface OneStarProps {}
+
 export interface TickSymbolProps {
     size?: number;
     background?: string;

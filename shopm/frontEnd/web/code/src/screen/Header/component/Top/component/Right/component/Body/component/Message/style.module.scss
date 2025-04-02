@@ -1,5 +1,72 @@
 @use 'src/utility/style/mixin.scss' as *;
 
 .parent {
-    background-color: antiquewhite;
+    > div {
+        margin: 10px 0;
+    }
+
+    > div:nth-child(1) {
+        @include center-of-row;
+
+        > div {
+            width: 50%;
+            height: 100%;
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+
+            &:hover {
+                background-color: rgb(235, 235, 235);
+            }
+
+            > div:nth-child(1) {
+                width: 100%;
+                height: 100%;
+
+                > div {
+                    width: 100%;
+                    height: 100%;
+                    @include center-of-rectangle;
+                }
+            }
+
+            > div:nth-child(2) {
+                position: absolute;
+                background-color: red;
+                top: 0;
+                left: 0;
+                color: white;
+                padding: 1px;
+                border-radius: 50%;
+                @include center-of-rectangle;
+            }
+        }
+    }
+
+    > div:nth-child(2) {
+        @include center-of-rectangle;
+
+        > div {
+            @include center-of-row;
+            border: 1px solid gray;
+            padding: 3px 5px;
+            border-radius: 10px;
+
+            > input {
+                border: none;
+                outline: none;
+            }
+
+            > svg {
+                cursor: pointer;
+            }
+        }
+    }
+
+    > div:nth-child(3) {
+        max-height: 600px;
+        overflow-y: auto;
+
+        @include small-scroll();
+    }
 }

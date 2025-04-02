@@ -1,5 +1,68 @@
 @use 'src/utility/style/mixin.scss' as *;
 
 .parent {
-    background-color: rgb(245, 140, 2);
+    background-color: white;
+
+    > .avatar {
+        width: 100%;
+
+        > div {
+            width: 100%;
+            margin-bottom: 10px;
+            @include center-of-rectangle;
+        }
+
+        > div:nth-child(1) {
+            height: 70px;
+
+            > img {
+                height: 100%;
+                aspect-ratio: 1 / 1;
+            }
+        }
+
+        > div:nth-child(2) {
+            height: 20px;
+
+            > div {
+                width: max-content;
+                height: 100%;
+            }
+        }
+    }
+
+    > .button1 {
+        border: 1px solid gray;
+        @include center-of-row;
+        height: 50px;
+
+        > div {
+            width: 50%;
+            height: 100%;
+            @include center-of-rectangle;
+            border: 1px solid gray;
+            cursor: pointer;
+            user-select: none;
+
+            &:hover {
+                background-color: rgb(233, 233, 233);
+            }
+
+            &:active {
+                background-color: white;
+            }
+        }
+    }
+
+    > .button2 {
+        width: 100%;
+        height: 25px;
+        margin-top: 10px;
+
+        > button {
+            width: 100%;
+            height: 100%;
+            @include center-of-rectangle;
+        }
+    }
 }
