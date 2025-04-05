@@ -15,6 +15,7 @@ import ThreeDotHorizontal from 'src/components/Icon/ThreeDotHorizontal';
 import ThreeDotVertical from 'src/components/Icon/ThreeDotVertical';
 import DynamicBigRowArrow from 'src/components/Icon/DynamicBigRowArrow';
 import OneStar from 'src/components/Icon/OneStar';
+import DynamicMenu from 'src/components/Icon/DynamicMenu';
 
 const IconScreen: FC<{}> = () => {
     const [direct, setDirect] = useState<'left' | 'right' | undefined>('right');
@@ -29,42 +30,47 @@ const IconScreen: FC<{}> = () => {
 
     return (
         <div className="TKS-IconScreen">
-            <WarnTriangle />
-            <ErrorCircle />
-            <TickSymbol />
-            <DeleteCircle />
-            <AddCircle />
-            <SubCircle />
-            <BigLeftArrow />
-            <BigRightArrow />
-            <BigDownArrow />
-            <div
-                style={{
-                    margin: '10px',
-                }}
-            >
-                <BigUpArrow />
-            </div>
             <div>
-                <ThreeDotHorizontal />
-            </div>
-            <div>
-                <ThreeDotVertical />
-            </div>
-            <div>
-                <DynamicBigRowArrow
-                    dynamicBigRowArrowProps={{
-                        during_time_animation: 300,
-                        direct: direct,
+                <WarnTriangle />
+                <ErrorCircle />
+                <TickSymbol />
+                <DeleteCircle />
+                <AddCircle />
+                <SubCircle />
+                <BigLeftArrow />
+                <BigRightArrow />
+                <BigDownArrow />
+                <div
+                    style={{
+                        margin: '10px',
                     }}
-                />
-            </div>
-            <div>
-                <button onClick={() => handleDirect()}>DynamicBigRowArrow_Click</button>
-            </div>
+                >
+                    <BigUpArrow />
+                </div>
+                <div>
+                    <ThreeDotHorizontal />
+                </div>
+                <div>
+                    <ThreeDotVertical />
+                </div>
+                <div>
+                    <DynamicBigRowArrow
+                        dynamicBigRowArrowProps={{
+                            during_time_animation: 300,
+                            direct: direct,
+                        }}
+                    />
+                </div>
+                <div>
+                    <button onClick={() => handleDirect()}>DynamicBigRowArrow_Click</button>
+                </div>
 
+                <div>
+                    <OneStar />
+                </div>
+            </div>
             <div>
-                <OneStar />
+                <DynamicMenu />
             </div>
         </div>
     );

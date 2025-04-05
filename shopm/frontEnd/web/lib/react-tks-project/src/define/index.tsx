@@ -198,6 +198,8 @@ export interface DeleteCircleProps {
     stroke_width?: number;
 }
 
+export interface DynamicMenuProps {}
+
 export interface AddCircleProps {
     size?: number;
     background?: string;

@@ -1,6 +1,7 @@
 import style from './style.module.scss';
 import { FiveStar } from '@src/component';
 import avatarnull from '../../../../../../../../../../asset/avatar/avatarnull.png';
+import { MESSAGE, GO_TO_PROFILE, FOLLOW } from '@src/const/text';
 
 const Profile = () => {
     return (
@@ -19,11 +20,11 @@ const Profile = () => {
                 </div>
             </div>
             <div className={style.button1}>
-                <div>Follow</div>
-                <div>Message</div>
+                <div>{FOLLOW}</div>
+                <div>{MESSAGE}</div>
             </div>
             <div className={style.button2}>
-                <button>Go to profile</button>
+                <button>{GO_TO_PROFILE}</button>
             </div>
         </div>
     );

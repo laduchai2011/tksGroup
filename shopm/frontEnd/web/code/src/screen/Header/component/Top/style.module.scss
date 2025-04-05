@@ -14,22 +14,34 @@
     align-items: center;
     justify-content: space-between;
     z-index: 900;
+    box-sizing: border-box;
 
     > div {
         height: 100%;
-        @include center-of-row;
+        box-sizing: border-box;
     }
 
     > .left {
+        padding-left: 30px;
+        background-color: white;
         width: 20%;
+        max-width: 40%;
     }
 
     > .center {
         background-color: white;
-        width: 60%;
+        @include center-of-rectangle;
     }
 
     > .right {
+        padding-right: 20px;
+        background-color: white;
         width: 20%;
+        max-width: 40%;
+
+        // @include responsive('lg') {
+        //     top: 61px;
+        //     width: 100%;
+        // }
     }
 }

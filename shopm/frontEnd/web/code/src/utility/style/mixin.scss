@@ -39,3 +39,28 @@
         }
     }
 }
+
+// Định nghĩa breakpoint
+$breakpoints: (
+    xs: 480px,
+    sm: 768px,
+    md: 1024px,
+    lg: 1280px,
+    xl: 1440px,
+);
+
+// Mixin giúp viết media query nhanh hơn
+// @mixin responsive($size) {
+//     @media (max-width: map-get($breakpoints, $size)) {
+//         @content;
+//     }
+// }
+@mixin responsive($size) {
+    @if not map-has-key($breakpoints, $size) {
+        @error "Breakpoint '#{$size}' is not defined in \$breakpoints map.";
+    }
+
+    @media (max-width: map-get($breakpoints, $size)) {
+        @content;
+    }
+}

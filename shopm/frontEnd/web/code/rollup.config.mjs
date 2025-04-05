@@ -81,7 +81,7 @@ const rollup_dev = isDev && [
             babel({
                 babelHelpers: 'bundled',
                 extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.pcss', '.scss'],
-                exclude: 'node_modules/**',
+                exclude: ['node_modules/**', '**/*.test.tsx', '**/*.spec.ts'],
             }),
             alias({
                 entries: entries,
@@ -112,7 +112,11 @@ const rollup_dev = isDev && [
             }),
         ],
         // external: ['react', 'react-dom'], // chỉ dùng khi build thư viện
-        // treeshake: false,
+        treeshake: {
+            pureExternalModules: true, // Xử lý các module ngoài có annotation __PURE__
+            annotations: true, // Bật tính năng nhận diện annotation
+        },
+        external: ['jest'],
     },
 ];
 
@@ -153,7 +157,7 @@ const rollup_prod = isProd && [
             babel({
                 babelHelpers: 'bundled',
                 extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.pcss', '.scss'],
-                exclude: 'node_modules/**',
+                exclude: ['node_modules/**', '**/*.test.tsx', '**/*.spec.ts'],
             }),
             alias({
                 entries: entries,
@@ -178,10 +182,11 @@ const rollup_prod = isProd && [
             terser(), // Chỉ nén code khi ở production
         ],
         // external: ['react', 'react-dom'], // chỉ dùng khi build thư viện
-        // treeshake: {
-        //     pureExternalModules: true, // Xử lý các module ngoài có annotation __PURE__
-        //     annotations: true, // Bật tính năng nhận diện annotation
-        // },
+        treeshake: {
+            pureExternalModules: true, // Xử lý các module ngoài có annotation __PURE__
+            annotations: true, // Bật tính năng nhận diện annotation
+        },
+        external: ['jest'],
     },
 ];
 

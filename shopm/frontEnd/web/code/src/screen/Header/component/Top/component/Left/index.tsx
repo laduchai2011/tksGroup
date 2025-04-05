@@ -7,7 +7,11 @@ const Left = () => {
         <div className={style.parent}>
             <div>
                 <input placeholder={SEARCH} />
-                <IoSearch size={30} />
+                <IoSearch size={25} />
+            </div>
+            <div>
+                <input placeholder={SEARCH} />
+                <IoSearch size={25} />
             </div>
         </div>
     );

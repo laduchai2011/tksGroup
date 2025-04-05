@@ -2,6 +2,8 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import './utility/style/global.scss'; // Import SCSS global
+import reportWebVitals from './reportWebVitals';
+import { DEVELOPMENT, PRODUCTION } from './const/env';
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
@@ -10,4 +12,17 @@ if (rootElement) {
             <App />
         </StrictMode>
     );
+}
+
+if (process.env.NODE_ENV === DEVELOPMENT) {
+    reportWebVitals(console.log);
+}
+if (process.env.NODE_ENV === PRODUCTION) {
+    reportWebVitals((metric) => {
+        fetch('/analytics', {
+            method: 'POST',
+            body: JSON.stringify(metric),
+            headers: { 'Content-Type': 'application/json' },
+        });
+    });
 }

@@ -5,6 +5,7 @@ import { FaShoppingCart, FaPhone } from 'react-icons/fa';
 import { FaUserDoctor } from 'react-icons/fa6';
 import { FcAbout } from 'react-icons/fc';
 import { MAIN_BLUE_COLOR } from '@src/utility/color';
+import DynamicMenu from '@src/component/DynamicMenu';
 
 const Center = () => {
     const parent_element = useRef<HTMLDivElement | null>(null);
@@ -33,20 +34,25 @@ const Center = () => {
 
     return (
         <div className={style.parent} ref={parent_element}>
-            <div className={handle_icon_index(0)}>
-                <RiHome9Fill size={40} />
+            <div>
+                <DynamicMenu />
             </div>
-            <div className={handle_icon_index(1)}>
-                <FaShoppingCart size={40} />
-            </div>
-            <div className={handle_icon_index(2)}>
-                <FaUserDoctor size={40} />
-            </div>
-            <div className={handle_icon_index(3)}>
-                <FaPhone size={40} />
-            </div>
-            <div className={handle_icon_index(4)}>
-                <FcAbout size={40} />
+            <div>
+                <div className={handle_icon_index(0)}>
+                    <RiHome9Fill size={40} />
+                </div>
+                <div className={handle_icon_index(1)}>
+                    <FaShoppingCart size={40} />
+                </div>
+                <div className={handle_icon_index(2)}>
+                    <FaUserDoctor size={40} />
+                </div>
+                <div className={handle_icon_index(3)}>
+                    <FaPhone size={40} />
+                </div>
+                <div className={handle_icon_index(4)}>
+                    <FcAbout size={40} />
+                </div>
             </div>
         </div>
     );

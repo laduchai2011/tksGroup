@@ -3,7 +3,9 @@
 .parent {
     width: 100%;
     height: 100%;
-    @include center-of-rectangle;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     position: relative;
 
     > div:nth-child(1) {
@@ -44,6 +46,9 @@
 
             > div {
                 margin-left: 5px;
+                @include responsive(md) {
+                    display: none;
+                }
             }
         }
     }

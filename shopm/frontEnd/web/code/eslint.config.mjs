@@ -28,11 +28,11 @@ export default [
     {
         settings: {
             'import/parsers': {
-                '@typescript-eslint/parser': ['.tsx'],
+                '@typescript-eslint/parser': ['.tsx', '.ts'],
             },
             'import/resolver': {
                 node: {
-                    extensions: ['.jsx', '.tsx'],
+                    extensions: ['.jsx', '.tsx', '.ts'],
                 },
                 typescript: {
                     alwaysTryTypes: true, // Cố gắng resolve cả file `.d.ts`
@@ -69,11 +69,11 @@ export default [
         },
         settings: {
             'import/parsers': {
-                '@typescript-eslint/parser': ['.jsx', '.tsx'],
+                '@typescript-eslint/parser': ['.jsx', '.tsx', '.ts'],
             },
             'import/resolver': {
                 node: {
-                    extensions: ['.jsx', '.tsx'],
+                    extensions: ['.jsx', '.tsx', '.ts'],
                 },
                 typescript: {
                     alwaysTryTypes: true, // Cố gắng resolve cả file `.d.ts`

@@ -9,11 +9,9 @@ class Handle_Login {
 
     constructor() {
         this._queryDB_login = new QueryDB_Login();
-
-        this.main = this.main.bind(this);
     }
 
-    async main(req: Request, res: Response) {
+    main = async (req: Request, res: Response) => {
         const userName: unknown = req.query.userName;
         const password: unknown = req.query.password;
 
@@ -82,7 +80,7 @@ class Handle_Login {
         }
 
         res.json(resData);
-    }
+    };
 }
 
 export default Handle_Login;
