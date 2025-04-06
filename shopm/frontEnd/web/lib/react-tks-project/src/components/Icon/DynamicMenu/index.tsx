@@ -3,7 +3,7 @@ import './styles.css';
 
 import { DynamicMenuProps } from 'src/define';
 
-interface MyDynamicMenuProps extends React.HTMLProps<SVGSVGElement> {
+interface MyDynamicMenuProps extends React.HTMLProps<HTMLDivElement> {
     dynamicMenu?: DynamicMenuProps;
     [key: string]: any;
 }

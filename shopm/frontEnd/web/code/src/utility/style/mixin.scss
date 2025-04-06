@@ -48,13 +48,6 @@ $breakpoints: (
     lg: 1280px,
     xl: 1440px,
 );
-
-// Mixin giúp viết media query nhanh hơn
-// @mixin responsive($size) {
-//     @media (max-width: map-get($breakpoints, $size)) {
-//         @content;
-//     }
-// }
 @mixin responsive($size) {
     @if not map-has-key($breakpoints, $size) {
         @error "Breakpoint '#{$size}' is not defined in \$breakpoints map.";

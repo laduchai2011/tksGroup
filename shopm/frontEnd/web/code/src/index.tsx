@@ -4,12 +4,16 @@ import App from './App';
 import './utility/style/global.scss'; // Import SCSS global
 import reportWebVitals from './reportWebVitals';
 import { DEVELOPMENT, PRODUCTION } from './const/env';
+import { Provider } from 'react-redux';
+import { store } from './redux';
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
     createRoot(rootElement).render(
         <StrictMode>
-            <App />
+            <Provider store={store}>
+                <App />
+            </Provider>
         </StrictMode>
     );
 }

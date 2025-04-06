@@ -10,6 +10,7 @@ import DynamicMenu from '@src/component/DynamicMenu';
 const Center = () => {
     const parent_element = useRef<HTMLDivElement | null>(null);
     const [icon_index, set_icon_index] = useState<number>(0);
+    const [menu_container_active, set_menu_container_active] = useState<boolean>(false);
 
     useEffect(() => {
         if (parent_element.current) {
@@ -25,6 +26,17 @@ const Center = () => {
         }
     }, []);
 
+    useEffect(() => {
+        if (parent_element.current) {
+            const menu_contaiber_element = parent_element.current.children[1];
+            if (menu_container_active) {
+                menu_contaiber_element.classList.add(style.menu_active);
+            } else {
+                menu_contaiber_element.classList.remove(style.menu_active);
+            }
+        }
+    }, [menu_container_active]);
+
     const handle_icon_index = (_icon_index: number): string => {
         if (_icon_index === icon_index) {
             return style.active;
@@ -32,10 +44,14 @@ const Center = () => {
         return '';
     };
 
+    const handle_show_menu = () => {
+        set_menu_container_active(!menu_container_active);
+    };
+
     return (
         <div className={style.parent} ref={parent_element}>
             <div>
-                <DynamicMenu />
+                <DynamicMenu dynamicMenu={{ active: menu_container_active }} onClick={() => handle_show_menu()} />
             </div>
             <div>
                 <div className={handle_icon_index(0)}>
