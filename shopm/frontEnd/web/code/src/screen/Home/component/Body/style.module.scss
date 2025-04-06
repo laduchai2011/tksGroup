@@ -1,6 +1,6 @@
 @use 'src/utility/style/mixin.scss' as *;
 
 .parent {
-    width: 0;
-    height: 0;
+    background-color: aqua;
+    margin-top: 200px;
 }

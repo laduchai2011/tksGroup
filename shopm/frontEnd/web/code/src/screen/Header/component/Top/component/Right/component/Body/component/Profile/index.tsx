@@ -2,8 +2,15 @@ import style from './style.module.scss';
 import { FiveStar } from '@src/component';
 import avatarnull from '../../../../../../../../../../asset/avatar/avatarnull.png';
 import { MESSAGE, GO_TO_PROFILE, FOLLOW } from '@src/const/text';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
+    const navigate = useNavigate();
+
+    const handle_go_to_profile = () => {
+        navigate('/profile');
+    };
+
     return (
         <div className={style.parent}>
             <div className={style.avatar}>
@@ -24,7 +31,7 @@ const Profile = () => {
                 <div>{MESSAGE}</div>
             </div>
             <div className={style.button2}>
-                <button>{GO_TO_PROFILE}</button>
+                <button onClick={() => handle_go_to_profile()}>{GO_TO_PROFILE}</button>
             </div>
         </div>
     );

@@ -1,10 +1,12 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from '@src/screen/Home';
 import NotFoundPage from '@src/screen/NotFoundPage';
+import Profile from '@src/screen/Profile';
 
 const router = createBrowserRouter(
     [
         { path: '/', element: <Home /> },
+        { path: '/profile', element: <Profile /> },
         { path: '*', element: <NotFoundPage /> }, // Trang 404
     ],
     {

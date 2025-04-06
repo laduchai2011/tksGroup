@@ -14,7 +14,7 @@ const Header: React.FC<Header__Props> = ({ header__interface, className, ...prop
     const left_isShow: boolean | undefined = header__interface?.left_isShow;
 
     return (
-        <div className={`${style.header} ${className || ''}`} {...props}>
+        <div className={`${style.parent} ${className || ''}`} {...props}>
             {top_isShow && <Top />}
             {left_isShow && <Left />}
         </div>

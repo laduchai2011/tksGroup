@@ -3,7 +3,7 @@ import AppReducer from '@src/redux/slice/App';
 
 export const store = configureStore({
     reducer: {
-        counter: AppReducer,
+        App: AppReducer,
     },
 });
 

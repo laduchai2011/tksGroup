@@ -92,6 +92,7 @@ const rollup_dev = isDev && [
                 contentBase: 'dist', // Thư mục chứa file được phục vụ
                 host: HOST,
                 port: PORT, // Cổng chạy server
+                historyApiFallback: true, // Đảm bảo rằng yêu cầu không phải là tài nguyên tĩnh sẽ trả về index.html
             }),
             livereload('dist'), // Theo dõi thư mục "dist" và reload khi có thay đổi
             copy({
