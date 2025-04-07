@@ -5,3 +5,7 @@ export const PROFILE = 'Trang cá nhân';
 export const MESSAGE_GROUP = 'Tin nhắn nhóm';
 export const GO_TO_PROFILE = 'Đi tới trang cá nhân';
 export const FOLLOW = 'Theo dõi';
+export const FOLLOWED = 'Đã theo dõi';
+export const UN_FOLLOW = 'Bỏ theo dõi';
+export const CHANGE = 'Thay đổi';
+export const ADD = 'Thêm';

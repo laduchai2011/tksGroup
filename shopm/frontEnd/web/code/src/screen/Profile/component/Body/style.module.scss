@@ -5,9 +5,17 @@
 
     > div {
         width: 1024px;
-        height: 600px;
         background-color: white;
         box-sizing: border-box;
         padding: 10px;
+
+        @include responsive(md) {
+            width: 100%;
+            padding: calc((10 / 1024) * 100vw);
+        }
+
+        > div {
+            width: 100%;
+        }
     }
 }

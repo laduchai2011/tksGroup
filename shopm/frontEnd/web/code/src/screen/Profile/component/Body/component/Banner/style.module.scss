@@ -1,0 +1,217 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    width: 100%;
+
+    > .bannerContainer {
+        width: 100%;
+        height: 360px;
+        @include responsive(md) {
+            width: 100%;
+            height: calc((360 / 1024) * 100vw);
+        }
+
+        > .bannerBox {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            background-color: antiquewhite;
+            border: 1px solid rgb(235, 235, 235);
+            position: relative;
+
+            > img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            > .change_button {
+                user-select: none;
+                cursor: pointer;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                width: 100px;
+                height: 30px;
+                background-color: beige;
+                @include center-of-rectangle;
+                font-size: 20px;
+                font-weight: 500;
+                border-top-left-radius: 15px;
+                @include responsive(md) {
+                    width: calc((100 / 1024) * 100vw);
+                    height: calc((30 / 1024) * 100vw);
+                    font-size: calc((20 / 1024) * 100vw);
+                    border-top-left-radius: calc((15 / 1024) * 100vw);
+                }
+            }
+        }
+
+        > .bannerBox_NULL {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            background-color: antiquewhite;
+            border: 1px solid rgb(235, 235, 235);
+            position: relative;
+
+            > img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            > .add_button {
+                cursor: pointer;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+
+    > .avatarContainer {
+        @include center-of-row;
+        width: 100%;
+        height: 200px;
+        box-sizing: border-box;
+        border-bottom: 1px solid gray;
+        padding: 5px;
+        @include responsive(md) {
+            width: 100%;
+            height: calc((200 / 1024) * 100vw);
+        }
+
+        > .avatarBox {
+            height: 100%;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            position: relative;
+            box-sizing: border-box;
+            padding: 10px;
+            @include responsive(md) {
+                padding: calc((10 / 1024) * 100vw);
+            }
+
+            > img {
+                height: 100%;
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+                background-color: white;
+                border-radius: 50%;
+                box-sizing: border-box;
+                border: 3px solid blue;
+                user-select: none;
+            }
+
+            > svg {
+                cursor: pointer;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+            }
+        }
+
+        > .inforBox {
+            box-sizing: border-box;
+            padding: 10px;
+            height: 100%;
+            flex-grow: 1;
+            display: flex;
+            @include responsive(md) {
+                padding: calc((10 / 1024) * 100vw);
+            }
+
+            > div {
+                width: 50%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+            }
+
+            > div:nth-child(1) {
+                > .nameBox {
+                    height: 80%;
+                    width: 100%;
+                    line-height: 60px;
+                    @include responsive(md) {
+                        line-height: calc((60 / 1024) * 100vw);
+                    }
+
+                    > div:nth-child(1) {
+                        width: 100%;
+                        font-size: 2rem;
+                        font-weight: 800;
+                        @include line-clamp(1);
+                        @include responsive(md) {
+                            font-size: 4vw;
+                            line-height: 6vw;
+                        }
+                    }
+
+                    > div:nth-child(2) {
+                        height: 30px;
+                        width: max-content;
+                        @include responsive(md) {
+                            height: calc((30 / 1024) * 100vw);
+                        }
+                    }
+
+                    > div:nth-child(3) {
+                        font-style: italic;
+                        @include line-clamp(1);
+                        @include responsive(md) {
+                            font-size: calc((16 / 1024) * 100vw);
+                        }
+                    }
+                }
+            }
+
+            > div:nth-child(2) {
+                justify-content: flex-end;
+
+                > .buttonBox {
+                    > div {
+                        margin: 20px 0;
+                        box-sizing: border-box;
+                        padding: 10px;
+                        @include center-of-rectangle;
+                        user-select: none;
+                        cursor: pointer;
+                        @include responsive(md) {
+                            padding: calc((10 / 1024) * 100vw);
+                            margin: calc((20 / 1024) * 100vw) 0;
+                        }
+                    }
+
+                    > div:nth-child(1) {
+                        border: 1px solid blue;
+                        color: blue;
+                        font-size: 20px;
+                        @include responsive(md) {
+                            font-size: calc((25 / 1024) * 100vw);
+                        }
+
+                        &:active {
+                            background-color: rgb(225, 225, 255);
+                        }
+                    }
+
+                    > div:nth-child(2) {
+                        border: 1px solid red;
+                        color: red;
+                        font-size: 20px;
+                        @include responsive(md) {
+                            font-size: calc((25 / 1024) * 100vw);
+                        }
+
+                        &:active {
+                            background-color: rgb(255, 204, 204);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,15 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    background-color: rgb(245, 255, 255);
+    height: 30px;
+
+    > .icon {
+        height: 100%;
+
+        > svg {
+            height: 100%;
+            aspect-ratio: 1 / 1;
+        }
+    }
+}

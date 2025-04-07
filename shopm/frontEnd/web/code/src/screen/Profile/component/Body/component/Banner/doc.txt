@@ -1,0 +1,5 @@
+- Kích thước banner: với chiều rộng Body cha là MD ( tức 1024px ) theo chuẩn dự án,
+ padding của Body lại là 10px ( với box-sizing: border-box; ), 
+ do vậy kích thước Baner: 
+ width: 1002px ( 1024px(MD) - 20px(Padding) -2px(border) ), 
+ height: 358px ( 360px(cố đinh cho dự án) -2px(border))
