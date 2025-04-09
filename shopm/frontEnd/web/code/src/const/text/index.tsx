@@ -13,5 +13,5 @@ export const DIARY = 'Nhật ký';
 export const PATIENT_RECORD = 'Bệnh án';
 export const BUY_HISTORY = 'Lịch sử mua';
 export const INFORMATION = 'Thông tin';
-export const PROVIDER = 'Nhà cung cấpcấp';
+export const PROVIDER = 'Nhà cung cấp';
 export const DOCTOR_OR_PHARMACIST = 'Bác sĩ / Dược sĩ';

@@ -15,6 +15,7 @@
         @include responsive(sm) {
             position: relative;
             overflow: visible;
+            z-index: 10;
 
             > div {
                 position: absolute;
@@ -23,6 +24,7 @@
                 width: 0;
                 height: 0;
                 overflow: hidden;
+                background-color: white;
 
                 transition:
                     width 0.3s linear,
@@ -30,7 +32,7 @@
 
                 &.list_show_w_res {
                     width: 150px;
-                    height: 200px;
+                    height: max-content;
                 }
 
                 > div {

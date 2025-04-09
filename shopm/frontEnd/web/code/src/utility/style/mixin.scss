@@ -56,6 +56,22 @@
     }
 }
 
+@mixin small-scroll-xx($thickness) {
+    &::-webkit-scrollbar {
+        height: $thickness;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: white;
+    }
+
+    &:hover {
+        &::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+    }
+}
+
 // Định nghĩa breakpoint
 $breakpoints: (
     xs: 480px,

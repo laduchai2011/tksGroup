@@ -1,0 +1,56 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    display: flex;
+    height: 50px;
+    width: 100%;
+    box-sizing: border-box;
+    padding-bottom: 5px;
+    border-bottom: 1px solid gray;
+
+    > div {
+        height: 100%;
+        width: calc(100% / 3);
+    }
+
+    > div:nth-child(1) {
+        display: flex;
+        > img {
+            height: 100%;
+            aspect-ratio: 1 / 1;
+        }
+
+        > div {
+            height: 100%;
+            font-size: 1.2rem;
+            font-weight: 600;
+            flex-grow: 1;
+            @include center-of-row;
+            margin: 0 10px;
+            @include line-clamp(2);
+        }
+    }
+
+    > div:nth-child(2) {
+        font-style: italic;
+        font-size: 0.9rem;
+        @include center-of-rectangle;
+    }
+
+    > div:nth-child(3) {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        > svg {
+            cursor: pointer;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+
+            &:hover {
+                background-color: rgb(226, 226, 226);
+            }
+        }
+    }
+}

@@ -1,0 +1,12 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    margin-top: 70px;
+    width: 100%;
+    height: 100%;
+
+    > div {
+        width: 100%;
+        height: 100%;
+    }
+}
