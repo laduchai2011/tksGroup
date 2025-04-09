@@ -67,6 +67,6 @@
         max-height: 600px;
         overflow-y: auto;
 
-        @include small-scroll();
+        @include small-scroll-y();
     }
 }

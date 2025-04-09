@@ -13,7 +13,7 @@ const Left = () => {
     const [input_value, set_input_value] = useState('');
 
     useEffect(() => {
-        const handleResize = () => {
+        const handleResposive = () => {
             if (window.innerWidth <= RES_VALUE) {
                 isResponsive.current = true;
             } else {
@@ -21,10 +21,10 @@ const Left = () => {
                 input2_element.current?.classList.remove(style.input2_active);
             }
         };
-        handleResize();
-        window.addEventListener('resize', handleResize);
+        handleResposive();
+        window.addEventListener('resize', handleResposive);
 
-        return () => window.removeEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResposive);
     }, [RES_VALUE]);
 
     const handle_input1_icon = () => {
