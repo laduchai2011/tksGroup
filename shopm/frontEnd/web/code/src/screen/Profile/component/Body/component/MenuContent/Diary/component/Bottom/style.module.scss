@@ -1,0 +1,86 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    box-sizing: border-box;
+    padding: 5px 0;
+    width: 100%;
+
+    > .buttonContainer {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+
+        > div:nth-child(1) {
+            width: 60%;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            user-select: none;
+            box-sizing: border-box;
+            padding-right: 5%;
+            @include responsive(sm) {
+                width: 40%;
+                padding-right: 0;
+            }
+
+            > input {
+                flex-grow: 1;
+                border: none;
+                outline: none;
+                border-bottom: 0.1px solid gray;
+                @include responsive(sm) {
+                    width: 75%;
+                    flex-grow: 0;
+                }
+            }
+
+            > div {
+                > svg {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        > div:not(:nth-child(1)) {
+            width: 10%;
+            height: 30px;
+            @include center-of-rectangle;
+            cursor: pointer;
+            user-select: none;
+            @include responsive(sm) {
+                width: 15%;
+            }
+
+            &:hover {
+                background-color: rgb(230, 230, 230);
+            }
+
+            > div:nth-child(2) {
+                color: black;
+                margin-left: 3px;
+            }
+        }
+    }
+
+    > .inputContainer {
+        width: 100%;
+        margin-top: 10px;
+        // @include center-of-ow;
+        display: flex;
+        align-items: center;
+
+        > input {
+            flex-grow: 1;
+            border: none;
+            outline: none;
+            border-bottom: 0.1px solid gray;
+            user-select: none;
+        }
+
+        > div {
+            > svg {
+                cursor: pointer;
+            }
+        }
+    }
+}

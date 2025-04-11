@@ -2,9 +2,8 @@ import { useRef } from 'react';
 import style from './style.module.scss';
 import Top from './component/Top';
 import Center from './component/Center';
-import Bottom from './component/Bottom';
 
-const Diary = () => {
+const A_Comment = () => {
     const parent_element = useRef<HTMLDivElement | null>(null);
 
     return (
@@ -15,11 +14,9 @@ const Diary = () => {
             <div>
                 <Center />
             </div>
-            <div>
-                <Bottom />
-            </div>
+            <div></div>
         </div>
     );
 };
 
-export default Diary;
+export default A_Comment;

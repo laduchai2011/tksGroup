@@ -9,8 +9,6 @@ const Center = () => {
     const parent_element = useRef<HTMLDivElement | null>(null);
     const [index_img, set_index_img] = useState(0);
 
-    console.log(img_list_data);
-
     const hangle_imgBtn = (type: string) => {
         if (type === 'left') {
             if (index_img > 0) {

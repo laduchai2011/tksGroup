@@ -101,7 +101,7 @@ const Menu = () => {
         const _data = text_list[selected_index];
 
         return (
-            <div key={index} title={data} data-index={index}>
+            <div key={index} title={_data} data-index={index}>
                 {_data}
             </div>
         );

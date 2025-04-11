@@ -1,0 +1,127 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    position: fixed;
+    background-color: white;
+    box-sizing: border-box;
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 20px;
+    width: 600px;
+    height: 800px;
+    max-width: 80vw;
+    max-height: 80vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+
+    > .headerContainer {
+        width: 100%;
+        @include center-of-row;
+        justify-content: space-between;
+
+        > div:not(:nth-child(2)) {
+            width: 25%;
+            height: 100%;
+        }
+
+        > div:nth-child(1) {
+            @include center-of-row;
+        }
+
+        > div:nth-child(2) {
+            @include center-of-rectangle;
+            width: 50%;
+        }
+
+        > div:nth-child(3) {
+            @include center-of-row;
+            justify-content: flex-end;
+
+            > div {
+                margin-right: 15px;
+                color: blue;
+                font-size: 0.8rem;
+                user-select: none;
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            > svg {
+                height: 100%;
+                aspect-ratio: 1 / 1;
+                cursor: pointer;
+            }
+        }
+    }
+
+    > .inputContainer {
+        margin-top: 15px;
+        width: 100%;
+
+        > textarea {
+            width: 100%;
+            border: none;
+            outline: none;
+            border-bottom: 1px solid gray;
+            resize: none;
+            overflow: hidden;
+        }
+    }
+
+    > .btnContainer {
+        @include center-of-row;
+        justify-content: space-between;
+        margin-top: 10px;
+
+        > div:nth-child(1) {
+            > svg {
+                cursor: pointer;
+            }
+        }
+
+        > div:nth-child(2) {
+            > button {
+                margin: 0 3px;
+            }
+        }
+    }
+
+    // > .commentContainer {
+    //     margin-top: 20px;
+    //     background-color: aqua;
+    //     width: 100%;
+
+    //     > div {
+    //         display: flex;
+    //         flex-wrap: wrap;
+    //         width: 100%;
+
+    //         > div:nth-child(1) {
+    //             width: 10%;
+    //             background-color: antiquewhite;
+
+    //             > img {
+    //                 width: 100%;
+    //                 aspect-ratio: 1/1;
+    //             }
+    //         }
+
+    //         > div:nth-child(2) {
+    //             width: 90%;
+    //             > div:nth-child(1) {
+    //                 @include line-clamp(3);
+    //             }
+    //         }
+    //     }
+    // }
+
+    > .commentContainer {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
