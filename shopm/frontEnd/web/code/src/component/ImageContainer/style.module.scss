@@ -1,0 +1,66 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    > .imageContainer {
+        width: 100%;
+        height: 100%;
+        @include small-scroll-snap-parent;
+
+        > img {
+            @include small-scroll-snap-children;
+            object-fit: contain;
+            user-select: none;
+            background-color: black;
+        }
+    }
+
+    > .controlContainer {
+        width: 0;
+        left: 0;
+
+        > div {
+            position: absolute;
+            top: 0.3vw;
+            left: 0.3vw;
+            background-color: white;
+            border-radius: 50%;
+            width: max-content;
+            height: max-content;
+            padding: 5px;
+            opacity: 0.3;
+            cursor: default;
+            user-select: none;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+
+        > svg {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            cursor: pointer;
+            opacity: 0.3;
+            width: 5%;
+            height: 15%;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+
+        > .left_button {
+            left: 1%;
+        }
+
+        > .right_button {
+            right: 1%;
+        }
+    }
+}

@@ -4,7 +4,7 @@ import { AiFillLike, AiFillDislike } from 'react-icons/ai';
 import { FaRegCommentDots } from 'react-icons/fa';
 import { RiShareForwardFill } from 'react-icons/ri';
 import { RiSendPlaneFill } from 'react-icons/ri';
-import CommentBox from './component/CommentBox';
+import CommentBox from '@src/component/CommentBox';
 
 const Bottom = () => {
     const parent_element = useRef<HTMLDivElement | null>(null);

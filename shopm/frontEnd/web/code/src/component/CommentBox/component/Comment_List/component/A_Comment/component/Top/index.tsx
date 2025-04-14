@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import style from './style.module.scss';
-import avatarnull from '../../../../../../../../../../../../../../../../../asset/avatar/avatarnull.png';
+import avatarnull from '../../../../../../../../asset/avatar/avatarnull.png';
 import { CgMoreAlt } from 'react-icons/cg';
 import { REPORT } from '@src/const/text';
 

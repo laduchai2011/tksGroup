@@ -72,6 +72,38 @@
     }
 }
 
+@mixin small-scroll-yy($thickness) {
+    &::-webkit-scrollbar {
+        width: $thickness;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: white;
+    }
+
+    &:hover {
+        &::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+    }
+}
+
+@mixin small-scroll-snap-parent {
+    display: flex;
+    flex-grow: 1;
+    overflow-x: auto;
+    @include small-scroll-xx(0);
+    scroll-snap-type: x mandatory; // snap từng item
+    scroll-behavior: smooth; // scroll mượt
+}
+
+@mixin small-scroll-snap-children {
+    width: 100%;
+    height: 100%;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+}
+
 // Định nghĩa breakpoint
 $breakpoints: (
     xs: 480px,
