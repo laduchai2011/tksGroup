@@ -68,7 +68,6 @@ const Center = () => {
                     </div>
                 </div>
                 <div>
-                    {/* <textarea rows={1} placeholder={COMMENT} /> */}
                     <CommentInput />
                 </div>
             </div>

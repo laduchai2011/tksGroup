@@ -3,6 +3,7 @@ import style from './style.module.scss';
 import { IoSearch } from 'react-icons/io5';
 import { SEARCH } from '@src/const/text';
 import { RES_VALUES_WITH_PX } from '@src/const/responsive';
+import throttle from '@src/handle/throttle';
 
 // Thành phần này đang responsive tại giá trị LG, hãy chú ý khi thay đổi trên mã tệp ts và trong tệp scss
 
@@ -13,14 +14,14 @@ const Left = () => {
     const [input_value, set_input_value] = useState('');
 
     useEffect(() => {
-        const handleResposive = () => {
+        const handleResposive = throttle(() => {
             if (window.innerWidth <= RES_VALUE) {
                 isResponsive.current = true;
             } else {
                 isResponsive.current = false;
                 input2_element.current?.classList.remove(style.input2_active);
             }
-        };
+        }, 200);
         handleResposive();
         window.addEventListener('resize', handleResposive);
 

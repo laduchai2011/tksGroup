@@ -50,7 +50,7 @@ const CommentInput: FC<MyCommentInputProps> = ({ className, ...props }) => {
     const handleFolderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
         if (files) {
-            for (const file of files) {
+            for (const file of Array.from(files as FileList)) {
                 const url = URL.createObjectURL(file);
                 setImage(url);
                 setImages((pre) => [...pre, url]);

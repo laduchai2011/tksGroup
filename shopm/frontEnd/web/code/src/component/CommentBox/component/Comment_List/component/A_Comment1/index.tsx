@@ -1,11 +1,13 @@
-import { useRef } from 'react';
+import { FC, useRef, useEffect } from 'react';
 import style from './style.module.scss';
 import Top from './component/Top';
 import Center from './component/Center';
 import Bottom from './component/Bottom';
 
-const A_Comment = () => {
+const A_Comment1: FC<{ index: number }> = ({ index }) => {
     const parent_element = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {}, [index]);
 
     return (
         <div className={style.parent} ref={parent_element}>
@@ -16,10 +18,10 @@ const A_Comment = () => {
                 <Center />
             </div>
             <div>
-                <Bottom />
+                <Bottom index={index} />
             </div>
         </div>
     );
 };
 
-export default A_Comment;
+export default A_Comment1;
