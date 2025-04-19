@@ -25,3 +25,5 @@ export const POST = 'Bài viết';
 export const COMMENT_POST = 'Bình luận bài viết';
 export const COMMENT_BEFORE = 'Bình luận trước';
 export const CANCEL = 'Hủy';
+export const SEE_MORE = 'Xem thêm';
+export const HIDDEN = 'Ẩn';

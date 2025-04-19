@@ -3,6 +3,7 @@ import style from './style.module.scss';
 import Top from './component/Top';
 import Center from './component/Center';
 import Bottom from './component/Bottom';
+import A_Comment2 from './component/A_Comment2';
 
 const A_Comment1: FC<{ index: number }> = ({ index }) => {
     const parent_element = useRef<HTMLDivElement | null>(null);
@@ -16,6 +17,9 @@ const A_Comment1: FC<{ index: number }> = ({ index }) => {
             </div>
             <div>
                 <Center />
+            </div>
+            <div>
+                <A_Comment2 index={0} />
             </div>
             <div>
                 <Bottom index={index} />

@@ -13,5 +13,4 @@
 
 export type context_type = {
     parent_element: React.RefObject<HTMLDivElement | null>;
-    rect_bottom_container: number;
 };

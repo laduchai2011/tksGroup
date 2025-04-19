@@ -1,8 +1,8 @@
-function throttle<T extends (...args: any[]) => any>(func: T, limit: number): T {
+function throttle<T extends (...args: unknown[]) => unknown>(func: T, limit: number): T {
     let lastFunc: ReturnType<typeof setTimeout> | null;
     let lastRan: number;
 
-    return function (this: any, ...args: any[]) {
+    return function (this: unknown, ...args: unknown[]) {
         if (!lastRan) {
             func.apply(this, args);
             lastRan = Date.now();

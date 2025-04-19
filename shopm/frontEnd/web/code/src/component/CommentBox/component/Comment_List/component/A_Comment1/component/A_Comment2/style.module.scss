@@ -1,0 +1,24 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    width: 100%;
+    // box-sizing: border-box;
+    // padding: 0 5px;
+    // background-color: antiquewhite;
+    display: flex;
+
+    > div:nth-child(1) {
+        width: 40px;
+        @include center-of-column;
+
+        > div {
+            background-color: gray;
+            height: 100%;
+            width: 1px;
+        }
+    }
+
+    > div:nth-child(2) {
+        width: calc(100% - 40px);
+    }
+}

@@ -4,7 +4,6 @@
     width: 100%;
     height: 30px;
     @include center-of-row;
-    background-color: antiquewhite;
 
     > div:nth-child(1) {
         width: 40px;
