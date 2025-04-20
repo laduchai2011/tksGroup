@@ -6,6 +6,7 @@ import { AiFillLike, AiFillDislike } from 'react-icons/ai';
 import { RiShareForwardFill } from 'react-icons/ri';
 import { LIKE, DIS_LIKE, REPLY, SHARE, SEE_MORE, HIDDEN } from '@src/const/text';
 import CommentInput from '@src/component/CommentInput';
+import ImageOverview from './component/ImageOverview';
 
 const Center = () => {
     const parent_element = useRef<HTMLDivElement | null>(null);
@@ -47,7 +48,13 @@ const Center = () => {
                     </div>
                 </div>
                 <div>
-                    <LazyImage src={img} alt="img" />
+                    {/* <LazyImage src={img} alt="img" /> */}
+                    <div>
+                        <ImageOverview />
+                    </div>
+                    <div>
+                        <ImageOverview />
+                    </div>
                 </div>
                 <div>
                     <div>

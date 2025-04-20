@@ -26,4 +26,6 @@ export const COMMENT_POST = 'Bình luận bài viết';
 export const COMMENT_BEFORE = 'Bình luận trước';
 export const CANCEL = 'Hủy';
 export const SEE_MORE = 'Xem thêm';
+export const SEE_IMAGE = 'Xem ảnh';
+export const SEE_VIDEO = 'Xem video';
 export const HIDDEN = 'Ẩn';
