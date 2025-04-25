@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import style from './style.module.scss';
-import LazyImage from '@src/component/LazyImage';
+// import LazyImage from '@src/component/LazyImage';
 import { BsReply } from 'react-icons/bs';
 import { AiFillLike, AiFillDislike } from 'react-icons/ai';
 import { RiShareForwardFill } from 'react-icons/ri';
