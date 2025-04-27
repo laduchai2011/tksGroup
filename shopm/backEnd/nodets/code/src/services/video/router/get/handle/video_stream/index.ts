@@ -1,8 +1,8 @@
 // import { mssql_server } from '@src/connect';
 import { Request, Response, NextFunction } from 'express';
 // import my_interface from '@src/interface';
-import { spawn } from 'child_process';
-import { COMMAND_Encode_Video_To_HLS } from './const';
+import { spawnSync } from 'child_process';
+// import { COMMAND_Encode_Video_To_HLS } from './const';
 import ffmpegPath from 'ffmpeg-static';
 import { handle_cmd } from './util';
 import path from 'path';
@@ -17,9 +17,9 @@ class Handle_Video_Stream {
     constructor() {}
 
     middle_encode_video_to_HLS = (
-        req: Request<Record<string, never>, unknown, unknown, query_options>,
-        res: Response,
-        next: NextFunction
+        req: Request<Record<string, never>, unknown, unknown, query_options>
+        // res: Response,
+        // next: NextFunction
     ) => {
         if (ffmpegPath) {
             const video_name: string = req.query.video_name;
@@ -39,10 +39,18 @@ class Handle_Video_Stream {
                     resolution: { w: '1920', h: '720' },
                 });
 
-                const ff = spawn(ffmpegPath, cmd, { shell: true });
+                // const ff = spawn(ffmpegPath, cmd, { shell: true });
 
-                ff.stderr.on('data', (data) => console.log(data.toString()));
-                ff.on('close', (code) => console.log(`Exited with code ${code}`));
+                // ff.stderr.on('data', (data) => console.log(data.toString()));
+                // ff.on('close', (code) => console.log(`Exited with code ${code}`));
+
+                const ff = spawnSync(ffmpegPath, cmd);
+
+                const stdout = ff.stdout;
+                // const stderr = ff.stderr;
+                // const status = ff.status;
+
+                console.log(111111, stdout);
             } else {
                 console.warn('video_name must is a string !');
             }
