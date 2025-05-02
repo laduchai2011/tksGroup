@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC, useRef } from 'react';
 import style from './style.module.scss';
 import { Options } from './type';
 import { TfiAngleLeft } from 'react-icons/tfi';
@@ -12,8 +12,6 @@ interface MyOptions extends React.HTMLProps<HTMLDivElement> {
 const ImageContainer: FC<MyOptions> = ({ options, className, ...props }) => {
     const parent_element = useRef<HTMLImageElement | null>(null);
     const images: string[] | undefined = options?.images;
-
-    useEffect(() => {}, []);
 
     const list_image =
         images &&

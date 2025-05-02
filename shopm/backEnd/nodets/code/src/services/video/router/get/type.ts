@@ -1,3 +1,4 @@
-export interface query_options {
-    video_name: string;
+export interface parameter_options {
+    id: string;
+    name: string;
 }
