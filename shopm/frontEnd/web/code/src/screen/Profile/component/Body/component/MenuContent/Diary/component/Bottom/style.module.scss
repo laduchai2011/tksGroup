@@ -62,25 +62,25 @@
         }
     }
 
-    > .inputContainer {
-        width: 100%;
-        margin-top: 10px;
-        // @include center-of-ow;
-        display: flex;
-        align-items: center;
+    // > .inputContainer {
+    //     width: 100%;
+    //     margin-top: 10px;
+    //     // @include center-of-ow;
+    //     display: flex;
+    //     align-items: center;
 
-        > input {
-            flex-grow: 1;
-            border: none;
-            outline: none;
-            border-bottom: 0.1px solid gray;
-            user-select: none;
-        }
+    //     > input {
+    //         flex-grow: 1;
+    //         border: none;
+    //         outline: none;
+    //         border-bottom: 0.1px solid gray;
+    //         user-select: none;
+    //     }
 
-        > div {
-            > svg {
-                cursor: pointer;
-            }
-        }
-    }
+    //     > div {
+    //         > svg {
+    //             cursor: pointer;
+    //         }
+    //     }
+    // }
 }

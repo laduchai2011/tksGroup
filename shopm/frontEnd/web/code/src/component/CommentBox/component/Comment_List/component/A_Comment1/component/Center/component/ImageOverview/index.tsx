@@ -13,6 +13,7 @@ const ImageOverview: FC<{ src: string }> = ({ src }) => {
                 <LazyImage src={src} alt="" />
             </div>
             <div>{SEE_IMAGE}</div>
+            <div>99</div>
         </div>
     );
 };

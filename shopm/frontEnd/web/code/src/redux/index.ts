@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import AppReducer from '@src/redux/slice/App';
+import CommentBoxReducer from '@src/redux/slice/CommentBox';
 
 export const store = configureStore({
     reducer: {
-        App: AppReducer,
+        CommentBoxSlice: CommentBoxReducer,
     },
 });
 

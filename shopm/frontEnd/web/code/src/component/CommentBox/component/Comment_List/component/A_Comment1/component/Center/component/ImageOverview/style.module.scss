@@ -40,4 +40,15 @@
             background-color: white;
         }
     }
+
+    > div:nth-child(3) {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 0.8rem;
+        box-sizing: border-box;
+        padding: 3px;
+        background-color: rgb(246, 246, 246);
+        border-bottom-left-radius: 10px;
+    }
 }

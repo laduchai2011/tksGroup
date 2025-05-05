@@ -1,6 +1,7 @@
 import style from './style.module.scss';
 import Header from './component/Header';
 import Body from './component/Body';
+import CommentBox from '@src/component/CommentBox';
 // import type { AppDispatch } from '@src/redux';
 // import { useDispatch } from 'react-redux';
 // import { set_header_screen_top_isShow, set_header_screen_left_isShow } from '@src/redux/slice/App';
@@ -17,6 +18,9 @@ const Profile = () => {
             </div>
             <div>
                 <Body />
+            </div>
+            <div>
+                <CommentBox />
             </div>
         </div>
     );

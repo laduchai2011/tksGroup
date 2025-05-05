@@ -32,6 +32,7 @@ const VideoOverview: FC<{ src_img: string; src_video: string }> = ({ src_img, sr
             <div onMouseEnter={() => handle_btn_onMouseEnter()} onMouseOut={() => handle_btn_onMouseOut()}>
                 {SEE_VIDEO}
             </div>
+            <div>99</div>
         </div>
     );
 };
