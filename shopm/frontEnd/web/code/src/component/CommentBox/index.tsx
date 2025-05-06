@@ -21,18 +21,20 @@ const CommentBox = () => {
             if (parent_element.current) {
                 parent_element.current.classList.add(style.parent_show_display);
             }
-            setTimeout(() => {
+            const timeout = setTimeout(() => {
                 if (parent_element.current) {
                     parent_element.current.classList.add(style.parent_show_opacity);
                 }
+                clearTimeout(timeout);
             }, 50);
         } else {
             if (parent_element.current) {
                 parent_element.current.classList.remove(style.parent_show_opacity);
             }
-            setTimeout(() => {
+            const timeout = setTimeout(() => {
                 if (parent_element.current) {
                     parent_element.current.classList.remove(style.parent_show_display);
+                    clearTimeout(timeout);
                 }
             }, 350);
         }

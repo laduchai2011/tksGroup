@@ -2,14 +2,15 @@ import style from './style.module.scss';
 import Header from './component/Header';
 import Body from './component/Body';
 import CommentBox from '@src/component/CommentBox';
-// import type { AppDispatch } from '@src/redux';
-// import { useDispatch } from 'react-redux';
-// import { set_header_screen_top_isShow, set_header_screen_left_isShow } from '@src/redux/slice/App';
+import VideoPlayBox from '@src/component/VideoPlayBox';
+import { useSelector } from 'react-redux';
+import type { RootState } from '@src/redux';
+import { state_props as state_props_VideoPlayBox } from '@src/component/VideoPlayBox/type';
 
 const Profile = () => {
-    // const dispatch = useDispatch<AppDispatch>();
-    // dispatch(set_header_screen_top_isShow(false));
-    // dispatch(set_header_screen_left_isShow(true));
+    const state_store_VideoPlayBox: state_props_VideoPlayBox = useSelector(
+        (state: RootState) => state.VideoPlayBoxSlice
+    );
 
     return (
         <div className={style.parent}>
@@ -21,6 +22,7 @@ const Profile = () => {
             </div>
             <div>
                 <CommentBox />
+                {state_store_VideoPlayBox.isShowComponent && <VideoPlayBox />}
             </div>
         </div>
     );

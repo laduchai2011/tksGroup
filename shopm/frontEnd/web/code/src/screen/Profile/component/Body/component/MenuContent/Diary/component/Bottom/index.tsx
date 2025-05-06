@@ -5,7 +5,7 @@ import { AiFillLike, AiFillDislike } from 'react-icons/ai';
 import { FaRegCommentDots } from 'react-icons/fa';
 import { RiShareForwardFill } from 'react-icons/ri';
 import { RiSendPlaneFill } from 'react-icons/ri';
-import CommentBox from '@src/component/CommentBox';
+// import CommentBox from '@src/component/CommentBox';
 import { set_isShow, set_id } from '@src/redux/slice/CommentBox';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@src/redux';

@@ -29,3 +29,6 @@ export const SEE_MORE = 'Xem thêm';
 export const SEE_IMAGE = 'Xem ảnh';
 export const SEE_VIDEO = 'Xem video';
 export const HIDDEN = 'Ẩn';
+export const VIDEO = 'Video';
+export const GO_TO_VIDEO = 'Đi tới video';
+export const CLOSE = 'Đóng';
