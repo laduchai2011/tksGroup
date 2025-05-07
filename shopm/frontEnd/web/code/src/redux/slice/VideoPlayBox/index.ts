@@ -12,13 +12,19 @@ const VideoPlayBoxSlice = createSlice({
     initialState,
     reducers: {
         set_id: (state, action: PayloadAction<string>) => {
-            state.id = action.payload;
+            if (state.id !== action.payload || state.isShowComponent !== true) {
+                state.id = action.payload;
+            }
         },
         set_isShow: (state, action: PayloadAction<boolean>) => {
-            state.isShow = action.payload;
+            if (state.isShow !== action.payload || state.isShowComponent !== true) {
+                state.isShow = action.payload;
+            }
         },
         set_isShowComponent: (state, action: PayloadAction<boolean>) => {
-            state.isShowComponent = action.payload;
+            if (state.isShowComponent !== action.payload) {
+                state.isShowComponent = action.payload;
+            }
         },
     },
 });

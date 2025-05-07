@@ -14,7 +14,7 @@
             @include small-scroll-snap-children;
             object-fit: contain;
             user-select: none;
-            background-color: black;
+            background-color: rgb(199, 199, 199);
         }
     }
 
@@ -24,6 +24,7 @@
 
         > div {
             position: absolute;
+            @include center-of-row;
             top: 0.3vw;
             left: 0.3vw;
             background-color: white;
@@ -46,7 +47,7 @@
             transform: translateY(-50%);
             color: white;
             cursor: pointer;
-            opacity: 0.3;
+            opacity: 0.5;
             width: 5%;
             height: 15%;
 

@@ -7,9 +7,11 @@ const Top = () => {
         <div className={style.parent}>
             <div>
                 <img src={avatarnull} alt="avatar" />
-                <div>name name name</div>
+                <div>
+                    <div>name name name</div>
+                    <div>note / time</div>
+                </div>
             </div>
-            <div>time</div>
             <div>
                 <TfiMore size={25} />
             </div>

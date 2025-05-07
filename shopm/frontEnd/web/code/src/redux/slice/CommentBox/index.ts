@@ -11,10 +11,14 @@ const CommentBoxSlice = createSlice({
     initialState,
     reducers: {
         set_id: (state, action: PayloadAction<string>) => {
-            state.id = action.payload;
+            if (state.id !== action.payload || state.isShow !== true) {
+                state.id = action.payload;
+            }
         },
         set_isShow: (state, action: PayloadAction<boolean>) => {
-            state.isShow = action.payload;
+            if (state.isShow !== action.payload) {
+                state.isShow = action.payload;
+            }
         },
     },
 });

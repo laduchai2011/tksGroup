@@ -3,11 +3,11 @@ import { RES_VALUES_WITH_PX } from '@src/const/responsive';
 // Thành phần này đang responsive tại giá trị MD, hãy chú ý khi thay đổi trên mã tệp ts và trong tệp scss
 
 class ClickEvent {
-    _selections_container_element: Element;
-    _selections_element: HTMLCollection;
-    _selections_element_when_res: HTMLCollection;
-    _len: number;
-    _style: {
+    private _selections_container_element: Element;
+    private _selections_element: HTMLCollection;
+    private _selections_element_when_res: HTMLCollection;
+    private _len: number;
+    private _style: {
         [key: string]: string;
     };
 
@@ -32,7 +32,7 @@ class ClickEvent {
         this._selections_element_when_res[index].classList.add(this._style.selected_w_res);
     };
 
-    handle_click = (event: MouseEvent) => {
+    private handle_click = (event: MouseEvent) => {
         const target = event.target as HTMLElement;
         const index = target.dataset.index;
 
