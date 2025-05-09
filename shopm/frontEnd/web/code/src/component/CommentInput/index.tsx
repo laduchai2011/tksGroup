@@ -1,9 +1,10 @@
-import { FC, useEffect, useRef, useState, useId } from 'react';
+import { FC, useEffect, useRef, useState, useId, useCallback } from 'react';
 import style from './style.module.scss';
 import { CommentInputProps } from './type';
 import { COMMENT, CANCEL } from '@src/const/text';
 import { FaFileImage } from 'react-icons/fa';
-import ImageContainer from '../ImageContainer';
+import ImageContainer from '@src/component/ImageContainer';
+import VideoContainer from '@src/component/VideoContainer';
 
 interface MyCommentInputProps extends React.HTMLProps<HTMLDivElement> {
     commentInput?: CommentInputProps;
@@ -14,8 +15,8 @@ const CommentInput: FC<MyCommentInputProps> = ({ className, ...props }) => {
     const textarea_element = useRef<HTMLTextAreaElement | null>(null);
     const input_element = useRef<HTMLInputElement | null>(null);
     const [value, setValue] = useState<string>('');
-    const [image, setImage] = useState<string | undefined>(undefined);
-    const [images, setImages] = useState<string[]>([]);
+    // const [image, setImage] = useState<string | undefined>(undefined);
+    const [images, setImages] = useState<File[]>([]);
 
     const id_folderInput = useId();
 
@@ -23,13 +24,15 @@ const CommentInput: FC<MyCommentInputProps> = ({ className, ...props }) => {
         textarea_element.current?.focus();
     }, []);
 
-    useEffect(() => {
-        if (image) {
-            return () => {
-                URL.revokeObjectURL(image);
-            };
-        }
-    }, [image]);
+    // useEffect(() => {
+    //     if (images) {
+    //         return () => {
+    //             for (let i: number = 0; i < images.length; i++) {
+    //                 URL.revokeObjectURL(images[i]);
+    //             }
+    //         };
+    //     }
+    // }, [images]);
 
     const handleInput = () => {
         if (textarea_element.current) {
@@ -38,25 +41,25 @@ const CommentInput: FC<MyCommentInputProps> = ({ className, ...props }) => {
         }
     };
 
-    const handle_change = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handle_change = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const _value = e.target.value;
         setValue(_value);
-    };
+    }, []);
 
     const handleIconClick = () => {
         input_element.current?.click(); // Kích hoạt input ẩn
     };
 
-    const handleFolderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFolderChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
+
         if (files) {
             for (const file of Array.from(files as FileList)) {
-                const url = URL.createObjectURL(file);
-                setImage(url);
-                setImages((pre) => [...pre, url]);
+                // const url = URL.createObjectURL(file);
+                setImages((pre) => [...pre, file]);
             }
         }
-    };
+    }, []);
 
     return (
         <div className={`${style.parent} ${className || ''}`} {...props}>
@@ -68,12 +71,18 @@ const CommentInput: FC<MyCommentInputProps> = ({ className, ...props }) => {
                 rows={1}
                 placeholder={COMMENT}
             />
-            {image && (
-                <div className={style.images}>
-                    {/* <img src={image} alt="image" /> */}
-                    <ImageContainer options={{ images: images }} />
-                </div>
-            )}
+            <div className={style.photoContainer}>
+                {images.length > 0 && (
+                    <div className={style.images}>
+                        <ImageContainer className={style.imageContainer} options={{ src_array: images }} />
+                    </div>
+                )}
+                {/* {image && (
+                    <div className={style.videos}>
+                        <VideoContainer options={{ src_array: images }} />
+                    </div>
+                )} */}
+            </div>
             <div className={style.buttonContainer}>
                 <div className={style.icon}>
                     <FaFileImage onClick={handleIconClick} id={id_folderInput} size={25} color="#39ff33" />

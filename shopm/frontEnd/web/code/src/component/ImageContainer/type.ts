@@ -1,4 +1,4 @@
 export interface Options {
     id?: string;
-    images?: string[];
+    src_array?: File[];
 }

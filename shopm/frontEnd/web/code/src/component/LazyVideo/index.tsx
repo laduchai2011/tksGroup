@@ -1,20 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import style from './style.module.scss';
-import { LazyImageProps } from './type';
-import Skeleton from '../Skeleton';
+import { LazyVideoProps } from './type';
+import Skeleton from '@src/component/Skeleton';
 
-const LazyImage = ({ src, alt, className, root }: LazyImageProps) => {
-    const imgRef = useRef<HTMLImageElement | null>(null);
+const LazyVideo = ({ src, className, root }: LazyVideoProps) => {
+    const videoRef = useRef<HTMLVideoElement | null>(null);
     const [loaded, setLoaded] = useState(false);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (!imgRef.current) return;
+        if (!videoRef.current) return;
 
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    console.log('isIntersecting');
                     setLoading(true);
                     observer.disconnect();
                 }
@@ -24,7 +23,7 @@ const LazyImage = ({ src, alt, className, root }: LazyImageProps) => {
             }
         );
 
-        observer.observe(imgRef.current);
+        observer.observe(videoRef.current);
 
         return () => observer.disconnect();
     }, [root]);
@@ -34,10 +33,10 @@ const LazyImage = ({ src, alt, className, root }: LazyImageProps) => {
             {loading && !loaded ? (
                 <Skeleton />
             ) : (
-                <img className={style.image} ref={imgRef} src={src} alt={alt} onLoad={() => setLoaded(true)} />
+                <video className={style.image} ref={videoRef} src={src} onLoad={() => setLoaded(true)} />
             )}
         </div>
     );
 };
 
-export default LazyImage;
+export default LazyVideo;

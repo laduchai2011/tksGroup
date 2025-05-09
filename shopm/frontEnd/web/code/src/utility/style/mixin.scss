@@ -1,3 +1,7 @@
+@mixin background-color-photo {
+    background-color: rgb(205, 205, 205);
+}
+
 @mixin center-of-rectangle {
     display: flex;
     justify-content: center;
@@ -98,6 +102,39 @@
 }
 
 @mixin small-scroll-snap-children {
+    width: 100%;
+    height: 100%;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+}
+
+@mixin small-scrollX-snap-parent {
+    @include center-of-row;
+    flex-grow: 1;
+    overflow-x: auto;
+    @include small-scroll-xx(0);
+    scroll-snap-type: x mandatory; // snap từng item
+    scroll-behavior: smooth; // scroll mượt
+}
+
+@mixin small-scrollX-snap-children {
+    width: 100%;
+    height: 100%;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+}
+
+@mixin small-scrollY-snap-parent {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-y: auto;
+    @include small-scroll-yy(0);
+    scroll-snap-type: y mandatory; // snap từng item
+    scroll-behavior: smooth; // scroll mượt
+}
+
+@mixin small-scrollY-snap-children {
     width: 100%;
     height: 100%;
     flex: 0 0 100%;

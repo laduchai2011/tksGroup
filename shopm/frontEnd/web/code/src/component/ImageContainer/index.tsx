@@ -4,6 +4,7 @@ import { Options } from './type';
 import { TfiAngleLeft } from 'react-icons/tfi';
 import { TfiAngleRight } from 'react-icons/tfi';
 import { ScrollImageEvent } from './handle/event';
+import This_LazyImage from './component/This_LazyImage';
 
 interface MyOptions extends React.HTMLProps<HTMLDivElement> {
     options?: Options;
@@ -12,7 +13,7 @@ interface MyOptions extends React.HTMLProps<HTMLDivElement> {
 
 const ImageContainer: FC<MyOptions> = ({ options, className, ...props }) => {
     const parent_element = useRef<HTMLImageElement | null>(null);
-    const images: string[] | undefined = options?.images;
+    const images: File[] | undefined = options?.src_array;
     const images_container_element = useRef<HTMLImageElement | null>(null);
 
     useEffect(() => {
@@ -41,7 +42,15 @@ const ImageContainer: FC<MyOptions> = ({ options, className, ...props }) => {
     const list_image =
         images &&
         images.map((data, index) => {
-            return <img key={index} src={data} alt="image" />;
+            return (
+                <This_LazyImage
+                    className={style.lazyImage}
+                    key={index}
+                    src={data}
+                    root={images_container_element.current}
+                    alt="image"
+                />
+            );
         });
 
     return (
