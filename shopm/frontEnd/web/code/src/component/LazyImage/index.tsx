@@ -14,7 +14,6 @@ const LazyImage = ({ src, alt, className, root }: LazyImageProps) => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    console.log('isIntersecting');
                     setLoading(true);
                     observer.disconnect();
                 }

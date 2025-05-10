@@ -23,7 +23,7 @@
 
         > .images {
             width: 100%;
-            height: 150px;
+            height: 200px;
             @include background-color-photo;
 
             > .imageContainer {
@@ -34,8 +34,13 @@
 
         > .videos {
             width: 100%;
-            height: 150px;
+            height: 200px;
             @include background-color-photo;
+
+            > .videoContainer {
+                width: 100%;
+                height: 100%;
+            }
         }
     }
 

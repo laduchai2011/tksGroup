@@ -8,12 +8,12 @@
     > .videoContainer {
         width: 100%;
         height: 100%;
-        @include small-scroll-snap-parent;
+        @include small-scrollX-snap-parent;
 
         > .lazyVideo {
-            @include small-scroll-snap-children;
-            user-select: none;
+            @include small-scrollX-snap-children;
             @include background-color-photo;
+            overflow-y: hidden;
         }
     }
 

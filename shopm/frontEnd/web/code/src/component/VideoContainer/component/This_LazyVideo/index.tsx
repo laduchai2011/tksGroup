@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from 'react';
-import LazyImage from '@src/component/LazyImage';
+import style from './style.module.scss';
+import LazyVideo from '@src/component/LazyVideo';
 import { Options } from './type';
 
-const This_LazyImage: FC<Options> = ({ src, alt, className, root }) => {
+const This_LazyVideo: FC<Options> = ({ src, className, root }) => {
     const [url, setUrl] = useState<string>('');
     useEffect(() => {
         let create_url: string = '';
-
         if (src) {
             create_url = URL.createObjectURL(src);
             setUrl(create_url);
@@ -19,7 +19,7 @@ const This_LazyImage: FC<Options> = ({ src, alt, className, root }) => {
         };
     }, [src]);
 
-    return url.length > 0 && <LazyImage className={`${className || ''}`} src={url} root={root} alt={alt} />;
+    return url.length > 0 && <LazyVideo className={`${style.parent} ${className || ''}`} src={url} root={root} />;
 };
 
-export default This_LazyImage;
+export default This_LazyVideo;

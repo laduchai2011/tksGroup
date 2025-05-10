@@ -1,10 +1,10 @@
-import { FC, useRef, useEffect } from 'react';
+import { FC, useRef, useEffect, useState } from 'react';
 import style from './style.module.scss';
 import { Options } from './type';
 import { TfiAngleLeft } from 'react-icons/tfi';
 import { TfiAngleRight } from 'react-icons/tfi';
 import { ScrollImageEvent } from './handle/event';
-import LazyVideo from '../LazyVideo';
+import This_LazyVideo from './component/This_LazyVideo';
 
 interface MyOptions extends React.HTMLProps<HTMLDivElement> {
     options?: Options;
@@ -12,12 +12,15 @@ interface MyOptions extends React.HTMLProps<HTMLDivElement> {
 }
 
 const VideoContainer: FC<MyOptions> = ({ options, className, ...props }) => {
-    const parent_element = useRef<HTMLImageElement | null>(null);
-    const src_array: string[] | undefined = options?.src_array;
-    const videos_container_element = useRef<HTMLImageElement | null>(null);
+    const parent_element = useRef<HTMLDivElement | null>(null);
+    const src_array: File[] | undefined = options?.src_array;
+    const videos_container_element = useRef<HTMLDivElement | null>(null);
+    const [root_This_LazyVideo, set_root_This_LazyVideo] = useState<HTMLDivElement | null>(null);
 
     useEffect(() => {
         if (parent_element.current && videos_container_element.current && src_array) {
+            set_root_This_LazyVideo(videos_container_element.current);
+
             const _images_container_element = videos_container_element.current as Element;
             const index_text_element = parent_element.current.children[1].children[0].children[0] as Element;
             const left_btn_element = parent_element.current.children[1].children[1] as Element;
@@ -42,7 +45,7 @@ const VideoContainer: FC<MyOptions> = ({ options, className, ...props }) => {
     const list_video =
         src_array &&
         src_array.map((data, index) => {
-            return <LazyVideo className={style.lazyVideo} key={index} src={data} />;
+            return <This_LazyVideo className={style.lazyVideo} key={index} src={data} root={root_This_LazyVideo} />;
         });
 
     return (

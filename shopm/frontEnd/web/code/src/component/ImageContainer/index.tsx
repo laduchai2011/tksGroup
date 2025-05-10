@@ -1,4 +1,4 @@
-import { FC, useRef, useEffect } from 'react';
+import { FC, useRef, useEffect, useState } from 'react';
 import style from './style.module.scss';
 import { Options } from './type';
 import { TfiAngleLeft } from 'react-icons/tfi';
@@ -15,9 +15,12 @@ const ImageContainer: FC<MyOptions> = ({ options, className, ...props }) => {
     const parent_element = useRef<HTMLImageElement | null>(null);
     const images: File[] | undefined = options?.src_array;
     const images_container_element = useRef<HTMLImageElement | null>(null);
+    const [root_This_LazyImage, set_root_This_LazyImage] = useState<HTMLDivElement | null>(null);
 
     useEffect(() => {
         if (parent_element.current && images_container_element.current && images) {
+            set_root_This_LazyImage(images_container_element.current);
+
             const _images_container_element = images_container_element.current as Element;
             const index_text_element = parent_element.current.children[1].children[0].children[0] as Element;
             const left_btn_element = parent_element.current.children[1].children[1] as Element;
@@ -47,7 +50,7 @@ const ImageContainer: FC<MyOptions> = ({ options, className, ...props }) => {
                     className={style.lazyImage}
                     key={index}
                     src={data}
-                    root={images_container_element.current}
+                    root={root_This_LazyImage}
                     alt="image"
                 />
             );

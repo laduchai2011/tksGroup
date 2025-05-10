@@ -15,24 +15,14 @@ const CommentInput: FC<MyCommentInputProps> = ({ className, ...props }) => {
     const textarea_element = useRef<HTMLTextAreaElement | null>(null);
     const input_element = useRef<HTMLInputElement | null>(null);
     const [value, setValue] = useState<string>('');
-    // const [image, setImage] = useState<string | undefined>(undefined);
     const [images, setImages] = useState<File[]>([]);
+    const [videos, setVideos] = useState<File[]>([]);
 
     const id_folderInput = useId();
 
     useEffect(() => {
         textarea_element.current?.focus();
     }, []);
-
-    // useEffect(() => {
-    //     if (images) {
-    //         return () => {
-    //             for (let i: number = 0; i < images.length; i++) {
-    //                 URL.revokeObjectURL(images[i]);
-    //             }
-    //         };
-    //     }
-    // }, [images]);
 
     const handleInput = () => {
         if (textarea_element.current) {
@@ -54,10 +44,16 @@ const CommentInput: FC<MyCommentInputProps> = ({ className, ...props }) => {
         const files = event.target.files;
 
         if (files) {
-            for (const file of Array.from(files as FileList)) {
-                // const url = URL.createObjectURL(file);
-                setImages((pre) => [...pre, file]);
-            }
+            // for (const file of Array.from(files as FileList)) {
+            //     setImages((pre) => [...pre, file]);
+            // }
+            Array.from(files).forEach((file) => {
+                if (file.type.startsWith('image/')) {
+                    setImages((pre) => [...pre, file]);
+                } else if (file.type.startsWith('video/')) {
+                    setVideos((pre) => [...pre, file]);
+                }
+            });
         }
     }, []);
 
@@ -77,11 +73,11 @@ const CommentInput: FC<MyCommentInputProps> = ({ className, ...props }) => {
                         <ImageContainer className={style.imageContainer} options={{ src_array: images }} />
                     </div>
                 )}
-                {/* {image && (
+                {videos.length > 0 && (
                     <div className={style.videos}>
-                        <VideoContainer options={{ src_array: images }} />
+                        <VideoContainer className={style.videoContainer} options={{ src_array: videos }} />
                     </div>
-                )} */}
+                )}
             </div>
             <div className={style.buttonContainer}>
                 <div className={style.icon}>
