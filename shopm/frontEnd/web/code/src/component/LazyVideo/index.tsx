@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, memo } from 'react';
 import style from './style.module.scss';
 import { LazyVideoProps } from './type';
 import Skeleton from '@src/component/Skeleton';
@@ -73,4 +73,4 @@ const LazyVideo = ({ src, className, root }: LazyVideoProps) => {
     );
 };
 
-export default LazyVideo;
+export default memo(LazyVideo);

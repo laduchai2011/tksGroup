@@ -2,6 +2,7 @@ import style from './style.module.scss';
 import Header from './component/Header';
 import Body from './component/Body';
 import CommentBox from '@src/component/CommentBox';
+import CommentInputDetail from '@src/component/CommentInputDetail';
 import VideoPlayBox from '@src/component/VideoPlayBox';
 import { useSelector } from 'react-redux';
 import type { RootState } from '@src/redux';
@@ -22,6 +23,7 @@ const Profile = () => {
             </div>
             <div>
                 <CommentBox />
+                {/* <CommentInputDetail /> */}
                 {state_store_VideoPlayBox.isShowComponent && <VideoPlayBox />}
             </div>
         </div>

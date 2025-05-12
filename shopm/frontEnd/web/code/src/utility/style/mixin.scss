@@ -158,3 +158,9 @@ $breakpoints: (
         @content;
     }
 }
+
+@mixin display-grid($minmax, $gap) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(calc($minmax * 1px), 1fr));
+    gap: calc($gap * 1px);
+}

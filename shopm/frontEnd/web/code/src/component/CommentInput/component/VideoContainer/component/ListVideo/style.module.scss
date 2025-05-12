@@ -1,0 +1,13 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    width: 100%;
+    height: 100%;
+    @include small-scrollX-snap-parent;
+
+    > .lazyVideo {
+        @include small-scrollX-snap-children;
+        @include background-color-photo;
+        overflow-y: hidden;
+    }
+}

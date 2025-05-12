@@ -77,6 +77,14 @@
             }
 
             > button:nth-child(2) {
+                background-color: rgb(213, 255, 215);
+
+                &:active {
+                    background-color: white;
+                }
+            }
+
+            > button:nth-child(3) {
                 background-color: rgb(214, 230, 255);
 
                 &:active {

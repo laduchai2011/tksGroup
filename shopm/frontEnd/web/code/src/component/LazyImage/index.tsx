@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, memo } from 'react';
 import style from './style.module.scss';
 import { LazyImageProps } from './type';
 import Skeleton from '../Skeleton';
@@ -39,4 +39,4 @@ const LazyImage = ({ src, alt, className, root }: LazyImageProps) => {
     );
 };
 
-export default LazyImage;
+export default memo(LazyImage);
