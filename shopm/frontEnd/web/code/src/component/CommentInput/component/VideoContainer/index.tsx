@@ -10,7 +10,6 @@ interface MyOptions extends React.HTMLProps<HTMLDivElement> {
 const VideoContainer: FC<MyOptions> = ({ className, ...props }) => {
     const videos_container_element = useRef<HTMLDivElement | null>(null);
     const [root_LazyVideoWithFile, set_root_LazyVideoWithFile] = useState<HTMLDivElement | null>(null);
-    console.log('VideoContainer');
 
     useEffect(() => {
         if (videos_container_element.current) {

@@ -3,7 +3,7 @@ import style from './style.module.scss';
 import { LazyVideoProps } from './type';
 import Skeleton from '@src/component/Skeleton';
 
-const LazyVideo = ({ src, className, root }: LazyVideoProps) => {
+const LazyVideo = ({ lock_auto_play_with_scroll_snap, src, className, root }: LazyVideoProps) => {
     const parent_element = useRef<HTMLDivElement | null>(null);
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const [loading, setLoading] = useState<boolean | undefined>(undefined);
@@ -39,6 +39,8 @@ const LazyVideo = ({ src, className, root }: LazyVideoProps) => {
 
         if (!videoRef.current) return;
 
+        if (lock_auto_play_with_scroll_snap) return;
+
         let isPlay: boolean = false;
 
         const observer_play = new IntersectionObserver(
@@ -63,7 +65,7 @@ const LazyVideo = ({ src, className, root }: LazyVideoProps) => {
         observer_play.observe(videoRef.current);
 
         return () => observer_play.disconnect();
-    }, [root, loading]);
+    }, [root, loading, lock_auto_play_with_scroll_snap]);
 
     return (
         <div className={`${style.parent} ${className || ''}`} ref={parent_element}>

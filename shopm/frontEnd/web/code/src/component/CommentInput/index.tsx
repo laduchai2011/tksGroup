@@ -1,14 +1,14 @@
 import { FC, useEffect, useRef, useState, useId, useCallback } from 'react';
 import style from './style.module.scss';
-import { state_props, context_type, imageContainer_optopns, videoContainer_optopns } from './type';
+import { context_type, imageContainer_optiopns, videoContainer_optiopns, detail_optiopns } from './type';
 import { COMMENT, CANCEL, DETAIL } from '@src/const/text';
 import { FaFileImage } from 'react-icons/fa';
+import { Context } from './context';
 import ImageContainer from './component/ImageContainer';
 import VideoContainer from './component/VideoContainer';
-import { Context } from './context';
+import Detail from './component/Detail';
 
 interface MyCommentInputProps extends React.HTMLProps<HTMLDivElement> {
-    state?: state_props;
     [key: string]: unknown;
 }
 
@@ -18,11 +18,15 @@ const CommentInput: FC<MyCommentInputProps> = ({ className, ...props }) => {
     const [value, setValue] = useState<string>('');
     const [images, setImages] = useState<File[]>([]);
     const [videos, setVideos] = useState<File[]>([]);
-    const [imageContainer, setImageContainer] = useState<imageContainer_optopns>({
+    const [imageContainer, setImageContainer] = useState<imageContainer_optiopns>({
         index: 0,
     });
-    const [videoContainer, setVideoContainer] = useState<videoContainer_optopns>({
+    const [videoContainer, setVideoContainer] = useState<videoContainer_optiopns>({
         index: 0,
+    });
+    const [detail, setDetail] = useState<detail_optiopns>({
+        isShow: false,
+        isShowComponent: false,
     });
 
     const id_folderInput = useId();
@@ -66,6 +70,13 @@ const CommentInput: FC<MyCommentInputProps> = ({ className, ...props }) => {
         }
     }, []);
 
+    const handle_detail = useCallback(() => {
+        setDetail({
+            isShow: true,
+            isShowComponent: true,
+        });
+    }, []);
+
     const context_value: context_type = {
         comment: '',
         images: images,
@@ -76,6 +87,8 @@ const CommentInput: FC<MyCommentInputProps> = ({ className, ...props }) => {
         setVideos,
         setImageContainer,
         setVideoContainer,
+        detail: detail,
+        setDetail,
     };
 
     return (
@@ -114,10 +127,11 @@ const CommentInput: FC<MyCommentInputProps> = ({ className, ...props }) => {
                     </div>
                     <div className={style.buttons}>
                         <button>{CANCEL}</button>
-                        <button>{DETAIL}</button>
+                        <button onClick={() => handle_detail()}>{DETAIL}</button>
                         <button>{COMMENT}</button>
                     </div>
                 </div>
+                <div>{detail.isShowComponent && <Detail />}</div>
             </div>
         </Context.Provider>
     );

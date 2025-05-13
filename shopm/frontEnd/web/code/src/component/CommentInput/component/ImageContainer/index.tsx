@@ -10,7 +10,6 @@ interface MyOptions extends React.HTMLProps<HTMLDivElement> {
 const ImageContainer: FC<MyOptions> = ({ className, ...props }) => {
     const images_container_element = useRef<HTMLImageElement | null>(null);
     const [root_LazyImageWithFile, set_root_LazyImageWithFile] = useState<HTMLDivElement | null>(null);
-    console.log('ImageContainer');
 
     useEffect(() => {
         if (images_container_element.current) {

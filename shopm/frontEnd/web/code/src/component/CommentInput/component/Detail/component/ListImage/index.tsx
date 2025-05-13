@@ -1,8 +1,8 @@
-import { FC, useRef, useEffect, memo, useContext } from 'react';
+import { FC, useRef, memo, useContext } from 'react';
 import style from './style.module.scss';
-import LazyImageWithFile from '@src/component/LazyImageWithFile';
 import { Option_props } from './type';
 import { Context as Context_CommentInput } from '@src/component/CommentInput/context';
+import MyImage from './component/MyImage';
 
 interface MyOptions extends React.HTMLProps<HTMLDivElement> {
     option?: Option_props;
@@ -19,21 +19,10 @@ const ListImage: FC<MyOptions> = ({ option, className, ...props }) => {
         throw new Error('context_value_Context_CommentInput is undefined');
     }
 
-    const { images, imageContainer } = context_value_Context_CommentInput;
-    const index = imageContainer.index;
-
-    useEffect(() => {
-        if (parent_element.current) {
-            const { clientWidth } = parent_element.current;
-            parent_element.current.scrollTo({
-                left: index * clientWidth,
-                behavior: 'smooth',
-            });
-        }
-    }, [index]);
+    const { images } = context_value_Context_CommentInput;
 
     const list_image = images.map((data, index) => {
-        return <LazyImageWithFile className={style.lazyImage} key={index} src={data} root={root} alt="image" />;
+        return <MyImage className={style.lazyImage} key={index} option={{ my_src: data }} root={root} />;
     });
 
     return (

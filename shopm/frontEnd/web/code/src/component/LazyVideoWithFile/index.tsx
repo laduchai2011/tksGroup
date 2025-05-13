@@ -3,7 +3,7 @@ import style from './style.module.scss';
 import LazyVideo from '@src/component/LazyVideo';
 import { Options } from './type';
 
-const LazyVideoWithFile: FC<Options> = ({ src, className, root }) => {
+const LazyVideoWithFile: FC<Options> = ({ lock_auto_play_with_scroll_snap, src, className, root }) => {
     const [url, setUrl] = useState<string>('');
     useEffect(() => {
         let create_url: string = '';
@@ -19,7 +19,16 @@ const LazyVideoWithFile: FC<Options> = ({ src, className, root }) => {
         };
     }, [src]);
 
-    return url.length > 0 && <LazyVideo className={`${style.parent} ${className || ''}`} src={url} root={root} />;
+    return (
+        url.length > 0 && (
+            <LazyVideo
+                className={`${style.parent} ${className || ''}`}
+                lock_auto_play_with_scroll_snap={lock_auto_play_with_scroll_snap}
+                src={url}
+                root={root}
+            />
+        )
+    );
 };
 
 export default memo(LazyVideoWithFile);
