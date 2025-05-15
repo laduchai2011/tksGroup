@@ -1,5 +1,5 @@
 import style from './style.module.scss';
-import avatarnull from '../../../../../../../../../asset/avatar/avatarnull.png';
+import avatarnull from '../../../../../../../../../../../asset/avatar/avatarnull.png';
 import { TfiMore } from 'react-icons/tfi';
 
 const Top = () => {

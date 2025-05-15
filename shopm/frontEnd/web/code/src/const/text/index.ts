@@ -34,3 +34,5 @@ export const GO_TO_VIDEO = 'Đi tới video';
 export const CLOSE = 'Đóng';
 export const DETAIL = 'Chi tiết';
 export const DETAIL_YOUR_COMMENT = 'Chi tiết bình luận của bạn';
+export const UPLOAD = 'Đăng tải';
+export const PHOTO = 'Hình ảnh, video';
