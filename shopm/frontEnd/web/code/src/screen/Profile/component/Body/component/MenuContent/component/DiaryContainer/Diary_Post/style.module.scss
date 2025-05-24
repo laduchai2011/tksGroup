@@ -1,12 +1,16 @@
 @use 'src/utility/style/mixin.scss' as *;
 
 .parent {
+    box-sizing: border-box;
+    border: 1px solid gray;
+    padding: 5px;
+
     > textarea {
         width: 100%;
         resize: none;
         border: none;
         outline: none;
-        border: 1px solid gray;
+        border-bottom: 1px solid gray;
         overflow: hidden;
         box-sizing: border-box;
         padding: 5px;

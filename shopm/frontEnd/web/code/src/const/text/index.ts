@@ -36,3 +36,4 @@ export const DETAIL = 'Chi tiết';
 export const DETAIL_YOUR_COMMENT = 'Chi tiết bình luận của bạn';
 export const UPLOAD = 'Đăng tải';
 export const PHOTO = 'Hình ảnh, video';
+export const WHAT_DO_YOU_THINK = 'Bạn đang nghĩ gì ?';

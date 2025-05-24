@@ -1,0 +1,42 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    width: 100%;
+    height: 100px;
+    background-color: white;
+    box-sizing: border-box;
+    border: 1px solid gray;
+
+    > div {
+        width: 100%;
+        height: 50%;
+
+        @include center-of-rectangle;
+    }
+
+    > .pageContainer {
+        background: linear-gradient(to right, rgb(205, 205, 205), white, rgb(205, 205, 205));
+        position: relative;
+
+        > div {
+            position: absolute;
+            width: max-content;
+            height: 100%;
+            @include center-of-row;
+            top: 0;
+            left: 0;
+
+            transition: left 0.3s linear;
+
+            > div {
+                height: 100%;
+                aspect-ratio: 1 / 1;
+                @include center-of-rectangle;
+                cursor: pointer;
+                user-select: none;
+
+                transition: transform 0.3s linear;
+            }
+        }
+    }
+}

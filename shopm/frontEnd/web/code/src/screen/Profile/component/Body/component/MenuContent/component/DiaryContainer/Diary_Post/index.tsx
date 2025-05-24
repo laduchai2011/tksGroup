@@ -1,7 +1,7 @@
 import { useRef, useId, useCallback, useState } from 'react';
 import style from './style.module.scss';
 import { FaImage } from 'react-icons/fa6';
-import { UPLOAD, CANCEL, PHOTO } from '@src/const/text';
+import { UPLOAD, CANCEL, PHOTO, WHAT_DO_YOU_THINK } from '@src/const/text';
 import { Context } from './context';
 import { context_type } from './type';
 import MyImage from './component/MyImage';
@@ -65,7 +65,7 @@ const Diary_Post = () => {
     return (
         <Context.Provider value={context_value}>
             <div className={style.parent} ref={parent_element}>
-                <textarea ref={textarea_element} onInput={handleInput} />
+                <textarea ref={textarea_element} onInput={handleInput} title={WHAT_DO_YOU_THINK} rows={4} />
                 <div className={style.photoContainer}>
                     <div className={style.imageContainer}>{list_image}</div>
                     <div className={style.videoContainer}>{list_video}</div>

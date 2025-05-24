@@ -1,0 +1,10 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    @include center-of-column;
+
+    > div {
+        width: 1024px;
+        background-color: white;
+    }
+}
