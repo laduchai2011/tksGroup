@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import style from './style.module.scss';
 import { format_enum, format_type } from './type';
+import { HandleFormat } from './handle/event/handleFormat';
 
 import {
     BiBold,
@@ -26,64 +27,35 @@ const TextEditor = () => {
     const editor_element = useRef<HTMLDivElement | null>(null);
     const [fileName, setFileName] = useState('');
 
-    const applyBold = () => {
-        const selection = window.getSelection();
-        if (!selection?.rangeCount) return;
+    // const applyBold = () => {
+    //     // const selection = window.getSelection();
+    //     // if (!selection?.rangeCount) return;
 
-        const range = selection.getRangeAt(0);
+    //     // const range = selection.getRangeAt(0);
 
-        const selectedText = range.extractContents(); // lấy nội dung được chọn
-        const strong = document.createElement('strong');
-        strong.appendChild(selectedText);
+    //     // const selectedText = range.extractContents(); // lấy nội dung được chọn
+    //     // const strong = document.createElement('strong');
+    //     // strong.appendChild(selectedText);
 
-        range.insertNode(strong); // chèn lại nội dung đã được bọc
+    //     // range.insertNode(strong); // chèn lại nội dung đã được bọc
+
+    //     console.log('Editor Element:', editor_element.current);
+    //     const handleFormat = new HandleFormat({
+    //         editor_element: editor_element.current,
+    //         wrapperTag: 'strong',
+    //     });
+
+    //     handleFormat.toggle();
+    // };
+
+    const toggleText = (wrapperTag: string) => {
+        const handleFormat = new HandleFormat({
+            editor_element: editor_element.current,
+            wrapperTag: wrapperTag,
+        });
+
+        handleFormat.toggle();
     };
-
-    function toggleUnderline(): void {
-        const selection = window.getSelection();
-        if (!selection || selection.rangeCount === 0 || selection.isCollapsed) return;
-
-        const range = selection.getRangeAt(0);
-        const selectedText = range.toString();
-        const wrapperTag = 'u';
-
-        const anchorNode = selection.anchorNode;
-        if (!anchorNode) return;
-
-        if (!editor_element.current) return;
-
-        const parentElement = anchorNode.parentElement;
-
-        if (parentElement && parentElement.tagName.toLowerCase() === wrapperTag) {
-            const fragment = document.createDocumentFragment();
-            while (parentElement.firstChild) {
-                fragment.appendChild(parentElement.firstChild);
-            }
-            parentElement.replaceWith(fragment);
-
-            selection.removeAllRanges();
-            const newRange = document.createRange();
-            newRange.selectNodeContents(editor_element.current);
-            selection.addRange(newRange);
-        } else {
-            const wrapper = document.createElement(wrapperTag);
-            wrapper.textContent = selectedText;
-
-            range.deleteContents();
-            range.insertNode(wrapper);
-
-            // Reset selection to the new node
-            selection.removeAllRanges();
-            const newRange = document.createRange();
-            if (wrapper.firstChild) {
-                newRange.setStart(wrapper.firstChild, 0);
-                newRange.setEnd(wrapper.firstChild, wrapper.firstChild.textContent?.length || 0);
-                selection.addRange(newRange);
-            }
-            // newRange.selectNodeContents(wrapper);
-            // selection.addRange(newRange);
-        }
-    }
 
     const handleFormat = (
         cmd: format_type,
@@ -91,15 +63,15 @@ const TextEditor = () => {
     ) => {
         switch (cmd) {
             case format_enum.BOLD: {
-                applyBold();
+                toggleText('strong');
                 break;
             }
             case format_enum.ITALIC: {
-                //statements;
+                toggleText('i');
                 break;
             }
             case format_enum.UNDER_LINE: {
-                toggleUnderline();
+                toggleText('u');
                 break;
             }
             default: {
