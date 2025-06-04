@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import style from './style.module.scss';
-import { format_enum, format_type } from './type';
+import { format_enum, format_type, Style_Options } from './type';
 import { HandleFormat } from './handle/event/handleFormat';
 
 import {
@@ -27,31 +27,11 @@ const TextEditor = () => {
     const editor_element = useRef<HTMLDivElement | null>(null);
     const [fileName, setFileName] = useState('');
 
-    // const applyBold = () => {
-    //     // const selection = window.getSelection();
-    //     // if (!selection?.rangeCount) return;
-
-    //     // const range = selection.getRangeAt(0);
-
-    //     // const selectedText = range.extractContents(); // lấy nội dung được chọn
-    //     // const strong = document.createElement('strong');
-    //     // strong.appendChild(selectedText);
-
-    //     // range.insertNode(strong); // chèn lại nội dung đã được bọc
-
-    //     console.log('Editor Element:', editor_element.current);
-    //     const handleFormat = new HandleFormat({
-    //         editor_element: editor_element.current,
-    //         wrapperTag: 'strong',
-    //     });
-
-    //     handleFormat.toggle();
-    // };
-
-    const toggleText = (wrapperTag: string) => {
+    const toggleText = (wrapperTag: string, style?: Style_Options) => {
         const handleFormat = new HandleFormat({
             editor_element: editor_element.current,
             wrapperTag: wrapperTag,
+            style: style,
         });
 
         handleFormat.toggle();
@@ -72,6 +52,18 @@ const TextEditor = () => {
             }
             case format_enum.UNDER_LINE: {
                 toggleText('u');
+                break;
+            }
+            case format_enum.STRIKE_THROUGH: {
+                toggleText('del');
+                break;
+            }
+            case format_enum.UNORDERED_LIST: {
+                toggleText('li');
+                break;
+            }
+            case format_enum.ORDERED_LIST: {
+                toggleText('ol');
                 break;
             }
             default: {
@@ -96,15 +88,15 @@ const TextEditor = () => {
                     <button onClick={() => handleFormat(format_enum.UNDER_LINE)}>
                         <BiUnderline size={25} />
                     </button>
-                    {/* <button onClick={() => handleFormat('strikeThrough')}>
+                    <button onClick={() => handleFormat(format_enum.STRIKE_THROUGH)}>
                         <BiStrikethrough size={25} />
-                    </button> */}
+                    </button>
                 </span>
                 <span className="te-formats">
-                    {/* <button onClick={() => handleFormat('justifyLeft')}>
+                    {/* <button onClick={() => handleFormat(format_enum.LEFT)}>
                         <BiAlignLeft size={25} />
-                    </button>
-                    <button onClick={() => handleFormat('justifyCenter')}>
+                    </button> */}
+                    {/* <button onClick={() => handleFormat('justifyCenter')}>
                         <BiAlignMiddle size={25} />
                     </button>
                     <button onClick={() => handleFormat('justifyRight')}>
@@ -115,12 +107,12 @@ const TextEditor = () => {
                     </button> */}
                 </span>
                 <span className="te-formats">
-                    {/* <button onClick={() => handleFormat('insertUnorderedList')}>
+                    <button onClick={() => handleFormat(format_enum.UNORDERED_LIST)}>
                         <BiListUl size={25} />
                     </button>
-                    <button onClick={() => handleFormat('insertOrderedList')}>
+                    <button onClick={() => handleFormat(format_enum.ORDERED_LIST)}>
                         <BiListOl size={25} />
-                    </button> */}
+                    </button>
                 </span>
                 <span className="te-formats">
                     {/* <button onClick={() => handleFormat('indent')}>
