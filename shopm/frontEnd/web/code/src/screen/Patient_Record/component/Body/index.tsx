@@ -1,18 +1,14 @@
+import { useState } from 'react';
 import style from './style.module.scss';
 import Control from './component/Control';
 import PageList from './component/PageList';
 
 const Body = () => {
+    const [page, setPage] = useState<number>(1);
     return (
         <div className={style.parent}>
-            <div>
-                <div>
-                    <Control />
-                </div>
-                <div>
-                    <PageList />
-                </div>
-            </div>
+            <Control option={{ page: page, setPage: setPage }} />
+            <PageList option={{ page: page, setPage: setPage }} />
         </div>
     );
 };

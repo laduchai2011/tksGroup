@@ -1,0 +1,23 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    // background-color: white;
+    box-sizing: border-box;
+    border: 1px solid gray;
+    margin: 10px 0;
+    @include small-scrollY-snap-children;
+
+    > div:nth-child(1) {
+        width: 100%;
+        height: 30px;
+        @include center-of-row;
+        justify-content: flex-end;
+
+        > p {
+            box-sizing: border-box;
+            padding: 5px;
+            background-color: rgb(49, 49, 49);
+            color: white;
+        }
+    }
+}

@@ -8,18 +8,18 @@ import {
     BiItalic,
     BiUnderline,
     BiStrikethrough,
-    BiAlignLeft,
-    BiAlignMiddle,
-    BiAlignRight,
-    BiAlignJustify,
+    // BiAlignLeft,
+    // BiAlignMiddle,
+    // BiAlignRight,
+    // BiAlignJustify,
     BiListUl,
     BiListOl,
-    BiLeftIndent,
-    BiRightIndent,
-    BiLink,
-    BiUnlink,
-    BiImage,
-    BiVideo,
+    // BiLeftIndent,
+    // BiRightIndent,
+    // BiLink,
+    // BiUnlink,
+    // BiImage,
+    // BiVideo,
 } from 'react-icons/bi';
 
 const TextEditor = () => {
@@ -38,8 +38,8 @@ const TextEditor = () => {
     };
 
     const handleFormat = (
-        cmd: format_type,
-        e?: React.ChangeEvent<HTMLSelectElement> | React.FormEvent<HTMLInputElement> | string | null
+        cmd: format_type
+        // e?: React.ChangeEvent<HTMLSelectElement> | React.FormEvent<HTMLInputElement> | string | null
     ) => {
         switch (cmd) {
             case format_enum.BOLD: {
@@ -73,7 +73,7 @@ const TextEditor = () => {
         }
     };
 
-    const handleFile = (e: React.ChangeEvent<HTMLSelectElement>) => {};
+    // const handleFile = (e: React.ChangeEvent<HTMLSelectElement>) => {};
 
     return (
         <div className={style.parent} ref={parent_element}>

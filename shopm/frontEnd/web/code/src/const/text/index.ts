@@ -1,3 +1,4 @@
+export const HOME = 'Trang chủ';
 export const SEARCH = 'Tìm kiếm';
 export const NOTIFY = 'Thông báo';
 export const MESSAGE = 'Tin nhắn';

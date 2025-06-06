@@ -1,8 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import style from './style.module.scss';
 import { DynamicBigRowArrow } from 'react-tks/components';
+import { useNavigate } from 'react-router-dom';
+import { HOME, PROFILE, PATIENT_RECORD } from '@src/const/text';
 
 const Left = () => {
+    const navigate = useNavigate();
+
     const [show, set_show] = useState<boolean>(false);
     const parent_element = useRef<HTMLDivElement | null>(null);
     const icon_element = useRef<SVGSVGElement | null>(null);
@@ -46,7 +50,7 @@ const Left = () => {
         <div className={`${style.parent} ${handleShowClass(show)}`} ref={parent_element}>
             <div className={style.top}>
                 <div className={style.logo}>
-                    <strong>SHOPM</strong>
+                    <strong onClick={() => navigate('/')}>SHOPM</strong>
                 </div>
                 <DynamicBigRowArrow
                     className={style.icon}
@@ -57,6 +61,17 @@ const Left = () => {
                         direct: show ? 'left' : 'right',
                     }}
                 />
+            </div>
+            <div className={style.body}>
+                <div title={HOME} onClick={() => navigate('/')}>
+                    {HOME}
+                </div>
+                <div title={PROFILE} onClick={() => navigate('/profile')}>
+                    {PROFILE}
+                </div>
+                <div title={PATIENT_RECORD} onClick={() => navigate('/patient_record')}>
+                    {PATIENT_RECORD}
+                </div>
             </div>
         </div>
     );

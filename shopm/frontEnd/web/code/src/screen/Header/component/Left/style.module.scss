@@ -28,6 +28,11 @@
             width: 100%;
             height: 100%;
             @include center-of-rectangle;
+
+            > strong {
+                user-select: none;
+                cursor: pointer;
+            }
         }
 
         > .icon {
@@ -42,6 +47,23 @@
             &.icon_show {
                 right: -20px;
             }
+        }
+    }
+
+    > .body {
+        height: calc(100% - 60px);
+        width: 100%;
+        overflow-y: auto;
+        @include small-scroll-y();
+
+        > div {
+            width: 100%;
+            height: 40px;
+            border: 1px solid gray;
+            box-sizing: border-box;
+            @include center-of-rectangle;
+            user-select: none;
+            cursor: pointer;
         }
     }
 }
