@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.shopm.profile.ProfileView
+import com.example.shopm.view.Options
+import android.util.Log
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +39,32 @@ class Profile : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val viewAvatar = view.findViewById<View>(R.id.profile_avatar)
+        val viewName = view.findViewById<View>(R.id.profile_name)
+
+        val optionsAvatar: Options = object : Options {
+            override val view: View? = viewAvatar
+        }
+        val optionsName: Options = object : Options {
+            override val view: View? = viewName
+        }
+
+        val avatarView = ProfileView(optionsAvatar)
+        avatarView.setTag("Profile Screen (avatarView)")
+        avatarView.init()
+        avatarView.translateY(0.5f)
+        val heightAvatar: Int = avatarView.getHeight()
+        Log.d("heightAvatar", "Đây là log mức DEBUG: ${heightAvatar}")
+
+        val nameView = ProfileView(optionsName)
+        nameView.setTag("Profile Screen (nameView)")
+        nameView.init()
+        nameView.setMarginTop(100)
     }
 
     companion object {
