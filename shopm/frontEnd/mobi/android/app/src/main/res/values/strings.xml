@@ -1,7 +1,3 @@
 <resources>
     <string name="app_name">shopm</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="home_fragment">Home blank fragment</string>
-    <string name="profile_fragment">Profile blank fragment</string>
-    <string name="avatar_null">avatar_null</string>
 </resources>
