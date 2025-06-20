@@ -1,5 +1,7 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
-import { ContextTableProps } from 'src/define';
+import { ContextTableProps } from "src/define";
 
-export const ContextTable = createContext<ContextTableProps | undefined>(undefined);
+export const ContextTable = createContext<ContextTableProps | undefined>(
+  undefined
+);

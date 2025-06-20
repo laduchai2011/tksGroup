@@ -1,9 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt)
+//    alias(libs.plugins.kapt)
+    kotlin("kapt")
 
 //    kotlin("multiplatform")
-    id("org.jetbrains.kotlin.plugin.compose") version "2.0.21"
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -45,7 +48,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -60,4 +62,11 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.activity)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.coil.compose)
 }
+
+//kapt {
+//    correctErrorTypes = true
+//}

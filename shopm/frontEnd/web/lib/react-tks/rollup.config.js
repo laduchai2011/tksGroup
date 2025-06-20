@@ -60,6 +60,54 @@ export default [
     external: [/\.css$/],
   },
 
+  // defines
+  {
+    input: "src/defines.ts",
+    output: [
+      {
+        file: packageJson.exports["./defines"].require, // Output CommonJS
+        format: "cjs",
+        sourcemap: true,
+      },
+      {
+        file: packageJson.exports["./defines"].import, // Output ES Module
+        format: "esm",
+        sourcemap: true,
+      },
+    ],
+    plugins: [
+      peerDepsExternal(),
+      resolve(),
+      commonjs(),
+      typescript({ tsconfig: "./tsconfig.json" }),
+      terser(),
+      postcss(),
+      alias({
+        entries: entries,
+        customResolver,
+      }),
+      replace({
+        preventAssignment: true,
+        "process.env.NODE_ENV": JSON.stringify("production"),
+      }),
+    ],
+    external: ["react", "react-dom"],
+    // treeshake: false,
+  },
+  {
+    input: "src/defines.ts",
+    output: [{ file: packageJson.exports["./defines"].types }],
+    plugins: [
+      dts.default(),
+      typescript({ tsconfig: "./tsconfig.json" }),
+      alias({
+        entries: entries,
+        customResolver,
+      }),
+    ],
+    external: [/\.css$/],
+  },
+
   // components
   {
     input: "src/components.ts",
