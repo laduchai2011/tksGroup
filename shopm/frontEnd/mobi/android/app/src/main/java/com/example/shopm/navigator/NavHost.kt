@@ -14,10 +14,6 @@ import com.example.shopm.screen.SettingsScreen
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
-//    NavHost(navController = navController, startDestination = "profile") {
-//        composable("profile") { ProfileScreen(navController) }
-//        composable("settings") { SettingsScreen(navController) }
-//    }
     Scaffold(
         bottomBar = {
             BottomNavigationBar(navController)

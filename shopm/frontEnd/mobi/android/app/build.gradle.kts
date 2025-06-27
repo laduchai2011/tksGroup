@@ -24,7 +24,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("boolean", "DEV_MODE", "true")
+        }
         release {
+            buildConfigField("boolean", "DEV_MODE", "false")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -34,6 +38,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -52,6 +57,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.material3.android)
+    implementation(libs.compose.material.icons.extended)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -65,8 +71,24 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     implementation(libs.coil.compose)
+    implementation(libs.javapoet)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.hilt.navigation.compose)
 }
 
-//kapt {
-//    correctErrorTypes = true
+hilt {
+    enableAggregatingTask = false
+}
+
+//configurations.all {
+//    resolutionStrategy.eachDependency {
+//        if (requested.group == "com.squareup" && requested.name == "javapoet") {
+//            useVersion("1.13.0")
+//            because("Fix missing method canonicalName() error")
+//        }
+//    }
 //}
+
+kapt {
+    correctErrorTypes = true
+}
