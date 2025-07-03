@@ -1,7 +1,7 @@
 package com.example.shopm.constant
 
 object ConstText {
-    val HOME = "Trang chủ"
-    val PATIENT_RECORD = "Bệnh án"
-    val BUY_HISTORY = "Lịch sử mua"
+    const val HOME = "Trang chủ"
+    const val PATIENT_RECORD = "Bệnh án"
+    const val BUY_HISTORY = "Lịch sử mua"
 }

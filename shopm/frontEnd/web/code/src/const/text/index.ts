@@ -1,4 +1,6 @@
 export const HOME = 'Trang chủ';
+export const SIGNUP = 'Đăng ký';
+export const SIGNIN = 'Đăng nhập';
 export const SEARCH = 'Tìm kiếm';
 export const NOTIFY = 'Thông báo';
 export const MESSAGE = 'Tin nhắn';
@@ -38,3 +40,8 @@ export const DETAIL_YOUR_COMMENT = 'Chi tiết bình luận của bạn';
 export const UPLOAD = 'Đăng tải';
 export const PHOTO = 'Hình ảnh, video';
 export const WHAT_DO_YOU_THINK = 'Bạn đang nghĩ gì ?';
+export const ACCOUNT = 'Tài khoản';
+export const PASSWORD = 'Mật khẩu';
+export const PHONE_NUMBER = 'Số điện thoại';
+export const FIRST_NAME = 'Họ';
+export const LAST_NAME = 'Tên';

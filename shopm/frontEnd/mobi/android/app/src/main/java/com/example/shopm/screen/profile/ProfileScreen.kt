@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.shopm.screen.profile.component.overview.OverView
 import com.example.shopm.screen.profile.component.overview.OverViewContent
 import com.example.shopm.screen.profile.component.menu.MenuView
-import com.example.shopm.screen.profile.component.menu.MenuViewContent
+//import com.example.shopm.screen.profile.component.menu.MenuViewContent
 
 
 
@@ -45,6 +45,6 @@ fun ProfileContentPreview() {
             .background(Color.Blue)
     ) {
         OverViewContent(user = "hello kitty !")
-        MenuViewContent(user = "hello kitty !")
+//        MenuViewContent(user = "hello kitty !")
     }
 }

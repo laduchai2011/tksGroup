@@ -2,6 +2,8 @@ package com.example.shopm.screen.profile.component.menu
 
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -17,46 +19,52 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.shopm.MainViewModel
-import com.example.shopm.constant.ConstText
+//import com.example.shopm.MainViewModel
+//import com.example.shopm.constant.ConstText
+import com.example.shopm.type.ProfileType
+import com.example.shopm.viewModel.ProfileViewModel
 
 
 @Composable
-fun MenuView(viewModel: MainViewModel = hiltViewModel()) {
-    MenuViewContent(viewModel.user)
+fun MenuView(profileViewModel: ProfileViewModel = hiltViewModel()) {
+    MenuViewContent(profileViewModel)
 }
 
 @Composable
-fun MenuViewContent(user: String) {
+fun MenuViewContent(profileViewModel: ProfileViewModel) {
+    val menuSelected: ProfileType.Menu = profileViewModel.menuSelected
+    val setMenuSelected = profileViewModel.setMenuSelected()
+
+    val selectedColor = Color(0xFFe7e7e7)
+
     val items = listOf(
-        ConstText.HOME,
-        ConstText.PATIENT_RECORD,
-        ConstText.BUY_HISTORY,
-        ConstText.HOME,
-        ConstText.PATIENT_RECORD,
-        ConstText.BUY_HISTORY,
-        ConstText.HOME,
-        ConstText.PATIENT_RECORD,
-        ConstText.BUY_HISTORY,
-        user
+        ProfileType.Menu.HOME,
+        ProfileType.Menu.PATIENT_RECORD,
+        ProfileType.Menu.BUY_HISTORY
     )
     val scrollState = rememberScrollState()
+
+    fun onMenuSelected(item: ProfileType.Menu) {
+        setMenuSelected(item)
+    }
 
     Row(
         modifier = MenuStyle.parent
             .horizontalScroll(scrollState)
     ) {
         items.forEach { item ->
-            val backGround = if (item == ConstText.HOME) Color.Gray else Color.White
+            val backGround = if (item == menuSelected) selectedColor else Color.White
             Box(
                 modifier = Modifier
                     .wrapContentWidth()
                     .fillMaxHeight()
-                    .background(backGround),
+                    .background(backGround)
+                    .border(0.1.dp, Color.Gray)
+                    .clickable { onMenuSelected(item) },
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    item,
+                    item.title,
                     modifier = Modifier
                         .wrapContentWidth()
                         .padding(start = 5.dp, end = 5.dp)
@@ -72,6 +80,6 @@ fun MenuViewContent(user: String) {
 @Preview(showBackground = true)
 @Composable
 fun MenuViewContentPreview() {
-    val user = "la duc hai"
-    MenuViewContent(user)
+//    val user = "la duc hai"
+//    MenuViewContent(user)
 }

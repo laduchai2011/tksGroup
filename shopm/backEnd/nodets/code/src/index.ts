@@ -6,7 +6,7 @@ import process from 'process';
 
 dotenv.config();
 
-import service_account from './services/account';
+import service_account from '@src/services/account';
 import service_order_medication from '@src/services/order_medication';
 import service_video from './services/video';
 

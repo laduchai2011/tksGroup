@@ -74,6 +74,10 @@ dependencies {
     implementation(libs.javapoet)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
 }
 
 hilt {
