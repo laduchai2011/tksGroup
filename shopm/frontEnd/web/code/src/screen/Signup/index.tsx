@@ -4,6 +4,8 @@ import { SIGNIN, SIGNUP, ACCOUNT, PASSWORD, PHONE_NUMBER, FIRST_NAME, LAST_NAME 
 import { accountOption } from '@src/dataStruct';
 import { account_field_type, account_enum } from './type';
 import { isSpace, isFirstNumber, containsSpecialCharacters, isValidPhoneNumber } from '@src/utility/string';
+import { useSignupMutation } from '@src/redux/query/accountRTK';
+import { router_res_type } from '@src/interface';
 
 const Signup = () => {
     const [account, setAccount] = useState<accountOption>({
@@ -22,6 +24,9 @@ const Signup = () => {
     const [phoneWarn, setPhoneWarn] = useState<string>('');
     const [firstNameWarn, setFirstNameWarn] = useState<string>('');
     const [lastNameWarn, setLastNameWarn] = useState<string>('');
+    const [myRes, setMyRes] = useState<router_res_type | undefined>(undefined);
+
+    const [signup] = useSignupMutation();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>, field: account_field_type) => {
         const value = e.target.value;
@@ -111,6 +116,12 @@ const Signup = () => {
         }
     };
 
+    const handleSignup = () => {
+        signup(account)
+            .then((res) => setMyRes(res.data))
+            .catch((err) => console.error(err));
+    };
+
     return (
         <div className={style.parent}>
             <div>
@@ -188,9 +199,10 @@ const Signup = () => {
                     </div>
                 </div>
                 <div>
-                    <button>{SIGNUP}</button>
+                    <button onClick={() => handleSignup()}>{SIGNUP}</button>
                 </div>
                 <div>{`${SIGNIN} !`}</div>
+                {<div style={{ color: myRes?.status === 'error' ? 'red' : 'black' }}>{myRes?.message}</div>}
             </div>
         </div>
     );
