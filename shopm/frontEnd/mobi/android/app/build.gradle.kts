@@ -7,6 +7,7 @@ plugins {
 
 //    kotlin("multiplatform")
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -78,6 +79,7 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
+    implementation(libs.kotlinx.serialization.json)
 }
 
 hilt {

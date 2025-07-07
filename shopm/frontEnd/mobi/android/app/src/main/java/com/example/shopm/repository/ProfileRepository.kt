@@ -5,5 +5,5 @@ import javax.inject.Singleton
 
 @Singleton
 class ProfileRepository @Inject constructor() {
-    private val api: ApiService
+//    private val api: ApiService
 }

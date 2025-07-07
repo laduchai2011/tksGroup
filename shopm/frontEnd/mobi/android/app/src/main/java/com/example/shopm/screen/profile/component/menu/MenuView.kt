@@ -72,7 +72,6 @@ fun MenuViewContent(profileViewModel: ProfileViewModel) {
             }
 
         }
-
     }
 }
 

@@ -11,8 +11,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(
 //        ScreenRoutes.Home,
-        ScreenRoutes.Profile,
-        ScreenRoutes.Settings
+        BottomScreenRoutes.Setting,
+        BottomScreenRoutes.Profile
     )
     val currentDestination = navController.currentBackStackEntryAsState().value?.destination?.route
 
@@ -20,8 +20,8 @@ fun BottomNavigationBar(navController: NavHostController) {
         items.forEach { screen ->
             val icon = when (screen) {
 //                is ScreenRoutes.Home -> Icons.Default.Home
-                is ScreenRoutes.Profile -> Icons.Default.Person
-                is ScreenRoutes.Settings -> Icons.Default.Settings
+                is BottomScreenRoutes.Setting -> Icons.Default.Settings
+                is BottomScreenRoutes.Profile -> Icons.Default.Person
             }
 
             NavigationBarItem(
