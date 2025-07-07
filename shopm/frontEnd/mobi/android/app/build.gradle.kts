@@ -51,6 +51,13 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    packaging {
+        resources {
+            excludes += "META-INF/INDEX.LIST"
+            excludes += "META-INF/io.netty.versions.properties"
+        }
+    }
 }
 
 dependencies {
@@ -80,6 +87,10 @@ dependencies {
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.ktor.core)
+    implementation(libs.ktor.netty)
+    implementation(libs.ktor.content.negotiation)
+    implementation(libs.ktor.kotlinx.json)
 }
 
 hilt {

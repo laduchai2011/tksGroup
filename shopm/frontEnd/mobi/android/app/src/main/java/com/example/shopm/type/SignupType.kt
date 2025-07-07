@@ -11,4 +11,12 @@ object SignupType {
         FIRST_NAME(ConstText.FIRST_NAME),
         LAST_NAME(ConstText.LAST_NAME)
     }
+
+    enum class MaxLen(val value: Int) {
+        ACCOUNT(100),
+        PASSWORD(100),
+        PHONE_NUMBER(15),
+        FIRST_NAME(20),
+        LAST_NAME(20)
+    }
 }

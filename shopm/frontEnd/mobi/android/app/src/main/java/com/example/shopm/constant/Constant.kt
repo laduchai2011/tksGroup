@@ -1,5 +1,7 @@
 package com.example.shopm.constant
 
+import androidx.compose.ui.graphics.Color
+
 object ConstText {
     const val HOME = "Trang chủ"
     const val PATIENT_RECORD = "Bệnh án"
@@ -11,4 +13,8 @@ object ConstText {
     const val PHONE_NUMBER = "Số điện thoại"
     const val FIRST_NAME = "Họ"
     const val LAST_NAME = "Tên"
+}
+
+object ConstColor {
+    val HEADER_BACKGROUND = Color(0xFFafd7ff)
 }

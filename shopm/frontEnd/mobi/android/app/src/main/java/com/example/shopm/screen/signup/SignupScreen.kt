@@ -1,10 +1,7 @@
 package com.example.shopm.screen.signup
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Box
+
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -16,10 +13,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
-import com.example.shopm.navigator.localNavController
-
-
+import com.example.shopm.type.SignupType
 
 
 @Composable
@@ -31,18 +25,30 @@ fun SignupScreen() {
 fun SignupContent() {
     var text by remember { mutableStateOf(TextFieldValue("")) }
 
-    Column {
-        Row (verticalAlignment = Alignment.CenterVertically){
-            Text("username")
-            TextField(value=text, onValueChange = { newText -> text = newText },)
-        }
-        Row (verticalAlignment = Alignment.CenterVertically){
-            Text("username")
-            TextField(value=text, onValueChange = { newText -> text = newText },)
-        }
-        Row (verticalAlignment = Alignment.CenterVertically){
-            Text("username")
-            TextField(value=text, onValueChange = { newText -> text = newText },)
+    val items = listOf(
+        SignupType.Option.ACCOUNT,
+        SignupType.Option.PASSWORD,
+        SignupType.Option.PHONE_NUMBER,
+        SignupType.Option.FIRST_NAME,
+        SignupType.Option.LAST_NAME
+    )
+
+    Column(
+        modifier = SignupStyle.parent,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row(modifier = SignupStyle.header, verticalAlignment = Alignment.CenterVertically) {}
+        items.forEach { item ->
+            val maxLen = SignupType.MaxLen.entries[item.ordinal]
+            Row(modifier = SignupStyle.row, verticalAlignment = Alignment.CenterVertically) {
+                Text(item.title, modifier = SignupStyle.title)
+                TextField(
+                    value = text,
+                    modifier = SignupStyle.input,
+                    onValueChange = { newText -> text = newText },
+                    label = { Text("Tối đa ${maxLen.value} ký tự") }
+                )
+            }
         }
     }
 
