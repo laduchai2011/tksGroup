@@ -1,4 +1,8 @@
 package com.example.shopm.screen.profile
 
-class ProfileStyle {
+
+import androidx.compose.ui.Modifier
+
+object ProfileStyle {
+    val parent = Modifier
 }

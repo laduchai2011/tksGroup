@@ -1,12 +1,17 @@
 package com.example.shopm.navigator
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.CompositionLocalProvider
 //import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+//import androidx.compose.runtime.mutableStateOf
+//import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -15,33 +20,79 @@ import com.example.shopm.screen.profile.ProfileScreen
 import com.example.shopm.screen.setting.SettingScreen
 import com.example.shopm.screen.signup.SignupScreen
 import com.example.shopm.screen.signin.SigninScreen
+import com.example.shopm.screenCommon.ScreenCommon
+import com.example.shopm.viewModel.ScreenCommonViewModel
 
 val localNavController = staticCompositionLocalOf<NavHostController> {
     error("NavController not provided")
 }
+val LocalScreenCommonViewModel = staticCompositionLocalOf<ScreenCommonViewModel> {
+    error("ScreenCommonViewModel not provided")
+}
+
+//@Composable
+//fun AppNavigation() {
+//    val navController = rememberNavController()
+//    CompositionLocalProvider(localNavController provides navController) {
+//        Scaffold(
+//            bottomBar = {
+//                BottomNavigationBar(navController)
+//            }
+//        ) { paddingValues ->
+//            NavHost(
+//                navController = navController,
+//                startDestination = "profile",
+//                modifier = Modifier.padding(paddingValues)
+//            )
+//            {
+//                composable(BottomScreenRoutes.Setting.toString()) { SettingScreen() }
+//                composable(BottomScreenRoutes.Profile.toString()) { ProfileScreen() }
+//
+//                composable(OtherScreenRoutes.Signup.toString()) { SignupScreen() }
+//                composable(OtherScreenRoutes.Signin.toString()) { SigninScreen() }
+//            }
+//        }
+//
+//    }
+//}
 
 @Composable
-fun AppNavigation() {
+fun AppNavigation(modifier: Modifier = Modifier) {
+    val navController = localNavController.current
+
+    NavHost(
+        navController = navController,
+        startDestination = "profile",
+        modifier = modifier
+    ) {
+        composable(BottomScreenRoutes.Setting.toString()) { SettingScreen() }
+        composable(BottomScreenRoutes.Profile.toString()) { ProfileScreen() }
+
+        composable(OtherScreenRoutes.Signup.toString()) { SignupScreen() }
+        composable(OtherScreenRoutes.Signin.toString()) { SigninScreen() }
+    }
+}
+
+@Composable
+fun AppContainer() {
     val navController = rememberNavController()
+    val screenCommonViewModel: ScreenCommonViewModel = hiltViewModel()
 
-    Scaffold(
-        bottomBar = {
-            BottomNavigationBar(navController)
-        }
-    ) { paddingValues ->
-        CompositionLocalProvider(localNavController provides navController) {
-            NavHost(
-                navController = navController,
-                startDestination = "profile",
-                modifier = Modifier.padding(paddingValues))
-            {
-                composable(BottomScreenRoutes.Setting.toString()) { SettingScreen() }
-                composable(BottomScreenRoutes.Profile.toString()) { ProfileScreen() }
+    CompositionLocalProvider(
+        localNavController provides navController,
+        LocalScreenCommonViewModel provides screenCommonViewModel
+    ) {
+        Scaffold(
+            bottomBar = {
+                BottomNavigationBar(navController)
+            },
+        ) { paddingValues ->
+            Box(modifier = Modifier.fillMaxSize()) {
+                AppNavigation(modifier = Modifier.padding(paddingValues))
 
-                composable(OtherScreenRoutes.Signup.toString()) { SignupScreen() }
-                composable(OtherScreenRoutes.Signin.toString()) { SigninScreen() }
+                // common component
+                ScreenCommon()
             }
         }
-
     }
 }

@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.core.view.WindowCompat
-import com.example.shopm.navigator.AppNavigation
+import com.example.shopm.navigator.AppContainer
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MaterialTheme {
-                AppNavigation()
+                AppContainer()
             }
         }
     }

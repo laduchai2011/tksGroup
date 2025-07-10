@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AccountOption(
-    val id: Int,
+    val id: Int? = null,
     val userName: String,
     val password: String,
     val phone: String,
