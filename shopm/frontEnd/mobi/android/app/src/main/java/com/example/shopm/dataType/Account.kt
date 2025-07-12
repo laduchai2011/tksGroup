@@ -3,7 +3,7 @@ package com.example.shopm.dataType
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AccountOption(
+data class AccountField(
     val id: Int? = null,
     val userName: String,
     val password: String,

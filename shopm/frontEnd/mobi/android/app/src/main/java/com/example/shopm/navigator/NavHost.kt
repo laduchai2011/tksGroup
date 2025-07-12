@@ -3,13 +3,10 @@ package com.example.shopm.navigator
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.CompositionLocalProvider
-//import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-//import androidx.compose.runtime.mutableStateOf
-//import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -30,31 +27,6 @@ val LocalScreenCommonViewModel = staticCompositionLocalOf<ScreenCommonViewModel>
     error("ScreenCommonViewModel not provided")
 }
 
-//@Composable
-//fun AppNavigation() {
-//    val navController = rememberNavController()
-//    CompositionLocalProvider(localNavController provides navController) {
-//        Scaffold(
-//            bottomBar = {
-//                BottomNavigationBar(navController)
-//            }
-//        ) { paddingValues ->
-//            NavHost(
-//                navController = navController,
-//                startDestination = "profile",
-//                modifier = Modifier.padding(paddingValues)
-//            )
-//            {
-//                composable(BottomScreenRoutes.Setting.toString()) { SettingScreen() }
-//                composable(BottomScreenRoutes.Profile.toString()) { ProfileScreen() }
-//
-//                composable(OtherScreenRoutes.Signup.toString()) { SignupScreen() }
-//                composable(OtherScreenRoutes.Signin.toString()) { SigninScreen() }
-//            }
-//        }
-//
-//    }
-//}
 
 @Composable
 fun AppNavigation(modifier: Modifier = Modifier) {

@@ -87,7 +87,7 @@ const Signup = () => {
                     setPhoneWarn('Không được có khoảng trắng !');
                 } else if (containsSpecialCharacters(str)) {
                     setPhoneWarn('Số điện thoại không được chứa ký tự đặc biệt !');
-                } else if (!isValidPhoneNumber) {
+                } else if (!isValidPhoneNumber(str)) {
                     setPhoneWarn('Không phải là số điện thoại !');
                 } else {
                     setPhoneWarn('');

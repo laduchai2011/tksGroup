@@ -10,23 +10,29 @@ import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.shopm.viewModel.ToastMessageViewModel
+import com.example.shopm.navigator.LocalScreenCommonViewModel
 
 
 @Composable
-fun MessageDialog(toastMessageViewModel: ToastMessageViewModel = hiltViewModel()) {
-    MessageDialogContent(toastMessageViewModel)
+fun MessageDialog() {
+    MessageDialogContent()
 }
 
 @Composable
-fun MessageDialogContent(toastMessageViewModel: ToastMessageViewModel) {
-    val message: String = toastMessageViewModel.toastMessageField.message
+fun MessageDialogContent() {
+    val screenCommonViewModel = LocalScreenCommonViewModel.current
+    val message: String = screenCommonViewModel.fieldToastMessage.message
+    val close = screenCommonViewModel.close()
+
+    fun handleClose() {
+        close()
+    }
 
     Box(
         modifier = MessageDialogStyle.parent,
@@ -36,11 +42,18 @@ fun MessageDialogContent(toastMessageViewModel: ToastMessageViewModel) {
         ) {
             Row {
                 Spacer(modifier = Modifier.weight(1f))
-                Icon(
-                    imageVector = Icons.Filled.Close,
-                    contentDescription = "Close",
-                    tint = Color.Black
-                )
+//                Icon(
+//                    imageVector = Icons.Filled.Close,
+//                    contentDescription = "Close",
+//                    tint = Color.Black
+//                )
+                IconButton(onClick = { handleClose() }) {
+                    Icon(
+                        imageVector = Icons.Filled.Close,
+                        contentDescription = "Close",
+                        tint = Color.Black
+                    )
+                }
             }
             Row(
                 modifier = MessageDialogStyle.content,
@@ -56,6 +69,6 @@ fun MessageDialogContent(toastMessageViewModel: ToastMessageViewModel) {
 
 @Preview(showBackground = true)
 @Composable
-fun ScreenCommonPreview() {
+fun MessageDialogPreview() {
 //    MessageDialogContent()
 }
