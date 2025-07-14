@@ -1,5 +1,5 @@
 export interface accountOption {
-    id: number; // not use in signup
+    id: number | null; // not use in signup
     userName: string;
     password: string;
     phone: string;

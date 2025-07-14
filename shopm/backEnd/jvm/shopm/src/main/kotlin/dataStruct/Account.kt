@@ -1,4 +1,4 @@
-package com.example.shopm.dataType
+package org.example.dataStruct
 
 import kotlinx.serialization.Serializable
 

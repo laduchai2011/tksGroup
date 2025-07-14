@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.shopm.type.SignupType
 import com.example.shopm.component.header.TopHeaderScreen
-import com.example.shopm.dataType.AccountField
+import com.example.shopm.dataStruct.AccountField
 import com.example.shopm.constant.ConstText
 import com.example.shopm.navigator.LocalScreenCommonViewModel
 import com.example.shopm.type.ScreenCommonType

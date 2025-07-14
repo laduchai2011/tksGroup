@@ -1,5 +1,5 @@
 export interface accountOption {
-    id: number;
+    id: number | null;
     userName: string;
     password: string;
     phone: string;

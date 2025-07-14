@@ -87,10 +87,13 @@ dependencies {
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.ktor.core)
-    implementation(libs.ktor.netty)
-    implementation(libs.ktor.content.negotiation)
+//    implementation(libs.ktor.core)
+//    implementation(libs.ktor.netty)
+//    implementation(libs.ktor.content.negotiation)
     implementation(libs.ktor.kotlinx.json)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.cio)
 }
 
 hilt {
