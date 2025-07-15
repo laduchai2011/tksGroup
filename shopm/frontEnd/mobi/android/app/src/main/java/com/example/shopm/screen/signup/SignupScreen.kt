@@ -29,6 +29,7 @@ import com.example.shopm.utility.containsSpecialCharacters
 import com.example.shopm.utility.isFirstNumber
 import com.example.shopm.utility.isSpace
 import com.example.shopm.utility.isValidPhoneNumber
+import java.time.OffsetDateTime
 
 
 @Composable
@@ -55,10 +56,24 @@ fun SignupContent() {
                 lastName = "",
                 avatar = null,
                 status = "",
-                updateTime = ""
+                updateTime = OffsetDateTime.now()
             )
         )
     }
+
+    // 🔄 Convert object thành JSON string
+//    val jsonString = json.encodeToString(AccountField.serializer(), account)
+//    println("Serialized JSON:\n$jsonString")
+//
+//    // 🔄 Convert JSON string thành object
+//    val parsed = json.decodeFromString(AccountField.serializer(), jsonString)
+//    println("Parsed Object:\n$parsed")
+//    output:
+//    Serialized JSON:
+//    {"userName":"duc_hai","updateTime":"2025-07-15T14:30:00+07:00"}
+//
+//    Parsed Object:
+//    AccountField(userName=duc_hai, updateTime=2025-07-15T14:30+07:00)
 
     val fieldStates = remember {
         mutableStateMapOf(

@@ -8,18 +8,14 @@ import io.ktor.server.request.*
 import io.ktor.server.routing.*
 import io.ktor.server.plugins.contentnegotiation.*
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 import io.ktor.serialization.kotlinx.json.*
 import org.example.route.accountRoute
+import org.example.serialization.AppJson
 
 fun main() {
     embeddedServer(Netty, port = 6000, host = "0.0.0.0") {
         install(ContentNegotiation) {
-            json(Json {
-                prettyPrint = true
-                isLenient = false
-                ignoreUnknownKeys = false
-            })
+            json(AppJson)
         }
 
         routing {

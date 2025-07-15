@@ -1,6 +1,8 @@
 package org.example.dataStruct
 
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
+import java.time.OffsetDateTime
 
 @Serializable
 data class AccountField(
@@ -12,5 +14,5 @@ data class AccountField(
     val lastName: String,
     val avatar: String? = null,
     val status: String,
-    val updateTime: String,
+    @Contextual val updateTime: OffsetDateTime,
 )
