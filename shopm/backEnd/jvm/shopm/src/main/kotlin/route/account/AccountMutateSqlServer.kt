@@ -1,5 +1,6 @@
 package org.example.route.account
 
+import org.example.dataStruct.AccountField
 import org.example.database.ConnectSqlServer
 import java.time.OffsetDateTime
 
@@ -43,7 +44,7 @@ class AccountMutateSqlServer {
         return false
     }
 
-    fun signupToDB(userName: String, password: String, phone: String, firstName: String, lastName: String) {
+    fun signupToDB(userName: String, password: String, phone: String, firstName: String, lastName: String): AccountField? {
         val sql = "{call Signup(?, ?, ?, ?, ?)}"
         val conn = ConnectSqlServer.connectionShopmDev
         val stmt = conn.prepareCall(sql)
@@ -56,20 +57,27 @@ class AccountMutateSqlServer {
 
         val resultSet = stmt.executeQuery()
 
+        var newAccount: AccountField? = null
+
         // Lấy kết quả từ OUTPUT INSERTED.*
         while (resultSet.next()) {
-            val id = resultSet.getInt("id")
-            val userName = resultSet.getString("userName")
-            val password = resultSet.getString("password")
-            val phone = resultSet.getString("phone")
-            val firstName = resultSet.getString("firstName")
-            val lastName = resultSet.getString("lastName")
-            val avatar = resultSet.getString("avatar")
-            val status = resultSet.getString("status")
-            val updateTime: OffsetDateTime = resultSet.getObject("updateTime", OffsetDateTime::class.java)
+            val account = AccountField(
+                id = resultSet.getInt("id"),
+                userName = resultSet.getString("userName"),
+                password = resultSet.getString("password"),
+                phone = resultSet.getString("phone"),
+                firstName = resultSet.getString("firstName"),
+                lastName = resultSet.getString("lastName"),
+                avatar = resultSet.getString("avatar"),
+                status = resultSet.getString("status"),
+                updateTime = resultSet.getObject("updateTime", OffsetDateTime::class.java)
+            )
+            newAccount = account
         }
 
         resultSet.close()
         stmt.close()
+
+        return newAccount
     }
 }

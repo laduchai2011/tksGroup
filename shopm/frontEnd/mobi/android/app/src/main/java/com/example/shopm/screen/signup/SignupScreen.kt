@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
@@ -19,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.shopm.type.SignupType
 import com.example.shopm.component.header.TopHeaderScreen
 import com.example.shopm.dataStruct.AccountField
@@ -29,21 +31,25 @@ import com.example.shopm.utility.containsSpecialCharacters
 import com.example.shopm.utility.isFirstNumber
 import com.example.shopm.utility.isSpace
 import com.example.shopm.utility.isValidPhoneNumber
+import com.example.shopm.viewModel.SignupViewModel
 import java.time.OffsetDateTime
+import androidx.compose.runtime.collectAsState
+import com.example.shopm.dataStruct.ApiResult
 
 
 @Composable
-fun SignupScreen() {
-    SignupContent()
+fun SignupScreen(signupViewModel: SignupViewModel = hiltViewModel()) {
+    SignupContent(signupViewModel)
 }
 
 @Composable
-fun SignupContent() {
+fun SignupContent(signupViewModel: SignupViewModel) {
     val screenCommonViewModel = LocalScreenCommonViewModel.current
 
     val setToastMessage = screenCommonViewModel.setToastMessage()
     val setLoadingIcon = screenCommonViewModel.setLoadingIcon()
-
+    val closeScreenCommon = screenCommonViewModel.close()
+    val signupResult by signupViewModel.signupResult.collectAsState()
 
     var accountOption by remember {
         mutableStateOf(
@@ -93,80 +99,180 @@ fun SignupContent() {
         SignupType.Option.LAST_NAME
     )
 
-    fun isPassString(item: SignupType.Option, newText: TextFieldValue): Boolean {
-        val type = ScreenCommonType.ToastMessageType.DIALOG
-        var fieldMessage = ScreenCommonType.FieldToastMessage(
-            message = ""
-        )
-
-        var isPsss = true
-
-        when (item.ordinal) {
-            SignupType.Option.ACCOUNT.ordinal -> {
-                fieldMessage = if (isSpace(newText.text)) {
-                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.ACCOUNT.title}) Không được có khoảng trắng !")
-                } else if (isFirstNumber(newText.text)) {
-                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.ACCOUNT.title}) Ký tự đầu tiên không được là số !")
-                } else if (containsSpecialCharacters(newText.text)) {
-                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.ACCOUNT.title}) Tên tài khoản không được chứa ký tự đặc biệt !")
-                } else {
-                    ScreenCommonType.FieldToastMessage(message = "")
-                }
+    LaunchedEffect(signupResult) {
+        when (val result = signupResult) {
+            is ApiResult.Success -> {
+                closeScreenCommon()
+                val data = result.data
+                val type = ScreenCommonType.ToastMessageType.DIALOG
+                val fieldMessage = ScreenCommonType.FieldToastMessage(
+                    message = data.message
+                )
+                setToastMessage(type, fieldMessage)
             }
-
-            SignupType.Option.PASSWORD.ordinal -> {
-                fieldMessage = if (isSpace(newText.text)) {
-                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PASSWORD.title}) Không được có khoảng trắng !")
-                } else if (containsSpecialCharacters(newText.text)) {
-                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PASSWORD.title}) Mật khẩu không được chứa ký tự đặc biệt !")
-                } else {
-                    ScreenCommonType.FieldToastMessage(message = "")
-                }
+            is ApiResult.Error -> {
+                closeScreenCommon()
+                val data = result.message
+                val type = ScreenCommonType.ToastMessageType.DIALOG
+                val fieldMessage = ScreenCommonType.FieldToastMessage(
+                    message = data
+                )
+                setToastMessage(type, fieldMessage)
             }
+            else -> {}
+        }
+    }
 
-            SignupType.Option.PHONE_NUMBER.ordinal -> {
-                fieldMessage = when {
-                    isSpace(newText.text) -> {
-                        ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PHONE_NUMBER.title}) Không được có khoảng trắng !")
-                    }
-                    containsSpecialCharacters(newText.text) -> {
-                        ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PHONE_NUMBER.title}) Số điện thoại không được chứa ký tự đặc biệt !")
-                    }
-                    !isValidPhoneNumber(newText.text) -> {
-                        ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PHONE_NUMBER.title}) Không phải là số điện thoại !")
-                    }
-                    else -> {
+    val isPassString = remember(setToastMessage) {
+        fun(item: SignupType.Option, newText: TextFieldValue): Boolean {
+            val type = ScreenCommonType.ToastMessageType.DIALOG
+            var fieldMessage = ScreenCommonType.FieldToastMessage(
+                message = ""
+            )
+
+            var isPsss = true
+
+            when (item.ordinal) {
+                SignupType.Option.ACCOUNT.ordinal -> {
+                    fieldMessage = if (isSpace(newText.text)) {
+                        ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.ACCOUNT.title}) Không được có khoảng trắng !")
+                    } else if (isFirstNumber(newText.text)) {
+                        ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.ACCOUNT.title}) Ký tự đầu tiên không được là số !")
+                    } else if (containsSpecialCharacters(newText.text)) {
+                        ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.ACCOUNT.title}) Tên tài khoản không được chứa ký tự đặc biệt !")
+                    } else {
                         ScreenCommonType.FieldToastMessage(message = "")
                     }
                 }
-            }
 
-            SignupType.Option.FIRST_NAME.ordinal -> {
-                fieldMessage = if (containsSpecialCharacters(newText.text)) {
-                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.FIRST_NAME.title}) Tên không được chứa ký tự đặc biệt !")
-                } else {
-                    ScreenCommonType.FieldToastMessage(message = "")
+                SignupType.Option.PASSWORD.ordinal -> {
+                    fieldMessage = if (isSpace(newText.text)) {
+                        ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PASSWORD.title}) Không được có khoảng trắng !")
+                    } else if (containsSpecialCharacters(newText.text)) {
+                        ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PASSWORD.title}) Mật khẩu không được chứa ký tự đặc biệt !")
+                    } else {
+                        ScreenCommonType.FieldToastMessage(message = "")
+                    }
                 }
-            }
 
-            SignupType.Option.LAST_NAME.ordinal -> {
-                fieldMessage = if (containsSpecialCharacters(newText.text)) {
-                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.LAST_NAME.title}) Tên không được chứa ký tự đặc biệt !")
-                } else {
-                    ScreenCommonType.FieldToastMessage(message = "")
+                SignupType.Option.PHONE_NUMBER.ordinal -> {
+                    fieldMessage = when {
+                        isSpace(newText.text) -> {
+                            ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PHONE_NUMBER.title}) Không được có khoảng trắng !")
+                        }
+                        containsSpecialCharacters(newText.text) -> {
+                            ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PHONE_NUMBER.title}) Số điện thoại không được chứa ký tự đặc biệt !")
+                        }
+                        !isValidPhoneNumber(newText.text) -> {
+                            ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PHONE_NUMBER.title}) Không phải là số điện thoại !")
+                        }
+                        else -> {
+                            ScreenCommonType.FieldToastMessage(message = "")
+                        }
+                    }
                 }
+
+                SignupType.Option.FIRST_NAME.ordinal -> {
+                    fieldMessage = if (containsSpecialCharacters(newText.text)) {
+                        ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.FIRST_NAME.title}) Tên không được chứa ký tự đặc biệt !")
+                    } else {
+                        ScreenCommonType.FieldToastMessage(message = "")
+                    }
+                }
+
+                SignupType.Option.LAST_NAME.ordinal -> {
+                    fieldMessage = if (containsSpecialCharacters(newText.text)) {
+                        ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.LAST_NAME.title}) Tên không được chứa ký tự đặc biệt !")
+                    } else {
+                        ScreenCommonType.FieldToastMessage(message = "")
+                    }
+                }
+
+                else -> println("handleChange (checkString)")
             }
 
-            else -> println("handleChange (checkString)")
-        }
+            if (fieldMessage.message.isNotEmpty()) {
+                setToastMessage(type, fieldMessage)
+                isPsss = false
+            }
 
-        if (fieldMessage.message.isNotEmpty()) {
-            setToastMessage(type, fieldMessage)
-            isPsss = false
+            return isPsss
         }
-
-        return isPsss
     }
+//    fun isPassString(item: SignupType.Option, newText: TextFieldValue): Boolean {
+//        val type = ScreenCommonType.ToastMessageType.DIALOG
+//        var fieldMessage = ScreenCommonType.FieldToastMessage(
+//            message = ""
+//        )
+//
+//        var isPsss = true
+//
+//        when (item.ordinal) {
+//            SignupType.Option.ACCOUNT.ordinal -> {
+//                fieldMessage = if (isSpace(newText.text)) {
+//                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.ACCOUNT.title}) Không được có khoảng trắng !")
+//                } else if (isFirstNumber(newText.text)) {
+//                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.ACCOUNT.title}) Ký tự đầu tiên không được là số !")
+//                } else if (containsSpecialCharacters(newText.text)) {
+//                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.ACCOUNT.title}) Tên tài khoản không được chứa ký tự đặc biệt !")
+//                } else {
+//                    ScreenCommonType.FieldToastMessage(message = "")
+//                }
+//            }
+//
+//            SignupType.Option.PASSWORD.ordinal -> {
+//                fieldMessage = if (isSpace(newText.text)) {
+//                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PASSWORD.title}) Không được có khoảng trắng !")
+//                } else if (containsSpecialCharacters(newText.text)) {
+//                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PASSWORD.title}) Mật khẩu không được chứa ký tự đặc biệt !")
+//                } else {
+//                    ScreenCommonType.FieldToastMessage(message = "")
+//                }
+//            }
+//
+//            SignupType.Option.PHONE_NUMBER.ordinal -> {
+//                fieldMessage = when {
+//                    isSpace(newText.text) -> {
+//                        ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PHONE_NUMBER.title}) Không được có khoảng trắng !")
+//                    }
+//                    containsSpecialCharacters(newText.text) -> {
+//                        ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PHONE_NUMBER.title}) Số điện thoại không được chứa ký tự đặc biệt !")
+//                    }
+//                    !isValidPhoneNumber(newText.text) -> {
+//                        ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PHONE_NUMBER.title}) Không phải là số điện thoại !")
+//                    }
+//                    else -> {
+//                        ScreenCommonType.FieldToastMessage(message = "")
+//                    }
+//                }
+//            }
+//
+//            SignupType.Option.FIRST_NAME.ordinal -> {
+//                fieldMessage = if (containsSpecialCharacters(newText.text)) {
+//                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.FIRST_NAME.title}) Tên không được chứa ký tự đặc biệt !")
+//                } else {
+//                    ScreenCommonType.FieldToastMessage(message = "")
+//                }
+//            }
+//
+//            SignupType.Option.LAST_NAME.ordinal -> {
+//                fieldMessage = if (containsSpecialCharacters(newText.text)) {
+//                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.LAST_NAME.title}) Tên không được chứa ký tự đặc biệt !")
+//                } else {
+//                    ScreenCommonType.FieldToastMessage(message = "")
+//                }
+//            }
+//
+//            else -> println("handleChange (checkString)")
+//        }
+//
+//        if (fieldMessage.message.isNotEmpty()) {
+//            setToastMessage(type, fieldMessage)
+//            isPsss = false
+//        }
+//
+//        return isPsss
+//    }
 
     fun updateText(item: SignupType.Option, newText: TextFieldValue) {
         when (item) {
@@ -198,7 +304,8 @@ fun SignupContent() {
         for ((key, value) in fieldStates) {
             isPassString(key, value)
         }
-//        setLoadingIcon(ScreenCommonType.LoadingIconType.BASIC)
+        setLoadingIcon(ScreenCommonType.LoadingIconType.BASIC)
+        signupViewModel.signupToDb()(accountOption)
     }
 
     Column(

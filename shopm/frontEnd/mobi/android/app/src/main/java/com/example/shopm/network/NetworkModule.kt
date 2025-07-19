@@ -1,5 +1,6 @@
 package com.example.shopm.network
 
+import com.example.shopm.serialization.AppJson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,7 +24,7 @@ object NetworkModule {
 //        }
         return HttpClient(CIO) {
             install(ContentNegotiation) {
-                json()
+                json(AppJson)
             }
             expectSuccess = true
         }

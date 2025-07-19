@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.1.21"
+    kotlin("plugin.serialization") version "2.1.21"
 
     id("application")
 }
@@ -21,6 +22,7 @@ dependencies {
     implementation("org.slf4j:slf4j-api:2.0.7")
     implementation("ch.qos.logback:logback-classic:1.4.14")
     implementation("com.microsoft.sqlserver:mssql-jdbc:12.6.1.jre11")
+    implementation("io.ktor:ktor-server-cors:${ktorVersion}")
 }
 
 configurations.all {
