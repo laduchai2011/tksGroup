@@ -1,7 +1,6 @@
 package com.example.shopm.screen.signup
 
 
-
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,6 +34,8 @@ import com.example.shopm.viewModel.SignupViewModel
 import java.time.OffsetDateTime
 import androidx.compose.runtime.collectAsState
 import com.example.shopm.dataStruct.ApiResult
+import com.example.shopm.navigator.OtherScreenRoutes
+import com.example.shopm.navigator.localNavController
 
 
 @Composable
@@ -45,6 +46,7 @@ fun SignupScreen(signupViewModel: SignupViewModel = hiltViewModel()) {
 @Composable
 fun SignupContent(signupViewModel: SignupViewModel) {
     val screenCommonViewModel = LocalScreenCommonViewModel.current
+    val navController = localNavController.current
 
     val setToastMessage = screenCommonViewModel.setToastMessage()
     val setLoadingIcon = screenCommonViewModel.setLoadingIcon()
@@ -91,14 +93,6 @@ fun SignupContent(signupViewModel: SignupViewModel) {
         )
     }
 
-    val items = listOf(
-        SignupType.Option.ACCOUNT,
-        SignupType.Option.PASSWORD,
-        SignupType.Option.PHONE_NUMBER,
-        SignupType.Option.FIRST_NAME,
-        SignupType.Option.LAST_NAME
-    )
-
     LaunchedEffect(signupResult) {
         when (val result = signupResult) {
             is ApiResult.Success -> {
@@ -110,6 +104,7 @@ fun SignupContent(signupViewModel: SignupViewModel) {
                 )
                 setToastMessage(type, fieldMessage)
             }
+
             is ApiResult.Error -> {
                 closeScreenCommon()
                 val data = result.message
@@ -119,6 +114,7 @@ fun SignupContent(signupViewModel: SignupViewModel) {
                 )
                 setToastMessage(type, fieldMessage)
             }
+
             else -> {}
         }
     }
@@ -160,12 +156,15 @@ fun SignupContent(signupViewModel: SignupViewModel) {
                         isSpace(newText.text) -> {
                             ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PHONE_NUMBER.title}) Không được có khoảng trắng !")
                         }
+
                         containsSpecialCharacters(newText.text) -> {
                             ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PHONE_NUMBER.title}) Số điện thoại không được chứa ký tự đặc biệt !")
                         }
+
                         !isValidPhoneNumber(newText.text) -> {
                             ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PHONE_NUMBER.title}) Không phải là số điện thoại !")
                         }
+
                         else -> {
                             ScreenCommonType.FieldToastMessage(message = "")
                         }
@@ -199,114 +198,59 @@ fun SignupContent(signupViewModel: SignupViewModel) {
             return isPsss
         }
     }
-//    fun isPassString(item: SignupType.Option, newText: TextFieldValue): Boolean {
-//        val type = ScreenCommonType.ToastMessageType.DIALOG
-//        var fieldMessage = ScreenCommonType.FieldToastMessage(
-//            message = ""
-//        )
-//
-//        var isPsss = true
-//
-//        when (item.ordinal) {
-//            SignupType.Option.ACCOUNT.ordinal -> {
-//                fieldMessage = if (isSpace(newText.text)) {
-//                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.ACCOUNT.title}) Không được có khoảng trắng !")
-//                } else if (isFirstNumber(newText.text)) {
-//                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.ACCOUNT.title}) Ký tự đầu tiên không được là số !")
-//                } else if (containsSpecialCharacters(newText.text)) {
-//                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.ACCOUNT.title}) Tên tài khoản không được chứa ký tự đặc biệt !")
-//                } else {
-//                    ScreenCommonType.FieldToastMessage(message = "")
-//                }
-//            }
-//
-//            SignupType.Option.PASSWORD.ordinal -> {
-//                fieldMessage = if (isSpace(newText.text)) {
-//                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PASSWORD.title}) Không được có khoảng trắng !")
-//                } else if (containsSpecialCharacters(newText.text)) {
-//                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PASSWORD.title}) Mật khẩu không được chứa ký tự đặc biệt !")
-//                } else {
-//                    ScreenCommonType.FieldToastMessage(message = "")
-//                }
-//            }
-//
-//            SignupType.Option.PHONE_NUMBER.ordinal -> {
-//                fieldMessage = when {
-//                    isSpace(newText.text) -> {
-//                        ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PHONE_NUMBER.title}) Không được có khoảng trắng !")
-//                    }
-//                    containsSpecialCharacters(newText.text) -> {
-//                        ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PHONE_NUMBER.title}) Số điện thoại không được chứa ký tự đặc biệt !")
-//                    }
-//                    !isValidPhoneNumber(newText.text) -> {
-//                        ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.PHONE_NUMBER.title}) Không phải là số điện thoại !")
-//                    }
-//                    else -> {
-//                        ScreenCommonType.FieldToastMessage(message = "")
-//                    }
-//                }
-//            }
-//
-//            SignupType.Option.FIRST_NAME.ordinal -> {
-//                fieldMessage = if (containsSpecialCharacters(newText.text)) {
-//                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.FIRST_NAME.title}) Tên không được chứa ký tự đặc biệt !")
-//                } else {
-//                    ScreenCommonType.FieldToastMessage(message = "")
-//                }
-//            }
-//
-//            SignupType.Option.LAST_NAME.ordinal -> {
-//                fieldMessage = if (containsSpecialCharacters(newText.text)) {
-//                    ScreenCommonType.FieldToastMessage(message = "(${SignupType.Option.LAST_NAME.title}) Tên không được chứa ký tự đặc biệt !")
-//                } else {
-//                    ScreenCommonType.FieldToastMessage(message = "")
-//                }
-//            }
-//
-//            else -> println("handleChange (checkString)")
-//        }
-//
-//        if (fieldMessage.message.isNotEmpty()) {
-//            setToastMessage(type, fieldMessage)
-//            isPsss = false
-//        }
-//
-//        return isPsss
-//    }
 
-    fun updateText(item: SignupType.Option, newText: TextFieldValue) {
-        when (item) {
-            SignupType.Option.ACCOUNT -> {
-                accountOption = accountOption.copy(userName = newText.text)
-                fieldStates[SignupType.Option.ACCOUNT] = newText
-            }
-            SignupType.Option.PASSWORD -> {
-                accountOption = accountOption.copy(password = newText.text)
-                fieldStates[SignupType.Option.PASSWORD] = newText
-            }
-            SignupType.Option.PHONE_NUMBER -> {
-                accountOption = accountOption.copy(phone = newText.text)
-                fieldStates[SignupType.Option.PHONE_NUMBER] = newText
-            }
-            SignupType.Option.FIRST_NAME -> {
-                accountOption = accountOption.copy(firstName = newText.text)
-                fieldStates[SignupType.Option.FIRST_NAME] = newText
-            }
-            SignupType.Option.LAST_NAME -> {
-                accountOption = accountOption.copy(lastName = newText.text)
-                fieldStates[SignupType.Option.LAST_NAME] = newText
+    val updateText = remember(accountOption) {
+        fun(item: SignupType.Option, newText: TextFieldValue) {
+            when (item) {
+                SignupType.Option.ACCOUNT -> {
+                    accountOption = accountOption.copy(userName = newText.text)
+                    fieldStates[SignupType.Option.ACCOUNT] = newText
+                }
+
+                SignupType.Option.PASSWORD -> {
+                    accountOption = accountOption.copy(password = newText.text)
+                    fieldStates[SignupType.Option.PASSWORD] = newText
+                }
+
+                SignupType.Option.PHONE_NUMBER -> {
+                    accountOption = accountOption.copy(phone = newText.text)
+                    fieldStates[SignupType.Option.PHONE_NUMBER] = newText
+                }
+
+                SignupType.Option.FIRST_NAME -> {
+                    accountOption = accountOption.copy(firstName = newText.text)
+                    fieldStates[SignupType.Option.FIRST_NAME] = newText
+                }
+
+                SignupType.Option.LAST_NAME -> {
+                    accountOption = accountOption.copy(lastName = newText.text)
+                    fieldStates[SignupType.Option.LAST_NAME] = newText
+                }
             }
         }
-
     }
 
-    fun handleSignup() {
-        for ((key, value) in fieldStates) {
-            isPassString(key, value)
+    val handleSignup = remember(accountOption, fieldStates) {
+        fun() {
+            for ((key, value) in fieldStates) {
+                isPassString(key, value)
+            }
+            setLoadingIcon(ScreenCommonType.LoadingIconType.BASIC)
+            signupViewModel.signupToDb()(accountOption)
         }
-        setLoadingIcon(ScreenCommonType.LoadingIconType.BASIC)
-        signupViewModel.signupToDb()(accountOption)
     }
+
+    fun goToSignin () {
+        navController.navigate(OtherScreenRoutes.Signin.toString())
+    }
+
+    val items = listOf(
+        SignupType.Option.ACCOUNT,
+        SignupType.Option.PASSWORD,
+        SignupType.Option.PHONE_NUMBER,
+        SignupType.Option.FIRST_NAME,
+        SignupType.Option.LAST_NAME
+    )
 
     Column(
         modifier = SignupStyle.parent,
@@ -334,8 +278,12 @@ fun SignupContent(signupViewModel: SignupViewModel) {
                 Text(ConstText.SIGNUP, fontSize = 18.sp)
             }
         }
-        Row(modifier = SignupStyle.row, verticalAlignment = Alignment.CenterVertically) {
-            Text("${ConstText.SIGNIN} ?", fontSize = 14.sp, color = Color.Blue)
+        Row(
+            modifier = SignupStyle.row, verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box (modifier = SignupStyle.signinBtn.clickable { goToSignin() }) {
+                Text("${ConstText.SIGNIN} ?", fontSize = 14.sp, color = Color.Blue)
+            }
         }
     }
 

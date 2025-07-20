@@ -3,17 +3,17 @@ package org.example
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.application.*
-import io.ktor.server.response.*
-import io.ktor.server.request.*
-import io.ktor.server.routing.*
+//import io.ktor.server.response.*
+//import io.ktor.server.request.*
+//import io.ktor.server.routing.*
 import io.ktor.server.plugins.contentnegotiation.*
 import kotlinx.serialization.Serializable
 import io.ktor.serialization.kotlinx.json.*
-import org.example.route.accountRoute
+//import org.example.route.accountRoute
 import org.example.serialization.AppJson
 //import io.ktor.server.application.*
-import io.ktor.server.plugins.cors.routing.*
-import io.ktor.http.*
+//import io.ktor.server.plugins.cors.routing.*
+//import io.ktor.http.*
 
 
 fun main() {
@@ -46,20 +46,24 @@ fun main() {
             json(AppJson)
         }
 
-        routing {
-            get("/") {
-                call.respondText("Hello, Kotlin Backend!")
-            }
+        configureAuth()
 
-            post("/echo") {
-                val request = call.receive<Message>()
-                call.respond(request)
-            }
+        configureRoutes()
 
-            route("/account") {
-                accountRoute()
-            }
-        }
+//        routing {
+//            get("/") {
+//                call.respondText("Hello, Kotlin Backend!")
+//            }
+//
+//            post("/echo") {
+//                val request = call.receive<Message>()
+//                call.respond(request)
+//            }
+//
+//            route("/account") {
+//                accountRoute()
+//            }
+//        }
     }.start(wait = true)
 }
 

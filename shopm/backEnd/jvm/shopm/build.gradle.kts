@@ -23,6 +23,8 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.4.14")
     implementation("com.microsoft.sqlserver:mssql-jdbc:12.6.1.jre11")
     implementation("io.ktor:ktor-server-cors:${ktorVersion}")
+    implementation("io.ktor:ktor-server-auth:${ktorVersion}")
+    implementation("io.ktor:ktor-server-auth-jwt:${ktorVersion}")
 }
 
 configurations.all {

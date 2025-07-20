@@ -9,9 +9,19 @@ import io.ktor.http.HttpStatusCode
 import org.example.dataStruct.AccountField
 import org.example.dataStruct.ResponseField
 import org.example.route.account.AccountMutateSqlServer
+import org.example.route.account.AccountQuerySqlServer
+
 //import java.util.logging.Logger
 
 //val logger = Logger.getLogger("MyLogger")
+
+const val Username_Used = "Tên tài khoản đã được sử dụng"
+const val Phone_Number_Used = "Số điện thoại đã được sử dụng"
+const val Account_Created_Successfully = "Tài khoản được tạo thành công"
+const val Account_Created_Failed = "Tài khoản được tạo thất bại"
+const val Signin_Successfully = "Đăng nhập thành công"
+const val Signin_Failed = "Đăng nhập thất bại"
+
 
 fun Route.accountRoute() {
     route("/signup") {
@@ -30,19 +40,17 @@ fun Route.accountRoute() {
                 isAccountCheckUserName -> {
                     val newRes: ResponseField<AccountField> = ResponseField(
                         success = false,
-                        message = "Username already exists",
+                        message = Username_Used,
                         data = null,
                         error = null
                     )
                     response = newRes
-//                    call.respond(HttpStatusCode.Conflict, "Username already exists.")
                 }
 
                 isAccountCheckPhone -> {
-//                    call.respond(HttpStatusCode.Conflict, "Phone number already registered")
                     val newRes: ResponseField<AccountField> = ResponseField(
                         success = false,
-                        message = "Phone number already registered",
+                        message = Phone_Number_Used,
                         data = null,
                         error = null
                     )
@@ -50,7 +58,6 @@ fun Route.accountRoute() {
                 }
 
                 else -> {
-                    // Gọi hàm tạo tài khoản ở đây nếu mọi thứ hợp lệ
                     val newAccount = accountMutateSqlServer.signupToDB(
                         userName = myAccount.userName,
                         password = myAccount.password,
@@ -59,25 +66,54 @@ fun Route.accountRoute() {
                         lastName = myAccount.lastName
                     )
                     if (newAccount != null) {
-//                        call.respond(HttpStatusCode.Created, "Account created successfully.")
                         val newRes: ResponseField<AccountField> = ResponseField(
                             success = true,
-                            message = "Account created successfully",
+                            message = Account_Created_Successfully,
                             data = newAccount,
                             error = null
                         )
                         response = newRes
                     } else {
-//                        call.respond(HttpStatusCode.InternalServerError, "Failed to create account.")
                         val newRes: ResponseField<AccountField> = ResponseField(
                             success = false,
-                            message = "Failed to create account",
+                            message = Account_Created_Failed,
                             data = null,
                             error = null
                         )
                         response = newRes
                     }
                 }
+            }
+
+            call.respond(HttpStatusCode.Created, response)
+        }
+    }
+
+    route("/signin") {
+        get {
+            val myAccount = call.receive<AccountField>()
+
+            val accountQuerySqlServer = AccountQuerySqlServer()
+            val account = accountQuerySqlServer.signin(userName = myAccount.userName, password = myAccount.password)
+
+            lateinit var response: ResponseField<AccountField>
+
+            if (account != null) {
+                val newRes: ResponseField<AccountField> = ResponseField(
+                    success = true,
+                    message = Signin_Successfully,
+                    data = account,
+                    error = null
+                )
+                response = newRes
+            } else {
+                val newRes: ResponseField<AccountField> = ResponseField(
+                    success = false,
+                    message = Signin_Failed,
+                    data = null,
+                    error = null
+                )
+                response = newRes
             }
 
             call.respond(HttpStatusCode.Created, response)

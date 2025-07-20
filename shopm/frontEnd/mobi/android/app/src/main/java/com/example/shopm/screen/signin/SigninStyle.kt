@@ -1,4 +1,4 @@
-package com.example.shopm.screen.signup
+package com.example.shopm.screen.signin
 
 
 import androidx.compose.foundation.background
@@ -13,8 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
-object SignupStyle {
-    private val signupBtnColor = Color(0xFF8dc6ff)
+
+
+object SigninStyle {
+
+    private val signinBtnColor = Color(0xFF8dc6ff)
 
     val parent = Modifier
         .fillMaxSize()
@@ -28,14 +31,15 @@ object SignupStyle {
     val input = Modifier
         .width(300.dp)
 
-    val signupBtn = Modifier
+    val signinBtn = Modifier
         .width(300.dp)
         .wrapContentWidth()
         .wrapContentHeight()
-        .background(signupBtnColor)
+        .background(signinBtnColor)
         .border(0.1.dp, Color.Gray)
         .padding(5.dp)
 
-    val signinBtn = Modifier
+    val signupBtn = Modifier
         .wrapContentSize()
+
 }

@@ -59,8 +59,7 @@ class AccountMutateSqlServer {
 
         var newAccount: AccountField? = null
 
-        // Lấy kết quả từ OUTPUT INSERTED.*
-        while (resultSet.next()) {
+        if (resultSet.next()) {
             val account = AccountField(
                 id = resultSet.getInt("id"),
                 userName = resultSet.getString("userName"),
