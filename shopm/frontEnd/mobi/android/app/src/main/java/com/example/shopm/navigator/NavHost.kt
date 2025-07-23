@@ -13,6 +13,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
+import com.example.shopm.screen.home.HomeScreen
 import com.example.shopm.screen.profile.ProfileScreen
 import com.example.shopm.screen.setting.SettingScreen
 import com.example.shopm.screen.signup.SignupScreen
@@ -37,6 +38,7 @@ fun AppNavigation(modifier: Modifier = Modifier) {
         startDestination = "profile",
         modifier = modifier
     ) {
+        composable(BottomScreenRoutes.Home.toString()) { HomeScreen() }
         composable(BottomScreenRoutes.Setting.toString()) { SettingScreen() }
         composable(BottomScreenRoutes.Profile.toString()) { ProfileScreen() }
 

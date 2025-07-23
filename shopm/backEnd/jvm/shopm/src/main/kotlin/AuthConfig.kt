@@ -5,6 +5,9 @@ import com.auth0.jwt.algorithms.Algorithm
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
+import org.example.dataStruct.AccountField
+import java.time.format.DateTimeFormatter
+import java.util.Date
 
 fun Application.configureAuth() {
     val secret = "my-super-secret"
@@ -28,13 +31,22 @@ fun Application.configureAuth() {
     }
 }
 
-fun generateToken(username: String): String {
+fun generateToken(account: AccountField, expiresAt: Date): String {
     val secret = "my-super-secret-shopm"
     val issuer = "ktor.io"
     val algorithm = Algorithm.HMAC256(secret)
+    val formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
+    val updateTimeStr = account.updateTime.format(formatter)
 
     return JWT.create()
         .withIssuer(issuer)
-        .withClaim("username", username)
+        .withClaim("id", account.id)
+        .withClaim("userName", account.userName)
+        .withClaim("password", account.password)
+        .withClaim("phone", account.phone)
+        .withClaim("firstName", account.firstName)
+        .withClaim("lastName", account.lastName)
+        .withClaim("updateTime", updateTimeStr)
+        .withExpiresAt(expiresAt)
         .sign(algorithm)
 }

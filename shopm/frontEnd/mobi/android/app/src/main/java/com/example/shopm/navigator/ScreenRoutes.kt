@@ -1,7 +1,7 @@
 package com.example.shopm.navigator
 
 sealed class BottomScreenRoutes(val route: String, val title: String) {
-    //    data object Home : ScreenRoutes("home", "Home")
+    data object Home : BottomScreenRoutes("home", "Home")
     data object Profile : BottomScreenRoutes("profile", "Profile")
     data object Setting : BottomScreenRoutes("setting", "Setting")
 //    data object Signup : ScreenRoutes("signup", "Signup")

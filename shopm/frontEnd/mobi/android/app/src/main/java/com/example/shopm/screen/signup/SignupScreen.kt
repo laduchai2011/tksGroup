@@ -126,7 +126,7 @@ fun SignupContent(signupViewModel: SignupViewModel) {
                 message = ""
             )
 
-            var isPsss = true
+            var isPass = true
 
             when (item.ordinal) {
                 SignupType.Option.ACCOUNT.ordinal -> {
@@ -192,10 +192,10 @@ fun SignupContent(signupViewModel: SignupViewModel) {
 
             if (fieldMessage.message.isNotEmpty()) {
                 setToastMessage(type, fieldMessage)
-                isPsss = false
+                isPass = false
             }
 
-            return isPsss
+            return isPass
         }
     }
 

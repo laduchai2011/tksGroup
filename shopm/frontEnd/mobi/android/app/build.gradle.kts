@@ -96,6 +96,7 @@ dependencies {
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.cio)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
+    implementation(libs.androidx.security.crypto)
 }
 
 hilt {

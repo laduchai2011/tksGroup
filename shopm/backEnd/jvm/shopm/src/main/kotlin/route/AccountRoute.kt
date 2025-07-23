@@ -8,8 +8,14 @@ import io.ktor.server.routing.*
 import io.ktor.http.HttpStatusCode
 import org.example.dataStruct.AccountField
 import org.example.dataStruct.ResponseField
+import org.example.dataStruct.TokenAuth
+import org.example.dataStruct.TokenAuthStatus
+import org.example.generateToken
 import org.example.route.account.AccountMutateSqlServer
 import org.example.route.account.AccountQuerySqlServer
+import java.time.temporal.ChronoUnit
+import java.util.Date
+import java.time.Instant
 
 //import java.util.logging.Logger
 
@@ -20,7 +26,7 @@ const val Phone_Number_Used = "Số điện thoại đã được sử dụng"
 const val Account_Created_Successfully = "Tài khoản được tạo thành công"
 const val Account_Created_Failed = "Tài khoản được tạo thất bại"
 const val Signin_Successfully = "Đăng nhập thành công"
-const val Signin_Failed = "Đăng nhập thất bại"
+const val Signin_Failed = "Đăng nhập thất bại, Tài khoản không tồn tại"
 
 
 fun Route.accountRoute() {
@@ -99,11 +105,20 @@ fun Route.accountRoute() {
             lateinit var response: ResponseField<AccountField>
 
             if (account != null) {
+                val expiresAtAccessToken = Date.from(Instant.now().plus(5/60, ChronoUnit.HOURS))
+                val expiresAtRefreshToken = Date.from(Instant.now().plus(8760, ChronoUnit.HOURS))
+                val accessToken = generateToken(myAccount, expiresAtAccessToken)
+                val refreshToken = generateToken(myAccount, expiresAtRefreshToken)
                 val newRes: ResponseField<AccountField> = ResponseField(
                     success = true,
                     message = Signin_Successfully,
                     data = account,
-                    error = null
+                    error = null,
+                    tokenAuth = TokenAuth(
+                        status = TokenAuthStatus.SIGNIN,
+                        accessToken = accessToken,
+                        refreshToken = refreshToken
+                    )
                 )
                 response = newRes
             } else {

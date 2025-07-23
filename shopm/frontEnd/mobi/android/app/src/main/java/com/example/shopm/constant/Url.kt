@@ -15,4 +15,11 @@ object AccountURL {
         }
         return "$PRODUCT/signup"
     }
+
+    fun signinUrl(): String {
+        if (BuildConfig.DEV_MODE) {
+            return "$DEVELOP/signin"
+        }
+        return "$PRODUCT/signin"
+    }
 }
