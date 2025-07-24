@@ -37,6 +37,7 @@ import com.example.shopm.utility.isFirstNumber
 import com.example.shopm.utility.isSpace
 import com.example.shopm.viewModel.SigninViewModel
 import java.time.OffsetDateTime
+import android.util.Log
 
 
 @Composable
@@ -52,7 +53,7 @@ fun SigninContent(signinViewModel: SigninViewModel) {
     val setToastMessage = screenCommonViewModel.setToastMessage()
     val setLoadingIcon = screenCommonViewModel.setLoadingIcon()
     val closeScreenCommon = screenCommonViewModel.close()
-    val signupResult by signinViewModel.signinResult.collectAsState()
+    val signinResult by signinViewModel.signinResult.collectAsState()
 
     var accountOption by remember {
         mutableStateOf(
@@ -77,8 +78,8 @@ fun SigninContent(signinViewModel: SigninViewModel) {
         )
     }
 
-    LaunchedEffect(signupResult) {
-        when (val result = signupResult) {
+    LaunchedEffect(signinResult) {
+        when (val result = signinResult) {
             is ApiResult.Success -> {
                 closeScreenCommon()
                 val data = result.data
@@ -100,6 +101,7 @@ fun SigninContent(signinViewModel: SigninViewModel) {
                 val fieldMessage = ScreenCommonType.FieldToastMessage(
                     message = data
                 )
+                Log.e("SigninScreen", data)
                 setToastMessage(type, fieldMessage)
             }
 

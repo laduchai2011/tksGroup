@@ -17,30 +17,24 @@ import java.time.temporal.ChronoUnit
 import java.util.Date
 import java.time.Instant
 
-//import java.util.logging.Logger
-
-//val logger = Logger.getLogger("MyLogger")
 
 const val Username_Used = "Tên tài khoản đã được sử dụng"
 const val Phone_Number_Used = "Số điện thoại đã được sử dụng"
 const val Account_Created_Successfully = "Tài khoản được tạo thành công"
 const val Account_Created_Failed = "Tài khoản được tạo thất bại"
 const val Signin_Successfully = "Đăng nhập thành công"
-const val Signin_Failed = "Đăng nhập thất bại, Tài khoản không tồn tại"
+const val Signin_Failed = "Đăng nhập thất bại, Tài khoản hoặc mật khẩu không đúng"
 
 
 fun Route.accountRoute() {
     route("/signup") {
         post {
             val myAccount = call.receive<AccountField>()
-//            call.respond(request)
             val accountMutateSqlServer = AccountMutateSqlServer()
             val isAccountCheckUserName = accountMutateSqlServer.isAccountCheckUserName(myAccount.userName)
             val isAccountCheckPhone = accountMutateSqlServer.isAccountCheckPhone(myAccount.phone)
 
             lateinit var response: ResponseField<AccountField>
-
-//            logger.info("$isAccountCheckUserName")
 
             when {
                 isAccountCheckUserName -> {
@@ -96,19 +90,20 @@ fun Route.accountRoute() {
     }
 
     route("/signin") {
-        get {
+        post {
             val myAccount = call.receive<AccountField>()
 
             val accountQuerySqlServer = AccountQuerySqlServer()
-            val account = accountQuerySqlServer.signin(userName = myAccount.userName, password = myAccount.password)
 
             lateinit var response: ResponseField<AccountField>
 
+            val account = accountQuerySqlServer.signin(userName = myAccount.userName, password = myAccount.password)
+
             if (account != null) {
-                val expiresAtAccessToken = Date.from(Instant.now().plus(5/60, ChronoUnit.HOURS))
+                val expiresAtAccessToken = Date.from(Instant.now().plus(5 / 60, ChronoUnit.HOURS))
                 val expiresAtRefreshToken = Date.from(Instant.now().plus(8760, ChronoUnit.HOURS))
-                val accessToken = generateToken(myAccount, expiresAtAccessToken)
-                val refreshToken = generateToken(myAccount, expiresAtRefreshToken)
+                val accessToken = generateToken(account, expiresAtAccessToken)
+                val refreshToken = generateToken(account, expiresAtRefreshToken)
                 val newRes: ResponseField<AccountField> = ResponseField(
                     success = true,
                     message = Signin_Successfully,
