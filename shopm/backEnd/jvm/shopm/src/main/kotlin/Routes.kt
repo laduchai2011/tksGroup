@@ -1,10 +1,12 @@
 package org.example
 
 import io.ktor.server.application.*
+import io.ktor.server.auth.authenticate
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.example.route.accountRoute
+import org.example.route.authRoute
 
 fun Application.configureRoutes() {
     routing {
@@ -20,5 +22,10 @@ fun Application.configureRoutes() {
         route("/account") {
             accountRoute()
         }
+
+        route("/auth") {
+            authRoute()
+        }
+
     }
 }

@@ -51,6 +51,8 @@ class SigninViewModel @Inject constructor(
                 is ApiResult.Error -> {
                     _signinResult.value = ApiResult.Error(result.message)
                 }
+
+                else -> println("SigninViewModel -> signin")
             }
         }
 

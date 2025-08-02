@@ -4,6 +4,11 @@ import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import java.time.OffsetDateTime
 
+
+enum class AccountState {
+    NORMAL, LOCK, DELETE, WARN
+}
+
 @Serializable
 data class AccountField(
     val id: Int? = null,
@@ -13,6 +18,6 @@ data class AccountField(
     val firstName: String,
     val lastName: String,
     val avatar: String? = null,
-    val status: String,
+    val status: AccountState? = AccountState.NORMAL,
     @Contextual val updateTime: OffsetDateTime
 )

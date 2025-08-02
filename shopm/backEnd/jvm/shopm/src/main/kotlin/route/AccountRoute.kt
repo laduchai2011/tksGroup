@@ -6,6 +6,7 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.http.HttpStatusCode
+import org.example.TokenInforField
 import org.example.dataStruct.AccountField
 import org.example.dataStruct.ResponseField
 import org.example.dataStruct.TokenAuth
@@ -100,14 +101,20 @@ fun Route.accountRoute() {
             val account = accountQuerySqlServer.signin(userName = myAccount.userName, password = myAccount.password)
 
             if (account != null) {
+                val accountCp = account.copy(password = "", phone = "")
                 val expiresAtAccessToken = Date.from(Instant.now().plus(5 / 60, ChronoUnit.HOURS))
                 val expiresAtRefreshToken = Date.from(Instant.now().plus(8760, ChronoUnit.HOURS))
-                val accessToken = generateToken(account, expiresAtAccessToken)
-                val refreshToken = generateToken(account, expiresAtRefreshToken)
+                val tokenInfor: TokenInforField = TokenInforField(
+                    id = account.id,
+                    userName = account.userName,
+                    status = account.status
+                )
+                val accessToken = generateToken(tokenInfor, expiresAtAccessToken)
+                val refreshToken = generateToken(tokenInfor, expiresAtRefreshToken)
                 val newRes: ResponseField<AccountField> = ResponseField(
                     success = true,
                     message = Signin_Successfully,
-                    data = account,
+                    data = accountCp,
                     error = null,
                     tokenAuth = TokenAuth(
                         status = TokenAuthStatus.SIGNIN,
