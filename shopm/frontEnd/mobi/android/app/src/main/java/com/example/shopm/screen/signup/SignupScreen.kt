@@ -33,6 +33,7 @@ import com.example.shopm.utility.isValidPhoneNumber
 import com.example.shopm.viewModel.SignupViewModel
 import java.time.OffsetDateTime
 import androidx.compose.runtime.collectAsState
+import com.example.shopm.dataStruct.AccountState
 import com.example.shopm.dataStruct.ApiResult
 import com.example.shopm.navigator.OtherScreenRoutes
 import com.example.shopm.navigator.localNavController
@@ -63,7 +64,7 @@ fun SignupContent(signupViewModel: SignupViewModel) {
                 firstName = "",
                 lastName = "",
                 avatar = null,
-                status = "",
+                status = AccountState.NORMAL,
                 updateTime = OffsetDateTime.now()
             )
         )

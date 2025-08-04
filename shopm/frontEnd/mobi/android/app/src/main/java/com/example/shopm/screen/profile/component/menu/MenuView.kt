@@ -19,8 +19,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-//import com.example.shopm.MainViewModel
-//import com.example.shopm.constant.ConstText
 import com.example.shopm.type.ProfileType
 import com.example.shopm.viewModel.ProfileViewModel
 

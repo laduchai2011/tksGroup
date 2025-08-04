@@ -1,0 +1,8 @@
+# Cài thư viện
+pip install -r requirements.txt
+
+# Huấn luyện
+python src/train.py
+
+# Dự đoán
+python src/predict.py

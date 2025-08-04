@@ -45,7 +45,7 @@ fun ProfileContentPreview() {
             .fillMaxHeight()
             .background(Color.Blue)
     ) {
-        OverViewContent(user = "hello kitty !")
+        OverViewContent()
 //        MenuViewContent(user = "hello kitty !")
     }
 }

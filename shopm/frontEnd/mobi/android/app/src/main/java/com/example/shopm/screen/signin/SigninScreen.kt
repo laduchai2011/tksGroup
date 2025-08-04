@@ -37,7 +37,9 @@ import com.example.shopm.utility.isFirstNumber
 import com.example.shopm.utility.isSpace
 import com.example.shopm.viewModel.SigninViewModel
 import java.time.OffsetDateTime
-import android.util.Log
+//import android.util.Log
+import com.example.shopm.MainViewModel
+import com.example.shopm.dataStruct.AccountState
 
 
 @Composable
@@ -47,6 +49,7 @@ fun SigninScreen(signinViewModel: SigninViewModel = hiltViewModel()) {
 
 @Composable
 fun SigninContent(signinViewModel: SigninViewModel) {
+    val mainViewModel: MainViewModel = hiltViewModel()
     val screenCommonViewModel = LocalScreenCommonViewModel.current
     val navController = localNavController.current
 
@@ -54,6 +57,7 @@ fun SigninContent(signinViewModel: SigninViewModel) {
     val setLoadingIcon = screenCommonViewModel.setLoadingIcon()
     val closeScreenCommon = screenCommonViewModel.close()
     val signinResult by signinViewModel.signinResult.collectAsState()
+    val setIsSignin = mainViewModel.setIsSignin()
 
     var accountOption by remember {
         mutableStateOf(
@@ -65,7 +69,7 @@ fun SigninContent(signinViewModel: SigninViewModel) {
                 firstName = "",
                 lastName = "",
                 avatar = null,
-                status = "",
+                status = AccountState.NORMAL,
                 updateTime = OffsetDateTime.now()
             )
         )
@@ -84,6 +88,7 @@ fun SigninContent(signinViewModel: SigninViewModel) {
                 closeScreenCommon()
                 val data = result.data
                 if (data.success) {
+                    setIsSignin(true)
                     navController.navigate(BottomScreenRoutes.Home.toString())
                 } else {
                     val type = ScreenCommonType.ToastMessageType.DIALOG
@@ -101,7 +106,7 @@ fun SigninContent(signinViewModel: SigninViewModel) {
                 val fieldMessage = ScreenCommonType.FieldToastMessage(
                     message = data
                 )
-                Log.e("SigninScreen", data)
+//                Log.e("SigninScreen", data)
                 setToastMessage(type, fieldMessage)
             }
 

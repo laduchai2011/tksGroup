@@ -13,6 +13,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
+import com.example.shopm.MainViewModel
 import com.example.shopm.screen.home.HomeScreen
 import com.example.shopm.screen.profile.ProfileScreen
 import com.example.shopm.screen.setting.SettingScreen
@@ -45,12 +46,14 @@ fun AppNavigation(modifier: Modifier = Modifier) {
         composable(OtherScreenRoutes.Signup.toString()) { SignupScreen() }
         composable(OtherScreenRoutes.Signin.toString()) { SigninScreen() }
     }
+
 }
 
 @Composable
 fun AppContainer() {
     val navController = rememberNavController()
     val screenCommonViewModel: ScreenCommonViewModel = hiltViewModel()
+
 
     CompositionLocalProvider(
         localNavController provides navController,

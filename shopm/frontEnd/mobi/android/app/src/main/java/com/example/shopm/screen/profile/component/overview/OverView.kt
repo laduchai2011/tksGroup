@@ -14,9 +14,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import com.example.shopm.MainViewModel
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.StarBorder
 import androidx.compose.material3.Icon
@@ -28,12 +26,13 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun OverView(viewModel: MainViewModel = hiltViewModel()) {
-    OverViewContent(viewModel.user)
+fun OverView() {
+    OverViewContent()
 }
 
 @Composable
-fun OverViewContent(user: String) {
+fun OverViewContent() {
+    val user = "la duc hai"
     val url = "https://cdn-media.sforum.vn/storage/app/media/anh-dep-8.jpg"
 
 //    if (BuildConfig.DEV_MODE) {
@@ -83,6 +82,6 @@ fun OverViewContent(user: String) {
 @Preview(showBackground = true)
 @Composable
 fun OverViewContentPreview() {
-    val user = "la duc hai"
-    OverViewContent(user)
+
+//    OverViewContent(user)
 }

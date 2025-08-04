@@ -1,5 +1,8 @@
 package com.example.shopm
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -7,11 +10,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val userRepository: UserRepository
+    private val mainRepository: MainRepository
 ) : ViewModel() {
 
-    val user = userRepository.getUser()
+    var isSignin: Boolean by mutableStateOf(false)
+        private set
 
-
+    fun setIsSignin(): (isSignin: Boolean) -> Unit = {
+        this.isSignin = isSignin
+    }
 
 }

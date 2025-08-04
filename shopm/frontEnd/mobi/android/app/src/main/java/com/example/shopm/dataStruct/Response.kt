@@ -13,9 +13,9 @@ import io.ktor.util.AttributeKey
 enum class TokenAuthStatus {
     SIGNIN,
     NORMAL,
-    ACCESS_TOKEN_EXPIRED,
-    REFRESH_TOKEN_EXPIRED,
-    ACCOUNT_ATTACK
+//    ACCESS_TOKEN_EXPIRED,
+//    REFRESH_TOKEN_EXPIRED,
+//    ACCOUNT_ATTACK
 }
 
 @Serializable

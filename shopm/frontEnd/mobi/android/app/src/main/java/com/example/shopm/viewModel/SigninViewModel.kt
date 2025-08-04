@@ -52,7 +52,7 @@ class SigninViewModel @Inject constructor(
                     _signinResult.value = ApiResult.Error(result.message)
                 }
 
-                else -> println("SigninViewModel -> signin")
+//                else -> println("SigninViewModel -> signin")
             }
         }
 
