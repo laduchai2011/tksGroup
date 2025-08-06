@@ -1,0 +1,6 @@
+BATCH_SIZE = 32
+EMBED_DIM = 128
+HIDDEN_DIM = 256
+NUM_EPOCHS = 10
+LEARNING_RATE = 1e-3
+MODEL_TYPE = "lstm"  # hoặc "rnn", "gru", "cnn"
