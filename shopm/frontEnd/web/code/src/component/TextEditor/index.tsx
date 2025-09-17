@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import style from './style.module.scss';
 import { format_enum, format_type, Style_Options } from './type';
 import { HandleFormat } from './handle/event/handleFormat';

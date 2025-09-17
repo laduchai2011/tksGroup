@@ -1,0 +1,49 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    width: 1024px;
+    background-color: white;
+    box-sizing: border-box;
+    padding: 10px;
+
+    @include responsive(md) {
+        width: 100%;
+    }
+
+    > div {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    > div:nth-child(2) {
+        @include center-of-rectangle;
+
+        > .inputContainer {
+            box-sizing: border-box;
+            padding: 5px;
+            border: 1px dashed gray;
+            width: 768px;
+            @include center-of-row;
+            border-radius: 20px;
+            overflow: hidden;
+
+            @include responsive(sm) {
+                width: 100%;
+            }
+
+            > textarea {
+                flex: 1;
+                font-size: 1.2rem;
+                box-sizing: border-box;
+                padding: 10px;
+                border: none;
+                outline: none;
+                resize: none;
+            }
+
+            > svg {
+                cursor: pointer;
+            }
+        }
+    }
+}

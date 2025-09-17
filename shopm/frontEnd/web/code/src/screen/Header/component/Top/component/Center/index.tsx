@@ -15,7 +15,7 @@ const Center = () => {
     useEffect(() => {
         if (parent_element.current) {
             parent_element.current.style.setProperty('--icon-color', MAIN_BLUE_COLOR);
-            const icon_containers = parent_element.current.children;
+            const icon_containers = parent_element.current.children[1].children;
             const icon_containers_len: number = icon_containers.length;
             for (let i: number = 0; i < icon_containers_len; i++) {
                 const icon_container = icon_containers[i] as HTMLDivElement;

@@ -24,4 +24,7 @@ GO
 SELECT
     *
 FROM
-    Login('laduchai', '123');
+    Login('laduchai1', 'passladuchai');
+
+SELECT userName, password, LEN(userName), LEN(password)
+FROM dbo.account;

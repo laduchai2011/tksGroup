@@ -1,4 +1,4 @@
-ALTER PROCEDURE Signup
+﻿ALTER PROCEDURE Signup
 	  @userName NVARCHAR(100),
 	  @password NVARCHAR(100),
 	  @phone NVARCHAR(15),
@@ -15,3 +15,5 @@ END
 
 DELETE FROM account
 GO
+
+EXEC Signup N'laduchai1', N'passladuchai', N'0901234567', N'Hải', N'Lã';

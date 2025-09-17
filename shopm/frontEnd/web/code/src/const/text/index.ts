@@ -45,3 +45,5 @@ export const PASSWORD = 'Mật khẩu';
 export const PHONE_NUMBER = 'Số điện thoại';
 export const FIRST_NAME = 'Họ';
 export const LAST_NAME = 'Tên';
+export const SEND = 'Gửi';
+export const MAJOR = 'Chuyên ngành';
