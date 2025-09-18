@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import style from './style.module.scss';
 import Box from './component/Box';
 
@@ -29,4 +30,4 @@ const List = () => {
     );
 };
 
-export default List;
+export default memo(List);

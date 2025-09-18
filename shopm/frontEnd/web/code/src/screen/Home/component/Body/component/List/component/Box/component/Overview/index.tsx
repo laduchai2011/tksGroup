@@ -1,10 +1,10 @@
+import { FC, memo } from 'react';
 import style from './style.module.scss';
 import Skeleton from '@src/component/Skeleton';
 import { FiveStar } from '@src/component';
+import { FOLLOW } from '@src/const/text';
 
-const Overview = () => {
-    const isLoading = false;
-
+const Overview: FC<{ isLoading: boolean }> = ({ isLoading }) => {
     return (
         <div className={style.parent}>
             <div className={style.avatarContainer}>
@@ -29,10 +29,14 @@ const Overview = () => {
                         <FiveStar rate={5} />
                     </div>
                 )}
-                {isLoading ? <Skeleton className={style.follow} /> : <div className={style.follow}>Follow: 1000</div>}
+                {isLoading ? (
+                    <Skeleton className={style.follow} />
+                ) : (
+                    <div className={style.follow}>{`${FOLLOW}: 1000`}</div>
+                )}
             </div>
         </div>
     );
 };
 
-export default Overview;
+export default memo(Overview);

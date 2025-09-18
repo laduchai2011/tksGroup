@@ -1,0 +1,23 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    @include center-of-row;
+    align-items: stretch;
+    margin: 10px 0;
+    height: auto;
+    min-height: 20px;
+
+    > div:nth-child(1) {
+        width: 120px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-right: 5px;
+    }
+
+    > div:nth-child(2) {
+        flex: 1;
+        color: gray;
+        font-size: 0.9rem;
+        margin-left: 5px;
+    }
+}

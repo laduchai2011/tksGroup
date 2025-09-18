@@ -3,17 +3,5 @@
 .parent {
     box-sizing: border-box;
     padding: 10px 0;
-
-    > div {
-        @include center-of-row;
-
-        > div:nth-child(1) {
-            width: 120px;
-            background-color: antiquewhite;
-        }
-
-        > div:nth-child(2) {
-            flex: 1;
-        }
-    }
+    border-bottom: 1px dashed gray;
 }

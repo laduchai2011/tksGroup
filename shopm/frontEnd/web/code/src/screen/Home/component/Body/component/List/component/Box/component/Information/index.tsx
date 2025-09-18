@@ -1,20 +1,16 @@
+import { FC, memo } from 'react';
 import style from './style.module.scss';
-import Skeleton from '@src/component/Skeleton';
-import { MAJOR } from '@src/const/text';
+import OneInformation from './component/OneInformation';
+import { infor_enum } from './component/type';
 
-const Information = () => {
-    const isLoading = true;
-
+const Information: FC<{ isLoading: boolean }> = ({ isLoading }) => {
     return (
         <div className={style.parent}>
-            <div>
-                <div>
-                    <div>{MAJOR}</div>
-                </div>
-                <div>{`${MAJOR} ${MAJOR} ${MAJOR} ${MAJOR}`}</div>
-            </div>
+            <OneInformation field={infor_enum.MAJOR} data={infor_enum.MAJOR} isLoading={isLoading} />
+            <OneInformation field={infor_enum.EXPERIENCE} data={infor_enum.EXPERIENCE} isLoading={isLoading} />
+            <OneInformation field={infor_enum.NOTE} data={infor_enum.NOTE} isLoading={isLoading} />
         </div>
     );
 };
 
-export default Information;
+export default memo(Information);
