@@ -1,0 +1,30 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    box-sizing: border-box;
+    border-bottom: 1px dashed gray;
+    padding: 10px 0;
+    @include center-of-row;
+    justify-content: flex-end;
+
+    > div {
+        @include center-of-row;
+
+        > .skeleton {
+            width: 70px;
+            height: 20px;
+        }
+
+        > div {
+            margin: 0 10px;
+        }
+
+        > .distance {
+            color: red;
+        }
+
+        > .price {
+            color: blue;
+        }
+    }
+}

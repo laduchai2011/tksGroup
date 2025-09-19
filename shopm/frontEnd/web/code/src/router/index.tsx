@@ -3,6 +3,7 @@ import Signup from '@src/screen/Signup';
 import Home from '@src/screen/Home';
 import NotFoundPage from '@src/screen/NotFoundPage';
 import Profile from '@src/screen/Profile';
+import Examine from '@src/screen/Examine';
 import Patient_Record from '@src/screen/Patient_Record';
 
 const router = createBrowserRouter(
@@ -11,6 +12,7 @@ const router = createBrowserRouter(
         { path: '/', element: <Home /> },
         { path: '/profile', element: <Profile /> },
         { path: '/patient_record', element: <Patient_Record /> },
+        { path: '/examine', element: <Examine /> },
         { path: '*', element: <NotFoundPage /> }, // Trang 404
     ],
     {

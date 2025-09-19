@@ -49,3 +49,4 @@ export const SEND = 'Gửi';
 export const MAJOR = 'Chuyên ngành';
 export const EXPERIENCE = 'Kinh nghiệm';
 export const NOTE = 'Ghi chú';
+export const EXAMINE = 'Khám';
