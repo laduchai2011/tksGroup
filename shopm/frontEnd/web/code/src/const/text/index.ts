@@ -50,3 +50,6 @@ export const MAJOR = 'Chuyên ngành';
 export const EXPERIENCE = 'Kinh nghiệm';
 export const NOTE = 'Ghi chú';
 export const EXAMINE = 'Khám';
+export const LIVE = 'Trực tuyến';
+export const ONLINE = 'Đang sử dụng';
+export const OFFLINE = 'Không sử dụng';

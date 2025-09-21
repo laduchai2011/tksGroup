@@ -164,3 +164,48 @@ $breakpoints: (
     grid-template-columns: repeat(auto-fit, minmax(calc($minmax * 1px), 1fr));
     gap: calc($gap * 1px);
 }
+
+@mixin heightRes($height, $res, $rate) {
+    $breakpoint-value: if(map-has-key($breakpoints, $res), map-get($breakpoints, $res), $res);
+    height: calc($height * $rate);
+    @if unit($height) == 'px' {
+        @include responsive($res) {
+            height: calc(($height / $breakpoint-value) * 100vw * $rate);
+        }
+    }
+    // @include responsive($res) {
+    //     height: calc(($height / $breakpoint-value) * 100vw * $rate);
+    // }
+}
+
+@mixin widthRes($width, $res, $rate) {
+    $breakpoint-value: if(map-has-key($breakpoints, $res), map-get($breakpoints, $res), $res);
+    width: calc($width * $rate);
+    @if unit($width) == 'px' {
+        @include responsive($res) {
+            width: calc(($width / $breakpoint-value) * 100vw * $rate);
+        }
+    }
+    // @include responsive($res) {
+    //     width: calc(($width / $breakpoint-value) * 100vw * $rate);
+    // }
+}
+
+@mixin fontSizeRes($size, $res, $rate) {
+    $breakpoint-value: if(map-has-key($breakpoints, $res), map-get($breakpoints, $res), $res);
+    font-size: calc($size * $rate);
+    @include responsive($res) {
+        font-size: calc(($size / $breakpoint-value) * 100vw * $rate);
+    }
+}
+
+@mixin marginRes($param1, $param2, $res, $rate) {
+    $breakpoint-value: if(map-has-key($breakpoints, $res), map-get($breakpoints, $res), $res);
+    margin: calc($param1 * $rate) calc($param2 * $rate);
+    @include responsive($res) {
+        margin: calc(($param1 / $breakpoint-value) * 100vw * $rate) calc(($param2 / $breakpoint-value) * 100vw * $rate);
+        // $m1: calc((#{$param1} / #{$breakpoint-value}) * 100vw * #{$rate});
+        // $m2: calc((#{$param2} / #{$breakpoint-value}) * 100vw * #{$rate});
+        // margin: #{$m1} #{$m2};
+    }
+}
