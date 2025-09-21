@@ -1,9 +1,7 @@
 @use 'src/utility/style/mixin.scss' as *;
 
 .parent {
-    background-color: white;
-    margin-top: 10px;
     box-sizing: border-box;
-    border-bottom: 1px dashed gray;
     padding: 10px;
+    border-bottom: 1px dashed gray;
 }

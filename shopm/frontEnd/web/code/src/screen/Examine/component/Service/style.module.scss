@@ -1,0 +1,38 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    box-sizing: border-box;
+    padding: 10px;
+    border-bottom: 1px dashed gray;
+
+    > .title {
+        @include min_heightRes(20px, md, 2);
+        width: 100%;
+    }
+
+    > .price {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        margin-top: 5px;
+
+        > div {
+            @include center-of-row;
+
+            > .price1 {
+                margin-top: 5px;
+                margin-right: 5px;
+                @include min_heightRes(15px, md, 1.5);
+                @include min_widthRes(100px, md, 1);
+            }
+
+            > div:nth-child(1) {
+                color: red;
+            }
+
+            > div:nth-child(2) {
+                color: blue;
+            }
+        }
+    }
+}

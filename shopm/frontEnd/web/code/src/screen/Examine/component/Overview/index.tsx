@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import style from './style.module.scss';
 import Skeleton from '@src/component/Skeleton';
 import { FiveStar } from '@src/component';
@@ -55,4 +55,4 @@ const Overview: FC<{ isLoading: boolean }> = ({ isLoading }) => {
     );
 };
 
-export default Overview;
+export default memo(Overview);

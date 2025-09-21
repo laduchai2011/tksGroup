@@ -7,6 +7,7 @@
     @include heightRes(200px, md, 1);
     box-sizing: border-box;
     padding: 10px;
+    border-bottom: 1px dashed gray;
 
     > .avatarContainer {
         height: 100%;
@@ -104,9 +105,11 @@
                     @include center-of-row;
                     justify-content: flex-start;
                     @include fontSizeRes(1 * 16px, md, 1.2);
-                    min-height: 20px;
+                    // min-height: 20px;
+                    @include min_heightRes(20px, md, 1);
                     height: auto;
-                    min-width: 100px;
+                    // min-width: 100px;
+                    @include min_widthRes(100px, md, 1);
                 }
 
                 // > div:nth-child(1) {

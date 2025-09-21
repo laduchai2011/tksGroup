@@ -173,9 +173,15 @@ $breakpoints: (
             height: calc(($height / $breakpoint-value) * 100vw * $rate);
         }
     }
-    // @include responsive($res) {
-    //     height: calc(($height / $breakpoint-value) * 100vw * $rate);
-    // }
+}
+@mixin min_heightRes($minHeight, $res, $rate) {
+    $breakpoint-value: if(map-has-key($breakpoints, $res), map-get($breakpoints, $res), $res);
+    min-height: calc($minHeight * $rate);
+    @if unit($minHeight) == 'px' {
+        @include responsive($res) {
+            min-height: calc(($minHeight / $breakpoint-value) * 100vw * $rate);
+        }
+    }
 }
 
 @mixin widthRes($width, $res, $rate) {
@@ -186,9 +192,15 @@ $breakpoints: (
             width: calc(($width / $breakpoint-value) * 100vw * $rate);
         }
     }
-    // @include responsive($res) {
-    //     width: calc(($width / $breakpoint-value) * 100vw * $rate);
-    // }
+}
+@mixin min_widthRes($minWidth, $res, $rate) {
+    $breakpoint-value: if(map-has-key($breakpoints, $res), map-get($breakpoints, $res), $res);
+    min-width: calc($minWidth * $rate);
+    @if unit($minWidth) == 'px' {
+        @include responsive($res) {
+            min-width: calc(($minWidth / $breakpoint-value) * 100vw * $rate);
+        }
+    }
 }
 
 @mixin fontSizeRes($size, $res, $rate) {
