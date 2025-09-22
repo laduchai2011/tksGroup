@@ -206,8 +206,10 @@ $breakpoints: (
 @mixin fontSizeRes($size, $res, $rate) {
     $breakpoint-value: if(map-has-key($breakpoints, $res), map-get($breakpoints, $res), $res);
     font-size: calc($size * $rate);
-    @include responsive($res) {
-        font-size: calc(($size / $breakpoint-value) * 100vw * $rate);
+    @if unit($size) == 'px' {
+        @include responsive($res) {
+            font-size: calc(($size / $breakpoint-value) * 100vw * $rate);
+        }
     }
 }
 

@@ -1,0 +1,220 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    background-color: rgba(145, 145, 145, 0.3);
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    @include center-of-rectangle;
+    opacity: 0;
+    transition: opacity 0.3s linear;
+    display: none;
+
+    &.parent_show_opacity {
+        opacity: 1;
+    }
+
+    &.parent_show_display {
+        display: flex;
+    }
+
+    > .main {
+        background-color: rgb(212, 255, 208);
+        border-radius: 15px;
+        width: 300px;
+        overflow: hidden;
+
+        > .header {
+            @include center-of-row;
+            justify-content: space-between;
+            align-items: stretch;
+
+            > div {
+                width: 50%;
+            }
+
+            > div:nth-child(1) {
+                font-size: 1.1rem;
+                font-weight: 500;
+                box-sizing: border-box;
+                padding: 5px;
+                @include center-of-rectangle;
+                background: linear-gradient(to bottom, #2aff23 0%, #ceffcc 100%);
+            }
+
+            > div:nth-child(2) {
+                box-sizing: border-box;
+                padding: 5px;
+                @include center-of-row;
+                justify-content: flex-end;
+
+                > svg {
+                    width: 25px;
+                    height: 25px;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        > .content {
+            box-sizing: border-box;
+            padding: 10px;
+            transition: height 0.3s linear;
+            height: 100px;
+            position: relative;
+            transition: height 0.5s linear;
+
+            &.content_isCreate {
+                height: 70px;
+            }
+
+            > .text1 {
+                @include center-of-rectangle;
+                height: 80px;
+                width: 100%;
+                font-size: 1.2rem;
+                position: absolute;
+                opacity: 0;
+                display: none;
+                transition:
+                    opacity 0.5s linear,
+                    height 0.5s linear;
+
+                &.text1_display {
+                    display: flex;
+                }
+
+                &.text1_opacity {
+                    opacity: 1;
+                    height: 50px;
+                    animation: animation_text1 1.5s ease-in-out infinite;
+                }
+            }
+
+            > .inputRowContainer {
+                height: 80px;
+                @include center-of-rectangle;
+                transition: opacity 0.3s linear;
+
+                &.inputRowContainer_hidden {
+                    opacity: 0;
+                }
+
+                > .inputRow {
+                    @include center-of-row;
+
+                    > div:nth-child(1) {
+                        width: 80px;
+                    }
+
+                    > div:nth-child(2) {
+                        flex: 1;
+                        background-color: white;
+                        box-sizing: border-box;
+                        padding: 5px;
+                        border-radius: 15px;
+
+                        > input {
+                            width: 100%;
+                            border: none;
+                            outline: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        > .btn {
+            height: 30px;
+            position: relative;
+            transition: height 0.5s linear;
+
+            &.btn_isCreate {
+                height: 50px;
+            }
+
+            > .text2 {
+                width: 100%;
+                height: 30px;
+                @include center-of-rectangle;
+                position: absolute;
+                display: none;
+                transition:
+                    opacity 0.5s linear,
+                    height 0.5s linear;
+
+                &.text2_display {
+                    display: flex;
+                }
+
+                &.text2_opacity {
+                    opacity: 1;
+                    height: 50px;
+                    animation: animation_text2 1.5s ease-in-out infinite;
+                }
+            }
+
+            > .btnContainer {
+                @include center-of-row;
+                margin-top: 5px;
+                height: 100%;
+
+                &.btnContainer_hidden {
+                    opacity: 0;
+                }
+
+                > div {
+                    width: 50%;
+                    height: 100%;
+                    @include center-of-rectangle;
+                    box-sizing: border-box;
+                    padding: 5px 0;
+                    cursor: pointer;
+                    user-select: none;
+                }
+
+                > div:nth-child(1) {
+                    border-right: 1px dashed gray;
+
+                    &:hover {
+                        background-color: #2aff23;
+                    }
+                }
+
+                > div:nth-child(2) {
+                    border-left: 1px dashed gray;
+
+                    &:hover {
+                        background-color: #f8fff7;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes animation_text1 {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes animation_text2 {
+    0% {
+        scale: 1.1;
+    }
+    50% {
+        scale: 1;
+    }
+    100% {
+        scale: 1.1;
+    }
+}

@@ -16,7 +16,6 @@
     display: none;
     flex-direction: column;
     opacity: 0;
-
     transition: opacity 0.3s linear;
 
     &.parent_show_opacity {

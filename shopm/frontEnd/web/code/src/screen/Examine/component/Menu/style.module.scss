@@ -6,4 +6,43 @@
     box-sizing: border-box;
     border-bottom: 1px dashed gray;
     padding: 10px;
+    @include center-of-row;
+
+    > .btn {
+        @include center-of-row;
+        box-sizing: border-box;
+        width: max-content;
+        // min-width: 100px;
+        // min-height: 40px;
+        @include min_heightRes(30px, md, 1);
+        @include min_widthRes(100px, md, 1);
+        padding: 5px;
+        border-radius: 10px;
+        cursor: pointer;
+        user-select: none;
+        @include marginRes(0px, 5px, md, 1);
+
+        &:hover {
+            scale: 1.05;
+        }
+
+        > svg {
+            margin-right: 5px;
+            @include heightRes(20px, md, 1.3);
+            @include widthRes(20px, md, 1.3);
+        }
+
+        > div {
+            @include fontSizeRes(16px, md, 1.2);
+        }
+    }
+
+    > .btnCreate {
+        background-color: #2aff23;
+    }
+
+    > .btnNewPage {
+        background-color: blue;
+        color: white;
+    }
 }

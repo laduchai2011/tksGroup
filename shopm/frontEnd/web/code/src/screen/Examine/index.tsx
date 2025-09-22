@@ -3,6 +3,7 @@ import Overview from './component/Overview';
 import Information from './component/Information';
 import Service from './component/Service';
 import Menu from './component/Menu';
+import CreatePatientRecordDialog from './component/CreatePatientRecordDialog';
 
 const Examine = () => {
     const isLoading = false;
@@ -13,6 +14,7 @@ const Examine = () => {
                 <Information isLoading={isLoading} />
                 <Service isLoading={isLoading} />
                 <Menu isLoading={isLoading} />
+                <CreatePatientRecordDialog />
             </div>
         </div>
     );
