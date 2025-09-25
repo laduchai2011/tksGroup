@@ -36,4 +36,5 @@ const BigLeftArrow: FC<MyBigLeftArrowProps> = ({ bigLeftArrow, className, ...pro
     );
 };
 
+// eslint-disable-next-line import/no-unused-modules
 export default React.memo(BigLeftArrow);

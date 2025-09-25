@@ -1,11 +1,11 @@
-import { useRef, useEffect, useState } from 'react';
-import { memo } from 'react';
+import { useRef, useEffect, useState, memo } from 'react';
 import style from './style.module.scss';
 import { IoClose } from 'react-icons/io5';
 import { CLOSE, CREATE_PATIENT_RECORD, TITLE, CREATE, EXIT } from '@src/const/text';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '@src/redux';
-import { setShow_createPatientRecordDialog } from '@src/redux/slice/Examine';
+import { setShow_createPatientRecordDialog, setData_toastMessage } from '@src/redux/slice/Examine';
+import { messageType_enum } from '@src/component/ToastMessage/type';
 
 const CreatePatientRecordDialog = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -130,6 +130,10 @@ const CreatePatientRecordDialog = () => {
         }, 3000);
     };
 
+    const handleExit = () => {
+        dispatch(setData_toastMessage({ type: messageType_enum.SUCCESS, message: 'toast message' }));
+    };
+
     return (
         <div className={style.parent} ref={parent_element}>
             <div className={style.main}>
@@ -158,7 +162,7 @@ const CreatePatientRecordDialog = () => {
                     </div>
                     <div className={style.btnContainer} ref={btnContainer_element}>
                         <div onClick={() => handleCreate()}>{CREATE}</div>
-                        <div onClick={() => setIsCreating(false)}>{EXIT}</div>
+                        <div onClick={() => handleExit()}>{EXIT}</div>
                     </div>
                 </div>
             </div>

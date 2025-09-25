@@ -8,7 +8,7 @@ interface MyThreeDotHorizontalProps extends React.HTMLProps<SVGSVGElement> {
     [key: string]: unknown;
 }
 
-const ThreeDotVertical: FC<MyThreeDotHorizontalProps> = ({ threeDotVertical, className, ...props }) => {
+const ThreeDotVertical: FC<MyThreeDotHorizontalProps> = ({ className, ...props }) => {
     return (
         <svg
             className={`${style.parent} ${className || ''}`}
@@ -25,4 +25,5 @@ const ThreeDotVertical: FC<MyThreeDotHorizontalProps> = ({ threeDotVertical, cla
     );
 };
 
+// eslint-disable-next-line import/no-unused-modules
 export default React.memo(ThreeDotVertical);

@@ -25,7 +25,7 @@ interface ToastMessage_Config_Props {
     max_message?: number;
 }
 export interface ToastMessage_Data_Props {
-    type?: string;
+    type?: messageType_type;
     message?: string;
 }
 interface ToastMessage_Control_Props {
@@ -34,3 +34,14 @@ interface ToastMessage_Control_Props {
 interface ToastMessage_Event_Props {
     onData?: (TKS: TKSProps) => void;
 }
+
+export enum messageType_enum {
+    SUCCESS = 'SUCCESS',
+    WARN = 'WARN',
+    ERROR = 'ERROR',
+}
+
+export type messageType_type =
+    | typeof messageType_enum.SUCCESS
+    | typeof messageType_enum.WARN
+    | typeof messageType_enum.ERROR;

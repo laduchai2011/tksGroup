@@ -4,7 +4,7 @@ import Information from './component/Information';
 import Service from './component/Service';
 import Menu from './component/Menu';
 import CreatePatientRecordDialog from './component/CreatePatientRecordDialog';
-import ToastMessage from '@src/component/ToastMessage';
+import MyToastMessage from './component/MyToastMessage';
 
 const Examine = () => {
     const isLoading = false;
@@ -16,7 +16,7 @@ const Examine = () => {
                 <Service isLoading={isLoading} />
                 <Menu isLoading={isLoading} />
                 <CreatePatientRecordDialog />
-                <ToastMessage toastMessage={{ data: { type: 'ERROR', message: '123dsfsdd sdf skdf bsdbf jsdbf' } }} />
+                <MyToastMessage />
             </div>
         </div>
     );

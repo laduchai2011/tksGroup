@@ -11,10 +11,10 @@ import { WarnTriangleProps } from '@src/component/Icon/WarnTriangle/type';
 import { ErrorCircleProps } from '@src/component/Icon/ErrorCircle/type';
 import { DeleteCircleProps } from '@src/component/Icon/DeleteCircle/type';
 
-import { TOAST_MESSAGE } from '../../const';
+import { messageType_enum, messageType_type } from '../../type';
 
 const MessageBox: FC<{
-    type?: string;
+    type?: messageType_type;
     message?: string;
 }> = ({ type, message }) => {
     const parent_element = useRef<HTMLDivElement | null>(null);
@@ -25,15 +25,15 @@ const MessageBox: FC<{
     const warnColor = '#ffff00';
     const errorColor = 'red';
 
-    if (type === TOAST_MESSAGE.TYPE.SUCCESS) {
+    if (type === messageType_enum.SUCCESS) {
         color = successColor;
     }
 
-    if (type === TOAST_MESSAGE.TYPE.WARN) {
+    if (type === messageType_enum.WARN) {
         color = warnColor;
     }
 
-    if (type === TOAST_MESSAGE.TYPE.ERROR) {
+    if (type === messageType_enum.ERROR) {
         color = errorColor;
     }
 
@@ -95,9 +95,9 @@ const MessageBox: FC<{
         <div className={style.parent} ref={parent_element} onMouseOver={() => handleMouseOver()}>
             <div></div>
             <div>
-                {type === TOAST_MESSAGE.TYPE.SUCCESS && <TickSymbol tickSymbol={tickSymbol} />}
-                {type === TOAST_MESSAGE.TYPE.WARN && <WarnTriangle warnTriangle={warnTriangle} />}
-                {type === TOAST_MESSAGE.TYPE.ERROR && <ErrorCircle errorCircle={errorCircle} />}
+                {type === messageType_enum.SUCCESS && <TickSymbol tickSymbol={tickSymbol} />}
+                {type === messageType_enum.WARN && <WarnTriangle warnTriangle={warnTriangle} />}
+                {type === messageType_enum.ERROR && <ErrorCircle errorCircle={errorCircle} />}
             </div>
             <div>{message}</div>
             <div>

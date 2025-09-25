@@ -45,4 +45,5 @@ const SubCircle: FC<MySubCircleProps> = ({ subCircle, className, ...props }) => 
     );
 };
 
+// eslint-disable-next-line import/no-unused-modules
 export default React.memo(SubCircle);
