@@ -1,0 +1,19 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: rgb(223, 223, 223);
+    @include center-of-row;
+
+    > div {
+        @include heightRes(25px, md, 1);
+        @include fontSizeRes(20px, md, 1);
+        @include marginRes(0px, 100px, md, 1);
+
+        @include responsive(sm) {
+            @include heightRes(25px, md, 1.2);
+            @include fontSizeRes(20px, md, 1.5);
+        }
+    }
+}

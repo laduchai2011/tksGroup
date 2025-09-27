@@ -5,7 +5,6 @@ import { FiveStar } from '@src/component';
 import { FOLLOW, LIVE, ONLINE, OFFLINE } from '@src/const/text';
 
 const Overview: FC<{ isLoading: boolean }> = ({ isLoading }) => {
-    console.log('Overview');
     return (
         <div className={style.parent}>
             <div className={style.avatarContainer}>

@@ -5,7 +5,7 @@ import { ToastMessage_Data_Props } from '@src/component/ToastMessage/type';
 const initialState: state_props = {
     isLoading: false,
     createPatientRecordDialog: {
-        isShow: true,
+        isShow: false,
     },
     toastMessage: {
         data: { type: undefined, message: '' },

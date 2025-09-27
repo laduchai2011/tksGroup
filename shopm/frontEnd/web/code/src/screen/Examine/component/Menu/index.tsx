@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import style from './style.module.scss';
 import Skeleton from '@src/component/Skeleton';
 import { IoMdAdd } from 'react-icons/io';
@@ -37,4 +37,4 @@ const Menu: FC<{ isLoading: boolean }> = ({ isLoading }) => {
     );
 };
 
-export default Menu;
+export default memo(Menu);

@@ -1,0 +1,87 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    background-color: white;
+    height: max-content;
+    box-sizing: border-box;
+    border-bottom: 1px solid gray;
+
+    > .header {
+        @include center-of-rectangle;
+        font-size: 20px;
+        font-weight: 600;
+        box-sizing: border-box;
+        padding: 10px;
+        user-select: none;
+
+        @include responsive(sm) {
+            @include fontSizeRes(20px, md, 1.5);
+        }
+    }
+
+    > .control {
+        box-sizing: border-box;
+        padding: 10px;
+        @include center-of-rectangle;
+
+        > div {
+            @include center-of-row;
+            width: max-content;
+
+            > div {
+                margin: 0 5px;
+            }
+
+            > .icons {
+                @include center-of-row;
+
+                > svg {
+                    @include widthRes(30px, md, 1);
+                    @include heightRes(30px, md, 1);
+                    cursor: pointer;
+
+                    @include responsive(sm) {
+                        @include widthRes(30px, md, 1.5);
+                        @include heightRes(30px, md, 1.5);
+                    }
+
+                    &:hover {
+                        scale: 1.2;
+                    }
+                }
+
+                > div {
+                    @include widthRes(50px, md, 1);
+                    @include heightRes(30px, md, 1);
+                    overflow: hidden;
+                    position: relative;
+
+                    > div {
+                        width: max-content;
+                        position: absolute;
+                        @include center-of-row;
+                        // @include leftRes(-100px, md, 1);
+                        // transition: left 0.3s linear;
+
+                        // @include responsive(sm) {
+                        //     @include leftRes(-100px, md, 1);
+                        //     // @include leftRes(calc(-1 * 2 * (50 / 1024) * 100vw * 1.5 * 1px), md, 1.5);
+                        // }
+
+                        > div {
+                            @include widthRes(50px, md, 1);
+                            @include heightRes(30px, md, 1);
+                            @include center-of-rectangle;
+                            @include fontSizeRes(22px, md, 1);
+                            user-select: none;
+
+                            @include responsive(sm) {
+                                @include fontSizeRes(22px, md, 1.5);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
