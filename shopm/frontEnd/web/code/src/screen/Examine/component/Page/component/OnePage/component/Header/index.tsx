@@ -1,11 +1,68 @@
-import { memo } from 'react';
+import { FC, memo, useState, useRef, useEffect } from 'react';
 import style from './style.module.scss';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import Skeleton from '@src/component/Skeleton';
 
-const Header = () => {
+const Header: FC<{ isLoading: boolean }> = ({ isLoading }) => {
+    const main2_element = useRef<HTMLDivElement | null>(null);
+    const [view, setView] = useState<boolean>(false);
+    const [myLoading, setMyLoading] = useState<boolean>(false);
+
+    useEffect(() => {
+        setMyLoading(isLoading);
+    }, [isLoading]);
+
+    useEffect(() => {
+        if (main2_element.current) {
+            if (view) {
+                main2_element.current.classList.add(style.main2_show);
+            } else {
+                main2_element.current.classList.remove(style.main2_show);
+            }
+        }
+    }, [view]);
+
+    const handleOpenView = () => {
+        setView(false);
+    };
+
+    const handleCloseView = () => {
+        setView(true);
+    };
+
     return (
         <div className={style.parent}>
-            <div>99</div>
-            <div>Header</div>
+            <div className={style.main1}>
+                <div className={style.index}>
+                    {myLoading ? (
+                        <Skeleton className={style.indexNumber} />
+                    ) : (
+                        <div className={style.indexNumber}>99</div>
+                    )}
+                </div>
+                <div className={style.title}>
+                    {myLoading ? (
+                        <Skeleton className={`${style.titleContent} ${style.titleContentLoading}`} />
+                    ) : (
+                        <div className={style.titleContent}>Header</div>
+                    )}
+                </div>
+                <div className={style.icons}>
+                    {myLoading ? (
+                        <Skeleton className={style.iconLoading} />
+                    ) : (
+                        <div>
+                            {view && <AiOutlineEye className={style.icon} onClick={() => handleOpenView()} />}
+                            {!view && (
+                                <AiOutlineEyeInvisible className={style.icon} onClick={() => handleCloseView()} />
+                            )}
+                        </div>
+                    )}
+                </div>
+            </div>
+            <div className={style.main2} ref={main2_element}>
+                Header
+            </div>
         </div>
     );
 };

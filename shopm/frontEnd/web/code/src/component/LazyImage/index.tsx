@@ -28,12 +28,18 @@ const LazyImage = ({ src, alt, className, root }: LazyImageProps) => {
         return () => observer.disconnect();
     }, [root]);
 
+    const handleOnLoad = () => {
+        setTimeout(() => {
+            setLoaded(true);
+        }, 3000);
+    };
+
     return (
         <div className={`${style.parent} ${className || ''}`}>
             {loading && !loaded ? (
                 <Skeleton />
             ) : (
-                <img className={style.image} ref={imgRef} src={src} alt={alt} onLoad={() => setLoaded(true)} />
+                <img className={style.image} ref={imgRef} src={src} alt={alt} onLoad={() => handleOnLoad()} />
             )}
         </div>
     );

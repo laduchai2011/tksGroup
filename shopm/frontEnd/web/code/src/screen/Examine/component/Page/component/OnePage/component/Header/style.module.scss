@@ -4,16 +4,102 @@
     box-sizing: border-box;
     padding: 10px;
     background-color: rgb(223, 223, 223);
-    @include center-of-row;
 
-    > div {
-        @include heightRes(25px, md, 1);
-        @include fontSizeRes(20px, md, 1);
-        @include marginRes(0px, 100px, md, 1);
+    > .main1 {
+        @include center-of-row;
+        cursor: default;
 
-        @include responsive(sm) {
+        > .index {
+            height: 100%;
+            @include center-of-rectangle;
+
+            > .indexNumber {
+                // min-height: max-content;
+                // min-width: max-content;
+                @include center-of-rectangle;
+                @include heightRes(25px, md, 1);
+                @include widthRes(25px, md, 1);
+                aspect-ratio: 1 / 1;
+                border-radius: 50%;
+                background-color: white;
+                box-sizing: border-box;
+                padding: 3px;
+                @include fontSizeRes(18px, md, 1);
+                user-select: none;
+
+                @include responsive(sm) {
+                    @include fontSizeRes(18px, md, 1.5);
+                    @include heightRes(25px, md, 1.5);
+                    @include widthRes(25px, md, 1.5);
+                }
+            }
+        }
+
+        > .title {
+            @include heightRes(25px, md, 1);
+            flex: 1;
+            @include center-of-rectangle;
+
+            @include responsive(sm) {
+                @include heightRes(25px, md, 1.2);
+            }
+
+            > .titleContent {
+                @include fontSizeRes(20px, md, 1);
+                @include heightRes(25px, md, 1);
+                width: 98%;
+                @include line-clamp(1);
+
+                @include responsive(sm) {
+                    @include heightRes(25px, md, 1.2);
+                    @include fontSizeRes(20px, md, 1.5);
+                }
+            }
+
+            > .titleContentLoading {
+                background-color: white;
+            }
+        }
+
+        > .icons {
+            height: 100%;
+            width: max-content;
+
+            > div {
+                > .icon {
+                    cursor: pointer;
+                }
+            }
+
+            > .iconLoading {
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                background-color: white;
+            }
+        }
+    }
+
+    > .main2 {
+        width: 100%;
+        @include heightRes(0px, md, 1.2);
+        @include center-of-rectangle;
+        background-color: rgb(241, 241, 241) !important;
+        overflow: hidden;
+        transition:
+            height 0.3s linear,
+            margin-top 0.3s linear;
+        border-radius: 15px;
+
+        &.main2_show {
             @include heightRes(25px, md, 1.2);
-            @include fontSizeRes(20px, md, 1.5);
+            @include fontSizeRes(14px, md, 1.5);
+            margin-top: 3px;
+
+            @include responsive(sm) {
+                @include heightRes(30px, md, 1.2);
+                @include fontSizeRes(16px, md, 1.5);
+            }
         }
     }
 }

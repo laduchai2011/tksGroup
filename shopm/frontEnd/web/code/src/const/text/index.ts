@@ -58,3 +58,5 @@ export const CREATE_NEW_PAGE = 'Tạo trang mới';
 export const TITLE = 'Tiêu đề';
 export const CREATE = 'Tạo';
 export const EXIT = 'Thoát';
+export const EDIT = 'Chỉnh sửa';
+export const IMAGE_VIDEO = 'Ảnh, video';

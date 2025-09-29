@@ -216,7 +216,7 @@ $breakpoints: (
 @mixin marginRes($param1, $param2, $res, $rate) {
     $breakpoint-value: if(map-has-key($breakpoints, $res), map-get($breakpoints, $res), $res);
     margin: calc($param1 * $rate) calc($param2 * $rate);
-    @if unit($size) == 'px' {
+    @if unit($param1) == 'px' and unit($param2) == 'px' {
         @include responsive($res) {
             margin: calc(($param1 / $breakpoint-value) * 100vw * $rate)
                 calc(($param2 / $breakpoint-value) * 100vw * $rate);

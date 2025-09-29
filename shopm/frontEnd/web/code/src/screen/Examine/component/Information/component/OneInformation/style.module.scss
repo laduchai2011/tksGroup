@@ -4,20 +4,36 @@
     @include center-of-row;
     align-items: stretch;
     margin: 10px 0;
-    height: auto;
     min-height: 20px;
 
-    > div:nth-child(1) {
-        width: 120px;
-        font-size: 1.1rem;
+    > .field {
+        @include center-of-row;
+        @include widthRes(120px, md, 1);
+        @include heightRes(25px, md, 1);
+        @include fontSizeRes(18px, md, 1);
+        @include marginRes(0px, 2px, md, 1);
         font-weight: 500;
-        margin-right: 5px;
+
+        @include responsive(sm) {
+            @include widthRes(120px, md, 1.5);
+            @include heightRes(25px, md, 1.5);
+            @include fontSizeRes(18px, md, 1.5);
+            @include marginRes(0px, 2px, md, 1.5);
+        }
     }
 
-    > div:nth-child(2) {
-        flex: 1;
+    > .content {
+        @include center-of-row;
+        @include heightRes(25px, md, 1);
+        @include fontSizeRes(14px, md, 1);
+        @include marginRes(0px, 2px, md, 1);
         color: gray;
-        font-size: 0.9rem;
-        margin-left: 5px;
+        flex: 1;
+
+        @include responsive(sm) {
+            @include heightRes(25px, md, 1.5);
+            @include fontSizeRes(14px, md, 1.5);
+            @include marginRes(0px, 2px, md, 1.5);
+        }
     }
 }
