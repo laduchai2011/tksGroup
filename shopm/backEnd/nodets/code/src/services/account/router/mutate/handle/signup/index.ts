@@ -14,7 +14,8 @@ class Handle_Signup {
         this._mutateDB_signup = new MutateDB_Signup();
     }
 
-    setup = (req: Request<Record<string, never>, unknown, accountOption>, res: Response, next: NextFunction) => {
+    setup = async (req: Request<Record<string, never>, unknown, accountOption>, res: Response, next: NextFunction) => {
+        await this._mssql_server.init();
         const signupInfor = req.body;
 
         const resData: my_interface['router_res_type'] = {
