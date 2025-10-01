@@ -1,0 +1,36 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    @include marginRes(5px, 0px, md, 1);
+    width: 100%;
+
+    @include responsive(sm) {
+        @include marginRes(5px, 0px, md, 1.2);
+    }
+
+    > .loading {
+        width: 100%;
+
+        @include heightRes(25px, md, 1);
+
+        @include responsive(sm) {
+            @include heightRes(25px, md, 1.5);
+        }
+    }
+
+    > .descript {
+        width: 100%;
+        > .descriptInput {
+            width: 100%;
+            resize: none;
+            border: none;
+            outline: none;
+            font-size: 1.05rem;
+        }
+
+        > .descriptView {
+            width: 100%;
+            height: max-content;
+        }
+    }
+}

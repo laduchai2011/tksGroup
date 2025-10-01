@@ -11,6 +11,7 @@
     opacity: 0;
     transition: opacity 0.3s linear;
     display: none;
+    z-index: 1000;
 
     &.parent_show_opacity {
         opacity: 1;

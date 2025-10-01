@@ -1,0 +1,39 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    @include marginRes(5px, 0px, md, 1);
+
+    @include responsive(sm) {
+        @include marginRes(5px, 0px, md, 1.2);
+    }
+
+    > .icons {
+        @include marginRes(5px, 0px, md, 1);
+        @include center-of-row;
+
+        @include responsive(sm) {
+            @include marginRes(5px, 0px, md, 1.2);
+        }
+
+        > svg {
+            cursor: pointer;
+        }
+
+        > .editIcon {
+            @include heightRes(25px, md, 1);
+            @include widthRes(25px, md, 1);
+            @include marginRes(0px, 5px, md, 1);
+
+            @include responsive(sm) {
+                @include heightRes(25px, md, 1.5);
+                @include widthRes(25px, md, 1.5);
+                @include marginRes(0px, 5px, md, 1.2);
+            }
+
+            &.editIcon_active {
+                scale: 1.2;
+                background-color: rgb(220, 220, 255);
+            }
+        }
+    }
+}

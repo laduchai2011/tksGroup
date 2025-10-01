@@ -1,0 +1,30 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    @include marginRes(5px, 0px, md, 1);
+
+    @include responsive(sm) {
+        @include marginRes(5px, 0px, md, 1.2);
+    }
+
+    > .loading {
+        width: 200px;
+        height: 25px;
+        @include heightRes(25px, md, 1);
+        @include widthRes(200px, md, 1);
+        @include marginRes(0px, 5px, md, 1);
+
+        @include responsive(sm) {
+            @include widthRes(200px, md, 1.5);
+            @include heightRes(25px, md, 1.5);
+        }
+    }
+
+    > .text {
+        @include marginRes(5px, 0px, md, 1);
+
+        @include responsive(sm) {
+            @include marginRes(5px, 0px, md, 1.2);
+        }
+    }
+}

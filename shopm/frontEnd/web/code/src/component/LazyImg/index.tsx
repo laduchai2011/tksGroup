@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState, memo } from 'react';
+import { useEffect, useRef, useState, memo, forwardRef } from 'react';
 import style from './style.module.scss';
 
 interface ComponentProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -7,7 +7,7 @@ interface ComponentProps extends React.HTMLAttributes<HTMLDivElement> {
     root?: Element | Document | null | undefined;
 }
 
-const LazyImg: FC<ComponentProps> = ({ srcImg, alt, className, root, ...props }) => {
+const LazyImg = forwardRef<HTMLDivElement, ComponentProps>(({ srcImg, alt, className, root, ...props }, ref) => {
     const parent_element = useRef<HTMLDivElement | null>(null);
     const [inView, setInView] = useState(false);
 
@@ -32,10 +32,21 @@ const LazyImg: FC<ComponentProps> = ({ srcImg, alt, className, root, ...props })
     }, [root]);
 
     return (
-        <div className={`${style.parent} ${className || ''}`} {...props} ref={parent_element}>
+        <div
+            className={`${style.parent} ${className || ''}`}
+            {...props}
+            ref={(el) => {
+                parent_element.current = el;
+                if (typeof ref === 'function') {
+                    ref(el);
+                } else if (ref) {
+                    (ref as React.RefObject<HTMLDivElement | null>).current = el;
+                }
+            }}
+        >
             {inView && <img className={style.image} src={srcImg} alt={alt} />}
         </div>
     );
-};
+});
 
 export default memo(LazyImg);

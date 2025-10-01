@@ -1,0 +1,142 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    @include marginRes(5px, 0px, md, 1);
+    @include heightRes(150px, md, 1);
+    @include center-of-rectangle;
+
+    @include responsive(sm) {
+        @include marginRes(5px, 0px, md, 1.2);
+        @include heightRes(150px, md, 1.5);
+    }
+
+    > .main {
+        position: relative;
+        width: 50%;
+        height: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+
+        @include responsive(sm) {
+            width: 100%;
+        }
+
+        > .images {
+            @include small-scrollX-snap-parent;
+            height: 100%;
+            width: 100%;
+
+            > .image {
+                @include center-of-rectangle;
+                @include small-scrollX-snap-children;
+            }
+        }
+
+        > .control {
+            width: 0;
+            height: 0;
+
+            > .close {
+                position: absolute;
+                color: white;
+                cursor: pointer;
+                @include heightRes(25px, md, 1);
+                @include widthRes(25px, md, 1);
+                @include topRes(5px, md, 1);
+                @include rightRes(5px, md, 1);
+
+                &:hover {
+                    color: black;
+                }
+
+                @include responsive(sm) {
+                    @include heightRes(25px, md, 1.5);
+                    @include widthRes(25px, md, 1.5);
+                    @include topRes(5px, md, 1.5);
+                    @include rightRes(5px, md, 1.5);
+                }
+            }
+
+            > .left {
+                position: absolute;
+                color: white;
+                cursor: pointer;
+                @include heightRes(25px, md, 1);
+                @include widthRes(25px, md, 1);
+                @include leftRes(5px, md, 1);
+                top: 50%;
+                transform: translateY(-50%);
+
+                &:hover {
+                    color: black;
+                }
+
+                @include responsive(sm) {
+                    @include heightRes(25px, md, 1.5);
+                    @include widthRes(25px, md, 1.5);
+                    @include leftRes(5px, md, 1.5);
+                }
+            }
+
+            > .right {
+                position: absolute;
+                color: white;
+                cursor: pointer;
+                @include heightRes(25px, md, 1);
+                @include widthRes(25px, md, 1);
+                @include rightRes(5px, md, 1);
+                top: 50%;
+                transform: translateY(-50%);
+
+                &:hover {
+                    color: black;
+                }
+
+                @include responsive(sm) {
+                    @include heightRes(25px, md, 1.5);
+                    @include widthRes(25px, md, 1.5);
+                    @include rightRes(5px, md, 1.5);
+                }
+            }
+
+            > .amount {
+                position: absolute;
+                color: white;
+                cursor: default;
+                @include heightRes(25px, md, 1);
+                @include widthRes(25px, md, 1);
+                @include leftRes(5px, md, 1);
+                @include topRes(5px, md, 1);
+
+                &:hover {
+                    color: black;
+                }
+
+                @include responsive(sm) {
+                    @include heightRes(25px, md, 1.5);
+                    @include widthRes(25px, md, 1.5);
+                    @include leftRes(5px, md, 1.5);
+                    @include topRes(5px, md, 1.5);
+                }
+            }
+
+            > .detail {
+                position: absolute;
+                color: black;
+                cursor: pointer;
+                background-color: white;
+                border-radius: 5px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                opacity: 0;
+                box-sizing: border-box;
+                padding: 5px;
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

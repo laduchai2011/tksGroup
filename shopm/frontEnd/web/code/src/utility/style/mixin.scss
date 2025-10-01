@@ -233,3 +233,33 @@ $breakpoints: (
         }
     }
 }
+
+@mixin topRes($top, $res, $rate) {
+    $breakpoint-value: if(map-has-key($breakpoints, $res), map-get($breakpoints, $res), $res);
+    top: calc($top * $rate);
+    @if unit($top) == 'px' {
+        @include responsive($res) {
+            top: calc(($top / $breakpoint-value) * 100vw * $rate);
+        }
+    }
+}
+
+@mixin rightRes($right, $res, $rate) {
+    $breakpoint-value: if(map-has-key($breakpoints, $res), map-get($breakpoints, $res), $res);
+    right: calc($right * $rate);
+    @if unit($right) == 'px' {
+        @include responsive($res) {
+            right: calc(($right / $breakpoint-value) * 100vw * $rate);
+        }
+    }
+}
+
+@mixin bottomRes($bottom, $res, $rate) {
+    $breakpoint-value: if(map-has-key($breakpoints, $res), map-get($breakpoints, $res), $res);
+    bottom: calc($bottom * $rate);
+    @if unit($bottom) == 'px' {
+        @include responsive($res) {
+            bottom: calc(($bottom / $breakpoint-value) * 100vw * $rate);
+        }
+    }
+}
