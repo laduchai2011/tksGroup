@@ -7,6 +7,9 @@ const initialState: state_props = {
     createPatientRecordDialog: {
         isShow: false,
     },
+    dialogPatientSend: {
+        isShow: false,
+    },
     toastMessage: {
         data: { type: undefined, message: '' },
     },
@@ -22,11 +25,15 @@ const ExamineSlice = createSlice({
         setShow_createPatientRecordDialog: (state, action: PayloadAction<boolean>) => {
             state.createPatientRecordDialog.isShow = action.payload;
         },
+        setShow_dialogPatientSend: (state, action: PayloadAction<boolean>) => {
+            state.dialogPatientSend.isShow = action.payload;
+        },
         setData_toastMessage: (state, action: PayloadAction<ToastMessage_Data_Props>) => {
             state.toastMessage.data = action.payload;
         },
     },
 });
 
-export const { setShow_createPatientRecordDialog, setData_toastMessage } = ExamineSlice.actions;
+export const { setShow_createPatientRecordDialog, setShow_dialogPatientSend, setData_toastMessage } =
+    ExamineSlice.actions;
 export default ExamineSlice.reducer;

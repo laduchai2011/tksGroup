@@ -4,6 +4,7 @@ import TextTop from './component/TextTop';
 import Edit from './component/Edit';
 import Descript from './component/Descript';
 import ImgContainer from './component/ImgContainer';
+import VideoContainer from './component/VideoContainer';
 import Send from './component/Send';
 
 const OfPatient: FC<{ isLoading: boolean }> = ({ isLoading }) => {
@@ -15,6 +16,7 @@ const OfPatient: FC<{ isLoading: boolean }> = ({ isLoading }) => {
             <Edit isLoading={isLoading} setIsEdit={setIsEdit} />
             <Descript isLoading={isLoading} isEdit={isEdit} />
             <ImgContainer isLoading={isLoading} />
+            <VideoContainer isLoading={isLoading} />
             <Send isLoading={isLoading} />
         </div>
     );

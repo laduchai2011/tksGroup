@@ -11,10 +11,12 @@ const CreatePatientRecordDialog = () => {
     const dispatch = useDispatch<AppDispatch>();
     const parent_element = useRef<HTMLDivElement | null>(null);
 
+    // text 1
     const content_element = useRef<HTMLDivElement | null>(null);
     const text1_element = useRef<HTMLDivElement | null>(null);
     const inputRowContainer_element = useRef<HTMLDivElement | null>(null);
 
+    // text 2
     const btn_element = useRef<HTMLDivElement | null>(null);
     const text2_element = useRef<HTMLDivElement | null>(null);
     const btnContainer_element = useRef<HTMLDivElement | null>(null);

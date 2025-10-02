@@ -1,6 +1,8 @@
 import style from './style.module.scss';
-import CreatePatientRecordDialog from './component/CreatePatientRecordDialog';
+
 import MyToastMessage from './component/MyToastMessage';
+import CreatePatientRecordDialog from './component/CreatePatientRecordDialog';
+import DialogPatientSend from './component/DialogPatientSend';
 import TopControl from './component/TopControl';
 import Overview from './component/Overview';
 import Information from './component/Information';
@@ -13,8 +15,9 @@ const Examine = () => {
     return (
         <div className={style.parent}>
             <div className={style.main}>
-                <CreatePatientRecordDialog />
                 <MyToastMessage />
+                <CreatePatientRecordDialog />
+                <DialogPatientSend />
                 <TopControl />
                 <Overview isLoading={isLoading} />
                 <Information isLoading={isLoading} />

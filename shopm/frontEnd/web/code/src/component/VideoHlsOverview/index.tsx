@@ -6,7 +6,7 @@ import LazyImg from '../LazyImg';
 interface ComponentProps extends React.HTMLAttributes<HTMLDivElement> {
     srcVideo?: string;
     srcImage?: string;
-    isPlay: boolean;
+    isPlay?: boolean;
     alt?: string;
     root?: Element | Document | null | undefined;
 }

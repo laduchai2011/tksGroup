@@ -46,6 +46,7 @@ export const PHONE_NUMBER = 'Số điện thoại';
 export const FIRST_NAME = 'Họ';
 export const LAST_NAME = 'Tên';
 export const SEND = 'Gửi';
+export const SEND_DESCRIPTION = 'Gửi mô tả';
 export const MAJOR = 'Chuyên ngành';
 export const EXPERIENCE = 'Kinh nghiệm';
 export const NOTE = 'Ghi chú';

@@ -1,11 +1,26 @@
 import { FC, memo } from 'react';
 import style from './style.module.scss';
 import { IoSend } from 'react-icons/io5';
+import { SEND } from '@src/const/text';
+import Skeleton from '@src/component/Skeleton';
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '@src/redux';
+import { setShow_dialogPatientSend } from '@src/redux/slice/Examine';
 
 const Send: FC<{ isLoading: boolean }> = ({ isLoading }) => {
+    const dispatch = useDispatch<AppDispatch>();
+
+    const handleShowDialog = () => {
+        dispatch(setShow_dialogPatientSend(true));
+    };
+
     return (
         <div className={style.parent}>
-            <IoSend />
+            {isLoading ? (
+                <Skeleton className={style.sendIcon} />
+            ) : (
+                <IoSend className={style.sendIcon} onClick={() => handleShowDialog()} title={SEND} />
+            )}
         </div>
     );
 };

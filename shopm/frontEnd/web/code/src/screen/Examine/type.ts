@@ -5,6 +5,9 @@ export interface state_props {
     createPatientRecordDialog: {
         isShow: boolean;
     };
+    dialogPatientSend: {
+        isShow: boolean;
+    };
     toastMessage: {
         data: ToastMessage_Data_Props;
     };
