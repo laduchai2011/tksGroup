@@ -9,9 +9,11 @@ import { options_enum, selectedOptions_type } from './type';
 interface ComponentProps extends React.HTMLAttributes<HTMLDivElement> {
     isShow?: boolean;
     data?: unknown;
+    onClose?: () => void;
 }
 
-const DialogPlayVideo: FC<ComponentProps> = ({ isShow, data, className, ...props }) => {
+const DialogPlayVideo: FC<ComponentProps> = ({ isShow, data, onClose, className, ...props }) => {
+    console.log('DialogPlayVideo', data);
     const parent_element = useRef<HTMLDivElement | null>(null);
     const options_element = useRef<HTMLDivElement | null>(null);
     const myCroll_element = useRef<HTMLDivElement | null>(null);
@@ -114,7 +116,11 @@ const DialogPlayVideo: FC<ComponentProps> = ({ isShow, data, className, ...props
         setSelectedOption(selectedOption);
     };
 
-    const handleClose = () => {};
+    const handleClose = () => {
+        if (onClose) {
+            onClose();
+        }
+    };
 
     const src_video = 'http://192.168.5.100:3007/api/service_video/get/watch?id=video.mp4';
 
@@ -130,7 +136,7 @@ const DialogPlayVideo: FC<ComponentProps> = ({ isShow, data, className, ...props
     }, []);
 
     return (
-        <div className={style.parent} ref={parent_element}>
+        <div className={`${style.parent} ${className || ''}`} {...props} ref={parent_element}>
             <div className={style.main}>
                 <div className={style.header}>
                     <div className={style.optionContainer}>

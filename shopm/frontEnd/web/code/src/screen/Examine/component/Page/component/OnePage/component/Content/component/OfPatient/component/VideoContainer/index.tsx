@@ -5,8 +5,12 @@ import Skeleton from '@src/component/Skeleton';
 import { LiaAngleLeftSolid, LiaAngleRightSolid } from 'react-icons/lia';
 import { IoCloseCircle } from 'react-icons/io5';
 import { CLOSE, SEE_VIDEO } from '@src/const/text';
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '@src/redux';
+import { setShow_dialogMyVideo } from '@src/redux/slice/Examine';
 
 const VideoContainer: FC<{ isLoading: boolean }> = ({ isLoading }) => {
+    const dispatch = useDispatch<AppDispatch>();
     const videos_element = useRef<HTMLDivElement | null>(null);
     const [indexVideo, setIndexVideo] = useState<number>(1);
     const [isPlay, setIsPlay] = useState<boolean>(false);
@@ -41,6 +45,10 @@ const VideoContainer: FC<{ isLoading: boolean }> = ({ isLoading }) => {
         setIsPlay(false);
     };
 
+    const handleShowDialogMyVideo = () => {
+        dispatch(setShow_dialogMyVideo(true));
+    };
+
     const src_video = 'http://192.168.5.100:3007/api/service_video/get/watch?id=video.mp4';
 
     const list_video = useMemo(() => {
@@ -73,6 +81,7 @@ const VideoContainer: FC<{ isLoading: boolean }> = ({ isLoading }) => {
                             className={style.detail}
                             onMouseEnter={() => handle_btn_onMouseEnter()}
                             onMouseOut={() => handle_btn_onMouseOut()}
+                            onClick={() => handleShowDialogMyVideo()}
                         >
                             {SEE_VIDEO}
                         </div>
