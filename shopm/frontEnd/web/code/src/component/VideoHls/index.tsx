@@ -1,12 +1,14 @@
 import { FC, memo, useRef, useEffect } from 'react';
 import style from './style.module.scss';
 import Hls, { LoaderContext, LoaderConfiguration, LoaderCallbacks } from 'hls.js';
+import { CutId } from './util';
 
 interface ComponentProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
     srcVideo?: string;
+    controls?: boolean;
 }
 
-const VideoHls: FC<ComponentProps> = ({ srcVideo, className, ...props }) => {
+const VideoHls: FC<ComponentProps> = ({ srcVideo, className, controls = false, ...props }) => {
     const parent_element = useRef<HTMLVideoElement>(null);
     const current_play_time = useRef<number>(0);
     const current_load_time = useRef<number>(0);
@@ -17,8 +19,9 @@ const VideoHls: FC<ComponentProps> = ({ srcVideo, className, ...props }) => {
         const video = parent_element.current;
 
         if (!video) return;
-
         if (!srcVideo) return;
+
+        const id = CutId(srcVideo);
 
         if (video.canPlayType('application/vnd.apple.mpegurl')) {
             // Native HLS support (Safari, iOS)
@@ -28,7 +31,7 @@ const VideoHls: FC<ComponentProps> = ({ srcVideo, className, ...props }) => {
                 load(context: LoaderContext, config: LoaderConfiguration, callbacks: LoaderCallbacks<LoaderContext>) {
                     // Modify URL (add token)
                     const url = new URL(context.url);
-                    url.searchParams.set('id', 'video.mp4');
+                    url.searchParams.set('id', id);
 
                     context.url = url.toString(); // Gán lại URL sau khi thêm params
 
@@ -95,7 +98,16 @@ const VideoHls: FC<ComponentProps> = ({ srcVideo, className, ...props }) => {
         };
     }, [srcVideo]);
 
-    return <video className={`${style.parent} ${className || ''}`} {...props} ref={parent_element} autoPlay muted />;
+    return (
+        <video
+            className={`${style.parent} ${className || ''}`}
+            {...props}
+            ref={parent_element}
+            autoPlay
+            muted
+            controls={controls}
+        />
+    );
 };
 
 export default memo(VideoHls);

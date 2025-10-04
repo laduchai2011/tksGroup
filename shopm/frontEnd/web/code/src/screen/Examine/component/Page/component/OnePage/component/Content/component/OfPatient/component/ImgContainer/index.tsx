@@ -11,13 +11,13 @@ const ImgContainer: FC<{ isLoading: boolean }> = ({ isLoading }) => {
     const [indexImg, setIndexImg] = useState<number>(1);
 
     useEffect(() => {
-        if (images_element.current) {
-            const { clientWidth } = images_element.current;
-            images_element.current.scrollTo({
-                left: (indexImg - 1) * clientWidth,
-                behavior: 'smooth',
-            });
-        }
+        if (!images_element.current) return;
+        const imagesElement = images_element.current;
+        const { clientWidth } = imagesElement;
+        imagesElement.scrollTo({
+            left: (indexImg - 1) * clientWidth,
+            behavior: 'smooth',
+        });
     }, [indexImg]);
 
     const handleBack = () => {

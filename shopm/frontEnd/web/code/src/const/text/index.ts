@@ -61,3 +61,6 @@ export const CREATE = 'Tạo';
 export const EXIT = 'Thoát';
 export const EDIT = 'Chỉnh sửa';
 export const IMAGE_VIDEO = 'Ảnh, video';
+export const ALL = 'Tất cả';
+export const LIST = 'Danh sách';
+export const PLAY = 'Phát';

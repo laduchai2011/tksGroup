@@ -8,6 +8,9 @@ export interface state_props {
     dialogPatientSend: {
         isShow: boolean;
     };
+    // dialogdialogVideo: {
+    //     isShow: boolean;
+    // };
     toastMessage: {
         data: ToastMessage_Data_Props;
     };
