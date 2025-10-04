@@ -1,21 +1,54 @@
-import { memo, useMemo, useRef, useEffect, useState } from 'react';
+import { FC, memo, useMemo, useRef, useEffect, useState } from 'react';
 import style from './style.module.scss';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import { CLOSE } from '@src/const/text';
 import VideoHls from '@src/component/VideoHls';
+import LazyImg from '../LazyImg';
 import VideoHlsOverview from '@src/component/VideoHlsOverview';
 import { options_enum, selectedOptions_type } from './type';
 
-const DialogVideo = () => {
+interface ComponentProps extends React.HTMLAttributes<HTMLDivElement> {
+    isShow?: boolean;
+    data?: unknown;
+    onClose?: () => void;
+}
+
+const DialogPlayImage: FC<ComponentProps> = ({ isShow, data, onClose, className, ...props }) => {
+    console.log('DialogPlayImage', data);
+    const parent_element = useRef<HTMLDivElement | null>(null);
     const options_element = useRef<HTMLDivElement | null>(null);
     const myCroll_element = useRef<HTMLDivElement | null>(null);
 
     // sroll content
     const contentContainer_element = useRef<HTMLDivElement | null>(null);
-    const videoContainer_element = useRef<HTMLDivElement | null>(null);
-    const videoListContainer_element = useRef<HTMLDivElement | null>(null);
+    const imageContainer_element = useRef<HTMLDivElement | null>(null);
+    const imageListContainer_element = useRef<HTMLDivElement | null>(null);
 
     const [selectedOption, setSelectedOption] = useState<selectedOptions_type>(options_enum.ALL);
+
+    useEffect(() => {
+        if (isShow) {
+            if (parent_element.current) {
+                parent_element.current.classList.add(style.parent_show_display);
+            }
+            const timeout = setTimeout(() => {
+                if (parent_element.current) {
+                    parent_element.current.classList.add(style.parent_show_opacity);
+                }
+                clearTimeout(timeout);
+            }, 50);
+        } else {
+            if (parent_element.current) {
+                parent_element.current.classList.remove(style.parent_show_opacity);
+            }
+            const timeout = setTimeout(() => {
+                if (parent_element.current) {
+                    parent_element.current.classList.remove(style.parent_show_display);
+                    clearTimeout(timeout);
+                }
+            }, 350);
+        }
+    }, [isShow]);
 
     useEffect(() => {
         // handle header
@@ -36,45 +69,44 @@ const DialogVideo = () => {
 
         // handle content
         if (!contentContainer_element.current) return;
-        if (!videoContainer_element.current) return;
-        if (!videoListContainer_element.current) return;
+        if (!imageContainer_element.current) return;
+        if (!imageListContainer_element.current) return;
 
         const contentContainerElement = contentContainer_element.current;
-        const videoContainerElement = videoContainer_element.current;
-        const videoListContainerElement = videoListContainer_element.current;
+        const imageContainerElement = imageContainer_element.current;
+        const imageListContainerElement = imageListContainer_element.current;
 
         switch (selectedOption) {
             case options_enum.ALL: {
                 contentContainerElement.style.left = '0';
-                videoContainerElement.classList.add(style.half);
-                videoContainerElement.classList.remove(style.full);
-                videoListContainerElement.classList.add(style.half);
-                videoListContainerElement.classList.remove(style.full);
+                imageContainerElement.classList.add(style.half);
+                imageContainerElement.classList.remove(style.full);
+                imageListContainerElement.classList.add(style.half);
+                imageListContainerElement.classList.remove(style.full);
                 break;
             }
             case options_enum.PLAY: {
                 contentContainerElement.style.left = '0';
-                videoContainerElement.classList.remove(style.half);
-                videoContainerElement.classList.add(style.full);
-                videoListContainerElement.classList.remove(style.half);
-                videoListContainerElement.classList.add(style.full);
+                imageContainerElement.classList.remove(style.half);
+                imageContainerElement.classList.add(style.full);
+                imageListContainerElement.classList.remove(style.half);
+                imageListContainerElement.classList.add(style.full);
                 break;
             }
             case options_enum.LIST: {
                 contentContainerElement.style.left = '-100%';
-                videoContainerElement.classList.remove(style.half);
-                videoContainerElement.classList.add(style.full);
-                videoListContainerElement.classList.remove(style.half);
-                videoListContainerElement.classList.add(style.full);
+                imageContainerElement.classList.remove(style.half);
+                imageContainerElement.classList.add(style.full);
+                imageListContainerElement.classList.remove(style.half);
+                imageListContainerElement.classList.add(style.full);
                 break;
             }
             default: {
-                console.log('default');
                 contentContainerElement.style.left = '0';
-                videoContainerElement.classList.add(style.half);
-                videoContainerElement.classList.remove(style.full);
-                videoListContainerElement.classList.add(style.half);
-                videoListContainerElement.classList.remove(style.full);
+                imageContainerElement.classList.add(style.half);
+                imageContainerElement.classList.remove(style.full);
+                imageListContainerElement.classList.add(style.half);
+                imageListContainerElement.classList.remove(style.full);
                 break;
             }
         }
@@ -84,23 +116,22 @@ const DialogVideo = () => {
         setSelectedOption(selectedOption);
     };
 
-    const handleClose = () => {};
+    const handleClose = () => {
+        if (onClose) {
+            onClose();
+        }
+    };
 
-    const src_video = 'http://192.168.5.100:3007/api/service_video/get/watch?id=video.mp4';
+    const srcImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpao8X6PNUrN1vgwedPR0FJu_IMZdA82jIag&s';
 
-    const list_video = useMemo(() => {
+    const list_image = useMemo(() => {
         return [1, 2, 3, 4, 5, 6, 7, 8, 9].map((_, index) => (
-            <VideoHlsOverview
-                key={index}
-                className={style.video1}
-                srcImage="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpao8X6PNUrN1vgwedPR0FJu_IMZdA82jIag&s"
-                srcVideo={src_video}
-            />
+            <LazyImg key={index} className={style.video1} srcImg={srcImage} />
         ));
     }, []);
 
     return (
-        <div className={style.parent}>
+        <div className={`${style.parent} ${className || ''}`} {...props} ref={parent_element}>
             <div className={style.main}>
                 <div className={style.header}>
                     <div className={style.optionContainer}>
@@ -124,11 +155,11 @@ const DialogVideo = () => {
                 </div>
                 <div className={style.content}>
                     <div className={style.contentContainer} ref={contentContainer_element}>
-                        <div className={style.videoContainer} ref={videoContainer_element}>
-                            <VideoHls className={style.video} srcVideo={src_video} controls={true} />
+                        <div className={style.imageContainer} ref={imageContainer_element}>
+                            <LazyImg className={style.image} srcImg={srcImage} />
                         </div>
-                        <div className={style.videoListContainer} ref={videoListContainer_element}>
-                            <div className={style.videoList}>{list_video}</div>
+                        <div className={style.imageListContainer} ref={imageListContainer_element}>
+                            <div className={style.imageList}>{list_image}</div>
                         </div>
                     </div>
                 </div>
@@ -137,4 +168,4 @@ const DialogVideo = () => {
     );
 };
 
-export default memo(DialogVideo);
+export default memo(DialogPlayImage);

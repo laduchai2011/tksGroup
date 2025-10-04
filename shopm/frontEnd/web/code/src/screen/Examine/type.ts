@@ -11,6 +11,9 @@ export interface state_props {
     dialogMyVideo: {
         isShow: boolean;
     };
+    dialogMyImage: {
+        isShow: boolean;
+    };
     toastMessage: {
         data: ToastMessage_Data_Props;
     };

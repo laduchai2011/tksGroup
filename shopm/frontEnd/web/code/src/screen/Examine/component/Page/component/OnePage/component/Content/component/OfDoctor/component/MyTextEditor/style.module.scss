@@ -1,0 +1,9 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    @include marginRes(5px, 0px, md, 1);
+
+    @include responsive(sm) {
+        @include marginRes(5px, 0px, md, 1.2);
+    }
+}

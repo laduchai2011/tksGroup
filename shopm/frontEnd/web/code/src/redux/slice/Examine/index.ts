@@ -13,6 +13,9 @@ const initialState: state_props = {
     dialogMyVideo: {
         isShow: false,
     },
+    dialogMyImage: {
+        isShow: false,
+    },
     toastMessage: {
         data: { type: undefined, message: '' },
     },
@@ -34,6 +37,9 @@ const ExamineSlice = createSlice({
         setShow_dialogMyVideo: (state, action: PayloadAction<boolean>) => {
             state.dialogMyVideo.isShow = action.payload;
         },
+        setShow_dialogMyImage: (state, action: PayloadAction<boolean>) => {
+            state.dialogMyImage.isShow = action.payload;
+        },
         setData_toastMessage: (state, action: PayloadAction<ToastMessage_Data_Props>) => {
             state.toastMessage.data = action.payload;
         },
@@ -44,6 +50,7 @@ export const {
     setShow_createPatientRecordDialog,
     setShow_dialogPatientSend,
     setShow_dialogMyVideo,
+    setShow_dialogMyImage,
     setData_toastMessage,
 } = ExamineSlice.actions;
 export default ExamineSlice.reducer;

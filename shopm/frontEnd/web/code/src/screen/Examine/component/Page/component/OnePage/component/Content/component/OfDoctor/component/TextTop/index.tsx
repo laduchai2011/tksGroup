@@ -10,7 +10,7 @@ const TextTop: FC<{ isLoading: boolean }> = ({ isLoading }) => {
             ) : (
                 <div className={style.text}>
                     <span>Hãy mô tả tình trạng của bạn</span>
-                    <span>Dành cho khách hàng</span>
+                    <span>Dành cho bác sĩ hoặc được sĩ</span>
                 </div>
             )}
         </div>

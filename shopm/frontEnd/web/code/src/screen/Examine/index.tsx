@@ -2,8 +2,8 @@ import style from './style.module.scss';
 
 import MyToastMessage from './component/MyToastMessage';
 import CreatePatientRecordDialog from './component/CreatePatientRecordDialog';
-// import DialogVideo from './component/DialogVideo';
 import DialogMyVideo from './component/DialogMyVideo';
+import DialogMyImage from './component/DialogMyImage';
 import DialogPatientSend from './component/DialogPatientSend';
 import TopControl from './component/TopControl';
 import Overview from './component/Overview';
@@ -19,8 +19,8 @@ const Examine = () => {
             <div className={style.main}>
                 <MyToastMessage />
                 <CreatePatientRecordDialog />
-                {/* <DialogVideo /> */}
                 <DialogMyVideo />
+                <DialogMyImage />
                 <DialogPatientSend />
                 <TopControl />
                 <Overview isLoading={isLoading} />

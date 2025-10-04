@@ -101,7 +101,6 @@ const DialogPlayVideo: FC<ComponentProps> = ({ isShow, data, onClose, className,
                 break;
             }
             default: {
-                console.log('default');
                 contentContainerElement.style.left = '0';
                 videoContainerElement.classList.add(style.half);
                 videoContainerElement.classList.remove(style.full);
