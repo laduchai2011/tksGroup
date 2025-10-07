@@ -5,7 +5,9 @@ import { select_enum } from '@src/screen/Header/type';
 const Header = () => {
     return (
         <div className={style.parent}>
-            <Header_Common header__interface={{ top_isShow: true, left_isShow: true, selected: select_enum.HOME }} />
+            <Header_Common
+                header__interface={{ top_isShow: true, left_isShow: true, selected: select_enum.MEDICATIONS }}
+            />
         </div>
     );
 };

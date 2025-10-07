@@ -1,0 +1,14 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    background-color: #eee;
+    margin-top: 60px;
+    @include center-of-column;
+
+    > .main {
+        background-color: white;
+        @include responsive(md) {
+            width: 100%;
+        }
+    }
+}
