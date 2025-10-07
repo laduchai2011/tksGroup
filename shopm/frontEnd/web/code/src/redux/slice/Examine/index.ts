@@ -7,6 +7,9 @@ const initialState: state_props = {
     createPatientRecordDialog: {
         isShow: false,
     },
+    dialogCall: {
+        isShow: false,
+    },
     dialogPatientSend: {
         isShow: false,
     },
@@ -34,6 +37,9 @@ const ExamineSlice = createSlice({
         setShow_createPatientRecordDialog: (state, action: PayloadAction<boolean>) => {
             state.createPatientRecordDialog.isShow = action.payload;
         },
+        setShow_dialogCall: (state, action: PayloadAction<boolean>) => {
+            state.dialogCall.isShow = action.payload;
+        },
         setShow_dialogPatientSend: (state, action: PayloadAction<boolean>) => {
             state.dialogPatientSend.isShow = action.payload;
         },
@@ -54,6 +60,7 @@ const ExamineSlice = createSlice({
 
 export const {
     setShow_createPatientRecordDialog,
+    setShow_dialogCall,
     setShow_dialogPatientSend,
     setShow_dialogDoctorSend,
     setShow_dialogMyVideo,

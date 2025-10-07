@@ -2,6 +2,7 @@ import style from './style.module.scss';
 
 import MyToastMessage from './component/MyToastMessage';
 import CreatePatientRecordDialog from './component/CreatePatientRecordDialog';
+import DialogCall from './component/DialogCall';
 import DialogMyVideo from './component/DialogMyVideo';
 import DialogMyImage from './component/DialogMyImage';
 import DialogPatientSend from './component/DialogPatientSend';
@@ -20,6 +21,7 @@ const Examine = () => {
             <div className={style.main}>
                 <MyToastMessage />
                 <CreatePatientRecordDialog />
+                <DialogCall />
                 <DialogMyVideo />
                 <DialogMyImage />
                 <DialogPatientSend />

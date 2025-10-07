@@ -1,9 +1,14 @@
 import { FC, memo, useState, useRef, useEffect } from 'react';
 import style from './style.module.scss';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { FaPhone } from 'react-icons/fa';
 import Skeleton from '@src/component/Skeleton';
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '@src/redux';
+import { setShow_dialogCall } from '@src/redux/slice/Examine';
 
 const Header: FC<{ isLoading: boolean }> = ({ isLoading }) => {
+    const dispatch = useDispatch<AppDispatch>();
     const main2_element = useRef<HTMLDivElement | null>(null);
     const [view, setView] = useState<boolean>(false);
     const [myLoading, setMyLoading] = useState<boolean>(false);
@@ -21,6 +26,10 @@ const Header: FC<{ isLoading: boolean }> = ({ isLoading }) => {
             }
         }
     }, [view]);
+
+    const handleCall = () => {
+        dispatch(setShow_dialogCall(true));
+    };
 
     const handleOpenView = () => {
         setView(false);
@@ -48,6 +57,13 @@ const Header: FC<{ isLoading: boolean }> = ({ isLoading }) => {
                     )}
                 </div>
                 <div className={style.icons}>
+                    {myLoading ? (
+                        <Skeleton className={style.iconLoading} />
+                    ) : (
+                        <div>
+                            <FaPhone className={style.icon} onClick={() => handleCall()} />
+                        </div>
+                    )}
                     {myLoading ? (
                         <Skeleton className={style.iconLoading} />
                     ) : (

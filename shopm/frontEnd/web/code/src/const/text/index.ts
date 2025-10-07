@@ -69,3 +69,4 @@ export const PRESCRIBE_MEDICAtTiION = 'Kê đơn';
 export const CUSTOMER_SEND = 'Khách hàng gửi';
 export const DOCTOR_SEND = 'Bác sĩ / Dược sĩ gửi';
 export const FINISH = 'Hoàn thành';
+export const CALL = 'Gọi';

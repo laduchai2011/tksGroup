@@ -1,6 +1,7 @@
 import React, { FC, useRef, useEffect } from 'react';
 import style from './style.module.scss';
 
+import { MdOutlineMessage } from 'react-icons/md';
 import TickSymbol from '@src/component/Icon/TickSymbol';
 import WarnTriangle from '@src/component/Icon/WarnTriangle';
 import ErrorCircle from '@src/component/Icon/ErrorCircle';
@@ -95,6 +96,7 @@ const MessageBox: FC<{
         <div className={style.parent} ref={parent_element} onMouseOver={() => handleMouseOver()}>
             <div></div>
             <div>
+                {type === messageType_enum.NORMAL && <MdOutlineMessage size={25} />}
                 {type === messageType_enum.SUCCESS && <TickSymbol tickSymbol={tickSymbol} />}
                 {type === messageType_enum.WARN && <WarnTriangle warnTriangle={warnTriangle} />}
                 {type === messageType_enum.ERROR && <ErrorCircle errorCircle={errorCircle} />}

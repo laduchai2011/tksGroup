@@ -36,12 +36,14 @@ interface ToastMessage_Event_Props {
 }
 
 export enum messageType_enum {
+    NORMAL = 'NORMAL',
     SUCCESS = 'SUCCESS',
     WARN = 'WARN',
     ERROR = 'ERROR',
 }
 
 export type messageType_type =
+    | typeof messageType_enum.NORMAL
     | typeof messageType_enum.SUCCESS
     | typeof messageType_enum.WARN
     | typeof messageType_enum.ERROR;

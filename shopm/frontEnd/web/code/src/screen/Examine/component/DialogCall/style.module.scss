@@ -1,0 +1,95 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    background-color: rgba(122, 122, 122, 0.5);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    @include center-of-rectangle;
+    display: none;
+    opacity: 0;
+    z-index: 1000;
+    transition: opacity 0.3s linear;
+
+    &.parent_show_opacity {
+        opacity: 1;
+    }
+
+    &.parent_show_display {
+        display: flex;
+    }
+
+    > .main {
+        background-color: white;
+        width: 300px;
+        border-radius: 15px;
+        overflow: hidden;
+
+        > .headerContainer {
+            @include center-of-row;
+            justify-content: space-between;
+            box-sizing: border-box;
+            padding: 10px 10px 5px 10px;
+
+            > .callContainer {
+                @include center-of-row;
+
+                > svg {
+                    @include marginRes(0px, 10px, md, 1);
+
+                    @include responsive(sm) {
+                        @include marginRes(0px, 10px, md, 1.2);
+                    }
+                }
+
+                > div {
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                }
+            }
+
+            > .closeIcon {
+                @include widthRes(25px, md, 1);
+                @include heightRes(25px, md, 1);
+
+                &:hover {
+                    scale: 1.2;
+                }
+
+                @include responsive(sm) {
+                    @include widthRes(25px, md, 1.5);
+                    @include heightRes(25px, md, 1.5);
+                }
+            }
+        }
+
+        > .contentContainer {
+            @include center-of-rectangle;
+            width: 100%;
+
+            > div {
+                > .textContainer {
+                    @include center-of-rectangle;
+                    height: 80px;
+                    width: 100%;
+                    font-size: 1.4rem;
+                }
+
+                > .nPhoneContainer {
+                    @include center-of-rectangle;
+                    height: 60px;
+                    width: 100%;
+
+                    > svg {
+                        color: red;
+                        height: 50px;
+                        width: 50px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}

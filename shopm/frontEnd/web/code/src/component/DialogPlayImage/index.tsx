@@ -22,18 +22,24 @@ const DialogPlayImage: FC<ComponentProps> = ({ isShow, data, onClose, className,
     const imageContainer_element = useRef<HTMLDivElement | null>(null);
     const imageListContainer_element = useRef<HTMLDivElement | null>(null);
 
+    const [isShow1, setIsShow1] = useState<boolean>(false);
+
     const [selectedOption, setSelectedOption] = useState<selectedOptions_type>(options_enum.ALL);
 
     useEffect(() => {
         if (isShow) {
-            if (parent_element.current) {
-                parent_element.current.classList.add(style.parent_show_display);
-            }
-            const timeout = setTimeout(() => {
+            setIsShow1(true);
+            const setTimeoutShow = setTimeout(() => {
                 if (parent_element.current) {
-                    parent_element.current.classList.add(style.parent_show_opacity);
+                    parent_element.current.classList.add(style.parent_show_display);
                 }
-                clearTimeout(timeout);
+                const timeout = setTimeout(() => {
+                    if (parent_element.current) {
+                        parent_element.current.classList.add(style.parent_show_opacity);
+                    }
+                    clearTimeout(timeout);
+                }, 50);
+                clearTimeout(setTimeoutShow);
             }, 50);
         } else {
             if (parent_element.current) {
@@ -45,6 +51,10 @@ const DialogPlayImage: FC<ComponentProps> = ({ isShow, data, onClose, className,
                     clearTimeout(timeout);
                 }
             }, 350);
+            const setTimeoutShow = setTimeout(() => {
+                setIsShow1(false);
+                clearTimeout(setTimeoutShow);
+            }, 400);
         }
     }, [isShow]);
 
@@ -154,10 +164,10 @@ const DialogPlayImage: FC<ComponentProps> = ({ isShow, data, onClose, className,
                 <div className={style.content}>
                     <div className={style.contentContainer} ref={contentContainer_element}>
                         <div className={style.imageContainer} ref={imageContainer_element}>
-                            <LazyImg className={style.image} srcImg={srcImage} />
+                            {isShow1 && <LazyImg className={style.image} srcImg={srcImage} />}
                         </div>
                         <div className={style.imageListContainer} ref={imageListContainer_element}>
-                            <div className={style.imageList}>{list_image}</div>
+                            {isShow1 && <div className={style.imageList}>{list_image}</div>}
                         </div>
                     </div>
                 </div>

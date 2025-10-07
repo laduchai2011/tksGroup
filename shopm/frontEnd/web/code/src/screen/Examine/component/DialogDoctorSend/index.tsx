@@ -3,7 +3,7 @@ import style from './style.module.scss';
 import { IoCloseSharp } from 'react-icons/io5';
 import { CLOSE, SEND, EXIT, SEND_TREATMENT } from '@src/const/text';
 import { useSelector, useDispatch } from 'react-redux';
-import type { RootState, AppDispatch } from '@src/redux';
+import { RootState, AppDispatch } from '@src/redux';
 import { setShow_dialogDoctorSend, setData_toastMessage } from '@src/redux/slice/Examine';
 import { messageType_enum } from '@src/component/ToastMessage/type';
 

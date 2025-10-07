@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Signup from '@src/screen/Signup';
 import Home from '@src/screen/Home';
+import Medications from '@src/screen/Medications';
 import NotFoundPage from '@src/screen/NotFoundPage';
 import Profile from '@src/screen/Profile';
 import Examine from '@src/screen/Examine';
@@ -10,6 +11,7 @@ const router = createBrowserRouter(
     [
         { path: '/signup', element: <Signup /> },
         { path: '/', element: <Home /> },
+        { path: '/medications', element: <Medications /> },
         { path: '/profile', element: <Profile /> },
         { path: '/patient_record', element: <Patient_Record /> },
         { path: '/examine', element: <Examine /> },

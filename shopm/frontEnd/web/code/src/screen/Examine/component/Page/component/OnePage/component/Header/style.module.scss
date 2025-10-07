@@ -14,8 +14,6 @@
             @include center-of-rectangle;
 
             > .indexNumber {
-                // min-height: max-content;
-                // min-width: max-content;
                 @include center-of-rectangle;
                 @include heightRes(25px, md, 1);
                 @include widthRes(25px, md, 1);
@@ -64,8 +62,15 @@
         > .icons {
             height: 100%;
             width: max-content;
+            @include center-of-row;
 
             > div {
+                @include marginRes(0px, 5px, md, 1);
+
+                @include responsive(sm) {
+                    @include marginRes(0px, 5px, md, 1.2);
+                }
+
                 > .icon {
                     cursor: pointer;
                 }

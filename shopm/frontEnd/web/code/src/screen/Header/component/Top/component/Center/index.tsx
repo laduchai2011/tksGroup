@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import style from './style.module.scss';
+import { useNavigate } from 'react-router-dom';
 import { RiHome9Fill } from 'react-icons/ri';
 import { FaShoppingCart, FaPhone } from 'react-icons/fa';
 import { FaUserDoctor } from 'react-icons/fa6';
@@ -8,6 +9,7 @@ import { MAIN_BLUE_COLOR } from '@src/utility/color';
 import DynamicMenu from '@src/component/DynamicMenu';
 
 const Center = () => {
+    const navigate = useNavigate();
     const parent_element = useRef<HTMLDivElement | null>(null);
     const [icon_index, set_icon_index] = useState<number>(0);
     const [menu_container_active, set_menu_container_active] = useState<boolean>(false);
@@ -36,6 +38,14 @@ const Center = () => {
             }
         }
     }, [menu_container_active]);
+
+    useEffect(() => {
+        if (icon_index === 0) {
+            navigate('/');
+        } else if (icon_index === 1) {
+            navigate('/medications');
+        }
+    }, [icon_index, navigate]);
 
     const handle_icon_index = (_icon_index: number): string => {
         if (_icon_index === icon_index) {

@@ -20,6 +20,7 @@
     top: 0;
     position: fixed;
     opacity: 1;
+    z-index: 1000000;
     transition:
         right calc(var(--show-time) * 1s) linear,
         top 1s linear,

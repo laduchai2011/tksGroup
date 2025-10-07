@@ -23,18 +23,24 @@ const DialogPlayVideo: FC<ComponentProps> = ({ isShow, data, onClose, className,
     const videoContainer_element = useRef<HTMLDivElement | null>(null);
     const videoListContainer_element = useRef<HTMLDivElement | null>(null);
 
+    const [isShow1, setIsShow1] = useState<boolean>(false);
+
     const [selectedOption, setSelectedOption] = useState<selectedOptions_type>(options_enum.ALL);
 
     useEffect(() => {
         if (isShow) {
-            if (parent_element.current) {
-                parent_element.current.classList.add(style.parent_show_display);
-            }
-            const timeout = setTimeout(() => {
+            setIsShow1(true);
+            const setTimeoutShow = setTimeout(() => {
                 if (parent_element.current) {
-                    parent_element.current.classList.add(style.parent_show_opacity);
+                    parent_element.current.classList.add(style.parent_show_display);
                 }
-                clearTimeout(timeout);
+                const timeout = setTimeout(() => {
+                    if (parent_element.current) {
+                        parent_element.current.classList.add(style.parent_show_opacity);
+                    }
+                    clearTimeout(timeout);
+                }, 50);
+                clearTimeout(setTimeoutShow);
             }, 50);
         } else {
             if (parent_element.current) {
@@ -46,6 +52,10 @@ const DialogPlayVideo: FC<ComponentProps> = ({ isShow, data, onClose, className,
                     clearTimeout(timeout);
                 }
             }, 350);
+            const setTimeoutShow = setTimeout(() => {
+                setIsShow1(false);
+                clearTimeout(setTimeoutShow);
+            }, 400);
         }
     }, [isShow]);
 
@@ -160,10 +170,10 @@ const DialogPlayVideo: FC<ComponentProps> = ({ isShow, data, onClose, className,
                 <div className={style.content}>
                     <div className={style.contentContainer} ref={contentContainer_element}>
                         <div className={style.videoContainer} ref={videoContainer_element}>
-                            {isShow && <VideoHls className={style.video} srcVideo={src_video} controls={true} />}
+                            {isShow1 && <VideoHls className={style.video} srcVideo={src_video} controls={true} />}
                         </div>
                         <div className={style.videoListContainer} ref={videoListContainer_element}>
-                            <div className={style.videoList}>{list_video}</div>
+                            {isShow1 && <div className={style.videoList}>{list_video}</div>}
                         </div>
                     </div>
                 </div>
