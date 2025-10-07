@@ -1,0 +1,90 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    @include marginRes(15px, 0px, md, 1);
+
+    @include responsive(sm) {
+        @include marginRes(15px, 0px, md, 1.2);
+    }
+
+    > .progressContainer {
+        @include center-of-rectangle;
+        @include marginRes(5px, 0px, md, 1);
+
+        @include responsive(sm) {
+            @include marginRes(5px, 0px, md, 1.2);
+        }
+
+        > div {
+            @include center-of-row;
+
+            > div {
+                @include center-of-row;
+                @include marginRes(0px, 10px, md, 1);
+
+                @include responsive(sm) {
+                    @include marginRes(0px, 10px, md, 1.2);
+                }
+
+                > .progressText {
+                    font-size: 0.9rem;
+                }
+                > .progressTextLoading {
+                    min-height: 20px;
+                    min-width: 100px;
+                }
+
+                > .icon {
+                    @include marginRes(0px, 2px, md, 1);
+                    min-height: 20px;
+                    min-width: 20px;
+                    border-radius: 50%;
+
+                    @include responsive(sm) {
+                        @include marginRes(0px, 2px, md, 1.2);
+                    }
+                }
+
+                > .finish {
+                    height: 25px;
+                    width: 25px;
+                    color: rgb(160, 255, 17);
+                }
+
+                > .nfinish {
+                    height: 20px;
+                    width: 20px;
+                    color: red;
+                }
+            }
+        }
+    }
+
+    > .statusBuyMedication {
+        @include center-of-rectangle;
+        @include marginRes(5px, 0px, md, 1);
+
+        @include responsive(sm) {
+            @include marginRes(5px, 0px, md, 1.2);
+        }
+
+        > .statusBuy {
+            font-size: 0.9rem;
+            @include center-of-row;
+            min-height: 20px;
+            min-width: 150px;
+
+            > div {
+                @include marginRes(0px, 2px, md, 1);
+
+                @include responsive(sm) {
+                    @include marginRes(0px, 2px, md, 1.2);
+                }
+            }
+
+            > div:nth-child(2) {
+                color: red;
+            }
+        }
+    }
+}

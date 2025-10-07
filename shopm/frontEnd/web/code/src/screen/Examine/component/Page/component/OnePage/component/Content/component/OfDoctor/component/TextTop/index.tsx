@@ -9,7 +9,7 @@ const TextTop: FC<{ isLoading: boolean }> = ({ isLoading }) => {
                 <Skeleton className={style.loading} />
             ) : (
                 <div className={style.text}>
-                    <span>Hãy mô tả tình trạng của bạn</span>
+                    <span>Khám</span>
                     <span>Dành cho bác sĩ hoặc được sĩ</span>
                 </div>
             )}

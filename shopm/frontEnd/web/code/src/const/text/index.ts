@@ -64,3 +64,7 @@ export const IMAGE_VIDEO = 'Ảnh, video';
 export const ALL = 'Tất cả';
 export const LIST = 'Danh sách';
 export const PLAY = 'Phát';
+export const PRESCRIBE_MEDICAtTiION = 'Kê đơn';
+export const CUSTOMER_SEND = 'Khách hàng gửi';
+export const DOCTOR_SEND = 'Bác sĩ / Dược sĩ gửi';
+export const FINISH = 'Hoàn thành';

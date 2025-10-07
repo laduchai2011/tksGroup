@@ -2,6 +2,7 @@
 
 .parent {
     @include marginRes(5px, 0px, md, 1);
+    min-height: 100px;
 
     @include responsive(sm) {
         @include marginRes(5px, 0px, md, 1.2);

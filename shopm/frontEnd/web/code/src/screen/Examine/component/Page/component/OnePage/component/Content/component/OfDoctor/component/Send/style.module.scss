@@ -1,0 +1,23 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    @include marginRes(5px, 0px, md, 1);
+    @include center-of-row;
+    justify-content: flex-end;
+
+    @include responsive(sm) {
+        @include marginRes(5px, 0px, md, 1.2);
+    }
+
+    > .sendIcon {
+        color: blue;
+        cursor: pointer;
+        @include heightRes(30px, md, 1);
+        @include widthRes(30px, md, 1);
+
+        @include responsive(sm) {
+            @include heightRes(30px, md, 1.5);
+            @include widthRes(30px, md, 1.5);
+        }
+    }
+}

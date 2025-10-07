@@ -21,9 +21,9 @@ class HandleFormat {
         const selection = window.getSelection();
         if (!selection || selection.rangeCount === 0 || selection.isCollapsed) return;
 
-        const range = selection.getRangeAt(0);
-        const selectedText = range.toString();
-        console.log(selectedText);
+        // const range = selection.getRangeAt(0);
+        // const selectedText = range.toString();
+        // console.log(selectedText);
 
         const anchorNode = selection.anchorNode;
         if (!anchorNode) return;
@@ -31,7 +31,7 @@ class HandleFormat {
         const wrapper_Element = anchorNode.parentElement;
         if (!wrapper_Element) return;
 
-        console.log(111111111, wrapper_Element.childNodes);
+        // console.log(111111111, wrapper_Element.childNodes);
 
         for (let i: number = 0; i < wrapper_Element.childNodes.length; i++) {
             const childNode = wrapper_Element.childNodes[i];

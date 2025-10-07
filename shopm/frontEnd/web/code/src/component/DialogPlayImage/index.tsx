@@ -2,9 +2,7 @@ import { FC, memo, useMemo, useRef, useEffect, useState } from 'react';
 import style from './style.module.scss';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import { CLOSE } from '@src/const/text';
-import VideoHls from '@src/component/VideoHls';
 import LazyImg from '../LazyImg';
-import VideoHlsOverview from '@src/component/VideoHlsOverview';
 import { options_enum, selectedOptions_type } from './type';
 
 interface ComponentProps extends React.HTMLAttributes<HTMLDivElement> {

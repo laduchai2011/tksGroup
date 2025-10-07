@@ -1,0 +1,213 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    background-color: rgba(122, 122, 122, 0.5);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    @include center-of-rectangle;
+    display: none;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s linear;
+
+    &.parent_show_opacity {
+        opacity: 1;
+    }
+
+    &.parent_show_display {
+        display: flex;
+    }
+
+    > .main {
+        background-color: white;
+        width: 300px;
+        border-radius: 15px;
+        overflow: hidden;
+
+        > .headerContainer {
+            @include center-of-row;
+            justify-content: space-between;
+            box-sizing: border-box;
+            padding: 10px 10px 5px 10px;
+
+            > .header {
+                font-size: 1.1rem;
+                font-weight: 600;
+            }
+
+            > .closeIcon {
+                @include widthRes(25px, md, 1);
+                @include heightRes(25px, md, 1);
+
+                &:hover {
+                    scale: 1.2;
+                }
+
+                @include responsive(sm) {
+                    @include widthRes(25px, md, 1.5);
+                    @include heightRes(25px, md, 1.5);
+                }
+            }
+        }
+
+        > .contentContainer {
+            position: relative;
+            @include center-of-rectangle;
+            color: rgb(255, 0, 242);
+            text-align: center;
+            font-size: 1.1rem;
+            box-sizing: border-box;
+            padding: 5px 10px 10px 10px;
+            height: 100px;
+            transition: height 0.5s linear;
+
+            &.contentContainer_isSend {
+                height: 50px;
+            }
+
+            > .text1 {
+                position: absolute;
+                width: 100%;
+                height: 40px;
+                @include center-of-rectangle;
+                display: none;
+                opacity: 0;
+                z-index: 2;
+                transition:
+                    opacity 0.5s linear,
+                    height 0.5s linear;
+
+                &.text1_show_display {
+                    display: flex;
+                }
+
+                &.text1_show_opacity {
+                    opacity: 1;
+                    height: 50px;
+                    animation: animation_text1 1.5s ease-in-out infinite;
+                }
+            }
+
+            > .content {
+                @include center-of-rectangle;
+                transition: opacity 0.5s linear;
+                z-index: 1;
+
+                &.content_hidden_opacity {
+                    opacity: 0;
+                }
+            }
+        }
+
+        > .btnContainer {
+            height: 40px;
+            position: relative;
+            transition: height 0.5s linear;
+
+            &.btnContainer_isSend {
+                height: 50px;
+            }
+
+            > .text2 {
+                width: 100%;
+                height: 40px;
+                @include center-of-rectangle;
+                position: absolute;
+                display: none;
+                opacity: 0;
+                color: rgb(255, 0, 242);
+                font-size: 1.1rem;
+                z-index: 2;
+                transition:
+                    opacity 0.5s linear,
+                    height 0.5s linear;
+
+                &.text2_show_display {
+                    display: flex;
+                }
+
+                &.text2_show_opacity {
+                    opacity: 1;
+                    height: 50px;
+                    animation: animation_text2 1.5s ease-in-out infinite;
+                }
+            }
+
+            > .btns {
+                @include center-of-row;
+                height: 100%;
+                transition: opacity 0.5s linear;
+                z-index: 1;
+
+                &.btns_hidden_opacity {
+                    opacity: 0;
+                }
+
+                > .btn {
+                    height: 100%;
+                    width: 50%;
+                    @include center-of-rectangle;
+                    font-size: 1.1rem;
+                    cursor: pointer;
+                    color: white;
+                    user-select: none;
+                }
+
+                > .btn:nth-child(1) {
+                    background-color: blue;
+
+                    &:hover {
+                        background-color: white;
+                        color: blue;
+                    }
+
+                    &:active {
+                        background-color: blue;
+                        color: white;
+                    }
+                }
+
+                > .btn:nth-child(2) {
+                    background-color: red;
+
+                    &:hover {
+                        background-color: white;
+                        color: red;
+                    }
+
+                    &:active {
+                        background-color: red;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes animation_text1 {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes animation_text2 {
+    0% {
+        scale: 1.1;
+    }
+    50% {
+        scale: 1;
+    }
+    100% {
+        scale: 1.1;
+    }
+}

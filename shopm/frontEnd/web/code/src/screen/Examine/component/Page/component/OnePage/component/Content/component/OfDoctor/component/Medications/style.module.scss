@@ -1,0 +1,57 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    @include marginRes(10px, 0px, md, 1);
+
+    @include responsive(sm) {
+        @include marginRes(10px, 0px, md, 1.2);
+    }
+
+    > .header {
+        font-style: italic;
+        min-height: 30px;
+        max-width: 100px;
+    }
+
+    > .table {
+        @include marginRes(5px, 0px, md, 1);
+
+        @include responsive(sm) {
+            @include marginRes(5px, 0px, md, 1.2);
+        }
+
+        > .row {
+            @include center-of-row;
+            width: 100%;
+            min-height: 30px;
+            @include marginRes(2px, 0px, md, 1);
+
+            @include responsive(sm) {
+                @include marginRes(2px, 0px, md, 1.2);
+            }
+
+            > div {
+                @include center-of-rectangle;
+                box-sizing: border-box;
+                padding: 5px;
+            }
+
+            > .index {
+                width: 30px;
+            }
+
+            > .name {
+                flex: 1;
+            }
+
+            > .amount {
+                width: 50px;
+            }
+
+            > .note {
+                min-width: 60px;
+                width: 50px;
+            }
+        }
+    }
+}

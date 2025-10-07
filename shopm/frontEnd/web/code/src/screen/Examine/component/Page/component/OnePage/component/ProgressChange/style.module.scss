@@ -1,0 +1,7 @@
+.parent {
+    @include marginRes(15px, 0px, md, 1);
+
+    @include responsive(sm) {
+        @include marginRes(15px, 0px, md, 1.2);
+    }
+}
