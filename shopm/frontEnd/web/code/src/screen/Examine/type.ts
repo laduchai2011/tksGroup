@@ -8,6 +8,9 @@ export interface state_props {
     dialogPatientSend: {
         isShow: boolean;
     };
+    dialogDoctorSend: {
+        isShow: boolean;
+    };
     dialogMyVideo: {
         isShow: boolean;
     };

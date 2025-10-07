@@ -160,7 +160,7 @@ const DialogPlayVideo: FC<ComponentProps> = ({ isShow, data, onClose, className,
                 <div className={style.content}>
                     <div className={style.contentContainer} ref={contentContainer_element}>
                         <div className={style.videoContainer} ref={videoContainer_element}>
-                            <VideoHls className={style.video} srcVideo={src_video} controls={true} />
+                            {isShow && <VideoHls className={style.video} srcVideo={src_video} controls={true} />}
                         </div>
                         <div className={style.videoListContainer} ref={videoListContainer_element}>
                             <div className={style.videoList}>{list_video}</div>

@@ -1,10 +1,10 @@
 import { memo, useRef, useState, useEffect } from 'react';
 import style from './style.module.scss';
 import { IoCloseSharp } from 'react-icons/io5';
-import { CLOSE, SEND, EXIT, SEND_DESCRIPTION } from '@src/const/text';
+import { CLOSE, SEND, EXIT, SEND_TREATMENT } from '@src/const/text';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '@src/redux';
-import { setShow_dialogPatientSend, setData_toastMessage } from '@src/redux/slice/Examine';
+import { setShow_dialogDoctorSend, setData_toastMessage } from '@src/redux/slice/Examine';
 import { messageType_enum } from '@src/component/ToastMessage/type';
 
 const DialogPatientSend = () => {
@@ -21,7 +21,7 @@ const DialogPatientSend = () => {
     const text2_element = useRef<HTMLDivElement | null>(null);
     const btns_element = useRef<HTMLDivElement | null>(null);
 
-    const isShow: boolean = useSelector((state: RootState) => state.ExamineSlice.dialogPatientSend.isShow);
+    const isShow: boolean = useSelector((state: RootState) => state.ExamineSlice.dialogDoctorSend.isShow);
     const [sending, setSending] = useState<boolean>(false);
     const [isSent, setIsSent] = useState<boolean>(false);
     const [content, setContent] = useState<string>('');
@@ -102,7 +102,7 @@ const DialogPatientSend = () => {
 
     useEffect(() => {
         if (isSent) {
-            setContent('Tình trạng đã được gửi !');
+            setContent('Nội dung điều trị đã được gửi !');
         } else {
             setContent('Sau khi gửi bạn sẽ không thể thay đổi nội dung này. Ban có muốn gửi không ?');
         }
@@ -113,7 +113,7 @@ const DialogPatientSend = () => {
             dispatch(
                 setData_toastMessage({
                     type: messageType_enum.WARN,
-                    message: 'Tình trạng đã được gửi, không thể gửi lại !',
+                    message: 'Nội dung điều trị đã được gửi, không thể gửi lại !',
                 })
             );
         } else {
@@ -128,18 +128,18 @@ const DialogPatientSend = () => {
     };
 
     const handleClose = () => {
-        dispatch(setShow_dialogPatientSend(false));
+        dispatch(setShow_dialogDoctorSend(false));
     };
 
     const handleExit = () => {
-        dispatch(setShow_dialogPatientSend(false));
+        dispatch(setShow_dialogDoctorSend(false));
     };
 
     return (
         <div className={style.parent} ref={parent_element}>
             <div className={style.main}>
                 <div className={style.headerContainer}>
-                    <div className={style.header}>{SEND_DESCRIPTION}</div>
+                    <div className={style.header}>{SEND_TREATMENT}</div>
                     <IoCloseSharp className={style.closeIcon} onClick={() => handleClose()} title={CLOSE} />
                 </div>
                 <div className={style.contentContainer} ref={contentContainer_element}>
@@ -152,7 +152,7 @@ const DialogPatientSend = () => {
                 </div>
                 <div className={style.btnContainer} ref={btnContainer_element}>
                     <div className={style.text2} ref={text2_element}>
-                        Tình trạng đang được gửi !!!
+                        Nội dung điều trị đang được gửi !!!
                     </div>
                     <div className={style.btns} ref={btns_element}>
                         <div className={style.btn} onClick={() => handleSend()}>

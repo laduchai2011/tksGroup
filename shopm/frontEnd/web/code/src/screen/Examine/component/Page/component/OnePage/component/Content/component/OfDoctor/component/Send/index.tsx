@@ -5,13 +5,13 @@ import { SEND } from '@src/const/text';
 import Skeleton from '@src/component/Skeleton';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@src/redux';
-import { setShow_dialogPatientSend } from '@src/redux/slice/Examine';
+import { setShow_dialogDoctorSend } from '@src/redux/slice/Examine';
 
 const Send: FC<{ isLoading: boolean }> = ({ isLoading }) => {
     const dispatch = useDispatch<AppDispatch>();
 
     const handleShowDialog = () => {
-        dispatch(setShow_dialogPatientSend(true));
+        dispatch(setShow_dialogDoctorSend(true));
     };
 
     return (

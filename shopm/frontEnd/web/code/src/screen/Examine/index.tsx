@@ -5,6 +5,7 @@ import CreatePatientRecordDialog from './component/CreatePatientRecordDialog';
 import DialogMyVideo from './component/DialogMyVideo';
 import DialogMyImage from './component/DialogMyImage';
 import DialogPatientSend from './component/DialogPatientSend';
+import DialogDoctorSend from './component/DialogDoctorSend';
 import TopControl from './component/TopControl';
 import Overview from './component/Overview';
 import Information from './component/Information';
@@ -22,6 +23,7 @@ const Examine = () => {
                 <DialogMyVideo />
                 <DialogMyImage />
                 <DialogPatientSend />
+                <DialogDoctorSend />
                 <TopControl />
                 <Overview isLoading={isLoading} />
                 <Information isLoading={isLoading} />

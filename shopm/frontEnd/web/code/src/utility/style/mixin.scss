@@ -224,6 +224,17 @@ $breakpoints: (
     }
 }
 
+@mixin paddingRes($param1, $param2, $res, $rate) {
+    $breakpoint-value: if(map-has-key($breakpoints, $res), map-get($breakpoints, $res), $res);
+    padding: calc($param1 * $rate) calc($param2 * $rate);
+    @if unit($param1) == 'px' and unit($param2) == 'px' {
+        @include responsive($res) {
+            padding: calc(($param1 / $breakpoint-value) * 100vw * $rate)
+                calc(($param2 / $breakpoint-value) * 100vw * $rate);
+        }
+    }
+}
+
 @mixin leftRes($left, $res, $rate) {
     $breakpoint-value: if(map-has-key($breakpoints, $res), map-get($breakpoints, $res), $res);
     left: calc($left * $rate);

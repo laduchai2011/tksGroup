@@ -1,7 +1,63 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parentLoading {
+    min-height: 30px;
+    @include marginRes(0px, 10px, md, 1.2);
+
+    @include responsive(sm) {
+        @include marginRes(0px, 10px, md, 1.2);
+    }
+}
 .parent {
+    background-color: rgb(231, 255, 254);
+    box-sizing: border-box;
+
     @include marginRes(15px, 0px, md, 1);
+    @include paddingRes(5px, 10px, md, 1);
 
     @include responsive(sm) {
         @include marginRes(15px, 0px, md, 1.2);
+        @include paddingRes(5px, 10px, md, 1.2);
+    }
+
+    > .header {
+        @include center-of-row;
+        justify-content: space-between;
+
+        > div {
+            font-style: italic;
+            user-select: none;
+        }
+
+        > .icon {
+            height: 25px;
+            width: 25px;
+            cursor: pointer;
+        }
+    }
+
+    > .content {
+        @include paddingRes(0px, 25px, md, 1);
+        overflow: hidden;
+        transition: height 0.3s ease-in-out;
+
+        @include responsive(sm) {
+            @include paddingRes(0px, 25px, md, 1.2);
+        }
+
+        > .row {
+            @include center-of-row;
+            @include paddingRes(5px, 0px, md, 1);
+            box-sizing: border-box;
+            height: 30px;
+
+            @include responsive(sm) {
+                @include paddingRes(5px, 0px, md, 1.2);
+            }
+
+            > div:nth-child(1) {
+                width: 50px;
+            }
+        }
     }
 }
