@@ -1,5 +1,6 @@
 import style from './style.module.scss';
 import Header from './component/Header';
+import Body from './component/Body';
 
 const Medications = () => {
     return (
@@ -7,7 +8,9 @@ const Medications = () => {
             <div>
                 <Header />
             </div>
-            <div>Medications</div>
+            <div>
+                <Body />
+            </div>
         </div>
     );
 };

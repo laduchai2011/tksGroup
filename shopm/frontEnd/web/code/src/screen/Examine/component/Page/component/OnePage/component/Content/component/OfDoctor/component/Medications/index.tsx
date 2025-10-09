@@ -1,12 +1,12 @@
-import { FC, memo, useState } from 'react';
+import { FC, memo, useRef } from 'react';
 import style from './style.module.scss';
 import { PRESCRIBE_MEDICAtTiION } from '@src/const/text';
 import Skeleton from '@src/component/Skeleton';
 
 const Medications: FC<{ isLoading: boolean }> = ({ isLoading }) => {
-    const [medications, setMedications] = useState<number[]>([1, 2, 3, 4, 5]);
+    const medications = useRef<number[]>([1, 2, 3, 4, 5]);
 
-    const list_row = medications.map((data, index) => {
+    const list_row = medications.current.map((_, index) => {
         return isLoading ? (
             <Skeleton className={style.row} key={index} />
         ) : (

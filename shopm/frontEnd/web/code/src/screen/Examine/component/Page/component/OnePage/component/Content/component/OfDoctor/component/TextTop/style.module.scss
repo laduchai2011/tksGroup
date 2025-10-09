@@ -10,9 +10,9 @@
     > .loading {
         width: 200px;
         height: 25px;
+        @include marginRes(0px, 5px, md, 1);
         @include heightRes(25px, md, 1);
         @include widthRes(200px, md, 1);
-        @include marginRes(0px, 5px, md, 1);
 
         @include responsive(sm) {
             @include widthRes(200px, md, 1.5);

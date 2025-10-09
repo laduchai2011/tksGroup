@@ -56,7 +56,7 @@ const Center = () => {
                 };
             }
         }
-    }, []);
+    }, [navigate, selected]);
 
     useEffect(() => {
         if (parent_element.current) {

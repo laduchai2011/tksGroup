@@ -1,0 +1,13 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    box-sizing: border-box;
+    padding: 3px;
+
+    > .content {
+        width: 100%;
+        @include line-clamp(2);
+        line-height: 1.4;
+        min-height: 35px;
+    }
+}

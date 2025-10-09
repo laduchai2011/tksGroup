@@ -1,0 +1,23 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    width: 100%;
+    height: 100px;
+    position: relative;
+
+    > img {
+        width: 100%;
+        height: 100%;
+    }
+
+    > .discount {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        background-color: yellow;
+        box-sizing: border-box;
+        padding: 1px;
+        font-size: 0.8rem;
+        @include center-of-rectangle;
+    }
+}

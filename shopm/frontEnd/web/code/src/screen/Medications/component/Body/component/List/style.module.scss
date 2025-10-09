@@ -1,0 +1,27 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    width: 100%;
+    box-sizing: border-box;
+    width: 1024px;
+    @include paddingRes(10px, 10px, md, 1);
+
+    @include responsive(sm) {
+        @include paddingRes(10px, 10px, md, 1.2);
+    }
+
+    @include responsive(md) {
+        width: 100vw;
+    }
+
+    > .main {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        column-gap: 10px;
+        row-gap: 15px;
+
+        > div {
+            @include center-of-rectangle;
+        }
+    }
+}

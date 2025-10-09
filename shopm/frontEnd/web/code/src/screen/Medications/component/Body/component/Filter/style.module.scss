@@ -1,0 +1,88 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    width: 100%;
+    box-sizing: border-box;
+    width: 1024px;
+    @include paddingRes(10px, 10px, md, 1);
+
+    @include responsive(sm) {
+        @include paddingRes(10px, 10px, md, 1.2);
+    }
+
+    @include responsive(md) {
+        width: 100vw;
+    }
+
+    > .searchRow {
+        @include center-of-rectangle;
+
+        > .searchContainer {
+            @include center-of-row;
+            box-sizing: border-box;
+            border: 1px solid gray;
+            border-radius: 20px;
+            overflow: hidden;
+
+            > input {
+                width: 300px;
+                border: none;
+                outline: none;
+                font-size: 1.1rem;
+                box-sizing: border-box;
+                padding: 5px;
+            }
+
+            > svg {
+                cursor: pointer;
+                height: 25px;
+                width: 25px;
+            }
+        }
+    }
+
+    > .targetRow {
+        box-sizing: border-box;
+        border: 1px dashed gray;
+        border-radius: 15px;
+        @include marginRes(5px, 10px, md, 1);
+        @include paddingRes(10px, 10px, md, 1);
+
+        @include responsive(sm) {
+            @include marginRes(5px, 10px, md, 1.2);
+            @include paddingRes(10px, 10px, md, 1.2);
+        }
+
+        > .selectedTargets {
+            @include center-of-row;
+            align-items: stretch;
+            @include marginRes(5px, 0px, md, 1);
+
+            @include responsive(sm) {
+                @include marginRes(5px, 0px, md, 1.2);
+            }
+
+            > div {
+                > div {
+                    width: max-content;
+                }
+            }
+        }
+
+        > .targetList {
+            @include center-of-row;
+            align-items: stretch;
+            @include marginRes(5px, 0px, md, 1);
+
+            @include responsive(sm) {
+                @include marginRes(5px, 0px, md, 1.2);
+            }
+
+            > div {
+                > div {
+                    width: max-content;
+                }
+            }
+        }
+    }
+}

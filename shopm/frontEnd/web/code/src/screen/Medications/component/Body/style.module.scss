@@ -7,8 +7,5 @@
 
     > .main {
         background-color: white;
-        @include responsive(md) {
-            width: 100%;
-        }
     }
 }
