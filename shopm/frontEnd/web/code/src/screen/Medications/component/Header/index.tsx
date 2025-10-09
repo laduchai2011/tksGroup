@@ -1,6 +1,6 @@
 import style from './style.module.scss';
 import Header_Common from '@src/screen/Header';
-import { select_enum } from '@src/screen/Header/type';
+import { select_enum } from '@src/router/type';
 
 const Header = () => {
     return (

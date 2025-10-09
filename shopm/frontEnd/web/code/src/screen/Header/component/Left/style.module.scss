@@ -56,7 +56,7 @@
         overflow-y: auto;
         @include small-scroll-y();
 
-        > div {
+        > .option {
             width: 100%;
             height: 40px;
             border: 1px solid gray;
@@ -64,6 +64,14 @@
             @include center-of-rectangle;
             user-select: none;
             cursor: pointer;
+
+            &:hover {
+                background-color: rgb(219, 219, 219);
+            }
+
+            &.option_selected {
+                background-color: rgb(219, 219, 219);
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 import style from './style.module.scss';
-
+import Header from './component/Header';
 import MyToastMessage from './component/MyToastMessage';
 import CreatePatientRecordDialog from './component/CreatePatientRecordDialog';
 import DialogCall from './component/DialogCall';
@@ -18,6 +18,9 @@ const Examine = () => {
     const isLoading = false;
     return (
         <div className={style.parent}>
+            <div>
+                <Header />
+            </div>
             <div className={style.main}>
                 <MyToastMessage />
                 <CreatePatientRecordDialog />

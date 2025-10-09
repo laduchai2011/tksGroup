@@ -1,0 +1,13 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    box-sizing: border-box;
+    padding: 3px;
+    @include center-of-row;
+    justify-content: flex-end;
+
+    > .fiveStar {
+        width: 50px;
+        height: 20px;
+    }
+}

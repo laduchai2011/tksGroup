@@ -8,19 +8,19 @@ import { FcAbout } from 'react-icons/fc';
 import { MAIN_BLUE_COLOR } from '@src/utility/color';
 import DynamicMenu from '@src/component/DynamicMenu';
 import { HeaderContext } from '@src/screen/Header/context';
-import { select_enum, route_enum, selected_type, routed_type } from '@src/screen/Header/type';
+import { select_enum, route_enum, selected_type, routed_type } from '@src/router/type';
 
 const Center = () => {
     const navigate = useNavigate();
-    const parent_element = useRef<HTMLDivElement | null>(null);
-    // const [icon_index, set_icon_index] = useState<number>(0);
-    const [menu_container_active, set_menu_container_active] = useState<boolean>(false);
 
     const headerContext = useContext(HeaderContext);
     if (!headerContext) {
-        throw new Error('HeaderContext in Header Sreen component cant undefined !');
+        throw new Error('HeaderContext in (Top-Center) Header Sreen component cant undefined !');
     }
     const { selected } = headerContext;
+
+    const parent_element = useRef<HTMLDivElement | null>(null);
+    const [menu_container_active, set_menu_container_active] = useState<boolean>(false);
 
     const headerArray = useRef<selected_type[]>([
         select_enum.HOME,
@@ -46,7 +46,6 @@ const Center = () => {
             for (let i: number = 0; i < icon_containers_len; i++) {
                 const icon_container = icon_containers[i] as HTMLDivElement;
                 icon_container.onclick = function () {
-                    // set_icon_index(i);
                     const selectedIndex = selected
                         ? headerArray.current.indexOf(selected)
                         : headerArray.current.indexOf(select_enum.HOME);

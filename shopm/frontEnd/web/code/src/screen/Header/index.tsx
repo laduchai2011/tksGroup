@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Top from './component/Top';
 import Left from './component/Left';
 import style from './style.module.scss';
@@ -28,4 +28,4 @@ const Header: React.FC<Header__Props> = ({ header__interface, className, ...prop
     );
 };
 
-export default Header;
+export default memo(Header);

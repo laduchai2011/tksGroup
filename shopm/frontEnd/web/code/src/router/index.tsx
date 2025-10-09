@@ -2,19 +2,22 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Signup from '@src/screen/Signup';
 import Home from '@src/screen/Home';
 import Medications from '@src/screen/Medications';
+import Medication from '@src/screen/Medication';
 import NotFoundPage from '@src/screen/NotFoundPage';
 import Profile from '@src/screen/Profile';
 import Examine from '@src/screen/Examine';
 import Patient_Record from '@src/screen/Patient_Record';
+import { route_enum } from './type';
 
 const router = createBrowserRouter(
     [
-        { path: '/signup', element: <Signup /> },
-        { path: '/', element: <Home /> },
-        { path: '/medications', element: <Medications /> },
-        { path: '/profile', element: <Profile /> },
-        { path: '/patient_record', element: <Patient_Record /> },
-        { path: '/examine', element: <Examine /> },
+        { path: route_enum.SIGNUP, element: <Signup /> },
+        { path: route_enum.HOME, element: <Home /> },
+        { path: route_enum.MEDICATIONS, element: <Medications /> },
+        { path: route_enum.MEDICATION, element: <Medication /> },
+        { path: route_enum.PROFILE, element: <Profile /> },
+        { path: route_enum.PATIENT_RECORD, element: <Patient_Record /> },
+        { path: route_enum.EXAMINE, element: <Examine /> },
         { path: '*', element: <NotFoundPage /> }, // Trang 404
     ],
     {
