@@ -3,6 +3,7 @@ import style from './style.module.scss';
 import MyImage from './component/MyImage';
 import Title from './component/Title';
 import Infor from './component/Infor';
+import Price from './component/Price';
 
 const Box = () => {
     const isLoading = false;
@@ -11,6 +12,7 @@ const Box = () => {
             <MyImage isLoading={isLoading} />
             <Title isLoading={isLoading} />
             <Infor isLoading={isLoading} />
+            <Price isLoading={isLoading} />
         </div>
     );
 };

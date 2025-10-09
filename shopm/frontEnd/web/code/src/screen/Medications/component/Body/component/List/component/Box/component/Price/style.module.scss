@@ -1,0 +1,79 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    box-sizing: border-box;
+    padding: 3px;
+    @include center-of-row;
+
+    > .price {
+        width: 60%;
+        @include line-clamp(1);
+        min-height: 15px;
+        box-sizing: border-box;
+        padding: 3px;
+        @include center-of-row;
+        position: relative;
+
+        > .new {
+            color: red;
+            margin: 0 2px;
+        }
+        > .newLoading {
+            min-height: 20px;
+            min-width: 55px;
+            margin: 0 3px;
+        }
+
+        > .old {
+            font-size: 0.9rem;
+            color: gray;
+            text-decoration: line-through;
+            margin: 0 2px;
+        }
+        > .oldLoading {
+            min-height: 16px;
+            min-width: 45px;
+            margin: 0 3px;
+        }
+
+        > .priceText {
+            position: absolute;
+            color: red;
+            font-size: 0.6rem;
+            top: 0;
+            right: 0;
+        }
+    }
+
+    > .amount {
+        width: 40%;
+        @include line-clamp(1);
+        box-sizing: border-box;
+        padding: 3px;
+        @include center-of-row;
+        justify-content: flex-end;
+
+        > .amount1 {
+            @include center-of-row;
+            width: max-content;
+            position: relative;
+
+            > .amount2 {
+                color: blue;
+            }
+            > .amount2Loading {
+                min-height: 20px;
+                min-width: 45px;
+            }
+
+            > .amountText {
+                position: absolute;
+                font-size: 0.7rem;
+                color: gray;
+                bottom: 0;
+                left: 0;
+                transform: translateX(-100%);
+            }
+        }
+    }
+}
