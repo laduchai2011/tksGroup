@@ -1,0 +1,128 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    width: 1024px;
+    box-sizing: border-box;
+    @include paddingRes(10px, 10px, md, 1);
+    position: relative;
+
+    @include responsive(sm) {
+        @include paddingRes(10px, 10px, md, 1.2);
+    }
+
+    @include responsive(md) {
+        width: 100%;
+    }
+
+    > .photoContainer {
+        @include center-of-row;
+        overflow: hidden;
+
+        > .photo {
+            width: 100%;
+            flex: 0 0 100%;
+            object-fit: contain;
+            @include heightRes(450px, md, 1);
+            position: relative;
+
+            @include responsive(sm) {
+                @include heightRes(450px, md, 1.2);
+            }
+        }
+    }
+
+    > .controlContainer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+
+        &:hover {
+            background: radial-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+        }
+
+        > .dotContainer {
+            flex: 1;
+            @include center-of-rectangle;
+
+            > .circle {
+                border: 2px solid white;
+                border-radius: 50%;
+                @include center-of-rectangle;
+                @include heightRes(30px, md, 1);
+                @include widthRes(30px, md, 1);
+                @include paddingRes(5px, 5px, md, 1);
+                cursor: pointer;
+                animation: animation_circle 1.5s ease-in-out infinite;
+
+                @include responsive(sm) {
+                    @include heightRes(30px, md, 1.2);
+                    @include widthRes(30px, md, 1.2);
+                    @include paddingRes(5px, 5px, md, 1.2);
+                }
+
+                > .dot {
+                    background-color: white;
+                    border-radius: 50%;
+                    @include heightRes(15px, md, 1);
+                    @include widthRes(15px, md, 1);
+                    animation: animation_dot 1.5s ease-in-out infinite;
+
+                    @include responsive(sm) {
+                        @include heightRes(15px, md, 1.2);
+                        @include widthRes(15px, md, 1.2);
+                    }
+                }
+            }
+        }
+
+        > .options {
+            height: 7%;
+            width: 100%;
+            @include center-of-row;
+            box-sizing: border-box;
+            border-top: 1px solid gray;
+
+            > .option {
+                width: 50%;
+                height: 100%;
+                @include center-of-rectangle;
+                cursor: pointer;
+                color: white;
+
+                &:hover {
+                    background-color: rgb(255, 255, 255, 0.8);
+                    color: black;
+                }
+            }
+        }
+    }
+}
+
+:local {
+    @keyframes animation_circle {
+        0% {
+            box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0);
+        }
+        50% {
+            box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.7);
+        }
+        100% {
+            box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0);
+        }
+    }
+    @keyframes animation_dot {
+        0% {
+            box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0);
+        }
+        50% {
+            box-shadow: 0 0 15px 5px rgb(255, 255, 255);
+        }
+        100% {
+            box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0);
+        }
+    }
+}

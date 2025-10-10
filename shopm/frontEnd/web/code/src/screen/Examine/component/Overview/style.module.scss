@@ -2,7 +2,6 @@
 
 .parent {
     @include center-of-row;
-    // height: 200px;
     max-height: 200px;
     @include heightRes(200px, md, 1);
     box-sizing: border-box;
@@ -12,21 +11,15 @@
     > .avatarContainer {
         height: 100%;
         @include center-of-rectangle;
-        // width: 180px;
         max-width: 180px;
         @include widthRes(180px, md, 1);
         flex-shrink: 0;
 
         > .avatar {
-            // max-width: 100%;
-            // max-height: 100%;
-            // width: 180px;
-            // height: 180px;
             max-width: 180px;
             max-height: 180px;
             @include heightRes(180px, md, 1);
             @include widthRes(180px, md, 1);
-            // aspect-ratio: 1 / 1;
             border-radius: 50%;
             overflow: hidden;
 
@@ -49,35 +42,24 @@
         flex: 1;
 
         > .name {
-            // font-size: 2.5rem;
             @include fontSizeRes(2.5 * 16px, md, 1);
             font-weight: 600;
-            // width: 100%;
-            // height: 40px;
             @include widthRes(100%, md, 1);
             @include heightRes(40px, md, 1);
-            // margin: 15px 0;
             @include marginRes(15px, 0px, md, 1);
             @include line-clamp(1);
         }
 
         > .fiveStar {
-            // width: 150px;
-            // height: 40px;
             @include widthRes(150px, md, 1);
             @include heightRes(40px, md, 1);
-            // margin: 15px 0;
             @include marginRes(15px, 0px, md, 1);
         }
 
         > .follow {
-            // width: 80%;
-            // height: 20px;
             @include widthRes(80%, md, 1);
             @include heightRes(20px, md, 1);
-            // margin: 15px 0;
             font-style: italic;
-            // font-size: 1.1rem;
             @include fontSizeRes(1.1 * 16px, md, 1);
             color: gray;
             @include marginRes(15px, 0px, md, 1);
@@ -96,34 +78,21 @@
 
             > div {
                 @include center-of-row;
-                // margin: 10px 0;
                 @include marginRes(10px, 0px, md, 1);
                 @include widthRes(100%, md, 1);
-                // width: 100%;
 
                 > .text {
                     flex: 1;
                     @include center-of-row;
                     justify-content: flex-start;
                     @include fontSizeRes(1 * 16px, md, 1.2);
-                    // min-height: 20px;
                     @include min_heightRes(20px, md, 1);
                     height: auto;
-                    // min-width: 100px;
                     @include min_widthRes(100px, md, 1);
                 }
 
-                // > div:nth-child(1) {
-                //     flex: 1;
-                //     @include center-of-row;
-                //     justify-content: flex-start;
-                //     @include fontSizeRes(1 * 16px, md, 1.2);
-                // }
-
                 > div:nth-child(2) {
                     border-radius: 50%;
-                    // width: 15px;
-                    // height: 15px;
                     @include widthRes(15px, md, 1);
                     @include heightRes(15px, md, 1);
                     margin-left: 5px;
@@ -172,36 +141,38 @@
     }
 }
 
-@keyframes animation_liveActive {
-    0% {
-        box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0);
+:local {
+    @keyframes animation_liveActive {
+        0% {
+            box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0);
+        }
+        50% {
+            box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.7);
+        }
+        100% {
+            box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0);
+        }
     }
-    50% {
-        box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.7);
+    @keyframes animation_onlineActive {
+        0% {
+            box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0);
+        }
+        50% {
+            box-shadow: 0 0 15px 5px greenyellow;
+        }
+        100% {
+            box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0);
+        }
     }
-    100% {
-        box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0);
-    }
-}
-@keyframes animation_onlineActive {
-    0% {
-        box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0);
-    }
-    50% {
-        box-shadow: 0 0 15px 5px greenyellow;
-    }
-    100% {
-        box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0);
-    }
-}
-@keyframes animation_offlineActive {
-    0% {
-        box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0);
-    }
-    50% {
-        box-shadow: 0 0 15px 5px gray;
-    }
-    100% {
-        box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0);
+    @keyframes animation_offlineActive {
+        0% {
+            box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0);
+        }
+        50% {
+            box-shadow: 0 0 15px 5px gray;
+        }
+        100% {
+            box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0);
+        }
     }
 }

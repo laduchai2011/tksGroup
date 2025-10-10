@@ -1,0 +1,10 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    background-color: #eee;
+    @include center-of-column;
+
+    > .main {
+        background-color: white;
+    }
+}
