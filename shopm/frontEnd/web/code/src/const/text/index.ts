@@ -1,7 +1,7 @@
 export const HOME = 'Trang chủ';
 export const MEDICATIONS = 'Danh sách thuốc';
 export const MEDICATION = 'Thuốc';
-export const DOCTORS = 'Danh sách thuốc bác sĩ / dược sĩ';
+export const DOCTORS = 'Danh sách bác sĩ / dược sĩ';
 export const CONTACT = 'Liên hệ';
 export const SIGNUP = 'Đăng ký';
 export const SIGNIN = 'Đăng nhập';
@@ -16,6 +16,7 @@ export const FOLLOWED = 'Đã theo dõi';
 export const UN_FOLLOW = 'Bỏ theo dõi';
 export const CHANGE = 'Thay đổi';
 export const ADD = 'Thêm';
+export const SUB = 'Bớt';
 export const DIARY = 'Nhật ký';
 export const PATIENT_RECORD = 'Bệnh án';
 export const BUY_HISTORY = 'Lịch sử mua';

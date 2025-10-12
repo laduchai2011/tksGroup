@@ -1,0 +1,46 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    width: 1024px;
+    box-sizing: border-box;
+    @include paddingRes(10px, 10px, md, 1);
+    @include center-of-row;
+
+    @include responsive(sm) {
+        @include paddingRes(10px, 10px, md, 1.2);
+    }
+
+    @include responsive(md) {
+        width: 100%;
+    }
+
+    > .amountCustom {
+        @include center-of-row;
+
+        > .inputContainer {
+            width: 80px;
+            height: 40px;
+            @include center-of-rectangle;
+            box-sizing: border-box;
+            border: 1px solid red;
+            border-radius: 10px;
+            padding: 5px;
+
+            > input {
+                width: 80%;
+                text-align: center;
+                border: none;
+                outline: none;
+                font-size: 1.1rem;
+            }
+        }
+
+        > .icon {
+            width: 40px;
+            height: 40px;
+            color: red;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+    }
+}

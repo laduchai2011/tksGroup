@@ -1,5 +1,17 @@
 @use 'src/utility/style/mixin.scss' as *;
 
+.parentLoading {
+    width: 1024px;
+    @include heightRes(450px, md, 1);
+
+    @include responsive(sm) {
+        @include heightRes(450px, md, 1.2);
+    }
+
+    @include responsive(md) {
+        width: 100%;
+    }
+}
 .parent {
     width: 1024px;
     box-sizing: border-box;
@@ -17,13 +29,16 @@
     > .photoContainer {
         @include center-of-row;
         overflow: hidden;
+        @include small-scrollX-snap-parent;
 
         > .photo {
             width: 100%;
             flex: 0 0 100%;
             object-fit: contain;
             @include heightRes(450px, md, 1);
-            position: relative;
+            // position: relative;
+            @include small-scrollX-snap-children;
+            @include center-of-rectangle;
 
             @include responsive(sm) {
                 @include heightRes(450px, md, 1.2);
@@ -39,8 +54,13 @@
         bottom: 0;
         display: flex;
         flex-direction: column;
+        box-sizing: border-box;
+        border: 1px solid white;
+        opacity: 0;
 
         &:hover {
+            border: 1px solid gray;
+            opacity: 1;
             background: radial-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
         }
 
@@ -92,6 +112,7 @@
                 @include center-of-rectangle;
                 cursor: pointer;
                 color: white;
+                user-select: none;
 
                 &:hover {
                     background-color: rgb(255, 255, 255, 0.8);

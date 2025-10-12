@@ -1,0 +1,88 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    width: 1024px;
+    box-sizing: border-box;
+    @include paddingRes(10px, 10px, md, 1);
+
+    @include responsive(sm) {
+        @include paddingRes(10px, 10px, md, 1.2);
+    }
+
+    @include responsive(md) {
+        width: 100%;
+    }
+
+    > .title {
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+    > .titleLoading {
+        min-height: 40px;
+        width: 100%;
+        margin: 2px 0;
+    }
+
+    > .name {
+        color: rgba(0, 225, 255);
+    }
+    > .nameLoading {
+        min-height: 20px;
+        width: 20%;
+        margin: 2px 0;
+    }
+
+    > .type {
+        color: rgb(231, 231, 0);
+    }
+    > .typeLoading {
+        min-height: 20px;
+        width: 20%;
+        margin: 2px 0;
+    }
+
+    > .howFar {
+        color: red;
+    }
+    > .howFarLoading {
+        min-height: 20px;
+        width: 20%;
+        margin: 2px 0;
+    }
+
+    > .amount {
+        color: gray;
+    }
+    > .amountLoading {
+        min-height: 20px;
+        width: 20%;
+        margin: 2px 0;
+    }
+
+    > .money {
+        @include center-of-row;
+
+        > div {
+            margin: 0 3px;
+        }
+
+        > div:nth-child(1) {
+            color: red;
+        }
+
+        > div:nth-child(2) {
+            font-size: 0.9rem;
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        > div:nth-child(3) {
+            font-size: 0.9rem;
+        }
+    }
+    > .moneyLoading {
+        min-height: 20px;
+        width: 20%;
+        margin: 2px 0;
+    }
+}
