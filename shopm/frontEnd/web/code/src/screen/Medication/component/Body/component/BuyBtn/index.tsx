@@ -6,7 +6,7 @@ import { AppDispatch } from '@src/redux';
 import { setData_toastMessage } from '@src/redux/slice/Medication';
 import { messageType_enum } from '@src/component/ToastMessage/type';
 import Skeleton from '@src/component/Skeleton';
-import { ADD, SUB } from '@src/const/text';
+import { ADD, SUB, BUY } from '@src/const/text';
 import { isPositiveInteger } from '@src/utility/string';
 
 const BuyBtn: FC<{ isLoading: boolean }> = ({ isLoading }) => {
@@ -30,15 +30,54 @@ const BuyBtn: FC<{ isLoading: boolean }> = ({ isLoading }) => {
 
     return (
         <div className={style.parent}>
-            <div className={style.amountCustom}>
-                <HiOutlineMinusSmall className={style.icon} title={SUB} />
-                <div className={style.inputContainer}>
-                    <input value={amount} onChange={(e) => handleAmountChange(e)} />
+            {isLoading ? (
+                <Skeleton className={style.amountCustomLoading} />
+            ) : (
+                <div className={style.amountCustom}>
+                    <HiOutlineMinusSmall className={style.icon} title={SUB} />
+                    <div className={style.inputContainer}>
+                        <input value={amount} onChange={(e) => handleAmountChange(e)} />
+                    </div>
+                    <HiOutlinePlusSmall className={style.icon} title={ADD} />
                 </div>
-                <HiOutlinePlusSmall className={style.icon} title={ADD} />
-            </div>
-            <div>1000</div>
-            <div>Btn</div>
+            )}
+            {isLoading ? (
+                <Skeleton className={style.moneyLoading} />
+            ) : (
+                <div className={style.money}>
+                    <div className={style.new}>1000</div>
+                    <div className={style.old}>1000</div>
+                    <div className={style.moneyType}>VND</div>
+                    <div className={style.note}>Tổng tiền sản phẩm</div>
+                </div>
+            )}
+            {isLoading ? (
+                <Skeleton className={style.moneyLoading} />
+            ) : (
+                <div className={style.money}>
+                    <div className={style.new}>1000</div>
+                    <div className={style.old}>1000</div>
+                    <div className={style.moneyType}>VND</div>
+                    <div className={style.note}>Cước vận chuyển</div>
+                </div>
+            )}
+            {isLoading ? (
+                <Skeleton className={style.moneyLoading} />
+            ) : (
+                <div className={style.money}>
+                    <div className={style.new}>1000</div>
+                    <div className={style.old}>1000</div>
+                    <div className={style.moneyType}>VND</div>
+                    <div className={style.note}>Tổng</div>
+                </div>
+            )}
+            {isLoading ? (
+                <Skeleton className={style.btnLoading} />
+            ) : (
+                <div className={style.btn} title={BUY}>
+                    {BUY}
+                </div>
+            )}
         </div>
     );
 };

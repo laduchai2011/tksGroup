@@ -4,6 +4,7 @@
     width: 1024px;
     box-sizing: border-box;
     @include paddingRes(10px, 10px, md, 1);
+    border-bottom: 1px dashed gray;
 
     @include responsive(sm) {
         @include paddingRes(10px, 10px, md, 1.2);

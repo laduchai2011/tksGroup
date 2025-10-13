@@ -4,7 +4,7 @@
     width: 1024px;
     box-sizing: border-box;
     @include paddingRes(10px, 10px, md, 1);
-    @include center-of-row;
+    border-bottom: 1px dashed gray;
 
     @include responsive(sm) {
         @include paddingRes(10px, 10px, md, 1.2);
@@ -14,8 +14,14 @@
         width: 100%;
     }
 
+    > .amountCustomLoading {
+        height: 60px;
+        width: 150px;
+        margin: 3px 0;
+    }
     > .amountCustom {
         @include center-of-row;
+        margin: 5px 0;
 
         > .inputContainer {
             width: 80px;
@@ -42,5 +48,53 @@
             margin: 0 5px;
             cursor: pointer;
         }
+    }
+
+    > .moneyLoading {
+        height: 25px;
+        width: 300px;
+        margin: 3px 0;
+    }
+    > .money {
+        @include center-of-row;
+        margin: 5px 0;
+
+        > .new {
+            margin: 0 3px;
+            color: red;
+        }
+
+        > .old {
+            margin: 0 3px;
+            font-size: 0.9rem;
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        > .moneyType {
+            margin: 0 3px;
+            font-size: 0.9rem;
+        }
+
+        > .note {
+            font-style: italic;
+            margin: 0 5px;
+        }
+    }
+
+    > .btnLoading {
+        height: 30px;
+        width: 100%;
+        margin: 3px 0;
+    }
+    > .btn {
+        box-sizing: border-box;
+        padding: 5px;
+        border-radius: 10px;
+        user-select: none;
+        background-color: red;
+        color: white;
+        @include center-of-rectangle;
+        cursor: pointer;
     }
 }

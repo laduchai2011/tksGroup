@@ -1,0 +1,122 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    width: 1024px;
+    box-sizing: border-box;
+    @include paddingRes(10px, 10px, md, 1);
+
+    @include responsive(sm) {
+        @include paddingRes(10px, 10px, md, 1.2);
+    }
+
+    @include responsive(md) {
+        width: 100%;
+    }
+
+    > .header {
+        font-size: 1.1rem;
+        font-weight: 600;
+        box-sizing: border-box;
+        padding: 10px;
+    }
+
+    > .table {
+        position: relative;
+
+        > .rowContainer {
+            // height: 50px;
+
+            > .row {
+                // height: 50px;
+                @include center-of-row;
+                box-sizing: border-box;
+                padding: 5px;
+                border-bottom: 1px solid gray;
+
+                > div {
+                    @include center-of-rectangle;
+                }
+
+                > .index {
+                    width: 50px;
+                }
+
+                > .title {
+                    flex: 1;
+                }
+
+                > .total {
+                    color: blue;
+                }
+
+                > .amountCustom {
+                    @include center-of-row;
+
+                    > .inputContainer {
+                        width: 40px;
+                        height: 20px;
+                        @include center-of-rectangle;
+                        box-sizing: border-box;
+                        border: 1px solid red;
+                        border-radius: 5px;
+                        padding: 2px;
+
+                        > input {
+                            width: 80%;
+                            text-align: center;
+                            border: none;
+                            outline: none;
+                        }
+                    }
+
+                    > .icon {
+                        width: 20px;
+                        height: 20px;
+                        color: red;
+                        margin: 0 2px;
+                        cursor: pointer;
+                    }
+                }
+
+                > .money {
+                    @include center-of-row;
+                    margin: 5px 0;
+
+                    > .new {
+                        margin: 0 3px;
+                        color: red;
+                    }
+
+                    > .old {
+                        margin: 0 3px;
+                        font-size: 0.9rem;
+                        text-decoration: line-through;
+                        color: gray;
+                    }
+
+                    > .moneyType {
+                        margin: 0 3px;
+                        font-size: 0.9rem;
+                    }
+
+                    > .note {
+                        font-style: italic;
+                        margin: 0 5px;
+                    }
+                }
+
+                > .btnContainer {
+                    @include center-of-rectangle;
+
+                    > div {
+                        user-select: none;
+                        background-color: rgb(255, 0, 170);
+                        box-sizing: border-box;
+                        padding: 2px;
+                        border-radius: 5px;
+                    }
+                }
+            }
+        }
+    }
+}
