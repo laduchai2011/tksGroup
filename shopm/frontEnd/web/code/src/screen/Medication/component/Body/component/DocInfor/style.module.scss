@@ -1,0 +1,36 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    width: 1024px;
+    box-sizing: border-box;
+    @include paddingRes(10px, 10px, md, 1);
+    border-bottom: 1px dashed gray;
+
+    @include responsive(sm) {
+        @include paddingRes(10px, 10px, md, 1.2);
+    }
+
+    @include responsive(md) {
+        width: 100%;
+    }
+
+    > .headerLoading {
+        width: 120px;
+        height: 40px;
+        margin: 5px 0;
+    }
+    > .header {
+        font-size: 1.1rem;
+        font-weight: 600;
+        box-sizing: border-box;
+        padding: 10px;
+    }
+
+    > .inforLoading {
+        height: 150px;
+        width: 100%;
+    }
+    > .infor {
+        width: 100%;
+    }
+}

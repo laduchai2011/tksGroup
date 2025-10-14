@@ -3,6 +3,7 @@
 .parent {
     width: 1024px;
     box-sizing: border-box;
+    border-bottom: 1px dashed gray;
     @include paddingRes(10px, 10px, md, 1);
 
     @include responsive(sm) {
@@ -13,6 +14,11 @@
         width: 100%;
     }
 
+    > .headerLoading {
+        width: 120px;
+        height: 40px;
+        margin: 5px 0;
+    }
     > .header {
         font-size: 1.1rem;
         font-weight: 600;
@@ -26,6 +32,11 @@
         > .rowContainer {
             // height: 50px;
 
+            > .rowLoading {
+                height: 25px;
+                width: 100%;
+                margin: 2px 0;
+            }
             > .row {
                 // height: 50px;
                 @include center-of-row;
@@ -38,7 +49,7 @@
                 }
 
                 > .index {
-                    width: 50px;
+                    width: 30px;
                 }
 
                 > .title {
@@ -112,8 +123,10 @@
                         user-select: none;
                         background-color: rgb(255, 0, 170);
                         box-sizing: border-box;
-                        padding: 2px;
+                        padding: 5px;
                         border-radius: 5px;
+                        color: white;
+                        cursor: pointer;
                     }
                 }
             }
