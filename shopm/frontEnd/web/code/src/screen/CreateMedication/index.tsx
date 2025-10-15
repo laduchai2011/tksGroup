@@ -5,7 +5,7 @@ import DialogMyImage from './component/DialogMyImage';
 import DialogMyVideo from './component/DialogMyVideo';
 import MyToastMessage from './component/MyToastMessage';
 
-const Medication = () => {
+const CreateMedication = () => {
     return (
         <div className={style.parent}>
             <div>
@@ -23,4 +23,4 @@ const Medication = () => {
     );
 };
 
-export default Medication;
+export default CreateMedication;

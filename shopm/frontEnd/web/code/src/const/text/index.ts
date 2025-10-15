@@ -1,6 +1,7 @@
 export const HOME = 'Trang chủ';
 export const MEDICATIONS = 'Danh sách thuốc';
 export const MEDICATION = 'Thuốc';
+export const CREATE_MEDICATION = 'Tạo thuốc';
 export const DOCTORS = 'Danh sách bác sĩ / dược sĩ';
 export const CONTACT = 'Liên hệ';
 export const SIGNUP = 'Đăng ký';

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { state_props } from '@src/screen/Medication/type';
+import { state_props } from '@src/screen/CreateMedication/type';
 import { ToastMessage_Data_Props } from '@src/component/ToastMessage/type';
 
 const initialState: state_props = {
@@ -15,8 +15,8 @@ const initialState: state_props = {
     },
 };
 
-const MedicationSlice = createSlice({
-    name: 'MedicationSlice',
+const CreateMedicationSlice = createSlice({
+    name: 'CreateMedicationSlice',
     initialState,
     reducers: {
         setData_toastMessage: (state, action: PayloadAction<ToastMessage_Data_Props>) => {
@@ -31,5 +31,5 @@ const MedicationSlice = createSlice({
     },
 });
 
-export const { setData_toastMessage, setShow_dialogMyVideo, setShow_dialogMyImage } = MedicationSlice.actions;
-export default MedicationSlice.reducer;
+export const { setData_toastMessage, setShow_dialogMyVideo, setShow_dialogMyImage } = CreateMedicationSlice.actions;
+export default CreateMedicationSlice.reducer;

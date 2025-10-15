@@ -1,6 +1,7 @@
 import { FC, memo } from 'react';
 import style from './style.module.scss';
 import Skeleton from '@src/component/Skeleton';
+import { FiveStar } from '@src/component';
 
 const Infor: FC<{ isLoading: boolean }> = ({ isLoading }) => {
     return (
@@ -9,6 +10,13 @@ const Infor: FC<{ isLoading: boolean }> = ({ isLoading }) => {
                 <Skeleton className={style.titleLoading} />
             ) : (
                 <div className={style.title}>Title Title Title Title Title</div>
+            )}
+            {isLoading ? (
+                <Skeleton className={style.fiveStarLoading} />
+            ) : (
+                <div className={style.fiveStar}>
+                    <FiveStar rate={5} />
+                </div>
             )}
             {isLoading ? <Skeleton className={style.nameLoading} /> : <div className={style.name}>name</div>}
             {isLoading ? <Skeleton className={style.typeLoading} /> : <div className={style.type}>type</div>}

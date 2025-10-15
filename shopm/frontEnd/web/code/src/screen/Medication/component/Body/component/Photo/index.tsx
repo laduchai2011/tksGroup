@@ -1,8 +1,12 @@
 import { FC, memo, useRef, useEffect, useState } from 'react';
 import style from './style.module.scss';
 import Skeleton from '@src/component/Skeleton';
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '@src/redux';
+import { setShow_dialogMyImage, setShow_dialogMyVideo } from '@src/redux/slice/Medication';
 
 const Photo: FC<{ isLoading: boolean }> = ({ isLoading }) => {
+    const dispatch = useDispatch<AppDispatch>();
     const photoContainer_element = useRef<HTMLDivElement | null>(null);
     const [view, setView] = useState<string>('image');
 
@@ -23,6 +27,15 @@ const Photo: FC<{ isLoading: boolean }> = ({ isLoading }) => {
         });
     }, [view]);
 
+    const handleShowDialogPhoto = () => {
+        if (view === 'image') {
+            dispatch(setShow_dialogMyImage(true));
+        }
+        if (view === 'video') {
+            dispatch(setShow_dialogMyVideo(true));
+        }
+    };
+
     return isLoading ? (
         <Skeleton className={style.parentLoading} />
     ) : (
@@ -42,7 +55,7 @@ const Photo: FC<{ isLoading: boolean }> = ({ isLoading }) => {
             <div className={style.controlContainer}>
                 <div className={style.dotContainer}>
                     <div className={style.circle}>
-                        <div className={style.dot} />
+                        <div className={style.dot} onClick={() => handleShowDialogPhoto()} />
                     </div>
                 </div>
                 <div className={style.options}>

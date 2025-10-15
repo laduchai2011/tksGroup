@@ -4,7 +4,6 @@
     width: 1024px;
     box-sizing: border-box;
     @include paddingRes(10px, 10px, md, 1);
-    @include center-of-row;
 
     @include responsive(sm) {
         @include paddingRes(10px, 10px, md, 1.2);
@@ -12,5 +11,28 @@
 
     @include responsive(md) {
         width: 100%;
+    }
+
+    > .cmt1 {
+        width: 100%;
+    }
+
+    > .cmt2Container {
+        @include center-of-row;
+
+        > .lineContainer {
+            width: 40px;
+            min-width: 40px;
+        }
+
+        > .cmt2 {
+            flex: 1;
+
+            > .seeMore {
+                color: gray;
+                font-size: 0.9rem;
+                cursor: pointer;
+            }
+        }
     }
 }

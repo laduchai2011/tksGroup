@@ -1,7 +1,7 @@
 @use 'src/utility/style/mixin.scss' as *;
 
 .parent {
-    width: 1024px;
+    width: 100%;
     box-sizing: border-box;
     @include paddingRes(10px, 10px, md, 1);
     @include center-of-row;
