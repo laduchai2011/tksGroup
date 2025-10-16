@@ -1,0 +1,32 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    > .iconContainer {
+        @include center-of-rectangle;
+
+        > div {
+            width: 100%;
+            max-width: 300px;
+            @include center-of-row;
+            justify-content: flex-start;
+
+            > svg {
+                width: 30px;
+                height: 30px;
+                color: greenyellow;
+                cursor: pointer;
+            }
+
+            > input {
+                display: none;
+            }
+        }
+    }
+
+    > .imageContainer {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        column-gap: 10px;
+        row-gap: 15px;
+    }
+}

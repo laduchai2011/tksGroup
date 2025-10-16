@@ -1,11 +1,34 @@
 import { memo, useState } from 'react';
 import style from './style.module.scss';
-import { CREATE_MEDICATION, TITLE, FRAGILE, NORMAL, OTHER, TYPE, AMOUNT } from '@src/const/text';
+import { CREATE_MEDICATION, TITLE, TYPE, AMOUNT } from '@src/const/text';
 import InputBasic from '@src/component/InputBasic';
 import TextareaBasic from '@src/component/TextareaBasic';
+import TypeGroup from './component/TypeGroup';
+import ImageContainer from './component/ImageContainer';
+import { isPositiveInteger } from '@src/utility/string';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@src/redux';
+import { setData_toastMessage } from '@src/redux/slice/CreateMedication';
+import { messageType_enum } from '@src/component/ToastMessage/type';
 
 const Body = () => {
-    const [typeGroup, setTypeGroup] = useState<number | undefined>(undefined);
+    const dispatch = useDispatch<AppDispatch>();
+    const [amount, setAmount] = useState<number>(0);
+
+    const handleAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        const value1 = value.trim();
+        if (isPositiveInteger(value1)) {
+            setAmount(Number(value1));
+        } else {
+            dispatch(
+                setData_toastMessage({
+                    type: messageType_enum.ERROR,
+                    message: 'Số lượng nhập vào phải là 1 số nguyên dương !',
+                })
+            );
+        }
+    };
 
     return (
         <div className={style.parent}>
@@ -15,41 +38,20 @@ const Body = () => {
                 </div>
                 <div className={style.infor}>
                     <div>
-                        <TextareaBasic className={style.myInput} header={TITLE} />
-                        <InputBasic className={style.myInput} header={TYPE} />
-                        <InputBasic className={style.myInput} header={AMOUNT} />
-                        {/* <div className={style.titleContainer}>
-                            <div className={style.titleHeader} ref={titleHeader_element}>
-                                {TITLE}
-                            </div>
-                            <textarea ref={titleInput_element} rows={1} wrap="soft" />
+                        <div>
+                            <TextareaBasic className={style.myInput} header={TITLE} />
+                            <InputBasic className={style.myInput} header={TYPE} />
+                            <InputBasic
+                                className={style.myInput}
+                                header={AMOUNT}
+                                value={amount.toString()}
+                                onChange={(e) => handleAmount(e)}
+                            />
+                            <TypeGroup />
                         </div>
-                        <div className={style.typeGroup}>
-                            <div>
-                                <div className={typeGroup === 0 ? style.active : ''} onClick={() => setTypeGroup(0)}>
-                                    {NORMAL}
-                                </div>
-                                <div className={typeGroup === 1 ? style.active : ''} onClick={() => setTypeGroup(1)}>
-                                    {FRAGILE}
-                                </div>
-                                <div className={typeGroup === 2 ? style.active : ''} onClick={() => setTypeGroup(2)}>
-                                    {OTHER}
-                                </div>
-                            </div>
-                            <div>{typeGroup === 2 && <input placeholder={OTHER} />}</div>
-                        </div>
-                        <div className={style.typeContainer}>
-                            <div className={style.typeHeader} ref={typeHeader_element}>
-                                {TYPE}
-                            </div>
-                            <input ref={typeInput_element} />
-                        </div>
-                        <div className={style.amountContainer}>
-                            <div className={style.amountHeader} ref={amountHeader_element}>
-                                {AMOUNT}
-                            </div>
-                            <input ref={amountInput_element} />
-                        </div> */}
+                    </div>
+                    <div>
+                        <ImageContainer />
                     </div>
                 </div>
             </div>

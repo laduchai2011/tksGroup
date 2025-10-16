@@ -23,164 +23,22 @@
 
         > .infor {
             margin-top: 50px;
-            @include center-of-column;
 
-            > div {
-                width: 100%;
-                max-width: 300px;
+            > div:nth-child(1) {
+                @include center-of-column;
 
-                > .myInput {
-                    margin: 5px 0;
+                > div {
+                    width: 100%;
+                    max-width: 300px;
+
+                    > .myInput {
+                        margin: 15px 0;
+                    }
                 }
+            }
 
-                // > .titleContainer {
-                //     @include center-of-row;
-                //     box-sizing: border-box;
-                //     border: 1px solid gray;
-                //     padding: 5px;
-                //     border-radius: 10px;
-                //     position: relative;
-
-                //     > .titleHeader {
-                //         width: max-content;
-                //         transition:
-                //             transform 0.3s ease-in-out,
-                //             top 0.3s ease-in-out,
-                //             left 0.3s ease-in-out;
-
-                //         &.forcus {
-                //             position: absolute;
-                //             top: 0;
-                //             left: 10px;
-                //             transform: translateY(-50%);
-                //             background-color: rgb(233, 233, 233);
-                //             box-sizing: border-box;
-                //             padding: 2px;
-                //             border-radius: 10px;
-                //         }
-                //     }
-
-                //     > textarea {
-                //         flex: 1;
-                //         border: none;
-                //         outline: none;
-                //         resize: none;
-                //         box-sizing: border-box;
-                //         padding: 10px;
-                //         font-size: 1.1rem;
-                //     }
-                // }
-
-                // > .typeGroup {
-                //     margin-top: 20px;
-                //     > div:nth-child(1) {
-                //         @include center-of-row;
-                //         justify-content: space-around;
-
-                //         > div {
-                //             background-color: rgb(190, 190, 255);
-                //             cursor: pointer;
-                //             box-sizing: border-box;
-                //             padding: 10px;
-                //             border-radius: 15px;
-                //             user-select: none;
-
-                //             &.active {
-                //                 background-color: rgb(88, 88, 255);
-                //                 color: white;
-                //             }
-                //         }
-                //     }
-
-                //     > div:nth-child(2) {
-                //         margin-top: 10px;
-                //         @include center-of-rectangle;
-
-                //         > input {
-                //             box-sizing: border-box;
-                //             padding: 5px;
-                //             border-radius: 10px;
-                //             border: 1px solid gray;
-                //             width: 50%;
-                //         }
-                //     }
-                // }
-
-                // > .typeContainer {
-                //     @include center-of-row;
-                //     box-sizing: border-box;
-                //     border: 1px solid gray;
-                //     padding: 5px;
-                //     border-radius: 10px;
-                //     position: relative;
-                //     margin-top: 20px;
-
-                //     > .typeHeader {
-                //         width: max-content;
-                //         transition:
-                //             transform 0.3s ease-in-out,
-                //             top 0.3s ease-in-out,
-                //             left 0.3s ease-in-out;
-
-                //         &.forcus {
-                //             position: absolute;
-                //             top: 0;
-                //             left: 10px;
-                //             transform: translateY(-50%);
-                //             background-color: rgb(233, 233, 233);
-                //             box-sizing: border-box;
-                //             padding: 2px;
-                //             border-radius: 10px;
-                //         }
-                //     }
-
-                //     > input {
-                //         flex: 1;
-                //         border: none;
-                //         outline: none;
-                //         box-sizing: border-box;
-                //         padding: 5px;
-                //         font-size: 1.1rem;
-                //     }
-                // }
-
-                // > .amountContainer {
-                //     @include center-of-row;
-                //     box-sizing: border-box;
-                //     border: 1px solid gray;
-                //     padding: 5px;
-                //     border-radius: 10px;
-                //     position: relative;
-                //     margin-top: 20px;
-
-                //     > .amountHeader {
-                //         width: max-content;
-                //         transition:
-                //             transform 0.3s ease-in-out,
-                //             top 0.3s ease-in-out,
-                //             left 0.3s ease-in-out;
-
-                //         &.forcus {
-                //             position: absolute;
-                //             top: 0;
-                //             left: 10px;
-                //             transform: translateY(-50%);
-                //             background-color: rgb(233, 233, 233);
-                //             box-sizing: border-box;
-                //             padding: 2px;
-                //             border-radius: 10px;
-                //         }
-                //     }
-
-                //     > input {
-                //         flex: 1;
-                //         border: none;
-                //         outline: none;
-                //         box-sizing: border-box;
-                //         padding: 5px;
-                //         font-size: 1.1rem;
-                //     }
-                // }
+            > div:nth-child(2) {
+                margin-top: 25px;
             }
         }
     }
