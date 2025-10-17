@@ -8,6 +8,13 @@
     overflow: hidden;
     border-radius: 15px;
 
+    > .index {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        color: white;
+    }
+
     > svg {
         position: absolute;
         color: white;

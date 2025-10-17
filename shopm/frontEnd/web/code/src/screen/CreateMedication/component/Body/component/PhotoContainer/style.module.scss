@@ -29,4 +29,11 @@
         column-gap: 10px;
         row-gap: 15px;
     }
+
+    > .videoContainer {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        column-gap: 10px;
+        row-gap: 15px;
+    }
 }

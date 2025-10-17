@@ -83,3 +83,5 @@ export const NORMAL = 'Thường';
 export const OTHER = 'Khác';
 export const TYPE = 'Kiểu';
 export const AMOUNT = 'Số lượng';
+export const PRICE = 'Giá';
+export const DISCOUNT = 'Giảm giá';

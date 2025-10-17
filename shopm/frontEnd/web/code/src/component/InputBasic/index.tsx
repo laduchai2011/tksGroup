@@ -3,7 +3,7 @@ import style from './style.module.scss';
 
 interface ComponentProps extends React.HTMLAttributes<HTMLDivElement> {
     header?: string;
-    value?: string;
+    value?: string | number;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

@@ -3,8 +3,9 @@ import style from './style.module.scss';
 import { MdPhotoLibrary } from 'react-icons/md';
 import { PHOTO } from '@src/const/text';
 import MyImage from './component/MyImage';
+import MyVideo from './component/MyVideo';
 
-const ImageContainer = () => {
+const PhotoContainer = () => {
     const id_folderInput = useId();
     const input_element = useRef<HTMLInputElement | null>(null);
     const [images, setImages] = useState<File[]>([]);
@@ -33,12 +34,22 @@ const ImageContainer = () => {
         input_element.current?.click();
     };
 
+    const handleDeleteImage = (data: File) => {
+        const newImages = images.filter((image) => image !== data);
+        setImages(newImages);
+    };
+
+    const handleDeleteVideo = (data: File) => {
+        const newVideos = videos.filter((video) => video !== data);
+        setVideos(newVideos);
+    };
+
     const list_image = images.map((data, index) => {
-        return <MyImage key={index} data={data} />;
+        return <MyImage key={index} index={index} data={data} onClose={() => handleDeleteImage(data)} />;
     });
 
     const list_video = videos.map((data, index) => {
-        // return <MyVideo className={style.myImage} key={index} option={{ my_src: data }} />;
+        return <MyVideo key={index} index={index} data={data} onClose={() => handleDeleteVideo(data)} />;
     });
 
     return (
@@ -50,8 +61,9 @@ const ImageContainer = () => {
                 </div>
             </div>
             <div className={style.imageContainer}>{list_image}</div>
+            <div className={style.videoContainer}>{list_video}</div>
         </div>
     );
 };
 
-export default memo(ImageContainer);
+export default memo(PhotoContainer);

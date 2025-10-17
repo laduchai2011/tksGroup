@@ -3,7 +3,7 @@ import style from './style.module.scss';
 import { TiDeleteOutline } from 'react-icons/ti';
 import { CLOSE } from '@src/const/text';
 
-const MyImage: FC<{ data: File }> = ({ data }) => {
+const MyImage: FC<{ index: number; data: File; onClose: () => void }> = ({ index, data, onClose }) => {
     const [src, setSrc] = useState<string>('');
 
     useEffect(() => {
@@ -15,10 +15,15 @@ const MyImage: FC<{ data: File }> = ({ data }) => {
         };
     }, [data]);
 
+    const handleClose = () => {
+        onClose();
+    };
+
     return (
         src.length > 0 && (
             <div className={style.parent}>
-                <TiDeleteOutline title={CLOSE} />
+                <div className={style.index}>{index}</div>
+                <TiDeleteOutline onClick={() => handleClose()} title={CLOSE} />
                 <img src={src} alt="" />
             </div>
         )
