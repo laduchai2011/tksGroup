@@ -1,0 +1,19 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    @include center-of-rectangle;
+    background-color: rgba(202, 202, 202, 0.3);
+    z-index: 1000;
+
+    > .main {
+        background-color: white;
+        width: 300px;
+        height: 250px;
+        border-radius: 20px;
+    }
+}

@@ -1,6 +1,6 @@
 import { memo, useState } from 'react';
 import style from './style.module.scss';
-import { CREATE_MEDICATION, TITLE, TYPE, AMOUNT, PRICE, DISCOUNT } from '@src/const/text';
+import { CREATE_MEDICATION, TITLE, TYPE, AMOUNT, PRICE, DISCOUNT, CREATE } from '@src/const/text';
 import InputBasic from '@src/component/InputBasic';
 import TextareaBasic from '@src/component/TextareaBasic';
 import TypeGroup from './component/TypeGroup';
@@ -96,6 +96,9 @@ const Body = () => {
                     </div>
                     <div>
                         <PhotoContainer />
+                    </div>
+                    <div className={style.createBtn}>
+                        <div>{CREATE}</div>
                     </div>
                 </div>
             </div>
