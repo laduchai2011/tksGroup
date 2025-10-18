@@ -1,0 +1,56 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    box-sizing: border-box;
+    padding: 10px 0;
+    @include center-of-row;
+    height: 50px;
+
+    > .skeleton {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin: 0 5px;
+    }
+
+    > .examine {
+        background-color: rgb(234, 255, 202);
+    }
+
+    > .profile {
+        background-color: rgb(233, 233, 233);
+    }
+
+    > .examine,
+    .profile {
+        @include center-of-row;
+        cursor: pointer;
+        user-select: none;
+        margin: 0 5px;
+        height: 30px;
+        width: max-content;
+        max-width: 30px;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: max-width 0.5s ease;
+
+        &:hover {
+            max-width: 150px;
+        }
+
+        > div:nth-child(1) {
+            width: 30px;
+            height: 30px;
+            @include center-of-rectangle;
+            flex-shrink: 0;
+        }
+
+        > div:nth-child(2) {
+            height: 100%;
+            width: max-content;
+            flex-shrink: 0;
+            @include center-of-row;
+            margin: 0 5px;
+        }
+    }
+}

@@ -8,9 +8,6 @@ export interface state_props {
     dialogMyImage: {
         isShow: boolean;
     };
-    dialogLoading: {
-        isShow: boolean;
-    };
     toastMessage: {
         data: ToastMessage_Data_Props;
     };

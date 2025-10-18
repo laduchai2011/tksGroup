@@ -8,7 +8,7 @@ import PhotoContainer from './component/PhotoContainer';
 import { isPositiveInteger } from '@src/utility/string';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@src/redux';
-import { setData_toastMessage } from '@src/redux/slice/CreateMedication';
+import { setData_toastMessage, setShow_dialogLoading } from '@src/redux/slice/CreateMedication';
 import { messageType_enum } from '@src/component/ToastMessage/type';
 
 const Body = () => {
@@ -62,6 +62,15 @@ const Body = () => {
         }
     };
 
+    const handleCreate = () => {
+        dispatch(setShow_dialogLoading(true));
+
+        const timout = setTimeout(() => {
+            dispatch(setShow_dialogLoading(false));
+            clearTimeout(timout);
+        }, 5000);
+    };
+
     return (
         <div className={style.parent}>
             <div className={style.main}>
@@ -98,7 +107,7 @@ const Body = () => {
                         <PhotoContainer />
                     </div>
                     <div className={style.createBtn}>
-                        <div>{CREATE}</div>
+                        <div onClick={() => handleCreate()}>{CREATE}</div>
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@ import CommentBoxReducer from '@src/redux/slice/CommentBox';
 import ExamineReducer from '@src/redux/slice/Examine';
 import MedicationReducer from '@src/redux/slice/Medication';
 import CreateMedicationReducer from '@src/redux/slice/CreateMedication';
+import DoctorsReducer from '@src/redux/slice/Doctors';
 import VideoPlayBoxReducer from '@src/redux/slice/VideoPlayBox';
 import { accountRTK } from './query/accountRTK';
 
@@ -12,6 +13,7 @@ export const store = configureStore({
         ExamineSlice: ExamineReducer,
         MedicationSlice: MedicationReducer,
         CreateMedicationSlice: CreateMedicationReducer,
+        DoctorsSlice: DoctorsReducer,
         VideoPlayBoxSlice: VideoPlayBoxReducer,
         [accountRTK.reducerPath]: accountRTK.reducer,
     },

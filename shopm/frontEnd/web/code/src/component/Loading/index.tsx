@@ -11,7 +11,7 @@ import Skeleton from './components/Skeleton';
 
 interface MyLoadProps extends React.HTMLProps<HTMLDivElement> {
     load: LoadProps;
-    [key: string]: any;
+    [key: string]: unknown;
 }
 
 const Loading: FC<MyLoadProps> = ({ load, className, ...props }) => {
