@@ -1,6 +1,6 @@
 import sql from 'mssql';
 import { MutateDB } from '@src/services/account/interface';
-import { signup_infor_type } from '../../handle/signup/type';
+import { signup_infor_type } from '../../handle/Signup/type';
 import { AccountField } from '@src/dataStruct/account';
 
 class MutateDB_Signup extends MutateDB {

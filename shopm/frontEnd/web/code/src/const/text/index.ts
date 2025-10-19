@@ -49,6 +49,7 @@ export const PHOTO = 'Hình ảnh, video';
 export const WHAT_DO_YOU_THINK = 'Bạn đang nghĩ gì ?';
 export const ACCOUNT = 'Tài khoản';
 export const PASSWORD = 'Mật khẩu';
+export const FORGET_PASSWORD = 'Quên mật khẩu';
 export const PHONE_NUMBER = 'Số điện thoại';
 export const FIRST_NAME = 'Họ';
 export const LAST_NAME = 'Tên';

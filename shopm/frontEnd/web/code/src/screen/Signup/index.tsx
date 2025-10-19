@@ -1,14 +1,18 @@
 import { useState } from 'react';
 import style from './style.module.scss';
+import { useNavigate } from 'react-router-dom';
 import { SIGNIN, SIGNUP, ACCOUNT, PASSWORD, PHONE_NUMBER, FIRST_NAME, LAST_NAME } from '@src/const/text';
-import { accountOption } from '@src/dataStruct';
+import { AccountField } from '@src/dataStruct/account';
 import { account_field_type, account_enum } from './type';
 import { isSpace, isFirstNumber, containsSpecialCharacters, isValidPhoneNumber } from '@src/utility/string';
 import { useSignupMutation } from '@src/redux/query/accountRTK';
 import { router_res_type } from '@src/interface';
+import { route_enum } from '@src/router/type';
 
 const Signup = () => {
-    const [account, setAccount] = useState<accountOption>({
+    const navigate = useNavigate();
+
+    const [account, setAccount] = useState<AccountField>({
         id: 0,
         userName: '',
         password: '',
@@ -18,6 +22,7 @@ const Signup = () => {
         avatar: null,
         status: '',
         updateTime: '',
+        createTime: '',
     });
     const [userNameWarn, setUserNameWarn] = useState<string>('');
     const [passwordWarn, setPasswordWarn] = useState<string>('');
@@ -125,6 +130,10 @@ const Signup = () => {
             .catch((err) => console.error(err));
     };
 
+    const handleGoToSignin = () => {
+        navigate(route_enum.SIGNIN);
+    };
+
     return (
         <div className={style.parent}>
             <div>
@@ -204,7 +213,7 @@ const Signup = () => {
                 <div>
                     <button onClick={() => handleSignup()}>{SIGNUP}</button>
                 </div>
-                <div>{`${SIGNIN} !`}</div>
+                <div onClick={() => handleGoToSignin()}>{`${SIGNIN} !`}</div>
                 {<div style={{ color: myRes?.status === 'error' ? 'red' : 'black' }}>{myRes?.message}</div>}
             </div>
         </div>

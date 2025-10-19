@@ -1,15 +1,16 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { accountOption } from '@src/dataStruct';
+import { AccountField } from '@src/dataStruct/account';
 import { ACCOUNT_API } from '@src/const/api/account';
 import { router_res_type } from '@src/interface';
+import { MyResponse } from '@src/dataStruct/response';
 
 export const accountRTK = createApi({
     reducerPath: 'accountRTK',
-    baseQuery: fetchBaseQuery({ baseUrl: '' }),
+    baseQuery: fetchBaseQuery({ baseUrl: '', credentials: 'include' }),
     tagTypes: ['Account'],
     endpoints: (builder) => ({
         // Mutation (POST)
-        signup: builder.mutation<router_res_type, accountOption>({
+        signup: builder.mutation<router_res_type, AccountField>({
             query: (body) => ({
                 url: ACCOUNT_API.SIGNUP,
                 method: 'POST',
@@ -17,13 +18,15 @@ export const accountRTK = createApi({
             }),
             invalidatesTags: ['Account'], // dùng nếu muốn refetch danh sách sau khi thêm
         }),
-
-        // // Query (GET)
-        // getUsers: builder.query<User[], void>({
-        //     query: () => 'users',
-        //     providesTags: ['User'],
-        // }),
+        signin: builder.mutation<MyResponse<AccountField>, AccountField>({
+            query: (body) => ({
+                url: ACCOUNT_API.SIGNIN,
+                method: 'POST',
+                body,
+            }),
+            invalidatesTags: ['Account'], // dùng nếu muốn refetch danh sách sau khi thêm
+        }),
     }),
 });
 
-export const { useSignupMutation } = accountRTK;
+export const { useSignupMutation, useSigninMutation } = accountRTK;

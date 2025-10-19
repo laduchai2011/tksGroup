@@ -1,6 +1,6 @@
 import { mssql_server } from '@src/connect';
 import { Request, Response, NextFunction } from 'express';
-import MutateDB_Signup from '../../mutateDB/signup';
+import MutateDB_Signup from '../../mutateDB/Signup';
 import { AccountField } from '@src/dataStruct/account';
 import { MyResponse } from '@src/dataStruct/response';
 

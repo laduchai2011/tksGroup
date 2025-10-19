@@ -5,4 +5,5 @@ const apiString = isProduct ? '' : '/api';
 
 export const ACCOUNT_API = {
     SIGNUP: `${BASE_URL}${apiString}/service_account/mutate/signup`,
+    SIGNIN: `${BASE_URL}${apiString}/service_account/mutate/signin`,
 };
