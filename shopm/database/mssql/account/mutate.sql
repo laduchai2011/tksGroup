@@ -1,4 +1,4 @@
-﻿ALTER PROCEDURE Signup
+﻿CREATE PROCEDURE Signup
 	  @userName NVARCHAR(100),
 	  @password NVARCHAR(100),
 	  @phone NVARCHAR(15),
@@ -8,10 +8,11 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	INSERT INTO account (userName, password, phone, firstName, lastName, avatar, status, createTime)
+	INSERT INTO account (userName, password, phone, firstName, lastName, avatar, status, updateTime, createTime)
 	OUTPUT INSERTED.*
-	VALUES (@userName, @password, @phone, @firstName, @lastName, NULL, 'normal', SYSDATETIMEOFFSET());
-END
+	VALUES (@userName, @password, @phone, @firstName, @lastName, NULL, 'normal', SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET());
+END;
+GO
 
 DELETE FROM account
 GO

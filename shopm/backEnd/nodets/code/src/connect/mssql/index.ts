@@ -103,7 +103,8 @@ class MSSQL_Server {
                     },
                 };
 
-                this._connectionPool = await sql.connect(sqlConfig);
+                const pool = new sql.ConnectionPool(sqlConfig);
+                this._connectionPool = await pool.connect();
                 my_log.withGreen('MSSQL_Server connected successfully!');
             } catch (err) {
                 console.error('MSSQL_Server connection failed:', err);

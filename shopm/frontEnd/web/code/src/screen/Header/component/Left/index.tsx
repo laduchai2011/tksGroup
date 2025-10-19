@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useContext } from 'react';
 import style from './style.module.scss';
-import { DynamicBigRowArrow } from 'react-tks/components';
+import DynamicBigRowArrow from '@src/component/Icon/DynamicBigRowArrow';
 import { useNavigate } from 'react-router-dom';
 import { select_enum, selected_type, route_enum, routed_type } from '@src/router/type';
 import { HeaderContext } from '@src/screen/Header/context';

@@ -4,7 +4,7 @@ import Notify from './component/Notify';
 import Message from './component/Message';
 import Profile from './component/Profile';
 import { Context as Context_Hader_Top_Right } from '@src/screen/Header/component/Top/component/Right/context';
-import { Loading } from 'react-tks/components';
+import Loading from '@src/component/Loading';
 import { selections_index_enum, selections_enum, selections_index_type } from '../../type';
 
 const Body = () => {

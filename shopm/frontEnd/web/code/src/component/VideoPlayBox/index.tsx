@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import style from './style.module.scss';
 import { state_props } from './type';
-import { DeleteCircle } from 'react-tks/components';
+import DeleteCircle from '@src/component/Icon/DeleteCircle';
 import { VIDEO, GO_TO_VIDEO, CLOSE } from '@src/const/text';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import Hls, { LoaderContext, LoaderConfiguration, LoaderCallbacks } from 'hls.js';

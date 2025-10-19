@@ -13,7 +13,7 @@ router_mutate_account.post('/', (_: Request, res: Response) => {
 
 router_mutate_account.post(
     '/signup',
-    handle_signup.setup,
+    // handle_signup.setup,
     handle_signup.isAccountCheckUserName,
     handle_signup.isAccountCheckPhone,
     handle_signup.main

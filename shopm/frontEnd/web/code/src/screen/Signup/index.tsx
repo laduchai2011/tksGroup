@@ -118,7 +118,10 @@ const Signup = () => {
 
     const handleSignup = () => {
         signup(account)
-            .then((res) => setMyRes(res.data))
+            .then((res) => {
+                setMyRes(res.data);
+                console.log(res.data);
+            })
             .catch((err) => console.error(err));
     };
 

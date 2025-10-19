@@ -1,7 +1,7 @@
 import sql from 'mssql';
 import { MutateDB } from '@src/services/account/interface';
 import { signup_infor_type } from '../../handle/signup/type';
-import { accountOption } from '@src/dataStruct/account';
+import { AccountField } from '@src/dataStruct/account';
 
 class MutateDB_Signup extends MutateDB {
     private _connectionPool: sql.ConnectionPool | undefined;
@@ -15,7 +15,7 @@ class MutateDB_Signup extends MutateDB {
         this._connectionPool = connectionPool;
     };
 
-    set_data = (account: accountOption) => {
+    set_data = (account: AccountField) => {
         this._signup_infor = account;
     };
 
@@ -33,7 +33,7 @@ class MutateDB_Signup extends MutateDB {
         return false;
     };
 
-    async run(): Promise<sql.IResult<accountOption> | void> {
+    async run(): Promise<sql.IResult<AccountField> | void> {
         if (this._connectionPool !== undefined && this._signup_infor !== undefined) {
             try {
                 const result = SignupToDB(this._connectionPool, this._signup_infor);
@@ -75,8 +75,8 @@ async function isAccountCheckPhone(pool: sql.ConnectionPool, phone: string): Pro
 
 async function SignupToDB(
     pool: sql.ConnectionPool,
-    account: accountOption
-): Promise<sql.IProcedureResult<accountOption>> {
+    account: AccountField
+): Promise<sql.IProcedureResult<AccountField>> {
     const conn = await pool;
     const result = await conn
         .request()

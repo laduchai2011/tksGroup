@@ -129,5 +129,4 @@ const DynamicBigRowArrow: FC<MyDynamicBigRowArrowProps> = ({ dynamicBigRowArrowP
     );
 };
 
-// eslint-disable-next-line import/no-unused-modules
 export default React.memo(DynamicBigRowArrow);
