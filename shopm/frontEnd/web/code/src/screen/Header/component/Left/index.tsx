@@ -29,6 +29,7 @@ const Left = () => {
         select_enum.EXAMINE,
         select_enum.SIGNUP,
         select_enum.PATIENT_RECORD,
+        select_enum.SIGNOUT,
     ]);
     const routes = useRef<routed_type[]>([
         route_enum.HOME,
@@ -42,6 +43,7 @@ const Left = () => {
         route_enum.EXAMINE,
         route_enum.SIGNUP,
         route_enum.PATIENT_RECORD,
+        route_enum.SIGNOUT,
     ]);
 
     const handleShow = () => {

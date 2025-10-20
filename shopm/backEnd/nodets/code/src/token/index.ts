@@ -17,6 +17,10 @@ type CleanPayload = Omit<MyJwtPayload & Partial<JwtPayload>, 'exp' | 'iat' | 'nb
 
 type TokenState = MyJwtPayload | 'expired' | 'invalid';
 
+export function isJwtPayload(obj: TokenState): obj is MyJwtPayload {
+    return typeof obj === 'object' && obj !== null && 'id' in obj;
+}
+
 // const signOptions: SignOptions = {
 //     expiresIn: '1000h',
 // };
@@ -64,7 +68,6 @@ export function verifyAccessToken(token: string): TokenState {
         return 'invalid';
     }
 }
-
 export function verifyRefreshToken(token: string): TokenState {
     try {
         return jwt.verify(token, REFRESH_TOKEN_SECRET as Secret) as MyJwtPayload;

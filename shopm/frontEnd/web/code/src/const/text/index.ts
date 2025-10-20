@@ -6,6 +6,7 @@ export const DOCTORS = 'Danh sách bác sĩ / dược sĩ';
 export const CONTACT = 'Liên hệ';
 export const SIGNUP = 'Đăng ký';
 export const SIGNIN = 'Đăng nhập';
+export const SIGNOUT = 'Đăng xuất';
 export const SEARCH = 'Tìm kiếm';
 export const NOTIFY = 'Thông báo';
 export const MESSAGE = 'Tin nhắn';

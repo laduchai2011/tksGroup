@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Signup from '@src/screen/Signup';
 import Signin from '@src/screen/Signin';
+import Signout from '@src/screen/Signout';
 import Home from '@src/screen/Home';
 import Medications from '@src/screen/Medications';
 import Medication from '@src/screen/Medication';
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
     [
         { path: route_enum.SIGNUP, element: <Signup /> },
         { path: route_enum.SIGNIN, element: <Signin /> },
+        { path: route_enum.SIGNOUT, element: <Signout /> },
         { path: route_enum.HOME, element: <Home /> },
         { path: route_enum.MEDICATIONS, element: <Medications /> },
         { path: route_enum.MEDICATION, element: <Medication /> },

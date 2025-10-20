@@ -10,6 +10,7 @@ import {
     EXAMINE,
     SIGNUP,
     SIGNIN,
+    SIGNOUT,
     PATIENT_RECORD,
 } from '@src/const/text';
 
@@ -24,6 +25,7 @@ const _PROFILE = PROFILE;
 const _EXAMINE = EXAMINE;
 const _SIGNUP = SIGNUP;
 const _SIGNIN = SIGNIN;
+const _SIGNOUT = SIGNOUT;
 const _PATIENT_RECORD = PATIENT_RECORD;
 
 export enum select_enum {
@@ -38,6 +40,7 @@ export enum select_enum {
     EXAMINE = _EXAMINE,
     SIGNUP = _SIGNUP,
     SIGNIN = _SIGNIN,
+    SIGNOUT = _SIGNOUT,
     PATIENT_RECORD = _PATIENT_RECORD,
 }
 export type selected_type =
@@ -52,6 +55,7 @@ export type selected_type =
     | select_enum.EXAMINE
     | select_enum.SIGNUP
     | select_enum.SIGNIN
+    | select_enum.SIGNOUT
     | select_enum.PATIENT_RECORD;
 
 export enum route_enum {
@@ -66,6 +70,7 @@ export enum route_enum {
     EXAMINE = '/examine',
     SIGNUP = '/signup',
     SIGNIN = '/signin',
+    SIGNOUT = '/signout',
     PATIENT_RECORD = '/patient_record',
 }
 export type routed_type =
@@ -80,4 +85,5 @@ export type routed_type =
     | route_enum.EXAMINE
     | route_enum.SIGNUP
     | route_enum.SIGNIN
+    | route_enum.SIGNOUT
     | route_enum.PATIENT_RECORD;

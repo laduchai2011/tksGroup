@@ -26,7 +26,14 @@ export const accountRTK = createApi({
             }),
             invalidatesTags: ['Account'], // dùng nếu muốn refetch danh sách sau khi thêm
         }),
+        signout: builder.mutation<MyResponse<AccountField>, void>({
+            query: () => ({
+                url: ACCOUNT_API.SIGNOUT,
+                method: 'POST',
+            }),
+            invalidatesTags: ['Account'], // dùng nếu muốn refetch danh sách sau khi thêm
+        }),
     }),
 });
 
-export const { useSignupMutation, useSigninMutation } = accountRTK;
+export const { useSignupMutation, useSigninMutation, useSignoutMutation } = accountRTK;
