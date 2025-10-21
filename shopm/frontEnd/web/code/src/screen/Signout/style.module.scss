@@ -37,7 +37,7 @@
         height: 100vh;
         @include center-of-rectangle;
 
-        > div {
+        > .btnSignout {
             box-sizing: border-box;
             padding: 10px;
             border-radius: 15px;
@@ -45,6 +45,21 @@
             color: white;
             cursor: pointer;
             user-select: none;
+        }
+
+        > .btnSignin {
+            box-sizing: border-box;
+            padding: 10px;
+            border-radius: 15px;
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        > .note {
+            color: red;
+            margin-top: 30px;
         }
     }
 }

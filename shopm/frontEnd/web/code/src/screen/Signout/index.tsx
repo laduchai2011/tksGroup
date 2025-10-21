@@ -1,14 +1,20 @@
 import { useRef, useEffect, useState } from 'react';
 import style from './style.module.scss';
-import { SIGNOUT } from '@src/const/text';
+import { useNavigate } from 'react-router-dom';
+import { SIGNOUT, SIGNIN } from '@src/const/text';
 import Loading from '@src/component/Loading';
 import { LoadProps, LineCircleLoadProps } from '@src/component/Loading/type';
 import { LOAD_COMPONENTS_CONST } from '@src/component/Loading/const';
 import { useSignoutMutation } from '@src/redux/query/accountRTK';
+import { route_enum } from '@src/router/type';
 
 const Signout = () => {
+    const navigate = useNavigate();
+    const myId = sessionStorage.getItem('myId');
+
     const overlay_element = useRef<HTMLDivElement | null>(null);
     const [isSignouting, setIsSignouting] = useState<boolean>(false);
+    const [note, setNote] = useState<string>('');
 
     const [signout] = useSignoutMutation();
 
@@ -33,17 +39,23 @@ const Signout = () => {
 
     const handleSignout = () => {
         setIsSignouting(true);
-        // const timeout = setTimeout(() => {
-        //     setIsSignouting(false);
-        //     clearTimeout(timeout);
-        // }, 5000);
         signout()
             .then((res) => {
                 const resData = res.data;
-                console.log(resData);
+                if (resData?.isSuccess) {
+                    sessionStorage.removeItem('myId');
+                    navigate(route_enum.HOME);
+                    setNote('');
+                } else {
+                    setNote('Đăng xuất không thành công !');
+                }
             })
             .catch((err) => console.error(err))
             .finally(() => setIsSignouting(false));
+    };
+
+    const goToSignin = () => {
+        navigate(route_enum.SIGNIN);
     };
 
     const lineCircleLoad: LineCircleLoadProps = {
@@ -63,7 +75,17 @@ const Signout = () => {
                 <Loading className={style.loadding} load={load} />
             </div>
             <div className={style.main}>
-                <div onClick={() => handleSignout()}>{SIGNOUT}</div>
+                {myId !== null && (
+                    <div className={style.btnSignout} onClick={() => handleSignout()}>
+                        {SIGNOUT}
+                    </div>
+                )}
+                {myId === null && (
+                    <div className={style.btnSignin} onClick={() => goToSignin()}>
+                        {SIGNIN}
+                    </div>
+                )}
+                {note.length > 0 && <div className={style.note}>{note}</div>}
             </div>
         </div>
     );
