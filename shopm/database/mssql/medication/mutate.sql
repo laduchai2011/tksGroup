@@ -9,7 +9,7 @@ CREATE TYPE MedicationVideoType AS TABLE (
 );
 GO
 
-CREATE PROCEDURE CreateMedication
+ALTER PROCEDURE CreateMedication
 	@title NVARCHAR(255),
 	@type NVARCHAR(255),
 	@typeGroup NVARCHAR(255),
@@ -44,6 +44,8 @@ BEGIN
         SELECT 
             url, @newMedicationId, SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET()
         FROM @medicationVideo;
+
+		SELECT * FROM dbo.medication WHERE id = @newMedicationId;
 
 		COMMIT TRANSACTION;
 	END TRY

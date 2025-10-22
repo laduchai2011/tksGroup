@@ -7,6 +7,7 @@ import process from 'process';
 dotenv.config();
 
 import service_account from '@src/services/account';
+import service_medication from '@src/services/medication';
 import service_order_medication from '@src/services/order_medication';
 import service_video from './services/video';
 
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
 });
 
 app.use(`/api/service_account`, service_account);
+app.use(`/api/service_medication`, service_medication);
 app.use(`/api/service_order_medication`, service_order_medication);
 app.use(`/api/service_video`, service_video);
 
