@@ -1,4 +1,4 @@
-import { FC, useRef, useEffect } from 'react';
+import { FC, memo, useRef, useEffect } from 'react';
 import style from './style.module.scss';
 
 type DivProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'>;
@@ -52,4 +52,4 @@ const TextareaBasic: FC<ComponentProps> = ({ header, value, onChange, className,
     );
 };
 
-export default TextareaBasic;
+export default memo(TextareaBasic);

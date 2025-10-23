@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useState, useCallback } from 'react';
 import style from './style.module.scss';
 import { CREATE_MEDICATION, TITLE, TYPE, AMOUNT, PRICE, DISCOUNT, CREATE } from '@src/const/text';
 import InputBasic from '@src/component/InputBasic';
@@ -33,70 +33,82 @@ const Body = () => {
         updateTime: '',
         createTime: '',
     });
+    const [localImages, setLocalImages] = useState<File[]>([]);
+    const [localVideos, setLocalVideos] = useState<File[]>([]);
+
     const [createMedication] = useCreateMedicationMutation();
 
-    const handleTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleTitle = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const value = e.target.value;
-        setMedication({ ...medication, title: value });
-    };
+        setMedication((prev) => ({ ...prev, title: value }));
+    }, []);
 
-    const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleType = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        setMedication({ ...medication, type: value });
-    };
+        setMedication((prev) => ({ ...prev, type: value }));
+    }, []);
 
-    const handleAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        const value1 = value.trim();
-        if (isPositiveInteger(value1)) {
-            setMedication({ ...medication, amount: Number(value1) });
-        } else {
-            dispatch(
-                setData_toastMessage({
-                    type: messageType_enum.ERROR,
-                    message: 'Số lượng nhập vào phải là 1 số nguyên dương !',
-                })
-            );
-        }
-    };
+    const handleAmount = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            const value = e.target.value;
+            const value1 = value.trim();
+            if (isPositiveInteger(value1)) {
+                setMedication((prev) => ({ ...prev, amount: Number(value1) }));
+            } else {
+                dispatch(
+                    setData_toastMessage({
+                        type: messageType_enum.ERROR,
+                        message: 'Số lượng nhập vào phải là 1 số nguyên dương !',
+                    })
+                );
+            }
+        },
+        [dispatch]
+    );
 
-    const handleDiscount = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        const value1 = value.trim();
-        if (isPositiveInteger(value1)) {
-            setMedication({ ...medication, discount: Number(value1) });
-        } else {
-            dispatch(
-                setData_toastMessage({
-                    type: messageType_enum.ERROR,
-                    message: 'Giảm giá nhập vào phải là 1 số nguyên dương !',
-                })
-            );
-        }
-    };
+    const handleDiscount = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            const value = e.target.value;
+            const value1 = value.trim();
+            if (isPositiveInteger(value1)) {
+                setMedication((prev) => ({ ...prev, discount: Number(value1) }));
+            } else {
+                dispatch(
+                    setData_toastMessage({
+                        type: messageType_enum.ERROR,
+                        message: 'Giảm giá nhập vào phải là 1 số nguyên dương !',
+                    })
+                );
+            }
+        },
+        [dispatch]
+    );
 
-    const handlePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        const value1 = value.trim();
-        if (isPositiveInteger(value1)) {
-            setMedication({ ...medication, price: Number(value1) });
-        } else {
-            dispatch(
-                setData_toastMessage({
-                    type: messageType_enum.ERROR,
-                    message: 'Giá nhập vào phải là 1 số nguyên dương !',
-                })
-            );
-        }
-    };
+    const handlePrice = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            const value = e.target.value;
+            const value1 = value.trim();
+            if (isPositiveInteger(value1)) {
+                setMedication((prev) => ({ ...prev, price: Number(value1) }));
+            } else {
+                dispatch(
+                    setData_toastMessage({
+                        type: messageType_enum.ERROR,
+                        message: 'Giá nhập vào phải là 1 số nguyên dương !',
+                    })
+                );
+            }
+        },
+        [dispatch]
+    );
 
-    const handleTypeGroupChange = (typeGroup: typeGroup_type) => {
-        setMedication({ ...medication, typeGroup: typeGroup });
-    };
+    const handleTypeGroupChange = useCallback((typeGroup: typeGroup_type) => {
+        setMedication((prev) => ({ ...prev, typeGroup: typeGroup }));
+    }, []);
 
-    const handleMyTextEditorChange = (value: string) => {
-        setMedication({ ...medication, information: value });
-    };
+    const handleMyTextEditorChange = useCallback((value: string) => {
+        setMedication((prev) => ({ ...prev, information: value }));
+    }, []);
 
     const handleCreate = () => {
         const medication_cp = { ...medication };
@@ -121,40 +133,45 @@ const Body = () => {
                                 className={style.myInput}
                                 header={TITLE}
                                 value={medication.title}
-                                onChange={(e) => handleTitle(e)}
+                                onChange={handleTitle}
                             />
                             <InputBasic
                                 className={style.myInput}
                                 header={TYPE}
                                 value={medication.type}
-                                onChange={(e) => handleType(e)}
+                                onChange={handleType}
                             />
                             <InputBasic
                                 className={style.myInput}
                                 header={AMOUNT}
                                 value={medication.amount}
-                                onChange={(e) => handleAmount(e)}
+                                onChange={handleAmount}
                             />
                             <InputBasic
                                 className={style.myInput}
                                 header={`${DISCOUNT} %`}
                                 value={medication.discount}
-                                onChange={(e) => handleDiscount(e)}
+                                onChange={handleDiscount}
                             />
                             <InputBasic
                                 className={style.myInput}
                                 header={`${PRICE} VND`}
                                 value={medication.price}
-                                onChange={(e) => handlePrice(e)}
+                                onChange={handlePrice}
                             />
-                            <TypeGroup onChange={(typeGroup) => handleTypeGroupChange(typeGroup)} />
+                            <TypeGroup onChange={handleTypeGroupChange} />
                         </div>
                     </div>
                     <div>
-                        <PhotoContainer />
+                        <PhotoContainer
+                            localImages={localImages}
+                            setLocalImages={setLocalImages}
+                            localVideos={localVideos}
+                            setLocalVideos={setLocalVideos}
+                        />
                     </div>
                     <div>
-                        <MyTextEditor onChange={(value) => handleMyTextEditorChange(value)} />
+                        <MyTextEditor onChange={handleMyTextEditorChange} />
                     </div>
                     <div className={style.createBtn}>
                         <div onClick={() => handleCreate()}>{CREATE}</div>

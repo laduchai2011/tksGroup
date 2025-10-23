@@ -1,14 +1,13 @@
 import { Request, Response } from 'express';
-import path from "path";
-import fs from "fs";
-import multer from "multer";
+import path from 'path';
+import fs from 'fs';
+import multer from 'multer';
 
 class Handle_UploadAImage {
-
     constructor() {}
 
     upload = (): multer.Multer => {
-        const imagePath = path.join(process.cwd(), 'data', "image");
+        const imagePath = path.join(process.cwd(), 'data', 'image');
         if (!fs.existsSync(imagePath)) {
             fs.mkdirSync(imagePath, { recursive: true });
         }
@@ -18,7 +17,7 @@ class Handle_UploadAImage {
                 cb(null, imagePath);
             },
             filename: (req, file, cb) => {
-                const userId = req.cookies?.id || 'unknown'; 
+                const userId = req.cookies?.id || 'unknown';
                 const timestamp = Date.now();
                 const ext = path.extname(file.originalname);
                 cb(null, `${userId}_${timestamp}${ext}`);
@@ -31,10 +30,11 @@ class Handle_UploadAImage {
 
     main = async (req: Request, res: Response) => {
         if (!req.file) {
-            return res.status(400).json({ message: "No file uploaded" });
+            res.status(400).json({ message: 'No file uploaded' });
+            return;
         }
         res.json({ file: req.file.filename });
-    }
+    };
 }
 
 export default Handle_UploadAImage;

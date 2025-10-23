@@ -17,8 +17,7 @@ const TypeGroup: FC<{ onChange?: (typeGroup: typeGroup_type) => void }> = ({ onC
                 }
             }
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [typeGroup, otherType]);
+    }, [onChange, typeGroup, otherType]);
 
     const handleOtherType = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;

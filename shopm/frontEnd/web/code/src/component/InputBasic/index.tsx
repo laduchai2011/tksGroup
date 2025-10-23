@@ -1,4 +1,4 @@
-import { FC, useRef, useEffect } from 'react';
+import { FC, memo, useRef, useEffect } from 'react';
 import style from './style.module.scss';
 
 interface ComponentProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -41,4 +41,4 @@ const InputBasic: FC<ComponentProps> = ({ header, value, onChange, className, ..
     );
 };
 
-export default InputBasic;
+export default memo(InputBasic);
