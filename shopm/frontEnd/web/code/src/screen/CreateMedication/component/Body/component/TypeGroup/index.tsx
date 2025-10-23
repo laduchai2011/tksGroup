@@ -1,24 +1,54 @@
-import { memo, useState } from 'react';
+import { FC, memo, useState, useEffect } from 'react';
 import style from './style.module.scss';
 import { FRAGILE, NORMAL, OTHER } from '@src/const/text';
+import { typeGroup_enum, typeGroup_type } from '@src/dataStruct/medication';
 
-const TypeGroup = () => {
-    const [typeGroup, setTypeGroup] = useState<number | undefined>(undefined);
+const TypeGroup: FC<{ onChange?: (typeGroup: typeGroup_type) => void }> = ({ onChange }) => {
+    const [typeGroup, setTypeGroup] = useState<typeGroup_type | undefined>(undefined);
+    const [otherType, setOtherType] = useState<string>('');
+
+    useEffect(() => {
+        if (onChange && typeGroup !== undefined) {
+            if (typeGroup === typeGroup_enum.NORMAL || typeGroup === typeGroup_enum.FRAGILE) {
+                onChange(typeGroup);
+            } else {
+                if (otherType.length > 0) {
+                    onChange(otherType);
+                }
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [typeGroup, otherType]);
+
+    const handleOtherType = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setOtherType(value.trim());
+    };
 
     return (
         <div className={style.parent}>
             <div>
-                <div className={typeGroup === 0 ? style.active : ''} onClick={() => setTypeGroup(0)}>
+                <div
+                    className={typeGroup === typeGroup_enum.NORMAL ? style.active : ''}
+                    onClick={() => setTypeGroup(typeGroup_enum.NORMAL)}
+                >
                     {NORMAL}
                 </div>
-                <div className={typeGroup === 1 ? style.active : ''} onClick={() => setTypeGroup(1)}>
+                <div
+                    className={typeGroup === typeGroup_enum.FRAGILE ? style.active : ''}
+                    onClick={() => setTypeGroup(typeGroup_enum.FRAGILE)}
+                >
                     {FRAGILE}
                 </div>
-                <div className={typeGroup === 2 ? style.active : ''} onClick={() => setTypeGroup(2)}>
+                <div className={typeGroup === '' ? style.active : ''} onClick={() => setTypeGroup('')}>
                     {OTHER}
                 </div>
             </div>
-            <div>{typeGroup === 2 && <input placeholder={OTHER} />}</div>
+            <div>
+                {typeGroup === '' && (
+                    <input value={otherType} onChange={(e) => handleOtherType(e)} placeholder={OTHER} />
+                )}
+            </div>
         </div>
     );
 };
