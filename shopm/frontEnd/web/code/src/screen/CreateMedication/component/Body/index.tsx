@@ -11,9 +11,30 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@src/redux';
 import { setData_toastMessage, setShow_dialogLoading } from '@src/redux/slice/CreateMedication';
 import { messageType_enum } from '@src/component/ToastMessage/type';
-import { MedicationField } from '@src/dataStruct/medication';
-import { typeGroup_type } from '@src/dataStruct/medication';
+import {
+    MedicationField,
+    typeGroup_type,
+    CreateMedicationField,
+    MedicationImageField,
+} from '@src/dataStruct/medication';
 import { useCreateMedicationMutation } from '@src/redux/query/medicationRTK';
+import { IMAGE_API } from '@src/const/api/image';
+import axiosInstance from '@src/api/axiosInstance';
+import { BASE_URL } from '@src/const/api/baseUrl';
+
+const isProduct = process.env.NODE_ENV === 'production';
+const apiString = isProduct ? '' : '/api';
+
+interface aFileField {
+    filename: string;
+    mimetype: string;
+    path: string;
+    size: number;
+}
+interface UploadMultipleImageResponse {
+    message: string;
+    files: aFileField[];
+}
 
 const Body = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -110,8 +131,65 @@ const Body = () => {
         setMedication((prev) => ({ ...prev, information: value }));
     }, []);
 
-    const handleCreate = () => {
+    const handleUploadImage = async (files: File[]): Promise<UploadMultipleImageResponse | null> => {
+        if (!files || files.length === 0) return null;
+
+        const formData = new FormData();
+        files.forEach((file) => {
+            formData.append('images', file); // 👈 key này phải trùng với backend
+        });
+
+        try {
+            const res = await axiosInstance.post<UploadMultipleImageResponse>(
+                IMAGE_API.UPLOAD_MULTIPLE_IMAGE, // hoặc vẫn là UPLOAD_AIMAGE nếu backend tự detect
+                formData,
+                {
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                    onUploadProgress: (progressEvent) => {
+                        const percent = Math.round((progressEvent.loaded * 100) / (progressEvent.total ?? 1));
+                        console.log(`Đang tải lên: ${percent}%`);
+                    },
+                }
+            );
+            console.log(111, res.data);
+            return res.data;
+        } catch (error) {
+            console.error('Upload thất bại:', error);
+            // setMessage({
+            //     message: 'Tải ảnh lên thất bại!',
+            //     type: 'error',
+            // });
+            return null;
+        }
+    };
+
+    const handleCreate = async () => {
         const medication_cp = { ...medication };
+
+        const createMedicationBody: CreateMedicationField = {
+            medication: medication_cp,
+            images: [],
+            videos: [],
+        };
+
+        const resData_images = await handleUploadImage(localImages);
+        if (resData_images === null) return;
+
+        const imageFiles = resData_images.files;
+        const imageUrls: MedicationImageField[] = [];
+        for (let i: number = 0; i < imageFiles.length; i++) {
+            const url = `${BASE_URL}${apiString}/service_image/store/image/${imageFiles[i].filename}`;
+            const aImage: MedicationImageField = {
+                id: -1,
+                url: url,
+                medicationId: -1,
+                updateTime: '',
+                createTime: '',
+            };
+            imageUrls.push(aImage);
+        }
+
+        createMedicationBody.images = imageUrls;
 
         dispatch(setShow_dialogLoading(true));
         const timout = setTimeout(() => {

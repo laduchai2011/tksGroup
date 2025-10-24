@@ -16,6 +16,8 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 const sameSite = process.env.NODE_ENV === 'development' ? 'lax' : 'none';
+// const sameSite = 'none';
+const cookieDomain = 'shopm.local.com';
 
 const timeExpireat = 60 * 60 * 24 * 30 * 12; // 1 year
 
@@ -49,6 +51,7 @@ class Handle_Signin {
         } else {
             myResponse.message = 'Connect BD(mssql) NOT successly !';
             res.status(500).json(myResponse);
+            return;
         }
 
         if (connection_pool_isExist) {
@@ -61,6 +64,7 @@ class Handle_Signin {
                     if (id === null) {
                         myResponse.message = 'Đăng ký thất bại !';
                         res.status(500).json(myResponse);
+                        return;
                     }
 
                     const myJwtPayload: MyJwtPayload = {
@@ -98,18 +102,21 @@ class Handle_Signin {
                             sameSite: sameSite,
                             expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
                             // signed: true
+                            domain: cookieDomain,
                         })
                             .cookie('accessToken', accessToken, {
                                 httpOnly: true,
                                 secure: secure_cookie,
                                 sameSite: sameSite,
                                 expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
+                                domain: cookieDomain,
                             })
                             .cookie('refreshToken', refreshToken, {
                                 httpOnly: true,
                                 secure: secure_cookie,
                                 sameSite: sameSite,
                                 expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
+                                domain: cookieDomain,
                             });
                     } else {
                         res.cookie('id', id, {
@@ -140,14 +147,17 @@ class Handle_Signin {
                     myResponse.isSuccess = true;
                     myResponse.data = result.recordset[0];
                     res.json(myResponse);
+                    return;
                 } else {
                     myResponse.message = 'Login NOT successly, account or password is incorrect !';
                     res.status(500).json(myResponse);
+                    return;
                 }
             } catch (error) {
                 myResponse.message = 'Login NOT successly 6 !';
                 myResponse.err = error;
                 res.status(500).json(myResponse);
+                return;
             }
         }
     };

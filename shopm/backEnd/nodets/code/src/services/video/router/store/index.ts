@@ -1,17 +1,17 @@
-import express, { Router, Request, Response } from 'express';
+import express, { Router } from 'express';
 import dotenv from 'dotenv';
 import Handle_Watch from './handle/watch';
 
 dotenv.config();
-const router_get_video: Router = express.Router();
+const router_store_video: Router = express.Router();
 
 const handle_Watch = new Handle_Watch();
 
-router_get_video.get('/watch', handle_Watch.main);
+router_store_video.get('/watch', handle_Watch.main);
 
-router_get_video.get('/*.m3u8', handle_Watch.main_playlist);
+router_store_video.get('/*.m3u8', handle_Watch.main_playlist);
 
-router_get_video.get('/*.ts', handle_Watch.main_segment);
+router_store_video.get('/*.ts', handle_Watch.main_segment);
 
 // router_get_video.get(
 //     '/*.m3u8',
@@ -47,4 +47,4 @@ router_get_video.get('/*.ts', handle_Watch.main_segment);
 //     }
 // );
 
-export default router_get_video;
+export default router_store_video;

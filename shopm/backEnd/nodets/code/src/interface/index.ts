@@ -10,12 +10,12 @@ interface redis_interface {
     config?: redis_config;
 }
 
-interface router_res_type {
-    message: string;
-    status: '' | 'success' | 'failure' | 'warn-error' | 'error' | 'notify';
-    error: unknown;
-    data: unknown;
-}
+// interface router_res_type {
+//     message: string;
+//     status: '' | 'success' | 'failure' | 'warn-error' | 'error' | 'notify';
+//     error: unknown;
+//     data: unknown;
+// }
 
 interface video_interface {
     infor: video_infor;
@@ -24,7 +24,7 @@ interface video_interface {
 interface my_interface {
     mssql: mssql_interface;
     redis: redis_interface;
-    router_res_type: router_res_type;
+    // router_res_type: router_res_type;
     video: video_interface;
 }
 

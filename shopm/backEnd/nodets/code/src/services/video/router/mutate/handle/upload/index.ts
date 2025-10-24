@@ -1,6 +1,4 @@
-// import { mssql_server } from '@src/connect';
 import { Request, Response, NextFunction } from 'express';
-import my_interface from '@src/interface';
 import { spawnSync } from 'child_process';
 import ffmpegPath from 'ffmpeg-static';
 import { handle_cmd } from './util';
@@ -8,6 +6,7 @@ import path from 'path';
 import fs from 'fs';
 import { resolution_options } from './type';
 import { MyRequest } from '../../type';
+import { MyResponse } from '@src/dataStruct/response';
 
 const root_path = process.cwd();
 
@@ -18,28 +17,23 @@ class Handle_Upload {
         const myReq = req as MyRequest;
         myReq.video_name = 'video.mp4';
 
-        const resData: my_interface['router_res_type'] = {
-            message: 'middle_upload have a error',
-            status: '',
-            error: '',
-            data: '',
+        const myResponse: MyResponse<unknown> = {
+            isSuccess: false,
         };
 
         if (myReq.video_name) {
             next();
         } else {
-            res.json(resData);
+            res.json(myResponse);
+            return;
         }
     };
 
     middle_encode_video_to_HLS = async (req: Request, res: Response, next: NextFunction) => {
         const myReq = req as MyRequest;
 
-        const resData: my_interface['router_res_type'] = {
-            message: '',
-            status: '',
-            error: '',
-            data: '',
+        const myResponse: MyResponse<unknown> = {
+            isSuccess: false,
         };
 
         let isSuccess: boolean = false;
@@ -95,22 +89,18 @@ class Handle_Upload {
                 fs.copyFileSync(sourcePath, destinationPath);
                 isSuccess = true;
             } catch (error) {
-                resData.message = 'This is a error !';
-                resData.status = 'failure';
-                resData.error = error;
-                resData.data = null;
+                myResponse.message = 'This is a error !';
+                myResponse.err = error;
             }
         } else {
-            resData.message = 'Name of video must is a string !';
-            resData.status = 'failure';
-            resData.error = null;
-            resData.data = null;
+            myResponse.message = 'Name of video must is a string !';
         }
 
         if (isSuccess) {
             next();
         } else {
-            res.json(resData);
+            res.json(myResponse);
+            return;
         }
     };
 
@@ -118,14 +108,12 @@ class Handle_Upload {
         const myReq = req as MyRequest;
         const video_name: string = myReq.video_name;
 
-        const resData: my_interface['router_res_type'] = {
+        const myResponse: MyResponse<unknown> = {
             message: `Video (${video_name}) is uploaded successly !`,
-            status: 'success',
-            error: null,
-            data: '',
+            isSuccess: true,
         };
 
-        res.json(resData);
+        res.json(myResponse);
     };
 }
 

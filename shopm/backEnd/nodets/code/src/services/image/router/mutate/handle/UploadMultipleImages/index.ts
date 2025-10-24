@@ -51,7 +51,7 @@ class Handle_UploadMultipleImages {
 
         const fileInfos = files.map((file) => ({
             filename: file.filename,
-            path: `/uploads/${file.filename}`, // nếu bạn phục vụ static
+            path: `/${file.filename}`, // nếu bạn phục vụ static
             size: file.size,
             mimetype: file.mimetype,
         }));

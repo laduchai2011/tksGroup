@@ -33,8 +33,8 @@ export interface MedicationVideoField {
 
 export interface CreateMedicationField {
     medication: MedicationField;
-    medicationImages: MedicationImageField[];
-    medicationVideos: MedicationVideoField[];
+    images: MedicationImageField[];
+    videos: MedicationVideoField[];
 }
 
 export enum typeGroup_enum {
