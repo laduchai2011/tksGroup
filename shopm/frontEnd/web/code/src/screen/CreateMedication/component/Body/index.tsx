@@ -18,9 +18,10 @@ import {
     MedicationImageField,
 } from '@src/dataStruct/medication';
 import { useCreateMedicationMutation } from '@src/redux/query/medicationRTK';
-import { IMAGE_API } from '@src/const/api/image';
-import axiosInstance from '@src/api/axiosInstance';
 import { BASE_URL } from '@src/const/api/baseUrl';
+import { IMAGE_API } from '@src/const/api/image';
+import { VIDEO_API } from '@src/const/api/video';
+import axiosInstance from '@src/api/axiosInstance';
 
 const isProduct = process.env.NODE_ENV === 'production';
 const apiString = isProduct ? '' : '/api';
@@ -131,7 +132,7 @@ const Body = () => {
         setMedication((prev) => ({ ...prev, information: value }));
     }, []);
 
-    const handleUploadImage = async (files: File[]): Promise<UploadMultipleImageResponse | null> => {
+    const handleUploadMultipleImages = async (files: File[]): Promise<UploadMultipleImageResponse | null> => {
         if (!files || files.length === 0) return null;
 
         const formData = new FormData();
@@ -151,14 +152,48 @@ const Body = () => {
                     },
                 }
             );
-            console.log(111, res.data);
             return res.data;
         } catch (error) {
             console.error('Upload thất bại:', error);
-            // setMessage({
-            //     message: 'Tải ảnh lên thất bại!',
-            //     type: 'error',
-            // });
+            dispatch(
+                setData_toastMessage({
+                    type: messageType_enum.ERROR,
+                    message: 'Đăng tải hình ảnh thất bại !',
+                })
+            );
+            return null;
+        }
+    };
+
+    const handleUploadMultipleVideos = async (files: File[]): Promise<UploadMultipleImageResponse | null> => {
+        if (!files || files.length === 0) return null;
+
+        const formData = new FormData();
+        files.forEach((file) => {
+            formData.append('videos', file); // 👈 key này phải trùng với backend
+        });
+
+        try {
+            const res = await axiosInstance.post<UploadMultipleImageResponse>(
+                VIDEO_API.UPLOAD_MULTIPLE_VIDEOS,
+                formData,
+                {
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                    onUploadProgress: (progressEvent) => {
+                        const percent = Math.round((progressEvent.loaded * 100) / (progressEvent.total ?? 1));
+                        console.log(`Đang tải lên: ${percent}%`);
+                    },
+                }
+            );
+            return res.data;
+        } catch (error) {
+            console.error('Upload thất bại:', error);
+            dispatch(
+                setData_toastMessage({
+                    type: messageType_enum.ERROR,
+                    message: 'Đăng tải hình ảnh thất bại !',
+                })
+            );
             return null;
         }
     };
@@ -172,7 +207,7 @@ const Body = () => {
             videos: [],
         };
 
-        const resData_images = await handleUploadImage(localImages);
+        const resData_images = await handleUploadMultipleImages(localImages);
         if (resData_images === null) return;
 
         const imageFiles = resData_images.files;
@@ -188,6 +223,10 @@ const Body = () => {
             };
             imageUrls.push(aImage);
         }
+
+        const resData_videos = await handleUploadMultipleVideos(localVideos);
+        if (resData_videos === null) return;
+        console.log(1111111, resData_videos);
 
         createMedicationBody.images = imageUrls;
 

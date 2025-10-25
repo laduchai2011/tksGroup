@@ -3,6 +3,17 @@ import path from 'path';
 import fs from 'fs';
 import multer from 'multer';
 
+interface aFileField {
+    filename: string;
+    mimetype: string;
+    path: string;
+    size: number;
+}
+interface UploadMultipleImageResponse {
+    message: string;
+    files: aFileField[];
+}
+
 class Handle_UploadMultipleImages {
     constructor() {}
 
@@ -49,17 +60,19 @@ class Handle_UploadMultipleImages {
             return;
         }
 
-        const fileInfos = files.map((file) => ({
+        const fileInfos: aFileField[] = files.map((file) => ({
             filename: file.filename,
             path: `/${file.filename}`, // nếu bạn phục vụ static
             size: file.size,
             mimetype: file.mimetype,
         }));
 
-        res.json({
+        const resData: UploadMultipleImageResponse = {
             message: 'Upload thành công!',
             files: fileInfos,
-        });
+        };
+
+        res.json(resData);
         return;
     };
 }

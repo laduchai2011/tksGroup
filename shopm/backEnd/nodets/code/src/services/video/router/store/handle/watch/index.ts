@@ -3,7 +3,6 @@ import { Request, Response } from 'express';
 import { parameter_options } from '../../type';
 import path from 'path';
 import fs from 'fs';
-// import my_interface from '@src/interface';
 import { MyResponse } from '@src/dataStruct/response';
 
 const root_path = process.cwd();
@@ -12,12 +11,6 @@ class Handle_Watch {
     constructor() {}
 
     main_segment = (req: Request<Record<string, never>, unknown, unknown, parameter_options>, res: Response) => {
-        // const resData: my_interface['router_res_type'] = {
-        //     message: 'middle_upload have a error',
-        //     status: '',
-        //     error: '',
-        //     data: '',
-        // };
         const myResponse: MyResponse<unknown> = {
             message: 'middle_upload have a error',
             isSuccess: false,
@@ -41,12 +34,6 @@ class Handle_Watch {
     };
 
     main_playlist = (req: Request<Record<string, never>, unknown, unknown, parameter_options>, res: Response) => {
-        // const resData: my_interface['router_res_type'] = {
-        //     message: 'middle_upload have a error',
-        //     status: '',
-        //     error: '',
-        //     data: '',
-        // };
         const myResponse: MyResponse<unknown> = {
             message: 'middle_upload have a error',
             isSuccess: false,
@@ -70,12 +57,6 @@ class Handle_Watch {
     };
 
     main = async (req: Request<Record<string, never>, unknown, unknown, parameter_options>, res: Response) => {
-        // const resData: my_interface['router_res_type'] = {
-        //     message: 'middle_upload have a error',
-        //     status: '',
-        //     error: '',
-        //     data: '',
-        // };
         const myResponse: MyResponse<unknown> = {
             message: 'middle_upload have a error',
             isSuccess: false,
@@ -83,12 +64,13 @@ class Handle_Watch {
 
         try {
             const id = req.query.id;
-            const filePath = path.join(root_path, 'data', 'video', 'output', id, `master.m3u8`);
+            const filePath = path.join(root_path, 'data', 'video', 'output', id, 'master.m3u8');
             const stat = fs.statSync(filePath);
             res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');
             res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
             res.setHeader('Content-Length', stat.size);
             res.sendFile(filePath);
+            return;
         } catch (err) {
             myResponse.message = `Master.m3u8 (${req.path}) not found !`;
             myResponse.err = err;
