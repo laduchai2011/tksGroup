@@ -1,7 +1,6 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-import path from 'path';
 import process from 'process';
 
 dotenv.config();
@@ -16,8 +15,8 @@ const app: Express = express();
 const port = process.env.PORT || 3007;
 
 app.use(cookieParser());
-app.use(`/api`, express.json());
-app.use(`/api`, express.urlencoded({ extended: true }));
+app.use('/api', express.json());
+app.use('/api', express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
     const allowedOrigins = ['http://192.168.5.100:3000', 'http://shopm.local.com:3000'];
@@ -25,20 +24,24 @@ app.use((req, res, next) => {
     if (allowedOrigins.includes(origin)) {
         res.header('Access-Control-Allow-Origin', origin);
     }
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     res.header('Access-Control-Allow-Credentials', 'true');
+
+    // 👉 Quan trọng: xử lý preflight
+    if (req.method === 'OPTIONS') {
+        res.sendStatus(200);
+        return;
+    }
+
     next();
 });
 
-app.use(`/api/service_image`, service_image);
-app.use(`/api/service_video`, service_video);
-app.use(`/api/service_account`, service_account);
-app.use(`/api/service_medication`, service_medication);
-app.use(`/api/service_order_medication`, service_order_medication);
-
-console.log(path.join(process.cwd(), 'data', 'video', 'output', 'video.mp4'));
-app.use('/watch1', express.static(path.join(process.cwd(), 'data', 'video', 'output', 'video.mp4')));
+app.use('/api/service_image', service_image);
+app.use('/api/service_video', service_video);
+app.use('/api/service_account', service_account);
+app.use('/api/service_medication', service_medication);
+app.use('/api/service_order_medication', service_order_medication);
 
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);

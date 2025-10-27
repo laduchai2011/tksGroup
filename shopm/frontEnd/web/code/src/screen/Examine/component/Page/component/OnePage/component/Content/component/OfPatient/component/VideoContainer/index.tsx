@@ -49,7 +49,7 @@ const VideoContainer: FC<{ isLoading: boolean }> = ({ isLoading }) => {
         dispatch(setShow_dialogMyVideo(true));
     };
 
-    const src_video = 'http://192.168.5.100:3007/api/service_video/get/watch?id=video.mp4';
+    const src_video = 'http://shopm.local.com:3007/api/service_video/store/watch?id=khongphaiemdungkhong-1761410113566';
 
     const list_video = useMemo(() => {
         return [1, 2, 3].map((_, index) => (
