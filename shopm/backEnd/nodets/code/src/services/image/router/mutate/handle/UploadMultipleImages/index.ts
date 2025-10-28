@@ -2,17 +2,8 @@ import { Request, Response } from 'express';
 import path from 'path';
 import fs from 'fs';
 import multer from 'multer';
-
-interface aFileField {
-    filename: string;
-    mimetype: string;
-    path: string;
-    size: number;
-}
-interface UploadMultipleImageResponse {
-    message: string;
-    files: aFileField[];
-}
+import { AImageFileField } from '@src/dataStruct/photo';
+import { MyResponse } from '@src/dataStruct/response';
 
 class Handle_UploadMultipleImages {
     constructor() {}
@@ -60,16 +51,16 @@ class Handle_UploadMultipleImages {
             return;
         }
 
-        const fileInfos: aFileField[] = files.map((file) => ({
+        const fileInfos: AImageFileField[] = files.map((file) => ({
             filename: file.filename,
             path: `/${file.filename}`, // nếu bạn phục vụ static
             size: file.size,
             mimetype: file.mimetype,
         }));
 
-        const resData: UploadMultipleImageResponse = {
-            message: 'Upload thành công!',
-            files: fileInfos,
+        const resData: MyResponse<AImageFileField[]> = {
+            message: 'Đăng tải những hình ảnh thành công !',
+            data: fileInfos,
         };
 
         res.json(resData);

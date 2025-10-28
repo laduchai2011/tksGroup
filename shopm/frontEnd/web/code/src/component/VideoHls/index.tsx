@@ -138,6 +138,7 @@ const VideoHls: FC<ComponentProps> = ({ srcVideo, className, controls = false, .
             hls.attachMedia(video);
 
             hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 console.log(`Available levels: ${data.levels.map((l: any) => l.height).join(', ')}p`);
             });
 

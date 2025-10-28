@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { spawnSync } from 'child_process';
+import { spawn } from 'child_process';
 import ffmpegPath from 'ffmpeg-static';
 import { handle_cmd } from './util';
 import multer from 'multer';
@@ -8,9 +8,10 @@ import fs from 'fs';
 import { resolution_options } from './type';
 // import { MyRequest } from '../../type';
 import { MyResponse } from '@src/dataStruct/response';
+import { AVideoFileField } from '@src/dataStruct/photo';
 
 const root_path = process.cwd();
-const videoPath = path.join(process.cwd(), 'data', 'videos');
+const videoPath = path.join(process.cwd(), 'data', 'video', 'input');
 
 class Handle_UploadMultipleVideos {
     constructor() {}
@@ -44,7 +45,7 @@ class Handle_UploadMultipleVideos {
     };
 
     encode_video_to_HLS = async (video_name: string) => {
-        const input_dir: string = path.join(root_path, 'data', 'videos');
+        const input_dir: string = path.join(root_path, 'data', 'video', 'input');
         const output_dir: string = path.join(root_path, 'data', 'video', 'output', video_name);
 
         if (!fs.existsSync(output_dir)) {
@@ -62,17 +63,33 @@ class Handle_UploadMultipleVideos {
         };
         const ff = (resolution: resolution_options) => {
             return new Promise((resolve, reject) => {
-                if (ffmpegPath) {
-                    const result = spawnSync(ffmpegPath, cmd(resolution));
+                // if (ffmpegPath) {
+                //     const result = spawnSync(ffmpegPath, cmd(resolution));
 
-                    if (result.error) {
-                        reject(result.error);
-                    } else {
-                        resolve(result.output);
-                    }
-                } else {
-                    reject('ffmpegPath is a null !');
-                }
+                //     if (result.error) {
+                //         reject(result.error);
+                //     } else {
+                //         resolve(result.output);
+                //     }
+                // } else {
+                //     reject('ffmpegPath is a null !');
+                // }
+                if (!ffmpegPath) return reject('ffmpegPath is null');
+
+                const child = spawn(ffmpegPath, cmd(resolution));
+
+                child.stdout.on('data', (data) => {
+                    console.log(`[${video_name} ${resolution.w}x${resolution.h}] ${data}`);
+                });
+
+                child.stderr.on('data', (data) => {
+                    console.error(`[${video_name} ${resolution.w}x${resolution.h}] ${data}`);
+                });
+
+                child.on('close', (code) => {
+                    if (code === 0) resolve(code);
+                    else reject(`ffmpeg exited with code ${code}`);
+                });
             });
         };
         //-------------------------------------------------
@@ -104,7 +121,7 @@ class Handle_UploadMultipleVideos {
         // }
     };
 
-    middle_upload = async (req: Request, res: Response, next: NextFunction) => {
+    middle_upload = (req: Request, res: Response, next: NextFunction) => {
         const myResponse: MyResponse<unknown> = {
             isSuccess: false,
         };
@@ -124,32 +141,37 @@ class Handle_UploadMultipleVideos {
 
         res.locals.files = files;
 
-        next();
-    };
-
-    middle_encode_videos_to_HLS = async (req: Request, res: Response, next: NextFunction) => {
-        const files = res.locals.files;
-        console.log(1111111, files);
-
-        const myResponse: MyResponse<unknown> = {
-            isSuccess: false,
-        };
-
         for (let i: number = 0; i < files.length; i++) {
             const filename = files[i].savedName;
-            await this.encode_video_to_HLS(filename);
+            this.encode_video_to_HLS(filename);
         }
 
         next();
     };
 
-    main = (req: Request, res: Response) => {
-        // const myReq = req as MyRequest;
-        // const video_name: string = myReq.video_name;
+    // middle_encode_videos_to_HLS = async (req: Request, res: Response, next: NextFunction) => {
+    //     const files = res.locals.files;
+    //     console.log(1111111, files);
 
-        const myResponse: MyResponse<unknown> = {
-            // message: `Video (${video_name}) is uploaded successly !`,
+    //     const myResponse: MyResponse<unknown> = {
+    //         isSuccess: false,
+    //     };
+
+    //     for (let i: number = 0; i < files.length; i++) {
+    //         const filename = files[i].savedName;
+    //         await this.encode_video_to_HLS(filename);
+    //     }
+
+    //     next();
+    // };
+
+    main = (_: Request, res: Response) => {
+        const files: AVideoFileField[] = res.locals.files;
+
+        const myResponse: MyResponse<AVideoFileField[]> = {
+            message: 'Đăng tải những thước phim thành công !',
             isSuccess: true,
+            data: files,
         };
 
         res.json(myResponse);

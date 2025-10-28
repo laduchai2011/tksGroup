@@ -20,7 +20,6 @@ router_mutate_video.post(
     '/uploadMultipleVideos',
     handle_uploadMultipleVideos.upload().array('videos', 10),
     handle_uploadMultipleVideos.middle_upload,
-    handle_uploadMultipleVideos.middle_encode_videos_to_HLS,
     handle_uploadMultipleVideos.main
 );
 
