@@ -75,4 +75,5 @@ const LazyVideoHLS = ({ lock_auto_play_with_scroll_snap, src, className, root }:
     );
 };
 
+/* eslint-disable import/no-unused-modules */
 export default memo(LazyVideoHLS);

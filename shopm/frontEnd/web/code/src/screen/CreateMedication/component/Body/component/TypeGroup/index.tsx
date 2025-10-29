@@ -3,12 +3,15 @@ import style from './style.module.scss';
 import { FRAGILE, NORMAL, OTHER } from '@src/const/text';
 import { typeGroup_enum, typeGroup_type } from '@src/dataStruct/medication';
 
-const TypeGroup: FC<{ onChange?: (typeGroup: typeGroup_type) => void }> = ({ onChange }) => {
-    const [typeGroup, setTypeGroup] = useState<typeGroup_type | undefined>(undefined);
+const TypeGroup: FC<{ value: typeGroup_type; onChange?: (typeGroup: typeGroup_type) => void }> = ({
+    value,
+    onChange,
+}) => {
+    const [typeGroup, setTypeGroup] = useState<typeGroup_type>(value);
     const [otherType, setOtherType] = useState<string>('');
 
     useEffect(() => {
-        if (onChange && typeGroup !== undefined) {
+        if (onChange) {
             if (typeGroup === typeGroup_enum.NORMAL || typeGroup === typeGroup_enum.FRAGILE) {
                 onChange(typeGroup);
             } else {

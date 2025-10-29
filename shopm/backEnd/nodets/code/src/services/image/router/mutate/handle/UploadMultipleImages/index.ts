@@ -60,6 +60,7 @@ class Handle_UploadMultipleImages {
 
         const resData: MyResponse<AImageFileField[]> = {
             message: 'Đăng tải những hình ảnh thành công !',
+            isSuccess: true,
             data: fileInfos,
         };
 

@@ -31,7 +31,7 @@ export interface MedicationVideoField {
     createTime: string;
 }
 
-export interface CreateMedicationField {
+export interface CreateMedicationBodyField {
     medication: MedicationField;
     images: MedicationImageField[];
     videos: MedicationVideoField[];

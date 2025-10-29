@@ -1,10 +1,10 @@
 import sql from 'mssql';
 import { MutateDB } from '@src/services/medication/interface';
-import { MedicationField, CreateMedicationField } from '@src/dataStruct/medication';
+import { MedicationField, CreateMedicationBodyField } from '@src/dataStruct/medication';
 
 class MutateDB_CreateMedication extends MutateDB {
     private _connectionPool: sql.ConnectionPool | undefined;
-    private _createMedicationOption: CreateMedicationField | undefined;
+    private _createMedicationOption: CreateMedicationBodyField | undefined;
 
     constructor() {
         super();
@@ -14,36 +14,38 @@ class MutateDB_CreateMedication extends MutateDB {
         this._connectionPool = connectionPool;
     }
 
-    set_createMedicationBody(createMedicationBody: CreateMedicationField): void {
+    set_createMedicationBody(createMedicationBody: CreateMedicationBodyField): void {
         this._createMedicationOption = createMedicationBody;
     }
 
     async run(): Promise<sql.IProcedureResult<MedicationField> | undefined> {
         if (this._connectionPool !== undefined && this._createMedicationOption !== undefined) {
             try {
+                // ===== TẠO TVP (Table-Valued Parameter) =====
+                const images = this._createMedicationOption.images;
+                const tvpImage = new sql.Table('MedicationImageType');
+                tvpImage.columns.add('url', sql.NVarChar(255));
+                for (const img of images) {
+                    tvpImage.rows.add(img.url);
+                }
+                const videos = this._createMedicationOption.videos;
+                const tvpVideo = new sql.Table('MedicationVideoType');
+                tvpVideo.columns.add('url', sql.NVarChar(255));
+                for (const video of videos) {
+                    tvpVideo.rows.add(video.url);
+                }
+
                 const result = await this._connectionPool
                     .request()
-                    // .input("label", sql.NVarChar(255), this._buyNowBody.order.label)
-                    // .input("total", sql.NVarChar(255), this._buyNowBody.order.total)
-                    // .input("note", sql.NVarChar(255), this._buyNowBody.order.note)
-                    // .input("userId", sql.Int, this._buyNowBody.order.userId)
-                    // .input("title", sql.NVarChar(255), this._buyNowBody.product.title)
-                    // .input("image", sql.NVarChar(255), this._buyNowBody.product.image)
-                    // .input("name", sql.NVarChar(255), this._buyNowBody.product.name)
-                    // .input("size", sql.NVarChar(255), this._buyNowBody.product.size)
-                    // .input("amount", sql.NVarChar(255), this._buyNowBody.product.amount)
-                    // .input("discount", sql.NVarChar(255), this._buyNowBody.product.discount)
-                    // .input("fishCodeInProduct", sql.NVarChar(255), this._buyNowBody.product.fishCodeInProduct)
-                    // .input("price", sql.NVarChar(255), this._buyNowBody.product.price)
-                    // .input("productId", sql.Int, this._buyNowBody.product.productId)
-                    // .input("sellerId", sql.Int, this._buyNowBody.product.sellerId)
-                    // .input("paymentMethod", sql.NVarChar(255), this._buyNowBody.payment.method)
-                    // .input("paymentInfo", sql.NVarChar(sql.MAX), this._buyNowBody.payment.infor)
-                    // .input("isPay", sql.Bit, this._buyNowBody.payment.isPay)
-                    // .input("myName", sql.NVarChar(100), this._buyNowBody.contact.name)
-                    // .input("myPhone", sql.NVarChar(15), this._buyNowBody.contact.phone)
-                    // .input("address", sql.Bit, this._buyNowBody.contact.address)
-                    // .input("contactId", sql.Int, this._buyNowBody.contact.contactId)
+                    .input('title', sql.NVarChar(255), this._createMedicationOption.medication.title)
+                    .input('type', sql.NVarChar(255), this._createMedicationOption.medication.type)
+                    .input('typeGroup', sql.NVarChar(255), this._createMedicationOption.medication.typeGroup)
+                    .input('information', sql.NVarChar(sql.MAX), this._createMedicationOption.medication.information)
+                    .input('averageRating', sql.Float, this._createMedicationOption.medication.averageRating)
+                    .input('rateCount', sql.Int, this._createMedicationOption.medication.rateCount)
+                    .input('userId', sql.Int, this._createMedicationOption.medication.userId)
+                    .input('medicationImage', tvpImage)
+                    .input('medicationVideo', tvpVideo)
                     .execute('CreateMedication');
 
                 return result;

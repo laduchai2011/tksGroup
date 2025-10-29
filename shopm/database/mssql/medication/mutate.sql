@@ -1,15 +1,13 @@
 CREATE TYPE MedicationImageType AS TABLE (
-    url NVARCHAR(255),
-    medicationId INT
+    url NVARCHAR(255)
 );
 GO
 CREATE TYPE MedicationVideoType AS TABLE (
-    url NVARCHAR(255),
-    medicationId INT
+    url NVARCHAR(255)
 );
 GO
 
-ALTER PROCEDURE CreateMedication
+CREATE PROCEDURE CreateMedication
 	@title NVARCHAR(255),
 	@type NVARCHAR(255),
 	@typeGroup NVARCHAR(255),

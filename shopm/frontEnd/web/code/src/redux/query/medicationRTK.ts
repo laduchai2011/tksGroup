@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { MedicationField, CreateMedicationField } from '@src/dataStruct/medication';
+import { MedicationField, CreateMedicationBodyField } from '@src/dataStruct/medication';
 import { MEDICATION_API } from '@src/const/api/medication';
 import { MyResponse } from '@src/dataStruct/response';
 
@@ -9,7 +9,7 @@ export const medicationRTK = createApi({
     tagTypes: ['Medication'],
     endpoints: (builder) => ({
         // Mutation (POST)
-        createMedication: builder.mutation<MyResponse<MedicationField>, CreateMedicationField>({
+        createMedication: builder.mutation<MyResponse<MedicationField>, CreateMedicationBodyField>({
             query: (body) => ({
                 url: MEDICATION_API.CREATE_MEDICATION,
                 method: 'POST',

@@ -13,10 +13,14 @@ import { setData_toastMessage, setShow_dialogLoading } from '@src/redux/slice/Cr
 import { messageType_enum } from '@src/component/ToastMessage/type';
 import {
     MedicationField,
+    typeGroup_enum,
     typeGroup_type,
-    CreateMedicationField,
+    CreateMedicationBodyField,
     MedicationImageField,
+    MedicationVideoField,
 } from '@src/dataStruct/medication';
+import { AImageFileField, AVideoFileField } from '@src/dataStruct/photo';
+import { MyResponse } from '@src/dataStruct/response';
 import { useCreateMedicationMutation } from '@src/redux/query/medicationRTK';
 import { BASE_URL } from '@src/const/api/baseUrl';
 import { IMAGE_API } from '@src/const/api/image';
@@ -26,24 +30,13 @@ import axiosInstance from '@src/api/axiosInstance';
 const isProduct = process.env.NODE_ENV === 'production';
 const apiString = isProduct ? '' : '/api';
 
-interface aFileField {
-    filename: string;
-    mimetype: string;
-    path: string;
-    size: number;
-}
-interface UploadMultipleImageResponse {
-    message: string;
-    files: aFileField[];
-}
-
 const Body = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [medication, setMedication] = useState<MedicationField>({
         id: -1,
         title: '',
         type: '',
-        typeGroup: '',
+        typeGroup: typeGroup_enum.NORMAL,
         information: '',
         averageRating: 0,
         rateCount: 0,
@@ -132,7 +125,7 @@ const Body = () => {
         setMedication((prev) => ({ ...prev, information: value }));
     }, []);
 
-    const handleUploadMultipleImages = async (files: File[]): Promise<UploadMultipleImageResponse | null> => {
+    const handleUploadMultipleImages = async (files: File[]): Promise<MyResponse<AImageFileField[]> | null> => {
         if (!files || files.length === 0) return null;
 
         const formData = new FormData();
@@ -141,7 +134,7 @@ const Body = () => {
         });
 
         try {
-            const res = await axiosInstance.post<UploadMultipleImageResponse>(
+            const res = await axiosInstance.post<MyResponse<AImageFileField[]>>(
                 IMAGE_API.UPLOAD_MULTIPLE_IMAGE, // hoặc vẫn là UPLOAD_AIMAGE nếu backend tự detect
                 formData,
                 {
@@ -165,7 +158,7 @@ const Body = () => {
         }
     };
 
-    const handleUploadMultipleVideos = async (files: File[]): Promise<UploadMultipleImageResponse | null> => {
+    const handleUploadMultipleVideos = async (files: File[]): Promise<MyResponse<AVideoFileField[]> | null> => {
         if (!files || files.length === 0) return null;
 
         const formData = new FormData();
@@ -174,7 +167,7 @@ const Body = () => {
         });
 
         try {
-            const res = await axiosInstance.post<UploadMultipleImageResponse>(
+            const res = await axiosInstance.post<MyResponse<AVideoFileField[]>>(
                 VIDEO_API.UPLOAD_MULTIPLE_VIDEOS,
                 formData,
                 {
@@ -198,19 +191,71 @@ const Body = () => {
         }
     };
 
-    const handleCreate = async () => {
-        const medication_cp = { ...medication };
-
-        const createMedicationBody: CreateMedicationField = {
-            medication: medication_cp,
-            images: [],
-            videos: [],
-        };
-
+    const handlePreTitle = () => {
+        const title = medication.title.trim();
+        if (title.length === 0) {
+            dispatch(
+                setData_toastMessage({
+                    type: messageType_enum.ERROR,
+                    message: 'Tiêu đề không được để trống !',
+                })
+            );
+        } else {
+            return title;
+        }
+    };
+    const handlePreType = () => {
+        const type = medication.type.trim();
+        if (type.length === 0) {
+            dispatch(
+                setData_toastMessage({
+                    type: messageType_enum.ERROR,
+                    message: 'Loại thuốc không được để trống !',
+                })
+            );
+        } else {
+            return type;
+        }
+    };
+    const handlePreAmount = () => {
+        const amount = medication.amount;
+        if (amount === 0) {
+            dispatch(
+                setData_toastMessage({
+                    type: messageType_enum.WARN,
+                    message: 'Số lượng thuốc bạn đang để là 0 !',
+                })
+            );
+        } else {
+            return amount;
+        }
+    };
+    const handlePrePrice = () => {
+        const price = medication.price;
+        if (price === 0) {
+            dispatch(
+                setData_toastMessage({
+                    type: messageType_enum.WARN,
+                    message: 'Giá thuốc bạn đang để là 0 !',
+                })
+            );
+        } else {
+            return price;
+        }
+    };
+    const handlePreImages = async () => {
         const resData_images = await handleUploadMultipleImages(localImages);
         if (resData_images === null) return;
-
-        const imageFiles = resData_images.files;
+        const imageFiles = resData_images.data;
+        if (!imageFiles) {
+            dispatch(
+                setData_toastMessage({
+                    type: messageType_enum.ERROR,
+                    message: 'Đăng tải những hình ảnh thất bại !',
+                })
+            );
+            return;
+        }
         const imageUrls: MedicationImageField[] = [];
         for (let i: number = 0; i < imageFiles.length; i++) {
             const url = `${BASE_URL}${apiString}/service_image/store/image/${imageFiles[i].filename}`;
@@ -224,17 +269,88 @@ const Body = () => {
             imageUrls.push(aImage);
         }
 
+        return imageUrls;
+    };
+    const handlePreVideos = async () => {
         const resData_videos = await handleUploadMultipleVideos(localVideos);
         if (resData_videos === null) return;
-        console.log(1111111, resData_videos);
+        const videoFiles = resData_videos.data;
+        if (!videoFiles) {
+            dispatch(
+                setData_toastMessage({
+                    type: messageType_enum.ERROR,
+                    message: 'Đăng tải những thước phim thất bại !',
+                })
+            );
+            return;
+        }
+        const videoUrls: MedicationVideoField[] = [];
+        for (let i: number = 0; i < videoFiles.length; i++) {
+            const url = `${BASE_URL}${apiString}/service_image/store/image/${videoFiles[i].savedName}`;
+            const aVideo: MedicationVideoField = {
+                id: -1,
+                url: url,
+                medicationId: -1,
+                updateTime: '',
+                createTime: '',
+            };
+            videoUrls.push(aVideo);
+        }
 
-        createMedicationBody.images = imageUrls;
+        return videoUrls;
+    };
+    const handleCreate = async () => {
+        const medication_cp = { ...medication };
+
+        const preTitle = handlePreTitle();
+        if (!preTitle) return;
+
+        const preType = handlePreType();
+        if (!preType) return;
+
+        handlePreAmount();
+
+        handlePrePrice();
+
+        const imageUrls: MedicationImageField[] | undefined = await handlePreImages();
+        const videoUrls: MedicationVideoField[] | undefined = await handlePreVideos();
+
+        const createMedicationBody: CreateMedicationBodyField = {
+            medication: medication_cp,
+            images: imageUrls ? imageUrls : [],
+            videos: videoUrls ? videoUrls : [],
+        };
 
         dispatch(setShow_dialogLoading(true));
-        const timout = setTimeout(() => {
-            dispatch(setShow_dialogLoading(false));
-            clearTimeout(timout);
-        }, 5000);
+        createMedication(createMedicationBody)
+            .then((res) => {
+                const resData = res.data;
+                if (resData?.isSuccess) {
+                    dispatch(
+                        setData_toastMessage({
+                            type: messageType_enum.SUCCESS,
+                            message: 'Đăng tải thuốc thành công !',
+                        })
+                    );
+                } else {
+                    dispatch(
+                        setData_toastMessage({
+                            type: messageType_enum.ERROR,
+                            message: 'Đăng tải thuốc thất bại !',
+                        })
+                    );
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                dispatch(
+                    setData_toastMessage({
+                        type: messageType_enum.SUCCESS,
+                        message: 'Đăng tải thuốc thất bại !',
+                    })
+                );
+            })
+            .finally(() => dispatch(setShow_dialogLoading(false)));
     };
 
     return (
@@ -276,7 +392,7 @@ const Body = () => {
                                 value={medication.price}
                                 onChange={handlePrice}
                             />
-                            <TypeGroup onChange={handleTypeGroupChange} />
+                            <TypeGroup value={medication.typeGroup} onChange={handleTypeGroupChange} />
                         </div>
                     </div>
                     <div>

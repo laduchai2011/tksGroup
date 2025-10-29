@@ -1,5 +1,5 @@
 CREATE TABLE medication (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY IDENTITY(1,1),
     title NVARCHAR(255) NOT NULL,
     type NVARCHAR(255) NOT NULL,
     typeGroup NVARCHAR(255) NOT NULL,
@@ -21,7 +21,7 @@ CREATE NONCLUSTERED INDEX idx_user_id ON medication(userId);
 GO
 
 CREATE TABLE medication_image (
-    id INT PRIMARY KEY,
+	id INT PRIMARY KEY IDENTITY(1,1),
     url NVARCHAR(255) NOT NULL,
     medicationId INT NOT NULL,
     updateTime DATETIMEOFFSET(7) NOT NULL,
@@ -34,7 +34,7 @@ CREATE NONCLUSTERED INDEX idx_medication_id ON medication_image(medicationId);
 GO
 
 CREATE TABLE medication_video (
-    id INT PRIMARY KEY,
+	id INT PRIMARY KEY IDENTITY(1,1),
     url NVARCHAR(255) NOT NULL,
     medicationId INT NOT NULL,
     updateTime DATETIMEOFFSET(7) NOT NULL,

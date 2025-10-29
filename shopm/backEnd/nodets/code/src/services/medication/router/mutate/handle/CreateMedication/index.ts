@@ -1,7 +1,7 @@
 import { mssql_server } from '@src/connect';
 import { Request, Response, NextFunction } from 'express';
 import { MyResponse } from '@src/dataStruct/response';
-import { CreateMedicationField, MedicationField } from '@src/dataStruct/medication';
+import { CreateMedicationBodyField, MedicationField } from '@src/dataStruct/medication';
 import { verifyRefreshToken } from '@src/token';
 import MutateDB_CreateMedication from '../../mutateDB/CreateMedication';
 // import { produceTask } from '@src/queueRedis/producer';
@@ -12,7 +12,7 @@ class Handle_CreateMedication {
     constructor() {}
 
     setup = async (
-        req: Request<Record<string, never>, unknown, CreateMedicationField>,
+        req: Request<Record<string, never>, unknown, CreateMedicationBodyField>,
         res: Response,
         next: NextFunction
     ) => {
@@ -55,7 +55,7 @@ class Handle_CreateMedication {
     };
 
     main = async (_: Request, res: Response) => {
-        const createMedicationBody = res.locals.createMedicationBody as CreateMedicationField;
+        const createMedicationBody = res.locals.createMedicationBody as CreateMedicationBodyField;
 
         const myResponse: MyResponse<MedicationField> = {
             isSuccess: false,
