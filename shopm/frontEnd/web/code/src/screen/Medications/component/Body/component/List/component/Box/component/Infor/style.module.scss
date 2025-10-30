@@ -4,13 +4,13 @@
     box-sizing: border-box;
     padding: 3px;
 
-    > .name {
-        @include center-of-rectangle;
-        @include line-clamp(1);
-        background-color: rgb(0, 225, 255, 0.3);
-        margin: 2px 0;
-        min-height: 18px;
-    }
+    // > .name {
+    //     @include center-of-rectangle;
+    //     @include line-clamp(1);
+    //     background-color: rgb(0, 225, 255, 0.3);
+    //     margin: 2px 0;
+    //     min-height: 18px;
+    // }
 
     > .infor {
         @include center-of-row;
@@ -22,7 +22,7 @@
         }
 
         > .type {
-            background-color: yellow;
+            background-color: rgb(0, 225, 255, 0.3);
             min-height: 18px;
         }
 

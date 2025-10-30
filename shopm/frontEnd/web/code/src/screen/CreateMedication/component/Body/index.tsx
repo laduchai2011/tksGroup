@@ -313,6 +313,7 @@ const Body = () => {
         handlePrePrice();
 
         const imageUrls: MedicationImageField[] | undefined = await handlePreImages();
+
         const videoUrls: MedicationVideoField[] | undefined = await handlePreVideos();
 
         const createMedicationBody: CreateMedicationBodyField = {

@@ -43,3 +43,14 @@ export enum typeGroup_enum {
 }
 
 export type typeGroup_type = typeGroup_enum.NORMAL | typeGroup_enum.FRAGILE | string;
+
+export interface MedicationBodyField {
+    page: number;
+    size: number;
+    userId?: number;
+}
+
+export interface PagedMedicationField {
+    items: MedicationField[];
+    totalCount: number;
+}
