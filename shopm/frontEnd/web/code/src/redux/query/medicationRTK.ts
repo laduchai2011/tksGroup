@@ -13,6 +13,13 @@ export const medicationRTK = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: '', credentials: 'include' }),
     tagTypes: ['Medication'],
     endpoints: (builder) => ({
+        getMedications: builder.query<PagedMedicationField, MedicationBodyField>({
+            query: (body) => ({
+                url: MEDICATION_API.GET_MEDICATION,
+                method: 'POST',
+                body,
+            }),
+        }),
         // Mutation
         createMedication: builder.mutation<MyResponse<MedicationField>, CreateMedicationBodyField>({
             query: (body) => ({
@@ -22,15 +29,7 @@ export const medicationRTK = createApi({
             }),
             invalidatesTags: ['Medication'], // dùng nếu muốn refetch danh sách sau khi thêm
         }),
-        getMedications: builder.mutation<PagedMedicationField, MedicationBodyField>({
-            query: (body) => ({
-                url: MEDICATION_API.GET_MEDICATION,
-                method: 'POST',
-                body,
-            }),
-            invalidatesTags: ['Medication'], // dùng nếu muốn refetch danh sách sau khi thêm
-        }),
     }),
 });
 
-export const { useCreateMedicationMutation, useGetMedicationsMutation } = medicationRTK;
+export const { useCreateMedicationMutation, useGetMedicationsQuery } = medicationRTK;

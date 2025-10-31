@@ -5,5 +5,5 @@ const apiString = isProduct ? '' : '/api';
 
 export const MEDICATION_API = {
     CREATE_MEDICATION: `${BASE_URL}${apiString}/service_medication/mutate/createMedication`,
-    GET_MEDICATION: `${BASE_URL}${apiString}/service_medication/mutate/getMedications`,
+    GET_MEDICATION: `${BASE_URL}${apiString}/service_medication/query/getMedications`,
 };

@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import CommentBoxReducer from '@src/redux/slice/CommentBox';
 import ExamineReducer from '@src/redux/slice/Examine';
 import MedicationReducer from '@src/redux/slice/Medication';
+import MedicationsReducer from '@src/redux/slice/Medications';
 import CreateMedicationReducer from '@src/redux/slice/CreateMedication';
 import DoctorsReducer from '@src/redux/slice/Doctors';
 import VideoPlayBoxReducer from '@src/redux/slice/VideoPlayBox';
@@ -13,6 +14,7 @@ export const store = configureStore({
         CommentBoxSlice: CommentBoxReducer,
         ExamineSlice: ExamineReducer,
         MedicationSlice: MedicationReducer,
+        MedicationsSlice: MedicationsReducer,
         CreateMedicationSlice: CreateMedicationReducer,
         DoctorsSlice: DoctorsReducer,
         VideoPlayBoxSlice: VideoPlayBoxReducer,
