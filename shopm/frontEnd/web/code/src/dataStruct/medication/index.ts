@@ -50,6 +50,14 @@ export interface MedicationBodyField {
     userId?: number;
 }
 
+export interface MedicationImageBodyField {
+    medicationId?: number;
+}
+
+export interface MedicationVideoBodyField {
+    medicationId?: number;
+}
+
 export interface PagedMedicationField {
     items: MedicationField[];
     totalCount: number;

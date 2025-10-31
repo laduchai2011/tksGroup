@@ -1,20 +1,28 @@
 import express, { Router } from 'express';
 import dotenv from 'dotenv';
 import Handle_GetMedications from './handle/GetMedications';
-import Handle_GetMedicationImages from './handle/GetMedicationImages';
-import Handle_GetMedicationVideos from './handle/GetMedicationVideos';
+import Handle_GetAMedicationImage from './handle/GetAMedicationImage';
+import Handle_GetAMedicationVideo from './handle/GetAMedicationVideo';
+import Handle_GetAllMedicationImages from './handle/GetAllMedicationImages';
+import Handle_GetAllMedicationVideos from './handle/GetAllMedicationVideos';
 
 dotenv.config();
 const router_query_medication: Router = express.Router();
 
 const handle_getMedications = new Handle_GetMedications();
-const handle_getMedicationImages = new Handle_GetMedicationImages();
-const handle_getMedicationVideos = new Handle_GetMedicationVideos();
+const handle_getAMedicationImage = new Handle_GetAMedicationImage();
+const handle_getAMedicationVideo = new Handle_GetAMedicationVideo();
+const handle_getAllMedicationImages = new Handle_GetAllMedicationImages();
+const handle_getAllMedicationVideos = new Handle_GetAllMedicationVideos();
 
 router_query_medication.post('/getMedications', handle_getMedications.main);
 
-router_query_medication.post('/getAllMedicationImages', handle_getMedicationImages.main);
+router_query_medication.post('/getAMedicationImage', handle_getAMedicationImage.main);
 
-router_query_medication.post('/getAllMedicationVideos', handle_getMedicationVideos.main);
+router_query_medication.post('/getAMedicationVideo', handle_getAMedicationVideo.main);
+
+router_query_medication.post('/getAllMedicationImages', handle_getAllMedicationImages.main);
+
+router_query_medication.post('/getAllMedicationVideos', handle_getAllMedicationVideos.main);
 
 export default router_query_medication;

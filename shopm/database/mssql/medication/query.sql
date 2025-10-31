@@ -30,14 +30,48 @@ ALTER PROCEDURE GetAllMedicationImages
     @medicationId INT
 AS
 BEGIN
-	SELECT * FROM medication_image WHERE medicationId = @medicationId
+	-- SELECT * FROM medication_image WHERE medicationId = @medicationId
+	SELECT 
+    mi.*,
+    ROW_NUMBER() OVER (ORDER BY mi.id DESC) AS rn
+	FROM medication_image AS mi
+	WHERE mi.medicationId = @medicationId
+	ORDER BY mi.id DESC;
 END
 GO
 
-CREATE PROCEDURE GetAllMedicationVideos
+ALTER PROCEDURE GetAllMedicationVideos
     @medicationId INT
 AS
 BEGIN
-	SELECT * FROM medication_video WHERE medicationId = @medicationId
+	-- SELECT * FROM medication_video WHERE medicationId = @medicationId
+	SELECT 
+    mv.*,
+    ROW_NUMBER() OVER (ORDER BY mv.id DESC) AS rn
+	FROM medication_video AS mv
+	WHERE mv.medicationId = @medicationId
+	ORDER BY mv.id DESC;
+END
+GO
+
+CREATE PROCEDURE GetAMedicationImage
+    @medicationId INT
+AS
+BEGIN
+	SELECT TOP 1 *
+	FROM medication_image AS mi
+	WHERE mi.medicationId = @medicationId
+	ORDER BY mi.id DESC;
+END
+GO
+
+CREATE PROCEDURE GetAMedicationVideo
+    @medicationId INT
+AS
+BEGIN
+	SELECT TOP 1 *
+	FROM medication_video AS mv
+	WHERE mv.medicationId = @medicationId
+	ORDER BY mv.id DESC;
 END
 GO

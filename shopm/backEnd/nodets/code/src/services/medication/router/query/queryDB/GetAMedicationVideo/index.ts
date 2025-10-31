@@ -2,7 +2,7 @@ import sql from 'mssql';
 import { QueryDB } from '@src/services/medication/interface';
 import { MedicationVideoField, MedicationVideoBodyField } from '@src/dataStruct/medication';
 
-class QueryDB_GetMedicationVideos extends QueryDB {
+class QueryDB_GetAMedicationVideo extends QueryDB {
     private _connectionPool: sql.ConnectionPool | undefined;
     private _medicationVideoBody: MedicationVideoBodyField | undefined;
 
@@ -24,7 +24,7 @@ class QueryDB_GetMedicationVideos extends QueryDB {
                 const result = await this._connectionPool
                     .request()
                     .input('medicationId', sql.Int, this._medicationVideoBody.medicationId)
-                    .execute('GetAllMedicationVideos');
+                    .execute('GetAMedicationVideo');
 
                 return result;
             } catch (error) {
@@ -34,4 +34,4 @@ class QueryDB_GetMedicationVideos extends QueryDB {
     }
 }
 
-export default QueryDB_GetMedicationVideos;
+export default QueryDB_GetAMedicationVideo;

@@ -1,8 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
     MedicationField,
+    MedicationImageField,
+    MedicationVideoField,
     CreateMedicationBodyField,
     MedicationBodyField,
+    MedicationImageBodyField,
+    MedicationVideoBodyField,
     PagedMedicationField,
 } from '@src/dataStruct/medication';
 import { MEDICATION_API } from '@src/const/api/medication';
@@ -20,6 +24,20 @@ export const medicationRTK = createApi({
                 body,
             }),
         }),
+        getAllMedicationImages: builder.query<MyResponse<MedicationImageField>, MedicationImageBodyField>({
+            query: (body) => ({
+                url: MEDICATION_API.GET_ALL_MEDICATION_IMAGES,
+                method: 'POST',
+                body,
+            }),
+        }),
+        getAllMedicationVideos: builder.query<MyResponse<MedicationVideoField>, MedicationVideoBodyField>({
+            query: (body) => ({
+                url: MEDICATION_API.GET_ALL_MEDICATION_VIDEOS,
+                method: 'POST',
+                body,
+            }),
+        }),
         // Mutation
         createMedication: builder.mutation<MyResponse<MedicationField>, CreateMedicationBodyField>({
             query: (body) => ({
@@ -32,4 +50,9 @@ export const medicationRTK = createApi({
     }),
 });
 
-export const { useCreateMedicationMutation, useGetMedicationsQuery } = medicationRTK;
+export const {
+    useGetMedicationsQuery,
+    useGetAllMedicationImagesQuery,
+    useGetAllMedicationVideosQuery,
+    useCreateMedicationMutation,
+} = medicationRTK;

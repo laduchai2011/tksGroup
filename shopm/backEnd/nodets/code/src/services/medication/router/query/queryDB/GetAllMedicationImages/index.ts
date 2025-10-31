@@ -2,7 +2,7 @@ import sql from 'mssql';
 import { QueryDB } from '@src/services/medication/interface';
 import { MedicationImageField, MedicationImageBodyField } from '@src/dataStruct/medication';
 
-class QueryDB_GetMedicationImages extends QueryDB {
+class QueryDB_GetAllMedicationImages extends QueryDB {
     private _connectionPool: sql.ConnectionPool | undefined;
     private _medicationImageBody: MedicationImageBodyField | undefined;
 
@@ -34,4 +34,4 @@ class QueryDB_GetMedicationImages extends QueryDB {
     }
 }
 
-export default QueryDB_GetMedicationImages;
+export default QueryDB_GetAllMedicationImages;

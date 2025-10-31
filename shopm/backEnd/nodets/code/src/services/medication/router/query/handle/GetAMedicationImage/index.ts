@@ -2,9 +2,9 @@ import { mssql_server } from '@src/connect';
 import { Request, Response } from 'express';
 import { MyResponse } from '@src/dataStruct/response';
 import { MedicationImageField, MedicationImageBodyField } from '@src/dataStruct/medication';
-import QueryDB_GetMedicationImages from '../../queryDB/GetMedicationImages';
+import QueryDB_GetAMedicationImage from '../../queryDB/GetAMedicationImage';
 
-class Handle_GetMedicationImages {
+class Handle_GetAMedicationImage {
     private _mssql_server = mssql_server;
 
     constructor() {}
@@ -18,12 +18,12 @@ class Handle_GetMedicationImages {
 
         await this._mssql_server.init();
 
-        const queryDB_getMedicationImages = new QueryDB_GetMedicationImages();
-        queryDB_getMedicationImages.setMedicationImageBody(medicationImageBody);
+        const queryDB_getAMedicationImage = new QueryDB_GetAMedicationImage();
+        queryDB_getAMedicationImage.setMedicationImageBody(medicationImageBody);
 
         const connection_pool = this._mssql_server.get_connectionPool();
         if (connection_pool) {
-            queryDB_getMedicationImages.set_connection_pool(connection_pool);
+            queryDB_getAMedicationImage.set_connection_pool(connection_pool);
         } else {
             myResponse.message = 'Kết nối cơ sở dữ liệu không thành công !';
             res.status(500).json(myResponse);
@@ -31,20 +31,20 @@ class Handle_GetMedicationImages {
         }
 
         try {
-            const result = await queryDB_getMedicationImages.run();
+            const result = await queryDB_getAMedicationImage.run();
             if (result?.recordset.length && result?.recordset.length > 0) {
                 myResponse.data = result?.recordset;
-                myResponse.message = 'Lấy hình ảnh sản phẩm thành công !';
+                myResponse.message = 'Lấy 1 hình ảnh sản phẩm thành công !';
                 myResponse.isSuccess = true;
                 res.status(200).json(myResponse);
                 return;
             } else {
-                myResponse.message = 'Lấy hình ảnh sản phẩm KHÔNG thành công 1 !';
+                myResponse.message = 'Lấy 1 hình ảnh sản phẩm KHÔNG thành công 1 !';
                 res.status(204).json(myResponse);
                 return;
             }
         } catch (error) {
-            myResponse.message = 'Lấy hình ảnh sản phẩm KHÔNG thành công 2 !';
+            myResponse.message = 'Lấy 1 hình ảnh sản phẩm KHÔNG thành công 2 !';
             myResponse.err = error;
             res.status(500).json(myResponse);
             return;
@@ -52,4 +52,4 @@ class Handle_GetMedicationImages {
     };
 }
 
-export default Handle_GetMedicationImages;
+export default Handle_GetAMedicationImage;
