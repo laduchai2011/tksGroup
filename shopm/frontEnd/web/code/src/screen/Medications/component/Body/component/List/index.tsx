@@ -3,20 +3,15 @@ import style from './style.module.scss';
 import Box from './component/Box';
 import { useGetMedicationsQuery } from '@src/redux/query/medicationRTK';
 import { MedicationField } from '@src/dataStruct/medication';
+import { setShow_dialogLoading, setData_toastMessage } from '@src/redux/slice/Medications';
+import { messageType_enum } from '@src/component/ToastMessage/type';
+import type { AppDispatch } from '@src/redux';
+import { useDispatch } from 'react-redux';
 
 const List = () => {
-    // const [getMedications] = useGetMedicationsMutation();
+    const dispatch = useDispatch<AppDispatch>();
 
     const [medications, setMedications] = useState<MedicationField[]>([]);
-
-    // useEffect(() => {
-    //     getMedications({ page: 1, size: 5 })
-    //         .then((res) => {
-    //             const resData = res.data;
-    //             console.log(resData);
-    //         })
-    //         .catch((err) => console.error(err));
-    // }, [getMedications]);
 
     const {
         data: data_medications,
@@ -28,103 +23,35 @@ const List = () => {
     useEffect(() => {
         if (isError_medications && error_medications) {
             console.error(error_medications);
+            dispatch(
+                setData_toastMessage({
+                    type: messageType_enum.SUCCESS,
+                    message: 'Lấy dữ liệu KHÔNG thành công !',
+                })
+            );
         }
-    }, [isError_medications, error_medications]);
-    // useEffect(() => {
-    //     dispatch(set_isLoading(isLoading_))
-    // }, [dispatch, isLoading_])
-    // useEffect(() => {
-    //     setData(data_?.data)
-    // }, [data_])
+    }, [dispatch, isError_medications, error_medications]);
+    useEffect(() => {
+        dispatch(setShow_dialogLoading(isLoading_medications));
+    }, [dispatch, isLoading_medications]);
+    useEffect(() => {
+        const resData = data_medications;
+        if (resData?.isSuccess && resData.data) {
+            setMedications(resData.data.items);
+        }
+    }, [dispatch, data_medications]);
+
+    const list_medication = medications.map((data, index) => {
+        return (
+            <div key={index}>
+                <Box data={data} />
+            </div>
+        );
+    });
 
     return (
         <div className={style.parent}>
-            <div className={style.main}>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-                <div>
-                    <Box />
-                </div>
-            </div>
+            <div className={style.main}>{list_medication}</div>
         </div>
     );
 };

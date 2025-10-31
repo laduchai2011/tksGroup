@@ -1,3 +1,14 @@
+DELETE FROM medication_image
+GO
+
+DELETE FROM medication_video
+GO
+
+DELETE FROM medication
+WHERE status = 'normal';
+GO
+
+
 CREATE TYPE MedicationImageType AS TABLE (
     url NVARCHAR(255)
 );
@@ -7,13 +18,16 @@ CREATE TYPE MedicationVideoType AS TABLE (
 );
 GO
 
-CREATE PROCEDURE CreateMedication
+ALTER PROCEDURE CreateMedication
 	@title NVARCHAR(255),
 	@type NVARCHAR(255),
 	@typeGroup NVARCHAR(255),
 	@information NVARCHAR(MAX),
 	@averageRating FLOAT,
 	@rateCount INT,
+	@amount INT,
+	@discount FLOAT,
+	@price FLOAT,
 	@userId INT,
 	@medicationImage MedicationImageType READONLY,
 	@medicationVideo MedicationVideoType READONLY
@@ -26,8 +40,8 @@ BEGIN
 		DECLARE @newMedicationId INT;
 
 		-- Thêm medication
-        INSERT INTO medication (title, type, typeGroup, information, averageRating, rateCount, status, userId, updateTime, createTime)
-        VALUES (@title, @type, @typeGroup, @information, @averageRating, @rateCount, 'normal', @userId, SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET());
+        INSERT INTO medication (title, type, typeGroup, information, averageRating, rateCount, amount, discount, price, status, userId, updateTime, createTime)
+        VALUES (@title, @type, @typeGroup, @information, @averageRating, @rateCount, @amount, @discount, @price, 'normal', @userId, SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET());
 
 		SET @newMedicationId = SCOPE_IDENTITY();
 

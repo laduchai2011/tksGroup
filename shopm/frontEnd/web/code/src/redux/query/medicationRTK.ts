@@ -13,7 +13,7 @@ export const medicationRTK = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: '', credentials: 'include' }),
     tagTypes: ['Medication'],
     endpoints: (builder) => ({
-        getMedications: builder.query<PagedMedicationField, MedicationBodyField>({
+        getMedications: builder.query<MyResponse<PagedMedicationField>, MedicationBodyField>({
             query: (body) => ({
                 url: MEDICATION_API.GET_MEDICATION,
                 method: 'POST',

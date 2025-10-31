@@ -25,3 +25,19 @@ BEGIN
 			AND (@userId IS NULL OR m.userId = @userId) 
 END
 GO
+
+ALTER PROCEDURE GetAllMedicationImages
+    @medicationId INT
+AS
+BEGIN
+	SELECT * FROM medication_image WHERE medicationId = @medicationId
+END
+GO
+
+CREATE PROCEDURE GetAllMedicationVideos
+    @medicationId INT
+AS
+BEGIN
+	SELECT * FROM medication_video WHERE medicationId = @medicationId
+END
+GO
