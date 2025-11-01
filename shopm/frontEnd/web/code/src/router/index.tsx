@@ -20,7 +20,7 @@ const router = createBrowserRouter(
         { path: route_enum.SIGNOUT, element: <Signout /> },
         { path: route_enum.HOME, element: <Home /> },
         { path: route_enum.MEDICATIONS, element: <Medications /> },
-        { path: route_enum.MEDICATION, element: <Medication /> },
+        { path: route_enum.MEDICATION + '/:id', element: <Medication /> },
         { path: route_enum.CREATE_MEDICATION, element: <CreateMedication /> },
         { path: route_enum.DOCTORS, element: <Doctors /> },
         { path: route_enum.PROFILE, element: <Profile /> },

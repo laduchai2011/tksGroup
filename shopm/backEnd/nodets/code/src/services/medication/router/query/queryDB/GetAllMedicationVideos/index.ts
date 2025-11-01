@@ -18,7 +18,7 @@ class QueryDB_GetAllMedicationVideos extends QueryDB {
         this._medicationVideoBody = medicationVideoBody;
     }
 
-    async run(): Promise<sql.IProcedureResult<MedicationVideoField> | void> {
+    async run(): Promise<sql.IProcedureResult<MedicationVideoField[]> | void> {
         if (this._connectionPool !== undefined && this._medicationVideoBody !== undefined) {
             try {
                 const result = await this._connectionPool

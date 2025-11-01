@@ -4,8 +4,6 @@ import Skeleton from '@src/component/Skeleton';
 import { MedicationField } from '@src/dataStruct/medication';
 
 const Price: FC<{ isLoading: boolean; data: MedicationField }> = ({ isLoading, data }) => {
-    console.log(data);
-
     return (
         <div className={style.parent}>
             <div className={style.price}>

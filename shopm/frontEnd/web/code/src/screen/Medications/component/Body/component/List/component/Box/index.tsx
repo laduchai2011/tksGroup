@@ -14,7 +14,7 @@ const Box: FC<{ data: MedicationField }> = ({ data }) => {
     const isLoading = false;
 
     const goToMedication = () => {
-        navigate(route_enum.MEDICATION);
+        navigate(route_enum.MEDICATION + '/' + `${data.id}`);
     };
 
     return (

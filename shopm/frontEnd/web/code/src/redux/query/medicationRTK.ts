@@ -17,21 +17,42 @@ export const medicationRTK = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: '', credentials: 'include' }),
     tagTypes: ['Medication'],
     endpoints: (builder) => ({
-        getMedications: builder.query<MyResponse<PagedMedicationField>, MedicationBodyField>({
+        getAMedication: builder.query<MyResponse<MedicationField>, MedicationBodyField>({
             query: (body) => ({
-                url: MEDICATION_API.GET_MEDICATION,
+                url: MEDICATION_API.GET_A_MEDICATION,
                 method: 'POST',
                 body,
             }),
         }),
-        getAllMedicationImages: builder.query<MyResponse<MedicationImageField>, MedicationImageBodyField>({
+        getMedications: builder.query<MyResponse<PagedMedicationField>, MedicationBodyField>({
+            query: (body) => ({
+                url: MEDICATION_API.GET_MEDICATIONS,
+                method: 'POST',
+                body,
+            }),
+        }),
+        getAMedicationImage: builder.query<MyResponse<MedicationImageField>, MedicationImageBodyField>({
+            query: (body) => ({
+                url: MEDICATION_API.GET_A_MEDICATION_IMAGE,
+                method: 'POST',
+                body,
+            }),
+        }),
+        getAMedicationVideo: builder.query<MyResponse<MedicationVideoField>, MedicationVideoBodyField>({
+            query: (body) => ({
+                url: MEDICATION_API.GET_A_MEDICATION_VIDEO,
+                method: 'POST',
+                body,
+            }),
+        }),
+        getAllMedicationImages: builder.query<MyResponse<MedicationImageField[]>, MedicationImageBodyField>({
             query: (body) => ({
                 url: MEDICATION_API.GET_ALL_MEDICATION_IMAGES,
                 method: 'POST',
                 body,
             }),
         }),
-        getAllMedicationVideos: builder.query<MyResponse<MedicationVideoField>, MedicationVideoBodyField>({
+        getAllMedicationVideos: builder.query<MyResponse<MedicationVideoField[]>, MedicationVideoBodyField>({
             query: (body) => ({
                 url: MEDICATION_API.GET_ALL_MEDICATION_VIDEOS,
                 method: 'POST',
@@ -51,7 +72,10 @@ export const medicationRTK = createApi({
 });
 
 export const {
+    useGetAMedicationQuery,
     useGetMedicationsQuery,
+    useGetAMedicationImageQuery,
+    useGetAMedicationVideoQuery,
     useGetAllMedicationImagesQuery,
     useGetAllMedicationVideosQuery,
     useCreateMedicationMutation,

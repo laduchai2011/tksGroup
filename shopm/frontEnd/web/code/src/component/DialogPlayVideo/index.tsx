@@ -131,7 +131,7 @@ const DialogPlayVideo: FC<ComponentProps> = ({ isShow, data, onClose, className,
         }
     };
 
-    const src_video = 'http://shopm.local.com:3007/api/service_video/store/watch?id=khongphaiemdungkhong-1761410113566';
+    const src_video = 'http://shopm.local.com:3007/api/service_video/store/watch?id=manhba-1761671580412.mp4';
 
     const list_video = useMemo(() => {
         return [1, 2, 3, 4, 5, 6, 7, 8, 9].map((_, index) => (

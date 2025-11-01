@@ -26,6 +26,14 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE GetAMedication
+    @id INT
+AS
+BEGIN
+	SELECT * FROM medication WHERE status = 'normal' AND id = @id
+END
+GO
+
 ALTER PROCEDURE GetAllMedicationImages
     @medicationId INT
 AS

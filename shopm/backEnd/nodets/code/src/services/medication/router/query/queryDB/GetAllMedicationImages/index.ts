@@ -18,7 +18,7 @@ class QueryDB_GetAllMedicationImages extends QueryDB {
         this._medicationImageBody = medicationImageBody;
     }
 
-    async run(): Promise<sql.IProcedureResult<MedicationImageField> | void> {
+    async run(): Promise<sql.IProcedureResult<MedicationImageField[]> | void> {
         if (this._connectionPool !== undefined && this._medicationImageBody !== undefined) {
             try {
                 const result = await this._connectionPool

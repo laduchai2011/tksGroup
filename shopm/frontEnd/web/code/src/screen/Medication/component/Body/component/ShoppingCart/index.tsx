@@ -30,7 +30,7 @@ const ShoppingCart: FC<{ isLoading: boolean }> = ({ isLoading }) => {
 
     const list_row = [1, 2, 3, 4, 5].map((data, index) => {
         return isLoading ? (
-            <Skeleton className={style.rowLoading} />
+            <Skeleton className={style.rowLoading} key={index} />
         ) : (
             <div className={style.row} key={index}>
                 <div className={style.index}>{data}</div>

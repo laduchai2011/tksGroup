@@ -48,6 +48,7 @@ export interface MedicationBodyField {
     page: number;
     size: number;
     userId?: number;
+    id?: number;
 }
 
 export interface MedicationImageBodyField {

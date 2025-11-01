@@ -5,7 +5,7 @@ import { useGetMedicationsQuery } from '@src/redux/query/medicationRTK';
 import { MedicationField } from '@src/dataStruct/medication';
 import { setShow_dialogLoading, setData_toastMessage } from '@src/redux/slice/Medications';
 import { messageType_enum } from '@src/component/ToastMessage/type';
-import type { AppDispatch } from '@src/redux';
+import { AppDispatch } from '@src/redux';
 import { useDispatch } from 'react-redux';
 
 const List = () => {

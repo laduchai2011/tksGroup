@@ -1,5 +1,6 @@
 import express, { Router } from 'express';
 import dotenv from 'dotenv';
+import Handle_GetAMedication from './handle/GetAMedication';
 import Handle_GetMedications from './handle/GetMedications';
 import Handle_GetAMedicationImage from './handle/GetAMedicationImage';
 import Handle_GetAMedicationVideo from './handle/GetAMedicationVideo';
@@ -9,11 +10,14 @@ import Handle_GetAllMedicationVideos from './handle/GetAllMedicationVideos';
 dotenv.config();
 const router_query_medication: Router = express.Router();
 
+const handle_getAMedication = new Handle_GetAMedication();
 const handle_getMedications = new Handle_GetMedications();
 const handle_getAMedicationImage = new Handle_GetAMedicationImage();
 const handle_getAMedicationVideo = new Handle_GetAMedicationVideo();
 const handle_getAllMedicationImages = new Handle_GetAllMedicationImages();
 const handle_getAllMedicationVideos = new Handle_GetAllMedicationVideos();
+
+router_query_medication.post('/getAMedication', handle_getAMedication.main);
 
 router_query_medication.post('/getMedications', handle_getMedications.main);
 

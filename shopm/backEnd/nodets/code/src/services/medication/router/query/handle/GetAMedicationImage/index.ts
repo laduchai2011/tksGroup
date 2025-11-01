@@ -12,7 +12,7 @@ class Handle_GetAMedicationImage {
     main = async (req: Request<unknown, unknown, MedicationImageBodyField>, res: Response) => {
         const medicationImageBody = req.body;
 
-        const myResponse: MyResponse<MedicationImageField[]> = {
+        const myResponse: MyResponse<MedicationImageField> = {
             isSuccess: false,
         };
 
@@ -33,7 +33,7 @@ class Handle_GetAMedicationImage {
         try {
             const result = await queryDB_getAMedicationImage.run();
             if (result?.recordset.length && result?.recordset.length > 0) {
-                myResponse.data = result?.recordset;
+                myResponse.data = result?.recordset[0];
                 myResponse.message = 'Lấy 1 hình ảnh sản phẩm thành công !';
                 myResponse.isSuccess = true;
                 res.status(200).json(myResponse);
