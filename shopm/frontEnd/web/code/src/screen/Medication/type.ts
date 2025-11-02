@@ -4,9 +4,11 @@ export interface state_props {
     isLoading: boolean;
     dialogMyVideo: {
         isShow: boolean;
+        data: string[];
     };
     dialogMyImage: {
         isShow: boolean;
+        data: string[];
     };
     toastMessage: {
         data: ToastMessage_Data_Props;

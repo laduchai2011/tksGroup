@@ -30,6 +30,10 @@
         @include center-of-row;
         overflow: hidden;
         @include small-scrollX-snap-parent;
+        @include heightRes(450px, md, 1);
+        @include responsive(sm) {
+            @include heightRes(450px, md, 1.2);
+        }
 
         > .photo {
             width: 100%;

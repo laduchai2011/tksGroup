@@ -6,18 +6,32 @@ import { parameter_options } from '../../type';
 
 const root_path = process.cwd();
 
+const applyCORS = (
+    req: Request | Request<Record<string, never>, unknown, unknown, parameter_options>,
+    res: Response
+) => {
+    const allowedOrigins = ['http://shopm.local.com:3000'];
+    const origin = req.headers.origin as string;
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
+    }
+};
+
 class Handle_Watch {
     constructor() {}
 
     main_segment = (req: Request, res: Response) => {
+        applyCORS(req, res);
+
         const myResponse: MyResponse<unknown> = {
             message: 'middle_upload have a error',
             isSuccess: false,
         };
 
         try {
-            const { folder, file } = req.params;
-            const filePath = path.join(root_path, 'data', 'video', 'output', folder, file);
+            const { folder } = req.params;
+            const filePath = path.join(root_path, 'data', 'video', 'output', folder);
             res.setHeader('Content-Type', 'video/MP2T');
             fs.createReadStream(filePath).pipe(res);
         } catch (err) {
@@ -29,6 +43,8 @@ class Handle_Watch {
     };
 
     main_playlist = (req: Request, res: Response) => {
+        applyCORS(req, res);
+
         const myResponse: MyResponse<unknown> = {
             message: 'middle_upload have a error',
             isSuccess: false,
@@ -48,14 +64,16 @@ class Handle_Watch {
     };
 
     main = async (req: Request<Record<string, never>, unknown, unknown, parameter_options>, res: Response) => {
+        applyCORS(req, res);
+
         const myResponse: MyResponse<unknown> = {
             message: 'middle_upload have a error',
             isSuccess: false,
         };
 
         try {
-            const id = req.query.id;
-            const filePath = path.join(root_path, 'data', 'video', 'output', id, 'master.m3u8');
+            const { folder, file } = req.params;
+            const filePath = path.join(root_path, 'data', 'video', 'output', folder, file);
             const stat = fs.statSync(filePath);
             res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');
             res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');

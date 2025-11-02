@@ -3,11 +3,18 @@ import style from './style.module.scss';
 import Skeleton from '@src/component/Skeleton';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@src/redux';
-import { setShow_dialogMyImage, setShow_dialogMyVideo } from '@src/redux/slice/Medication';
+import {
+    setShow_dialogMyImage,
+    setShow_dialogMyVideo,
+    setData_dialogMyImage,
+    setData_dialogMyVideo,
+} from '@src/redux/slice/Medication';
 import { MedicationField, MedicationImageField, MedicationVideoField } from '@src/dataStruct/medication';
 import { useGetAllMedicationImagesQuery, useGetAllMedicationVideosQuery } from '@src/redux/query/medicationRTK';
 import { setData_toastMessage } from '@src/redux/slice/Medication';
 import { messageType_enum } from '@src/component/ToastMessage/type';
+import VideoHls from '@src/component/VideoHls';
+import { unstable_batchedUpdates } from 'react-dom';
 
 const Photo: FC<{ isLoading: boolean; data: MedicationField | undefined }> = ({ isLoading, data }) => {
     const dispatch = useDispatch<AppDispatch>();
@@ -94,7 +101,14 @@ const Photo: FC<{ isLoading: boolean; data: MedicationField | undefined }> = ({ 
             dispatch(setShow_dialogMyImage(true));
         }
         if (view === 'video') {
-            dispatch(setShow_dialogMyVideo(true));
+            const urls: string[] = [];
+            for (let i: number = 0; i < allMedicationVideos.length; i++) {
+                urls.push(allMedicationVideos[i].url);
+            }
+            unstable_batchedUpdates(() => {
+                dispatch(setShow_dialogMyVideo(true));
+                dispatch(setData_dialogMyVideo(urls));
+            });
         }
     };
 
@@ -104,7 +118,7 @@ const Photo: FC<{ isLoading: boolean; data: MedicationField | undefined }> = ({ 
         <div className={style.parent}>
             <div className={style.photoContainer} ref={photoContainer_element}>
                 <img className={style.photo} src={allMedicationImages[0].url} alt="" />
-                <video className={style.photo} src={allMedicationVideos[0].url} controls />
+                <VideoHls className={style.photo} src={allMedicationVideos[0].url} controls={true} />
             </div>
             <div className={style.controlContainer}>
                 <div className={style.dotContainer}>

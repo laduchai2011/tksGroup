@@ -1,159 +1,176 @@
 import { FC, memo, useRef, useEffect } from 'react';
 import style from './style.module.scss';
-// import Hls, { LoaderContext, LoaderConfiguration, LoaderCallbacks } from 'hls.js';
-import Hls from 'hls.js';
+import Hls, { LoaderContext, LoaderConfiguration, LoaderCallbacks } from 'hls.js';
 // import { CutId } from './util';
 
 interface ComponentProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
     srcVideo?: string;
-    controls?: boolean;
 }
 
 const VideoHls: FC<ComponentProps> = ({ srcVideo, className, controls = false, ...props }) => {
-    const parent_element = useRef<HTMLVideoElement>(null);
-    // const current_play_time = useRef<number>(0);
-    // const current_load_time = useRef<number>(0);
-    // const id_requestAnimationFrame = useRef<number | null>(null);
-    // const hls = useRef<Hls | null>(null);
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const playTime = useRef(0);
+    const loadTime = useRef(0);
+    const rAF = useRef<number | null>(null);
+    const hlsRef = useRef<Hls | null>(null);
 
     // useEffect(() => {
-    //     const video = parent_element.current;
-
+    //     const video = videoRef.current;
     //     if (!video) return;
     //     if (!srcVideo) return;
 
-    //     console.log('VideoHls', srcVideo);
-    //     console.log('isBrowser:', typeof window !== 'undefined');
-    //     console.log('Hls.isSupported():', Hls.isSupported());
+    //     // console.log('Video ID:', id, srcVideo);
+    //     // const id = CutId(srcVideo); // lấy video-1762052119381.mp4
 
-    //     const id = CutId(srcVideo);
-
-    //     if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    //         console.log('canPlayType:', video.canPlayType('application/vnd.apple.mpegurl'));
-    //         // Native HLS support (Safari, iOS)
-    //         video.src = srcVideo;
-    //     } else if (Hls.isSupported()) {
-    //         console.log('isSupported', srcVideo);
+    //     if (Hls.isSupported()) {
     //         class CustomLoader extends Hls.DefaultConfig.loader {
     //             load(context: LoaderContext, config: LoaderConfiguration, callbacks: LoaderCallbacks<LoaderContext>) {
-    //                 // Modify URL (add token)
-    //                 const url = new URL(context.url);
-    //                 url.searchParams.set('id', id);
-    //                 console.log(url);
-
-    //                 context.url = url.toString(); // Gán lại URL sau khi thêm params
-
-    //                 // Gọi lại loader mặc định
+    //                 const u = new URL(context.url, window.location.origin);
+    //                 // u.searchParams.set('id', id);
+    //                 console.log('url', u);
+    //                 context.url = u.toString();
     //                 super.load(context, config, callbacks);
+    //                 // let url = context.url;
+    //                 // const u = new URL(context.url, window.location.origin);
+
+    //                 // console.log('url', url, u);
+
+    //                 // // Nếu URL không phải http => là relative
+    //                 // if (!url.startsWith('http')) {
+    //                 //     // Tiền tố folder vào
+    //                 //     url = `/api/service_video/store/${id}${url}`;
+    //                 // }
+
+    //                 // context.url = url;
+    //                 // super.load(context, config, callbacks);
     //             }
     //         }
-    //         // class CustomLoader extends Hls.DefaultConfig.loader {
-    //         //     load(context: LoaderContext, config: LoaderConfiguration, callbacks: LoaderCallbacks<LoaderContext>) {
-    //         //         // Nếu là đường dẫn tương đối => chuyển thành tuyệt đối
-    //         //         const absoluteURL = context.url.startsWith('http')
-    //         //             ? context.url
-    //         //             : `${window.location.origin}${context.url}`;
 
-    //         //         const url = new URL(absoluteURL);
-    //         //         url.searchParams.set('id', id);
-
-    //         //         context.url = url.toString();
-    //         //         super.load(context, config, callbacks);
-    //         //     }
-    //         // }
-
-    //         hls.current = new Hls({
+    //         const hls = new Hls({
     //             loader: CustomLoader,
-    //         });
-    //         // hls.current = new Hls();
-
-    //         console.log(hls.current);
-
-    //         hls.current.loadSource(srcVideo);
-    //         hls.current.attachMedia(video);
-
-    //         hls.current.on(Hls.Events.FRAG_LOADING, (event, data) => {
-    //             const frag = data.frag;
-    //             current_load_time.current = frag.start;
+    //             capLevelToPlayerSize: true,
+    //             startLevel: -1,
     //         });
 
-    //         let isLoading: boolean = true;
-    //         function trackTime(hls: Hls) {
-    //             current_play_time.current = video?.currentTime ? video?.currentTime : 0;
+    //         hlsRef.current = hls;
 
-    //             // init status
-    //             if (current_play_time.current === 0) {
-    //                 if (current_load_time.current >= 20) {
-    //                     hls.stopLoad();
+    //         hls.loadSource(srcVideo);
+    //         hls.attachMedia(video);
+
+    //         hls.on(Hls.Events.FRAG_LOADING, (_, data) => {
+    //             loadTime.current = data.frag.start;
+    //         });
+
+    //         let isLoading = true;
+
+    //         const track = () => {
+    //             playTime.current = video.currentTime || 0;
+
+    //             if (playTime.current === 0 && loadTime.current >= 20) {
+    //                 hls.stopLoad();
+    //             } else if (playTime.current >= loadTime.current - 10) {
+    //                 if (!isLoading) {
+    //                     isLoading = true;
+    //                     hls.startLoad();
     //                 }
-    //             } else {
-    //                 if (current_play_time.current >= current_load_time.current - 10) {
-    //                     if (!isLoading) {
-    //                         isLoading = true;
-    //                         hls.startLoad();
-    //                     }
-    //                 } else {
-    //                     if (isLoading) {
-    //                         isLoading = false;
-    //                         hls.stopLoad();
-    //                     }
-    //                 }
+    //             } else if (isLoading) {
+    //                 isLoading = false;
+    //                 hls.stopLoad();
     //             }
 
-    //             id_requestAnimationFrame.current = requestAnimationFrame(() => trackTime(hls));
-    //         }
-    //         trackTime(hls.current);
+    //             rAF.current = requestAnimationFrame(track);
+    //         };
+
+    //         track();
+    //     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    //         video.src = srcVideo;
     //     }
 
     //     return () => {
-    //         if (hls.current !== null) {
-    //             hls.current.destroy();
+    //         if (rAF.current) cancelAnimationFrame(rAF.current);
+
+    //         if (hlsRef.current) {
+    //             hlsRef.current.destroy();
+    //             hlsRef.current = null;
     //         }
 
-    //         if (id_requestAnimationFrame.current !== null) {
-    //             cancelAnimationFrame(id_requestAnimationFrame.current);
-    //             id_requestAnimationFrame.current = null;
-    //         }
-
-    //         if (video) {
-    //             video.pause();
-    //             video.removeAttribute('src');
-    //             video.load();
-    //         }
+    //         if (!video) return;
+    //         if (!srcVideo) return;
+    //         video.pause();
+    //         video.removeAttribute('src');
+    //         video.load();
     //     };
     // }, [srcVideo]);
 
     useEffect(() => {
-        const video = parent_element.current;
-        if (!video) return;
-        if (!srcVideo) return;
+        const video = videoRef.current;
+        if (!video || !srcVideo) return;
 
         if (Hls.isSupported()) {
+            if (hlsRef.current) hlsRef.current.destroy();
+
+            class CustomLoader extends Hls.DefaultConfig.loader {
+                load(context: LoaderContext, config: LoaderConfiguration, callbacks: LoaderCallbacks<LoaderContext>) {
+                    const urlObj = new URL(context.url, window.location.origin);
+                    context.url = urlObj.toString();
+                    super.load(context, config, callbacks);
+                }
+            }
+
             const hls = new Hls({
+                loader: CustomLoader,
                 capLevelToPlayerSize: true,
-                startLevel: -1, // tự động chọn chất lượng
+                startLevel: -1,
             });
 
+            hlsRef.current = hls;
             hls.loadSource(srcVideo);
             hls.attachMedia(video);
 
-            hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                console.log(`Available levels: ${data.levels.map((l: any) => l.height).join(', ')}p`);
+            hls.on(Hls.Events.FRAG_LOADING, (_, data) => {
+                loadTime.current = data.frag.start;
             });
 
-            return () => hls.destroy();
+            let isLoading = true;
+            const track = () => {
+                playTime.current = video.currentTime || 0;
+                if (playTime.current === 0 && loadTime.current >= 20) {
+                    hls.stopLoad();
+                } else if (playTime.current >= loadTime.current - 10) {
+                    if (!isLoading) {
+                        isLoading = true;
+                        hls.startLoad();
+                    }
+                } else if (isLoading) {
+                    isLoading = false;
+                    hls.stopLoad();
+                }
+                rAF.current = requestAnimationFrame(track);
+            };
+            rAF.current = requestAnimationFrame(track);
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            // Safari
             video.src = srcVideo;
         }
+
+        return () => {
+            if (rAF.current) cancelAnimationFrame(rAF.current);
+            if (hlsRef.current) {
+                hlsRef.current.destroy();
+                hlsRef.current = null;
+            }
+            if (videoRef.current) {
+                videoRef.current.pause();
+                videoRef.current.removeAttribute('src');
+                videoRef.current.load();
+            }
+        };
     }, [srcVideo]);
 
     return (
         <video
             className={`${style.parent} ${className || ''}`}
             {...props}
-            ref={parent_element}
+            ref={videoRef}
             autoPlay
             muted
             controls={controls}

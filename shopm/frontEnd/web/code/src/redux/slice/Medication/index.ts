@@ -6,9 +6,11 @@ const initialState: state_props = {
     isLoading: false,
     dialogMyVideo: {
         isShow: false,
+        data: [],
     },
     dialogMyImage: {
         isShow: false,
+        data: [],
     },
     toastMessage: {
         data: { type: undefined, message: '' },
@@ -28,8 +30,20 @@ const MedicationSlice = createSlice({
         setShow_dialogMyImage: (state, action: PayloadAction<boolean>) => {
             state.dialogMyImage.isShow = action.payload;
         },
+        setData_dialogMyVideo: (state, action: PayloadAction<string[]>) => {
+            state.dialogMyVideo.data = action.payload;
+        },
+        setData_dialogMyImage: (state, action: PayloadAction<string[]>) => {
+            state.dialogMyImage.data = action.payload;
+        },
     },
 });
 
-export const { setData_toastMessage, setShow_dialogMyVideo, setShow_dialogMyImage } = MedicationSlice.actions;
+export const {
+    setData_toastMessage,
+    setShow_dialogMyVideo,
+    setShow_dialogMyImage,
+    setData_dialogMyVideo,
+    setData_dialogMyImage,
+} = MedicationSlice.actions;
 export default MedicationSlice.reducer;

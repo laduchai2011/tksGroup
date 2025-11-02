@@ -258,7 +258,7 @@ const Body = () => {
         }
         const imageUrls: MedicationImageField[] = [];
         for (let i: number = 0; i < imageFiles.length; i++) {
-            const url = `${BASE_URL}${apiString}/service_image/store/image/${imageFiles[i].filename}`;
+            const url = `${BASE_URL}${apiString}/service_image/store/${imageFiles[i].filename}`;
             const aImage: MedicationImageField = {
                 id: -1,
                 url: url,
@@ -286,7 +286,8 @@ const Body = () => {
         }
         const videoUrls: MedicationVideoField[] = [];
         for (let i: number = 0; i < videoFiles.length; i++) {
-            const url = `${BASE_URL}${apiString}/service_image/store/image/${videoFiles[i].savedName}`;
+            // const url = `${BASE_URL}${apiString}/service_video/store/watch?id=${videoFiles[i].savedName}`;
+            const url = `${BASE_URL}${apiString}/service_video/store/${videoFiles[i].savedName}`;
             const aVideo: MedicationVideoField = {
                 id: -1,
                 url: url,

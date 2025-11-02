@@ -19,7 +19,7 @@ app.use('/api', express.json());
 app.use('/api', express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
-    const allowedOrigins = ['http://192.168.5.100:3000', 'http://shopm.local.com:3000'];
+    const allowedOrigins = ['http://shopm.local.com:3000'];
     const origin = req.headers.origin as string;
     if (allowedOrigins.includes(origin)) {
         res.header('Access-Control-Allow-Origin', origin);

@@ -8,12 +8,11 @@ import { options_enum, selectedOptions_type } from './type';
 
 interface ComponentProps extends React.HTMLAttributes<HTMLDivElement> {
     isShow?: boolean;
-    data?: unknown;
+    data?: string[];
     onClose?: () => void;
 }
 
 const DialogPlayVideo: FC<ComponentProps> = ({ isShow, data, onClose, className, ...props }) => {
-    console.log('DialogPlayVideo', data);
     const parent_element = useRef<HTMLDivElement | null>(null);
     const options_element = useRef<HTMLDivElement | null>(null);
     const myCroll_element = useRef<HTMLDivElement | null>(null);
@@ -26,6 +25,11 @@ const DialogPlayVideo: FC<ComponentProps> = ({ isShow, data, onClose, className,
     const [isShow1, setIsShow1] = useState<boolean>(false);
 
     const [selectedOption, setSelectedOption] = useState<selectedOptions_type>(options_enum.ALL);
+    const [selectedVideo, setSelectedVideo] = useState<string>(data && data.length > 0 ? data[0] : '');
+
+    // useEffect(() => {
+    //     console.log('selectedVideo', selectedVideo);
+    // }, [selectedVideo]);
 
     useEffect(() => {
         if (isShow) {
@@ -131,18 +135,17 @@ const DialogPlayVideo: FC<ComponentProps> = ({ isShow, data, onClose, className,
         }
     };
 
-    const src_video = 'http://shopm.local.com:3007/api/service_video/store/watch?id=manhba-1761671580412.mp4';
-
     const list_video = useMemo(() => {
-        return [1, 2, 3, 4, 5, 6, 7, 8, 9].map((_, index) => (
+        return data?.map((data1, index) => (
             <VideoHlsOverview
                 key={index}
                 className={style.video1}
                 srcImage="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpao8X6PNUrN1vgwedPR0FJu_IMZdA82jIag&s"
-                srcVideo={src_video}
+                srcVideo={data1}
+                onClick={() => setSelectedVideo(data1)}
             />
         ));
-    }, []);
+    }, [data]);
 
     return (
         <div className={`${style.parent} ${className || ''}`} {...props} ref={parent_element}>
@@ -170,7 +173,7 @@ const DialogPlayVideo: FC<ComponentProps> = ({ isShow, data, onClose, className,
                 <div className={style.content}>
                     <div className={style.contentContainer} ref={contentContainer_element}>
                         <div className={style.videoContainer} ref={videoContainer_element}>
-                            {isShow1 && <VideoHls className={style.video} srcVideo={src_video} controls={true} />}
+                            {isShow1 && <VideoHls className={style.video} srcVideo={selectedVideo} controls={true} />}
                         </div>
                         <div className={style.videoListContainer} ref={videoListContainer_element}>
                             {isShow1 && <div className={style.videoList}>{list_video}</div>}
