@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import ToastMessage from '@src/component/ToastMessage';
 import { useSelector } from 'react-redux';
-import type { RootState } from '@src/redux';
+import { RootState } from '@src/redux';
 import { ToastMessage_Data_Props } from '@src/component/ToastMessage/type';
 
 const MyToastMessage = () => {

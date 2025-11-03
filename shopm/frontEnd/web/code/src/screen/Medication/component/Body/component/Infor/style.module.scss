@@ -14,6 +14,10 @@
         width: 100%;
     }
 
+    > div {
+        margin: 10px 0;
+    }
+
     > .title {
         font-size: 1.1rem;
         font-weight: 500;
@@ -33,17 +37,17 @@
         height: 35px;
     }
 
-    > .name {
-        color: rgba(0, 225, 255);
-    }
-    > .nameLoading {
-        min-height: 20px;
-        width: 20%;
-        margin: 2px 0;
-    }
+    // > .name {
+    //     color: rgba(0, 225, 255);
+    // }
+    // > .nameLoading {
+    //     min-height: 20px;
+    //     width: 20%;
+    //     margin: 2px 0;
+    // }
 
     > .type {
-        color: rgb(231, 231, 0);
+        color: rgb(0, 231, 58);
     }
     > .typeLoading {
         min-height: 20px;
@@ -69,6 +73,15 @@
         margin: 2px 0;
     }
 
+    > .discount {
+        color: rgb(216, 216, 24);
+    }
+    > .discountLoading {
+        min-height: 20px;
+        width: 20%;
+        margin: 2px 0;
+    }
+
     > .money {
         @include center-of-row;
 
@@ -77,16 +90,20 @@
         }
 
         > div:nth-child(1) {
-            color: red;
+            color: black;
         }
 
         > div:nth-child(2) {
+            color: red;
+        }
+
+        > div:nth-child(3) {
             font-size: 0.9rem;
             text-decoration: line-through;
             color: gray;
         }
 
-        > div:nth-child(3) {
+        > div:nth-child(4) {
             font-size: 0.9rem;
         }
     }

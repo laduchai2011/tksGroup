@@ -7,12 +7,11 @@ import { options_enum, selectedOptions_type } from './type';
 
 interface ComponentProps extends React.HTMLAttributes<HTMLDivElement> {
     isShow?: boolean;
-    data?: unknown;
+    data?: string[];
     onClose?: () => void;
 }
 
 const DialogPlayImage: FC<ComponentProps> = ({ isShow, data, onClose, className, ...props }) => {
-    console.log('DialogPlayImage', data);
     const parent_element = useRef<HTMLDivElement | null>(null);
     const options_element = useRef<HTMLDivElement | null>(null);
     const myCroll_element = useRef<HTMLDivElement | null>(null);
@@ -25,6 +24,13 @@ const DialogPlayImage: FC<ComponentProps> = ({ isShow, data, onClose, className,
     const [isShow1, setIsShow1] = useState<boolean>(false);
 
     const [selectedOption, setSelectedOption] = useState<selectedOptions_type>(options_enum.ALL);
+    const [selectedImage, setSelectedImage] = useState<string>('');
+
+    useEffect(() => {
+        if (data && data.length > 0) {
+            setSelectedImage(data[0]);
+        }
+    }, [data]);
 
     useEffect(() => {
         if (isShow) {
@@ -130,13 +136,11 @@ const DialogPlayImage: FC<ComponentProps> = ({ isShow, data, onClose, className,
         }
     };
 
-    const srcImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpao8X6PNUrN1vgwedPR0FJu_IMZdA82jIag&s';
-
     const list_image = useMemo(() => {
-        return [1, 2, 3, 4, 5, 6, 7, 8, 9].map((_, index) => (
-            <LazyImg key={index} className={style.video1} srcImg={srcImage} />
+        return data?.map((data1, index) => (
+            <LazyImg key={index} className={style.video1} srcImg={data1} onClick={() => setSelectedImage(data1)} />
         ));
-    }, []);
+    }, [data]);
 
     return (
         <div className={`${style.parent} ${className || ''}`} {...props} ref={parent_element}>
@@ -164,7 +168,7 @@ const DialogPlayImage: FC<ComponentProps> = ({ isShow, data, onClose, className,
                 <div className={style.content}>
                     <div className={style.contentContainer} ref={contentContainer_element}>
                         <div className={style.imageContainer} ref={imageContainer_element}>
-                            {isShow1 && <LazyImg className={style.image} srcImg={srcImage} />}
+                            {isShow1 && <LazyImg className={style.image} srcImg={selectedImage} alt="" />}
                         </div>
                         <div className={style.imageListContainer} ref={imageListContainer_element}>
                             {isShow1 && <div className={style.imageList}>{list_image}</div>}

@@ -4,6 +4,7 @@ import Body from './component/Body';
 import DialogMyImage from './component/DialogMyImage';
 import DialogMyVideo from './component/DialogMyVideo';
 import MyToastMessage from './component/MyToastMessage';
+import DialogCreateShoppingCart from './component/DialogCreateShoppingCart';
 
 const Medication = () => {
     return (
@@ -15,6 +16,7 @@ const Medication = () => {
                 <DialogMyImage />
                 <DialogMyVideo />
                 <MyToastMessage />
+                <DialogCreateShoppingCart />
             </div>
             <div>
                 <Body />

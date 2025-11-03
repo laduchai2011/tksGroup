@@ -1,7 +1,7 @@
 import { FC, memo, useState } from 'react';
 import style from './style.module.scss';
 import { HiOutlineMinusSmall, HiOutlinePlusSmall } from 'react-icons/hi2';
-import { SHOPPING_CART, ADD, SUB } from '@src/const/text';
+import { SHOPPING_CART, ADD, SUB, CREATE_SHOPPING_CART } from '@src/const/text';
 import { isPositiveInteger } from '@src/utility/string';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@src/redux';
@@ -66,6 +66,11 @@ const ShoppingCart: FC<{ isLoading: boolean }> = ({ isLoading }) => {
             )}
             <div className={style.table}>
                 <div className={style.rowContainer}>{list_row}</div>
+                <div className={style.createContainer}>
+                    <div className={style.createBtn} title={CREATE_SHOPPING_CART}>
+                        {CREATE_SHOPPING_CART}
+                    </div>
+                </div>
             </div>
         </div>
     );

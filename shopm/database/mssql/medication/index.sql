@@ -4,20 +4,20 @@ CREATE TABLE medication (
     type NVARCHAR(255) NOT NULL,
     typeGroup NVARCHAR(255) NOT NULL,
     information NVARCHAR(MAX) NOT NULL,
-    averageRating FLOAT,
-    rateCount INT,
-	amount INT,
-	discount FLOAT,
-	price FLOAT,
+    averageRating FLOAT NOT NULL,
+    rateCount INT NOT NULL,
+	amount INT NOT NULL,
+	discount FLOAT NOT NULL,
+	price FLOAT NOT NULL,
     status NVARCHAR(255) NOT NULL,
-    userId INT NOT NULL,
+    accountId INT NOT NULL,
     updateTime DATETIMEOFFSET(7) NOT NULL,
     createTime DATETIMEOFFSET(7) NOT NULL,
 
-    CONSTRAINT FK_medication_User FOREIGN KEY (userId) REFERENCES account(id)
+    CONSTRAINT FK_medication_Account FOREIGN KEY (accountId) REFERENCES account(id)
 )
 GO
-CREATE NONCLUSTERED INDEX idx_user_id ON medication(userId);
+CREATE NONCLUSTERED INDEX idx_account_id ON medication(accountId);
 GO
 
 CREATE TABLE medication_image (

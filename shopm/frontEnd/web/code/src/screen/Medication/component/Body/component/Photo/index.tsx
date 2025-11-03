@@ -99,6 +99,14 @@ const Photo: FC<{ isLoading: boolean; data: MedicationField | undefined }> = ({ 
     const handleShowDialogPhoto = () => {
         if (view === 'image') {
             dispatch(setShow_dialogMyImage(true));
+            const urls: string[] = [];
+            for (let i: number = 0; i < allMedicationImages.length; i++) {
+                urls.push(allMedicationImages[i].url);
+            }
+            unstable_batchedUpdates(() => {
+                dispatch(setShow_dialogMyImage(true));
+                dispatch(setData_dialogMyImage(urls));
+            });
         }
         if (view === 'video') {
             const urls: string[] = [];

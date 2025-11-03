@@ -52,8 +52,8 @@ const Body = () => {
         <div className={style.parent}>
             <div className={style.main}>
                 <Photo isLoading={isLoading} data={medication} />
-                <Infor isLoading={isLoading} />
-                <BuyBtn isLoading={isLoading} />
+                <Infor isLoading={isLoading} data={medication} />
+                <BuyBtn isLoading={isLoading} data={medication} />
                 <ShoppingCart isLoading={isLoading} />
                 <DocInfor isLoading={isLoading} />
                 <Comment isLoading={isLoading} />
