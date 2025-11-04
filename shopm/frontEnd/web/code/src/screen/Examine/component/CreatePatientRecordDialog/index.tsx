@@ -3,7 +3,7 @@ import style from './style.module.scss';
 import { IoClose } from 'react-icons/io5';
 import { CLOSE, CREATE_PATIENT_RECORD, TITLE, CREATE, EXIT } from '@src/const/text';
 import { useSelector, useDispatch } from 'react-redux';
-import type { RootState, AppDispatch } from '@src/redux';
+import { RootState, AppDispatch } from '@src/redux';
 import { setShow_createPatientRecordDialog, setData_toastMessage } from '@src/redux/slice/Examine';
 import { messageType_enum } from '@src/component/ToastMessage/type';
 

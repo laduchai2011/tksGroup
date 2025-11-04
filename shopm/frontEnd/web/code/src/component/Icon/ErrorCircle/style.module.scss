@@ -22,15 +22,17 @@
     animation: parentAnimation calc(var(--animation-time) * 1s) linear infinite;
 }
 
-@keyframes parentAnimation {
-    0%,
-    100% {
-        scale: 0.9;
-    }
-    50% {
-        scale: 1;
-    }
-    80% {
-        scale: 1.1;
+:local {
+    @keyframes parentAnimation {
+        0%,
+        100% {
+            scale: 0.9;
+        }
+        50% {
+            scale: 1;
+        }
+        80% {
+            scale: 1.1;
+        }
     }
 }

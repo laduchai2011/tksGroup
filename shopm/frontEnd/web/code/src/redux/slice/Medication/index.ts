@@ -12,6 +12,9 @@ const initialState: state_props = {
         isShow: false,
         data: [],
     },
+    dialogCreateShoppingCart: {
+        isShow: false,
+    },
     toastMessage: {
         data: { type: undefined, message: '' },
     },
@@ -36,6 +39,9 @@ const MedicationSlice = createSlice({
         setData_dialogMyImage: (state, action: PayloadAction<string[]>) => {
             state.dialogMyImage.data = action.payload;
         },
+        setShow_dialogCreateShoppingCart: (state, action: PayloadAction<boolean>) => {
+            state.dialogCreateShoppingCart.isShow = action.payload;
+        },
     },
 });
 
@@ -45,5 +51,6 @@ export const {
     setShow_dialogMyImage,
     setData_dialogMyVideo,
     setData_dialogMyImage,
+    setShow_dialogCreateShoppingCart,
 } = MedicationSlice.actions;
 export default MedicationSlice.reducer;

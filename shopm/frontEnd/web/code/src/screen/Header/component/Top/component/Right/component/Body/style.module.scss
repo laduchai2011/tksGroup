@@ -37,13 +37,16 @@
         bottom: 0;
 
         animation: loading_animation 3s infinite;
-        @keyframes loading_animation {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
+    }
+}
+
+:local {
+    @keyframes loading_animation {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
         }
     }
 }

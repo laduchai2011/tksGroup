@@ -196,26 +196,28 @@
     }
 }
 
-@keyframes animation_text1 {
-    0% {
-        opacity: 1;
+:local {
+    @keyframes animation_text1 {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
     }
-    50% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
 
-@keyframes animation_text2 {
-    0% {
-        scale: 1.1;
-    }
-    50% {
-        scale: 1;
-    }
-    100% {
-        scale: 1.1;
+    @keyframes animation_text2 {
+        0% {
+            scale: 1.1;
+        }
+        50% {
+            scale: 1;
+        }
+        100% {
+            scale: 1.1;
+        }
     }
 }

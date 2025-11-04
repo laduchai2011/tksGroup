@@ -10,6 +10,9 @@ export interface state_props {
         isShow: boolean;
         data: string[];
     };
+    dialogCreateShoppingCart: {
+        isShow: boolean;
+    };
     toastMessage: {
         data: ToastMessage_Data_Props;
     };

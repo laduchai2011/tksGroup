@@ -67,6 +67,7 @@ export const OFFLINE = 'Không sử dụng';
 export const CREATE_PATIENT_RECORD = 'Tạo bệnh án';
 export const CREATE_NEW_PAGE = 'Tạo trang mới';
 export const TITLE = 'Tiêu đề';
+export const NAME = 'Tên';
 export const CREATE = 'Tạo';
 export const EXIT = 'Thoát';
 export const EDIT = 'Chỉnh sửa';

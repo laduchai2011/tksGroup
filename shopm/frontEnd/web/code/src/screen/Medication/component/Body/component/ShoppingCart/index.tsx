@@ -5,7 +5,7 @@ import { SHOPPING_CART, ADD, SUB, CREATE_SHOPPING_CART } from '@src/const/text';
 import { isPositiveInteger } from '@src/utility/string';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@src/redux';
-import { setData_toastMessage } from '@src/redux/slice/Medication';
+import { setData_toastMessage, setShow_dialogCreateShoppingCart } from '@src/redux/slice/Medication';
 import { messageType_enum } from '@src/component/ToastMessage/type';
 import Skeleton from '@src/component/Skeleton';
 
@@ -57,6 +57,10 @@ const ShoppingCart: FC<{ isLoading: boolean }> = ({ isLoading }) => {
         );
     });
 
+    const handleShow = () => {
+        dispatch(setShow_dialogCreateShoppingCart(true));
+    };
+
     return (
         <div className={style.parent}>
             {isLoading ? (
@@ -67,7 +71,7 @@ const ShoppingCart: FC<{ isLoading: boolean }> = ({ isLoading }) => {
             <div className={style.table}>
                 <div className={style.rowContainer}>{list_row}</div>
                 <div className={style.createContainer}>
-                    <div className={style.createBtn} title={CREATE_SHOPPING_CART}>
+                    <div className={style.createBtn} onClick={() => handleShow()} title={CREATE_SHOPPING_CART}>
                         {CREATE_SHOPPING_CART}
                     </div>
                 </div>
