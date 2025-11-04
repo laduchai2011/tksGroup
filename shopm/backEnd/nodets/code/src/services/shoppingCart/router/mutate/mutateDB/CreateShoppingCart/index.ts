@@ -1,5 +1,5 @@
 import sql from 'mssql';
-import { MutateDB } from '@src/services/medication/interface';
+import { MutateDB } from '@src/services/shoppingCart/interface';
 import { ShoppingCartField, CreateShoppingCartBodyField } from '@src/dataStruct/shoppingCart';
 
 class MutateDB_CreateShoppingCart extends MutateDB {
@@ -24,7 +24,7 @@ class MutateDB_CreateShoppingCart extends MutateDB {
                 const result = await this._connectionPool
                     .request()
                     .input('name', sql.NVarChar(255), this._createShoppingCartBody.name)
-                    .input('accountId', sql.NVarChar(255), this._createShoppingCartBody.accountId)
+                    .input('accountId', sql.Int, this._createShoppingCartBody.accountId)
                     .execute('CreateShoppingCart');
 
                 return result;

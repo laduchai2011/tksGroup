@@ -4,7 +4,10 @@ import { IoCloseSharp } from 'react-icons/io5';
 import { CREATE_SHOPPING_CART, CLOSE, NAME, CREATE, EXIT } from '@src/const/text';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '@src/redux';
-import { setShow_dialogCreateShoppingCart } from '@src/redux/slice/Medication';
+import { setShow_dialogCreateShoppingCart, setData_toastMessage } from '@src/redux/slice/Medication';
+import { CreateShoppingCartBodyField } from '@src/dataStruct/shoppingCart';
+import { useCreateShoppingCartMutation } from '@src/redux/query/shoppingCartRTK';
+import { messageType_enum } from '@src/component/ToastMessage/type';
 
 const DialogCreateShoppingCart = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -20,8 +23,14 @@ const DialogCreateShoppingCart = () => {
     const text2_element = useRef<HTMLDivElement | null>(null);
     const btnContainer_element = useRef<HTMLDivElement | null>(null);
 
+    const [createShoppingCart] = useCreateShoppingCartMutation();
+
     const isShow: boolean = useSelector((state: RootState) => state.MedicationSlice.dialogCreateShoppingCart.isShow);
     const [isCreating, setIsCreating] = useState<boolean>(false);
+    const [createShoppingCartBody, setCreateShoppingCartBody] = useState<CreateShoppingCartBodyField>({
+        name: '',
+        accountId: -1,
+    });
 
     useEffect(() => {
         if (isShow) {
@@ -125,14 +134,36 @@ const DialogCreateShoppingCart = () => {
 
     const handleCreate = () => {
         setIsCreating(true);
-        const timeout = setTimeout(() => {
-            setIsCreating(false);
-            clearTimeout(timeout);
-        }, 3000);
+        createShoppingCart(createShoppingCartBody)
+            .then((res) => {
+                const resData = res.data;
+                if (resData?.isSuccess) {
+                    dispatch(
+                        setData_toastMessage({
+                            type: messageType_enum.SUCCESS,
+                            message: 'Tạo giỏ hàng thành công !',
+                        })
+                    );
+                } else {
+                    dispatch(
+                        setData_toastMessage({
+                            type: messageType_enum.SUCCESS,
+                            message: 'Tạo giỏ hàng không thành công !',
+                        })
+                    );
+                }
+            })
+            .catch((err) => console.error(err))
+            .finally(() => setIsCreating(false));
     };
 
     const handleExit = () => {
         dispatch(setShow_dialogCreateShoppingCart(false));
+    };
+
+    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setCreateShoppingCartBody({ ...createShoppingCartBody, name: value });
     };
 
     return (
@@ -150,7 +181,7 @@ const DialogCreateShoppingCart = () => {
                         <div className={style.inputRow}>
                             <div>{NAME}</div>
                             <div>
-                                <input />
+                                <input value={createShoppingCartBody.name} onChange={(e) => handleNameChange(e)} />
                             </div>
                         </div>
                     </div>

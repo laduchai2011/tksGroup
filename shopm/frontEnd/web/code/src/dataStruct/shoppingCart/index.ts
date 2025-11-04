@@ -24,3 +24,7 @@ export interface CreateShoppingCartBodyField {
     name: string;
     accountId: number;
 }
+
+export interface ShoppingCartBodyField {
+    accountId: number;
+}

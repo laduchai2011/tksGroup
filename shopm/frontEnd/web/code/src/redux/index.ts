@@ -8,6 +8,7 @@ import DoctorsReducer from '@src/redux/slice/Doctors';
 import VideoPlayBoxReducer from '@src/redux/slice/VideoPlayBox';
 import { accountRTK } from './query/accountRTK';
 import { medicationRTK } from './query/medicationRTK';
+import { shoppingCartRTK } from './query/shoppingCartRTK';
 
 export const store = configureStore({
     reducer: {
@@ -20,9 +21,10 @@ export const store = configureStore({
         VideoPlayBoxSlice: VideoPlayBoxReducer,
         [accountRTK.reducerPath]: accountRTK.reducer,
         [medicationRTK.reducerPath]: medicationRTK.reducer,
+        [shoppingCartRTK.reducerPath]: shoppingCartRTK.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(accountRTK.middleware, medicationRTK.middleware),
+        getDefaultMiddleware().concat(accountRTK.middleware, medicationRTK.middleware, shoppingCartRTK.middleware),
 });
 
 // Type hỗ trợ

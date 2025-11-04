@@ -25,7 +25,7 @@ BEGIN
 END;
 GO
 
-ALTER PROCEDURE AddToMedicationToShoppingCart
+CREATE PROCEDURE AddMedicationToShoppingCart
 	@amount INT,
 	@discount FLOAT,
 	@price FLOAT,

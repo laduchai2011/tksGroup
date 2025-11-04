@@ -1,4 +1,4 @@
-import { FC, memo, useState } from 'react';
+import { FC, memo, useState, useEffect } from 'react';
 import style from './style.module.scss';
 import { HiOutlineMinusSmall, HiOutlinePlusSmall } from 'react-icons/hi2';
 import { SHOPPING_CART, ADD, SUB, CREATE_SHOPPING_CART } from '@src/const/text';
@@ -8,16 +8,57 @@ import { AppDispatch } from '@src/redux';
 import { setData_toastMessage, setShow_dialogCreateShoppingCart } from '@src/redux/slice/Medication';
 import { messageType_enum } from '@src/component/ToastMessage/type';
 import Skeleton from '@src/component/Skeleton';
+import { useGetAllShoppingCartsQuery } from '@src/redux/query/shoppingCartRTK';
+import { ShoppingCartField } from '@src/dataStruct/shoppingCart';
+import { MedicationField } from '@src/dataStruct/medication';
 
-const ShoppingCart: FC<{ isLoading: boolean }> = ({ isLoading }) => {
+const ShoppingCart: FC<{ isLoading: boolean; data: MedicationField | undefined }> = ({ isLoading, data }) => {
     const dispatch = useDispatch<AppDispatch>();
-    const [amount, setAmount] = useState<number>(0);
+    const [amounts, setAmounts] = useState<number[]>([]);
+    const [allShoppingCart, setAllShoppingCart] = useState<ShoppingCartField[]>([]);
 
-    const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+        data: data_allShoppingCarts,
+        // isFetching,
+        isLoading: isLoading_allShoppingCarts,
+        isError: isError_allShoppingCarts,
+        error: error_allShoppingCarts,
+    } = useGetAllShoppingCartsQuery({ accountId: -1 });
+    useEffect(() => {
+        if (isError_allShoppingCarts && error_allShoppingCarts) {
+            console.error(error_allShoppingCarts);
+            dispatch(
+                setData_toastMessage({
+                    type: messageType_enum.SUCCESS,
+                    message: 'Lấy dữ liệu KHÔNG thành công !',
+                })
+            );
+        }
+    }, [dispatch, isError_allShoppingCarts, error_allShoppingCarts]);
+    useEffect(() => {
+        // setIsLoading(isLoading_allShoppingCarts);
+    }, [isLoading_allShoppingCarts]);
+    useEffect(() => {
+        const resData = data_allShoppingCarts;
+        if (resData?.isSuccess && resData.data) {
+            setAllShoppingCart(resData.data);
+            const amounts1: number[] = [];
+            for (let i: number = 0; i < resData.data.length; i++) {
+                amounts1.push(0);
+            }
+            setAmounts(amounts1);
+        }
+    }, [data_allShoppingCarts]);
+
+    const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>, data: ShoppingCartField) => {
         const value = e.target.value;
         const value1 = value.trim();
+        const index = allShoppingCart.indexOf(data);
+
         if (isPositiveInteger(value1)) {
-            setAmount(Number(value1));
+            const amounts1: number[] = [...amounts];
+            amounts1[index] = Number(value1);
+            setAmounts(amounts1);
         } else {
             dispatch(
                 setData_toastMessage({
@@ -28,26 +69,57 @@ const ShoppingCart: FC<{ isLoading: boolean }> = ({ isLoading }) => {
         }
     };
 
-    const list_row = [1, 2, 3, 4, 5].map((data, index) => {
+    const handleAdd = (index: number) => {
+        if (!data) return;
+        const maxAmount = data.amount;
+        const selectedAmount = amounts[index];
+        if (selectedAmount < maxAmount) {
+            const amounts1: number[] = [...amounts];
+            amounts1[index] = amounts1[index] + 1;
+            setAmounts(amounts1);
+        }
+    };
+
+    const handleSub = (index: number) => {
+        const selectedAmount = amounts[index];
+        if (selectedAmount > 0) {
+            const amounts1: number[] = [...amounts];
+            amounts1[index] = amounts1[index] - 1;
+            setAmounts(amounts1);
+        }
+    };
+
+    const handleMoney = (index: number) => {
+        if (!data) return;
+        const selectedAmount = amounts[index];
+        const allOldPrice = selectedAmount * data.price;
+        const allDiscount = (allOldPrice * data.discount) / 100;
+        const allNewPrice = allOldPrice - allDiscount;
+
+        return {
+            old: allOldPrice,
+            new: allNewPrice,
+        };
+    };
+
+    const list_row = allShoppingCart.map((data, index) => {
         return isLoading ? (
             <Skeleton className={style.rowLoading} key={index} />
         ) : (
             <div className={style.row} key={index}>
-                <div className={style.index}>{data}</div>
-                <div className={style.title}>
-                    name name name name name name name name name name name name name name name name name name
-                </div>
-                <div className={style.total}>1000 VND</div>
+                <div className={style.index}>{index}</div>
+                <div className={style.title}>{data.name}</div>
+                <div className={style.total}>{`${data.total} VND`}</div>
                 <div className={style.amountCustom}>
-                    <HiOutlineMinusSmall className={style.icon} title={SUB} />
+                    <HiOutlineMinusSmall className={style.icon} onClick={() => handleSub(index)} title={SUB} />
                     <div className={style.inputContainer}>
-                        <input value={amount} onChange={(e) => handleAmountChange(e)} />
+                        <input value={amounts[index]} onChange={(e) => handleAmountChange(e, data)} />
                     </div>
-                    <HiOutlinePlusSmall className={style.icon} title={ADD} />
+                    <HiOutlinePlusSmall className={style.icon} onClick={() => handleAdd(index)} title={ADD} />
                 </div>
                 <div className={style.money}>
-                    <div className={style.new}>1000</div>
-                    <div className={style.old}>1000</div>
+                    <div className={style.new}>{handleMoney(index)?.new}</div>
+                    <div className={style.old}>{handleMoney(index)?.old}</div>
                     <div className={style.moneyType}>VND</div>
                 </div>
                 <div className={style.btnContainer}>

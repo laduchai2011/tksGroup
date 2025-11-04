@@ -54,7 +54,7 @@ const Body = () => {
                 <Photo isLoading={isLoading} data={medication} />
                 <Infor isLoading={isLoading} data={medication} />
                 <BuyBtn isLoading={isLoading} data={medication} />
-                <ShoppingCart isLoading={isLoading} />
+                <ShoppingCart isLoading={isLoading} data={medication} />
                 <DocInfor isLoading={isLoading} />
                 <Comment isLoading={isLoading} />
             </div>
