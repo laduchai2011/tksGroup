@@ -4,6 +4,9 @@ GO
 DELETE FROM medication_video
 GO
 
+DELETE FROM medication_comment
+GO
+
 DELETE FROM medication
 WHERE status = 'normal';
 GO

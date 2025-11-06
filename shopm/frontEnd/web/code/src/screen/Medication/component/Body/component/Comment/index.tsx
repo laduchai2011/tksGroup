@@ -1,10 +1,10 @@
-import { FC, memo, useRef, useEffect, useState } from 'react';
+import { FC, memo, useRef, useEffect, useState, useMemo } from 'react';
 import style from './style.module.scss';
 import { IoMdSend } from 'react-icons/io';
-import { COMMENT, SEND } from '@src/const/text';
+import { COMMENT, SEND, SEE_MORE } from '@src/const/text';
 import Skeleton from '@src/component/Skeleton';
 import AComment from './component/AComment';
-import { MedicationField, CreateMedicationCommentBodyField } from '@src/dataStruct/medication';
+import { MedicationField, CreateMedicationCommentBodyField, MedicationCommentField } from '@src/dataStruct/medication';
 import { useCreateMedicationCommentMutation } from '@src/redux/query/medicationRTK';
 import { AppDispatch } from '@src/redux';
 import { useDispatch } from 'react-redux';
@@ -17,6 +17,8 @@ const Comment: FC<{ isLoading: boolean; data: MedicationField | undefined }> = (
     const textarea_element = useRef<HTMLTextAreaElement | null>(null);
 
     const [newComment, setNewComment] = useState<string>('');
+    const [comments, setComments] = useState<MedicationCommentField[]>([]);
+    const [page, setPage] = useState<number>(1);
 
     const [createMedicationComment] = useCreateMedicationCommentMutation();
 
@@ -46,7 +48,7 @@ const Comment: FC<{ isLoading: boolean; data: MedicationField | undefined }> = (
         isError: isError_medicationComments,
         error: error_medicationComments,
     } = useGetMedicationCommentsQuery(
-        { page: 1, size: 5, level: 0, medicationCommentId: null, medicationId: data?.id || -1 },
+        { page: page, size: 5, level: 0, medicationCommentId: null, medicationId: data?.id || -1 },
         { skip: !data }
     );
     useEffect(() => {
@@ -65,14 +67,10 @@ const Comment: FC<{ isLoading: boolean; data: MedicationField | undefined }> = (
     }, [isLoading_medicationComments]);
     useEffect(() => {
         const resData = data_medicationComments;
-        console.log(1111, data_medicationComments, data?.id);
         if (resData?.isSuccess && resData.data) {
-            // setAllShoppingCart(resData.data);
-            // const amounts1: number[] = [];
-            // for (let i: number = 0; i < resData.data.length; i++) {
-            //     amounts1.push(0);
-            // }
-            // setAmounts(amounts1);
+            // const data1 = comments.concat(resData.data.items);
+            const data1 = resData.data.items;
+            setComments((pre) => pre.concat(data1));
         }
     }, [data_medicationComments, data]);
 
@@ -107,6 +105,17 @@ const Comment: FC<{ isLoading: boolean; data: MedicationField | undefined }> = (
             .catch((err) => console.error(err));
     };
 
+    const handleGetMoreComments = () => {
+        setPage((pre) => pre + 1);
+    };
+
+    const list_comment = useMemo(() => {
+        if (!data) return;
+        return comments.map((data1, index) => (
+            <AComment key={index} isLoading={isLoading} data={data} dataComment={data1} />
+        ));
+    }, [data, comments, isLoading]);
+
     return (
         <div className={style.parent}>
             {isLoading ? <Skeleton className={style.headerLoading} /> : <div className={style.header}>{COMMENT}</div>}
@@ -123,9 +132,12 @@ const Comment: FC<{ isLoading: boolean; data: MedicationField | undefined }> = (
             <div className={style.sendBtnContainer}>
                 <IoMdSend onClick={() => handleSend()} title={SEND} />
             </div>
-            <AComment isLoading={isLoading} />
-            <AComment isLoading={isLoading} />
-            <AComment isLoading={isLoading} />
+            {list_comment}
+            <div className={style.moreContainer}>
+                <div onClick={() => handleGetMoreComments()} title={SEE_MORE}>
+                    {SEE_MORE}
+                </div>
+            </div>
         </div>
     );
 };

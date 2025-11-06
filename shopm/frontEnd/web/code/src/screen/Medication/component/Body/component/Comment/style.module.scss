@@ -53,4 +53,21 @@
             height: 25px;
         }
     }
+
+    > .moreContainer {
+        width: 100%;
+        @include center-of-rectangle;
+        margin-top: 15px;
+
+        > div {
+            width: max-content;
+            user-select: none;
+            cursor: pointer;
+            background-color: blue;
+            box-sizing: border-box;
+            padding: 5px;
+            color: white;
+            border-radius: 8px;
+        }
+    }
 }

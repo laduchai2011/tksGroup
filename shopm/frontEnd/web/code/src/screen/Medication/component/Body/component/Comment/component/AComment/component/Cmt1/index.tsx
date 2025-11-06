@@ -5,8 +5,9 @@ import { AiFillLike, AiFillDislike } from 'react-icons/ai';
 import { RiReplyFill } from 'react-icons/ri';
 import { LIKE, DIS_LIKE, REPLY } from '@src/const/text';
 import Skeleton from '@src/component/Skeleton';
+import { MedicationCommentField } from '@src/dataStruct/medication';
 
-const Cmt1: FC<{ isLoading: boolean }> = ({ isLoading }) => {
+const Cmt1: FC<{ isLoading: boolean; data: MedicationCommentField | undefined }> = ({ isLoading, data }) => {
     return (
         <div className={style.parent}>
             <div className={style.cmtContainer}>
@@ -30,11 +31,7 @@ const Cmt1: FC<{ isLoading: boolean }> = ({ isLoading }) => {
                     {isLoading ? (
                         <Skeleton className={style.contentLoading} />
                     ) : (
-                        <div className={style.content}>
-                            cmt1 cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt
-                            cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt
-                            cmt cmt cmt
-                        </div>
+                        <div className={style.content}>{data?.content}</div>
                     )}
                     <div className={style.btnsContainer}>
                         <div className={style.btnContainer}>
@@ -46,7 +43,7 @@ const Cmt1: FC<{ isLoading: boolean }> = ({ isLoading }) => {
                             {isLoading ? (
                                 <Skeleton className={style.btnTxtLoading} />
                             ) : (
-                                <div className={style.btnTxt}>100</div>
+                                <div className={style.btnTxt}>{data?.likeAmount}</div>
                             )}
                         </div>
                         <div className={style.btnContainer}>
@@ -58,7 +55,7 @@ const Cmt1: FC<{ isLoading: boolean }> = ({ isLoading }) => {
                             {isLoading ? (
                                 <Skeleton className={style.btnTxtLoading} />
                             ) : (
-                                <div className={style.btnTxt}>100</div>
+                                <div className={style.btnTxt}>{data?.dislikeAmount}</div>
                             )}
                         </div>
                         <div className={style.btnContainer}>
@@ -67,12 +64,15 @@ const Cmt1: FC<{ isLoading: boolean }> = ({ isLoading }) => {
                             ) : (
                                 <RiReplyFill className={style.btnSvg} title={REPLY} />
                             )}
-                            {isLoading ? (
+                            {/* {isLoading ? (
                                 <Skeleton className={style.btnTxtLoading} />
                             ) : (
                                 <div className={style.btnTxt}>100</div>
-                            )}
+                            )} */}
                         </div>
+                    </div>
+                    <div className={style.replyContainer}>
+                        <input />
                     </div>
                 </div>
             </div>

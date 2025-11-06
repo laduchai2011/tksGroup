@@ -16,8 +16,6 @@ class Handle_GetMedicationComments {
     main = async (req: Request<Record<string, never>, unknown, MedicationCommentBodyField>, res: Response) => {
         const medicationCommentBody = req.body;
 
-        console.log(11111111, medicationCommentBody);
-
         const myResponse: MyResponse<PagedMedicationCommentField> = {
             isSuccess: false,
         };
