@@ -45,3 +45,22 @@ CREATE TABLE medication_video (
 GO
 CREATE NONCLUSTERED INDEX idx_medication_id ON medication_video(medicationId);
 GO
+
+CREATE TABLE medication_comment (
+	id INT PRIMARY KEY IDENTITY(1,1),
+    content NVARCHAR(255) NOT NULL,
+	likeAmount INT NOT NULL,
+	dislikeAmount INT NOT NULL,
+    level INT NOT NULL,
+	status NVARCHAR(255) NOT NULL,
+	medicationCommentId INT,
+	medicationId INT NOT NULL,
+	accountId INT NOT NULL,
+    updateTime DATETIMEOFFSET(7) NOT NULL,
+    createTime DATETIMEOFFSET(7) NOT NULL,
+
+	CONSTRAINT FK_MedicationComment_MedicationComment FOREIGN KEY (medicationCommentId) REFERENCES medication_comment(id),
+    CONSTRAINT FK_MedicationComment_Medication FOREIGN KEY (medicationId) REFERENCES medication(id),
+	CONSTRAINT FK_MedicationComment_Account FOREIGN KEY (accountId) REFERENCES account(id)
+)
+GO

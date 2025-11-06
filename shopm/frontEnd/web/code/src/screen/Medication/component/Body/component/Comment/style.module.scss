@@ -25,4 +25,32 @@
         box-sizing: border-box;
         padding: 10px;
     }
+
+    > .inputContainer {
+        width: 100%;
+
+        > textarea {
+            width: 100%;
+            flex: 1;
+            font-size: 1.2rem;
+            box-sizing: border-box;
+            padding: 10px;
+            border: none;
+            outline: none;
+            resize: none;
+        }
+    }
+
+    > .sendBtnContainer {
+        width: 100%;
+        @include center-of-row;
+        justify-content: flex-end;
+
+        > svg {
+            color: blue;
+            cursor: pointer;
+            width: 25px;
+            height: 25px;
+        }
+    }
 }

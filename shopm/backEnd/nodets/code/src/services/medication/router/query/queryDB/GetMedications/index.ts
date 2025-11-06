@@ -6,7 +6,7 @@ interface TotalCountField {
     totalCount: number;
 }
 
-type OrderQueryResult = {
+type MedicationQueryResult = {
     recordsets: [MedicationField[], TotalCountField[]];
     recordset: MedicationField[]; // tập đầu tiên
     rowsAffected: number[];
@@ -29,7 +29,7 @@ class QueryDB_GetMedications extends QueryDB {
         this._medicationBody = medicationBody;
     }
 
-    async run(): Promise<OrderQueryResult | void> {
+    async run(): Promise<MedicationQueryResult | void> {
         if (this._connectionPool !== undefined && this._medicationBody !== undefined) {
             try {
                 const userId = this._medicationBody.userId ? this._medicationBody.userId : null;
@@ -41,7 +41,7 @@ class QueryDB_GetMedications extends QueryDB {
                     .input('userId', sql.Int, userId)
                     .execute('GetMedications');
 
-                return result as unknown as OrderQueryResult;
+                return result as unknown as MedicationQueryResult;
             } catch (error) {
                 console.error(error);
             }

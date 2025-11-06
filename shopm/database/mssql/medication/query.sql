@@ -83,3 +83,37 @@ BEGIN
 	ORDER BY mv.id DESC;
 END
 GO
+
+CREATE PROCEDURE GetMedicationComments
+	@page INT,
+    @size INT,
+	@level INT,
+    @medicationCommentId INT,
+    @medicationId INT
+AS
+BEGIN
+	-- Tập kết quả 1: dữ liệu phân trang
+    WITH medicationComments AS (
+        SELECT mc.*,
+			ROW_NUMBER() OVER (ORDER BY mc.id DESC) AS rn
+        FROM dbo.medication_comment AS mc
+		WHERE 
+			status = 'normal' 
+			AND level = @level
+			AND (@medicationCommentId IS NULL OR mc.medicationCommentId = @medicationCommentId) 
+			AND medicationId = @medicationId
+    )
+    SELECT *
+    FROM medicationComments
+    WHERE rn BETWEEN ((@page - 1) * @size + 1) AND (@page * @size);
+
+    -- Tập kết quả 2: tổng số dòng
+    SELECT COUNT(*) AS totalCount
+	FROM dbo.medication_comment AS mc
+		WHERE 
+			status = 'normal' 
+			AND level = @level
+			AND (@medicationCommentId IS NULL OR mc.medicationCommentId = @medicationCommentId) 
+			AND medicationId = @medicationId
+END
+GO

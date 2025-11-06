@@ -25,6 +25,14 @@ export interface CreateShoppingCartBodyField {
     accountId: number;
 }
 
+export interface CreateShoppingCartMedicationBodyField {
+    amount: number;
+    discount: number;
+    price: number;
+    medicationId: number;
+    shoppingCartId: number;
+}
+
 export interface ShoppingCartBodyField {
     accountId: number;
 }

@@ -10,5 +10,7 @@ export const MEDICATION_API = {
     GET_A_MEDICATION_VIDEO: `${BASE_URL}${apiString}/service_medication/query/getAMedicationVideo`,
     GET_ALL_MEDICATION_IMAGES: `${BASE_URL}${apiString}/service_medication/query/getAllMedicationImages`,
     GET_ALL_MEDICATION_VIDEOS: `${BASE_URL}${apiString}/service_medication/query/getAllMedicationVideos`,
+    GET_MEDICATION_COMMENTS: `${BASE_URL}${apiString}/service_medication/query/getMedicationComments`,
     CREATE_MEDICATION: `${BASE_URL}${apiString}/service_medication/mutate/createMedication`,
+    CREATE_MEDICATION_COMMENT: `${BASE_URL}${apiString}/service_medication/mutate/createMedicationComment`,
 };

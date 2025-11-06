@@ -67,3 +67,34 @@ BEGIN
 	END CATCH
 END;
 GO
+
+ALTER PROCEDURE CreateMedicationComment
+	@content NVARCHAR(255),
+	@level INT,
+	@medicationCommentId INT,
+	@medicationId INT,
+	@accountId INT
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	BEGIN TRY
+        BEGIN TRANSACTION;
+		DECLARE @newMedicationCommentId INT;
+
+		-- Thêm medication
+        INSERT INTO medication_comment (content, likeAmount, dislikeAmount, level, status, medicationCommentId, medicationId, accountId, updateTime, createTime)
+        VALUES (@content, 0, 0, @level, 'normal', @medicationCommentId, @medicationId, @accountId, SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET());
+
+		SET @newMedicationCommentId = SCOPE_IDENTITY();
+
+		SELECT * FROM dbo.medication_comment WHERE id = @newMedicationCommentId;
+
+		COMMIT TRANSACTION;
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION;
+		THROW;
+	END CATCH
+END;
+GO

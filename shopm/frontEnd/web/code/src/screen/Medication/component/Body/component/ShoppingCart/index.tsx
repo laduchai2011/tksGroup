@@ -8,14 +8,16 @@ import { AppDispatch } from '@src/redux';
 import { setData_toastMessage, setShow_dialogCreateShoppingCart } from '@src/redux/slice/Medication';
 import { messageType_enum } from '@src/component/ToastMessage/type';
 import Skeleton from '@src/component/Skeleton';
-import { useGetAllShoppingCartsQuery } from '@src/redux/query/shoppingCartRTK';
-import { ShoppingCartField } from '@src/dataStruct/shoppingCart';
+import { useGetAllShoppingCartsQuery, useAddMedicationToShoppingCartMutation } from '@src/redux/query/shoppingCartRTK';
+import { ShoppingCartField, CreateShoppingCartMedicationBodyField } from '@src/dataStruct/shoppingCart';
 import { MedicationField } from '@src/dataStruct/medication';
 
 const ShoppingCart: FC<{ isLoading: boolean; data: MedicationField | undefined }> = ({ isLoading, data }) => {
     const dispatch = useDispatch<AppDispatch>();
     const [amounts, setAmounts] = useState<number[]>([]);
     const [allShoppingCart, setAllShoppingCart] = useState<ShoppingCartField[]>([]);
+
+    const [addMedicationToShoppingCart] = useAddMedicationToShoppingCartMutation();
 
     const {
         data: data_allShoppingCarts,
@@ -102,6 +104,38 @@ const ShoppingCart: FC<{ isLoading: boolean; data: MedicationField | undefined }
         };
     };
 
+    const handleAddMedicationToShoppingCart = (index: number) => {
+        if (!data) return;
+        const addMedicationToShoppingCartBody: CreateShoppingCartMedicationBodyField = {
+            amount: amounts[index],
+            discount: data.discount,
+            price: data.price,
+            medicationId: data.id,
+            shoppingCartId: allShoppingCart[index].id,
+        };
+
+        addMedicationToShoppingCart(addMedicationToShoppingCartBody)
+            .then((res) => {
+                const resData = res.data;
+                if (resData?.isSuccess && resData.data) {
+                    dispatch(
+                        setData_toastMessage({
+                            type: messageType_enum.SUCCESS,
+                            message: 'Thêm sản phẩm vào giỏ hàng thành công !',
+                        })
+                    );
+                } else {
+                    dispatch(
+                        setData_toastMessage({
+                            type: messageType_enum.SUCCESS,
+                            message: 'Thêm sản phẩm vào giỏ hàng KHÔNG thành công !',
+                        })
+                    );
+                }
+            })
+            .catch((err) => console.error(err));
+    };
+
     const list_row = allShoppingCart.map((data, index) => {
         return isLoading ? (
             <Skeleton className={style.rowLoading} key={index} />
@@ -123,7 +157,9 @@ const ShoppingCart: FC<{ isLoading: boolean; data: MedicationField | undefined }
                     <div className={style.moneyType}>VND</div>
                 </div>
                 <div className={style.btnContainer}>
-                    <div title={ADD}>{ADD}</div>
+                    <div onClick={() => handleAddMedicationToShoppingCart(index)} title={ADD}>
+                        {ADD}
+                    </div>
                 </div>
             </div>
         );

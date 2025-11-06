@@ -24,8 +24,11 @@ CREATE TABLE shoppingCartMedication (
     updateTime DATETIMEOFFSET(7) NOT NULL DEFAULT SYSDATETIMEOFFSET(),
     createTime DATETIMEOFFSET(7) NOT NULL DEFAULT SYSDATETIMEOFFSET(),
 
-	CONSTRAINT FK_shoppingCartMedication_shoppingCart FOREIGN KEY (shoppingCartId) REFERENCES account(id)
+	CONSTRAINT FK_shoppingCartMedication_medication FOREIGN KEY (medicationId) REFERENCES medication(id),
+	CONSTRAINT FK_shoppingCartMedication_shoppingCart FOREIGN KEY (shoppingCartId) REFERENCES shoppingCart(id)
 )
+GO
+CREATE NONCLUSTERED INDEX idx_medication_id ON shoppingCartMedication(medicationId);
 GO
 CREATE NONCLUSTERED INDEX idx_shoppingCart_id ON shoppingCartMedication(shoppingCartId);
 GO

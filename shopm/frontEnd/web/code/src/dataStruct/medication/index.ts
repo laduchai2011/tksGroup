@@ -31,6 +31,20 @@ export interface MedicationVideoField {
     createTime: string;
 }
 
+export interface MedicationCommentField {
+    id: number;
+    content: string;
+    likeAmount: number;
+    dislikeAmount: number;
+    level: number;
+    status: string;
+    medicationCommentId: number;
+    medicationId: number;
+    accountId: number;
+    updateTime: string;
+    createTime: string;
+}
+
 export interface CreateMedicationBodyField {
     medication: MedicationField;
     images: MedicationImageField[];
@@ -62,4 +76,25 @@ export interface MedicationVideoBodyField {
 export interface PagedMedicationField {
     items: MedicationField[];
     totalCount: number;
+}
+
+export interface PagedMedicationCommentField {
+    items: MedicationCommentField[];
+    totalCount: number;
+}
+
+export interface CreateMedicationCommentBodyField {
+    content: string;
+    level: number;
+    medicationCommentId: number | null;
+    medicationId: number;
+    accountId: number;
+}
+
+export interface MedicationCommentBodyField {
+    page: number;
+    size: number;
+    level: number;
+    medicationCommentId: number | null;
+    medicationId: number;
 }
