@@ -1,0 +1,47 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    @include center-of-row;
+
+    > .lineContainer {
+        width: 40px;
+        min-width: 40px;
+    }
+
+    > .cmt2 {
+        flex: 1;
+
+        > .replyContainer {
+            @include center-of-row;
+
+            > input {
+                flex: 1;
+                border: none;
+                outline: none;
+                border-bottom: 1px solid gray;
+                box-sizing: border-box;
+                padding: 5px;
+            }
+
+            > div {
+                width: max-content;
+
+                > svg:nth-child(1) {
+                    color: gray;
+                    margin-right: 5px;
+                }
+
+                > svg:nth-child(2) {
+                    color: blue;
+                    margin-left: 5px;
+                }
+            }
+        }
+
+        > .seeMore {
+            color: gray;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+    }
+}

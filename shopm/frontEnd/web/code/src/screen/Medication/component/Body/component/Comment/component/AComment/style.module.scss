@@ -17,22 +17,9 @@
         width: 100%;
     }
 
-    > .cmt2Container {
-        @include center-of-row;
-
-        > .lineContainer {
-            width: 40px;
-            min-width: 40px;
-        }
-
-        > .cmt2 {
-            flex: 1;
-
-            > .seeMore {
-                color: gray;
-                font-size: 0.9rem;
-                cursor: pointer;
-            }
-        }
+    > .seeMore {
+        color: gray;
+        font-size: 0.9rem;
+        cursor: pointer;
     }
 }

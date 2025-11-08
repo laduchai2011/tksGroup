@@ -1,7 +1,7 @@
-import { FC, memo, useState, useEffect, useMemo } from 'react';
+import { FC, memo, useState, useEffect, useMemo, useCallback } from 'react';
 import style from './style.module.scss';
 import Cmt1 from './component/Cmt1';
-import Cmt2 from './component/Cmt2';
+import Cmt2Container from './component/Cmt2Container';
 import { SEE_MORE } from '@src/const/text';
 import { MedicationField, MedicationCommentField } from '@src/dataStruct/medication';
 import { useGetMedicationCommentsQuery } from '@src/redux/query/medicationRTK';
@@ -40,7 +40,6 @@ const AComment: FC<{ isLoading: boolean; data: MedicationField; dataComment: Med
     }, [isLoading_medicationComments]);
     useEffect(() => {
         const resData = data_medicationComments;
-        console.log(11111, resData);
         if (resData?.isSuccess && resData.data) {
             // const data1 = comments.concat(resData.data.items);
             const data1 = resData.data.items;
@@ -48,39 +47,23 @@ const AComment: FC<{ isLoading: boolean; data: MedicationField; dataComment: Med
         }
     }, [data_medicationComments, data]);
 
-    const handleSeeMore = () => {
+    const handleSeeMore = useCallback(() => {
         setPage((pre) => pre + 1);
-    };
+    }, []);
 
     const list_comment = useMemo(() => {
-        return comments.map((data1, index) => (
-            <div className={style.cmt2Container}>
-                <div className={style.lineContainer} />
-                <div className={style.cmt2}>
-                    <Cmt2 isLoading={isLoading} />
-                    <div className={style.seeMore} onClick={() => handleSeeMore()} title={SEE_MORE}>
-                        {SEE_MORE}
-                    </div>
-                </div>
-            </div>
-        ));
-    }, [comments, isLoading]);
+        return [1, 2, 3].map((data1, index) => <Cmt2Container key={index} isLoading={isLoading} />);
+    }, [isLoading]);
 
     return (
         <div className={style.parent}>
             <div className={style.cmt1}>
                 <Cmt1 isLoading={isLoading} data={dataComment} />
             </div>
-            {/* <div className={style.cmt2Container}>
-                <div className={style.lineContainer} />
-                <div className={style.cmt2}>
-                    <Cmt2 isLoading={isLoading} />
-                    <div className={style.seeMore} onClick={() => handleSeeMore()} title={SEE_MORE}>
-                        {SEE_MORE}
-                    </div>
-                </div>
-            </div> */}
             {list_comment}
+            <div className={style.seeMore} onClick={handleSeeMore} title={SEE_MORE}>
+                {SEE_MORE}
+            </div>
         </div>
     );
 };

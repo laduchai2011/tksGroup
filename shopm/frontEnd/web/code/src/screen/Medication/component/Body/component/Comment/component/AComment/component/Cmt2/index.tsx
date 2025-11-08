@@ -6,7 +6,11 @@ import { RiReplyFill } from 'react-icons/ri';
 import { LIKE, DIS_LIKE, REPLY } from '@src/const/text';
 import Skeleton from '@src/component/Skeleton';
 
-const Cmt2: FC<{ isLoading: boolean }> = ({ isLoading }) => {
+const Cmt2: FC<{ isLoading: boolean; onReply: () => void }> = ({ isLoading, onReply }) => {
+    const handleReply = () => {
+        onReply();
+    };
+
     return (
         <div className={style.parent}>
             <div className={style.cmtContainer}>
@@ -65,7 +69,7 @@ const Cmt2: FC<{ isLoading: boolean }> = ({ isLoading }) => {
                             {isLoading ? (
                                 <Skeleton className={style.btnSvgLoading} />
                             ) : (
-                                <RiReplyFill className={style.btnSvg} title={REPLY} />
+                                <RiReplyFill className={style.btnSvg} onClick={() => handleReply()} title={REPLY} />
                             )}
                             {isLoading ? (
                                 <Skeleton className={style.btnTxtLoading} />

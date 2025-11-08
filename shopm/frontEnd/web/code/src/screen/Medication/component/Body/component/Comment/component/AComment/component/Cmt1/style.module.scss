@@ -4,7 +4,6 @@
     width: 100%;
     box-sizing: border-box;
     @include paddingRes(10px, 10px, md, 1);
-    @include center-of-row;
 
     @include responsive(sm) {
         @include paddingRes(10px, 10px, md, 1.2);
@@ -14,98 +13,123 @@
         width: 100%;
     }
 
-    > .cmtContainer {
+    > .cmtMain {
+        width: 100%;
         @include center-of-row;
-        align-items: stretch;
-        margin: 0 10px;
 
-        > .avatarContainer {
-            height: 100%;
-            width: 40px;
-            min-width: 40px;
-            margin: 0 5px;
+        > .cmtContainer {
+            @include center-of-row;
+            align-items: stretch;
+            margin: 0 10px;
 
-            > .imageLoading {
-                width: 100%;
-                aspect-ratio: 1/1;
-                border-radius: 50%;
-            }
-            > .image {
-                width: 100%;
-                aspect-ratio: 1/1;
-                border-radius: 50%;
-            }
-        }
+            > .avatarContainer {
+                height: 100%;
+                width: 40px;
+                min-width: 40px;
+                margin: 0 5px;
 
-        > .contentContainer {
-            > .userNameLoading {
-                height: 20px;
-                width: 100px;
-                margin: 2px 0;
-            }
-            > .userName {
-                font-weight: 600;
-            }
-
-            > .contentLoading {
-                width: 300px;
-                height: 35px;
-                margin: 2px 0;
-            }
-            > .content {
-                background-color: rgb(240, 240, 240);
-                box-sizing: border-box;
-                padding: 5px;
-                border-radius: 10px;
-            }
-
-            > .btnsContainer {
-                @include center-of-row;
-                margin: 2px 0;
-
-                > .btnContainer {
-                    @include center-of-row;
-                    margin: 0 10px;
-
-                    > .btnSvgLoading {
-                        width: 20px;
-                        height: 20px;
-                        border-radius: 50%;
-                        margin: 0 2px;
-                    }
-                    > .btnSvg {
-                        cursor: pointer;
-                    }
-
-                    > .btnTxtLoading {
-                        height: 20px;
-                        width: 30px;
-                        margin: 0 2px;
-                    }
-                    > .btnTxt {
-                        font-size: 0.9rem;
-                    }
+                > .imageLoading {
+                    width: 100%;
+                    aspect-ratio: 1/1;
+                    border-radius: 50%;
+                }
+                > .image {
+                    width: 100%;
+                    aspect-ratio: 1/1;
+                    border-radius: 50%;
                 }
             }
 
-            > .replyContainer {
-                width: 100%;
+            > .contentContainer {
+                > .userNameLoading {
+                    height: 20px;
+                    width: 100px;
+                    margin: 2px 0;
+                }
+                > .userName {
+                    font-weight: 600;
+                }
+
+                > .contentLoading {
+                    width: 300px;
+                    height: 35px;
+                    margin: 2px 0;
+                }
+                > .content {
+                    background-color: rgb(240, 240, 240);
+                    box-sizing: border-box;
+                    padding: 5px;
+                    border-radius: 10px;
+                }
+
+                > .btnsContainer {
+                    @include center-of-row;
+                    margin: 2px 0;
+
+                    > .btnContainer {
+                        @include center-of-row;
+                        margin: 0 10px;
+
+                        > .btnSvgLoading {
+                            width: 20px;
+                            height: 20px;
+                            border-radius: 50%;
+                            margin: 0 2px;
+                        }
+                        > .btnSvg {
+                            cursor: pointer;
+                        }
+
+                        > .btnTxtLoading {
+                            height: 20px;
+                            width: 30px;
+                            margin: 0 2px;
+                        }
+                        > .btnTxt {
+                            font-size: 0.9rem;
+                        }
+                    }
+                }
+            }
+        }
+
+        > .menuContainer {
+            margin: 0 10px;
+
+            > .menuLoading {
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+            }
+            > .menu {
+                width: 25px;
+                height: 25px;
+                cursor: pointer;
             }
         }
     }
 
-    > .menuContainer {
-        margin: 0 10px;
+    > .replyContainer {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 5px;
 
-        > .menuLoading {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
+        > input {
+            width: 100%;
+            border: none;
+            outline: none;
+            border-bottom: 1px solid gray;
+            box-sizing: border-box;
+            padding: 3px;
         }
-        > .menu {
-            width: 25px;
-            height: 25px;
-            cursor: pointer;
+
+        > div {
+            @include center-of-row;
+            justify-content: flex-end;
+
+            > svg {
+                color: blue;
+            }
         }
     }
 }
