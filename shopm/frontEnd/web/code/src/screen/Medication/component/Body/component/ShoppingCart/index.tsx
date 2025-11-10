@@ -106,34 +106,44 @@ const ShoppingCart: FC<{ isLoading: boolean; data: MedicationField | undefined }
 
     const handleAddMedicationToShoppingCart = (index: number) => {
         if (!data) return;
-        const addMedicationToShoppingCartBody: CreateShoppingCartMedicationBodyField = {
-            amount: amounts[index],
-            discount: data.discount,
-            price: data.price,
-            medicationId: data.id,
-            shoppingCartId: allShoppingCart[index].id,
-        };
+        const amount1 = amounts[index];
+        if (amount1 === 0) {
+            dispatch(
+                setData_toastMessage({
+                    type: messageType_enum.NORMAL,
+                    message: 'Trường số lượng phải lớn hơn 0 !',
+                })
+            );
+        } else {
+            const addMedicationToShoppingCartBody: CreateShoppingCartMedicationBodyField = {
+                amount: amounts[index],
+                discount: data.discount,
+                price: data.price,
+                medicationId: data.id,
+                shoppingCartId: allShoppingCart[index].id,
+            };
 
-        addMedicationToShoppingCart(addMedicationToShoppingCartBody)
-            .then((res) => {
-                const resData = res.data;
-                if (resData?.isSuccess && resData.data) {
-                    dispatch(
-                        setData_toastMessage({
-                            type: messageType_enum.SUCCESS,
-                            message: 'Thêm sản phẩm vào giỏ hàng thành công !',
-                        })
-                    );
-                } else {
-                    dispatch(
-                        setData_toastMessage({
-                            type: messageType_enum.SUCCESS,
-                            message: 'Thêm sản phẩm vào giỏ hàng KHÔNG thành công !',
-                        })
-                    );
-                }
-            })
-            .catch((err) => console.error(err));
+            addMedicationToShoppingCart(addMedicationToShoppingCartBody)
+                .then((res) => {
+                    const resData = res.data;
+                    if (resData?.isSuccess && resData.data) {
+                        dispatch(
+                            setData_toastMessage({
+                                type: messageType_enum.SUCCESS,
+                                message: 'Thêm sản phẩm vào giỏ hàng thành công !',
+                            })
+                        );
+                    } else {
+                        dispatch(
+                            setData_toastMessage({
+                                type: messageType_enum.SUCCESS,
+                                message: 'Thêm sản phẩm vào giỏ hàng KHÔNG thành công !',
+                            })
+                        );
+                    }
+                })
+                .catch((err) => console.error(err));
+        }
     };
 
     const list_row = allShoppingCart.map((data, index) => {

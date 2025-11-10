@@ -8,7 +8,7 @@ import { RootState } from '@src/redux';
 
 const DialogLoading = () => {
     const parent_element = useRef<HTMLDivElement | null>(null);
-    const isShow: boolean = useSelector((state: RootState) => state.MedicationsSlice.dialogLoading.isShow);
+    const isShow: boolean = useSelector((state: RootState) => state.ProfileSlice.dialogLoading.isShow);
 
     useEffect(() => {
         if (!parent_element.current) return;

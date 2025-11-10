@@ -1,6 +1,8 @@
 import style from './style.module.scss';
 import Header from './component/Header';
 import Body from './component/Body';
+import DialogLoading from './component/DialogLoading';
+import MyToastMessage from './component/MyToastMessage';
 import CommentBox from '@src/component/CommentBox';
 import VideoPlayBox from '@src/component/VideoPlayBox';
 import { useSelector } from 'react-redux';
@@ -21,6 +23,8 @@ const Profile = () => {
                 <Body />
             </div>
             <div>
+                <DialogLoading />
+                <MyToastMessage />
                 <CommentBox />
                 {state_store_VideoPlayBox.isShowComponent && <VideoPlayBox />}
             </div>

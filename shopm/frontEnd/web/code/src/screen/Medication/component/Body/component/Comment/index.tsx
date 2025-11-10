@@ -77,10 +77,6 @@ const Comment: FC<{ isLoading: boolean; data: MedicationField | undefined }> = (
         }
     }, [newCmt1]);
 
-    useEffect(() => {
-        console.log(1111, comments);
-    }, [comments]);
-
     const handleInputComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const value = e.target.value;
         setNewComment(value);

@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import DialogPlayImage from '@src/component/DialogPlayImage';
 import { useSelector, useDispatch } from 'react-redux';
-import type { RootState, AppDispatch } from '@src/redux';
+import { RootState, AppDispatch } from '@src/redux';
 import { setShow_dialogMyImage } from '@src/redux/slice/CreateMedication';
 
 const DialogMyImage = () => {

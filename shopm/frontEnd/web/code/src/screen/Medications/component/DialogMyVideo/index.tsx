@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import DialogPlayVideo from '@src/component/DialogPlayVideo';
 import { useSelector, useDispatch } from 'react-redux';
-import type { RootState, AppDispatch } from '@src/redux';
+import { RootState, AppDispatch } from '@src/redux';
 import { setShow_dialogMyVideo } from '@src/redux/slice/CreateMedication';
 
 const DialogMyVideo = () => {

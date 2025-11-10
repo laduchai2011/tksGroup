@@ -1,9 +1,9 @@
-import { FC, useRef, memo, useContext } from 'react';
+import { FC, useRef, memo, useContext, useEffect, useState } from 'react';
 import style from './style.module.scss';
-import LazyVideoWithFile from '@src/component/LazyVideoWithFile';
 import { Option_props } from './type';
 import { Context as Context_Diary_Post } from '@src/screen/Profile/component/Body/component/MenuContent/component/DiaryContainer/Diary_Post/context';
 import { MdOutlineCancel } from 'react-icons/md';
+import { CLOSE } from '@src/const/text';
 
 interface MyOptions extends React.HTMLProps<HTMLDivElement> {
     option: Option_props;
@@ -13,6 +13,24 @@ interface MyOptions extends React.HTMLProps<HTMLDivElement> {
 const MyVideo: FC<MyOptions> = ({ option, className, ...props }) => {
     const parent_element = useRef<HTMLDivElement | null>(null);
     const my_src = option.my_src;
+
+    const [url, setUrl] = useState<string>('');
+
+    useEffect(() => {
+        let create_url: string = '';
+
+        if (my_src) {
+            create_url = URL.createObjectURL(my_src);
+            setUrl(create_url);
+        }
+
+        return () => {
+            if (create_url.length > 0) {
+                URL.revokeObjectURL(create_url);
+                setUrl('');
+            }
+        };
+    }, [my_src]);
 
     const context_value_Context_Diary_Post = useContext(Context_Diary_Post);
 
@@ -34,9 +52,14 @@ const MyVideo: FC<MyOptions> = ({ option, className, ...props }) => {
 
     return (
         <div className={`${style.parent} ${className || ''}`} {...props} ref={parent_element}>
-            <LazyVideoWithFile className={style.lazyVideo} src={my_src} lock_auto_play_with_scroll_snap={true} />
+            <video src={url} />
             <div className={style.control}>
-                <MdOutlineCancel className={style.delete_button} onClick={() => handle_delete()} size={25} />
+                <MdOutlineCancel
+                    className={style.delete_button}
+                    onClick={() => handle_delete()}
+                    size={25}
+                    title={CLOSE}
+                />
             </div>
         </div>
     );
