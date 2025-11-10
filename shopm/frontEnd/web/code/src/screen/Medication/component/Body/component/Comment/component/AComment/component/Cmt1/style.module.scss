@@ -127,8 +127,14 @@
             @include center-of-row;
             justify-content: flex-end;
 
-            > svg {
+            > svg:nth-child(1) {
+                color: gray;
+                margin-right: 5px;
+            }
+
+            > svg:nth-child(2) {
                 color: blue;
+                margin-left: 5px;
             }
         }
     }

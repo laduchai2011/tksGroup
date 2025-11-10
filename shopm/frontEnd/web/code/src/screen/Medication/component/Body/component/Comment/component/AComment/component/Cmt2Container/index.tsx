@@ -3,8 +3,9 @@ import style from './style.module.scss';
 import Cmt2 from '../Cmt2';
 import { IoMdSend, IoMdClose } from 'react-icons/io';
 import { COMMENT, SEND, CLOSE } from '@src/const/text';
+import { MedicationCommentField } from '@src/dataStruct/medication';
 
-const Cmt2Container: FC<{ isLoading: boolean }> = ({ isLoading }) => {
+const Cmt2Container: FC<{ isLoading: boolean; dataComment: MedicationCommentField }> = ({ isLoading, dataComment }) => {
     const [isReply, setIsReply] = useState<boolean>(false);
 
     const handleSend = () => {};
@@ -21,7 +22,7 @@ const Cmt2Container: FC<{ isLoading: boolean }> = ({ isLoading }) => {
         <div className={style.parent}>
             <div className={style.lineContainer} />
             <div className={style.cmt2}>
-                <Cmt2 isLoading={isLoading} onReply={handleReply} />
+                <Cmt2 isLoading={isLoading} dataComment={dataComment} onReply={handleReply} />
                 {isReply && (
                     <div className={style.replyContainer}>
                         <input placeholder={COMMENT} />

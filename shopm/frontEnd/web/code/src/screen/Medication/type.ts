@@ -1,4 +1,5 @@
 import { ToastMessage_Data_Props } from '@src/component/ToastMessage/type';
+import { MedicationCommentField } from '@src/dataStruct/medication';
 
 export interface state_props {
     isLoading: boolean;
@@ -13,6 +14,8 @@ export interface state_props {
     dialogCreateShoppingCart: {
         isShow: boolean;
     };
+    newCmt1: MedicationCommentField | undefined;
+    newCmt2: MedicationCommentField | undefined;
     toastMessage: {
         data: ToastMessage_Data_Props;
     };

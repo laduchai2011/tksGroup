@@ -5,8 +5,13 @@ import { AiFillLike, AiFillDislike } from 'react-icons/ai';
 import { RiReplyFill } from 'react-icons/ri';
 import { LIKE, DIS_LIKE, REPLY } from '@src/const/text';
 import Skeleton from '@src/component/Skeleton';
+import { MedicationCommentField } from '@src/dataStruct/medication';
 
-const Cmt2: FC<{ isLoading: boolean; onReply: () => void }> = ({ isLoading, onReply }) => {
+const Cmt2: FC<{ isLoading: boolean; dataComment: MedicationCommentField; onReply: () => void }> = ({
+    isLoading,
+    dataComment,
+    onReply,
+}) => {
     const handleReply = () => {
         onReply();
     };
@@ -34,11 +39,7 @@ const Cmt2: FC<{ isLoading: boolean; onReply: () => void }> = ({ isLoading, onRe
                     {isLoading ? (
                         <Skeleton className={style.contentLoading} />
                     ) : (
-                        <div className={style.content}>
-                            cmt2 cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt
-                            cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt cmt
-                            cmt cmt cmt
-                        </div>
+                        <div className={style.content}>{dataComment.content}</div>
                     )}
                     <div className={style.btnsContainer}>
                         <div className={style.btnContainer}>
@@ -71,11 +72,11 @@ const Cmt2: FC<{ isLoading: boolean; onReply: () => void }> = ({ isLoading, onRe
                             ) : (
                                 <RiReplyFill className={style.btnSvg} onClick={() => handleReply()} title={REPLY} />
                             )}
-                            {isLoading ? (
+                            {/* {isLoading ? (
                                 <Skeleton className={style.btnTxtLoading} />
                             ) : (
                                 <div className={style.btnTxt}>100</div>
-                            )}
+                            )} */}
                         </div>
                     </div>
                 </div>

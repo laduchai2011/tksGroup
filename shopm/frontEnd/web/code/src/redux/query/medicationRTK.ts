@@ -19,7 +19,7 @@ import { MyResponse } from '@src/dataStruct/response';
 export const medicationRTK = createApi({
     reducerPath: 'medicationRTK',
     baseQuery: fetchBaseQuery({ baseUrl: '', credentials: 'include' }),
-    tagTypes: ['Medication', 'MedicationComment'],
+    tagTypes: ['Medication', 'MedicationComments'],
     endpoints: (builder) => ({
         getAMedication: builder.query<MyResponse<MedicationField>, MedicationBodyField>({
             query: (body) => ({
@@ -86,27 +86,6 @@ export const medicationRTK = createApi({
                     method: 'POST',
                     body,
                 }),
-                // async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-                //     try {
-                //         const { data: newCommentResp } = await queryFulfilled;
-                //         const newComment = newCommentResp.data;
-
-                //         if (!newComment) return;
-
-                //         // ✅ cập nhật cache chỉ cho comment list của medication hiện tại
-                //         dispatch(
-                //             medicationRTK.util.updateQueryData(
-                //                 'getMedicationComments',
-                //                 { medicationId: arg.medicationId },
-                //                 (draft) => {
-                //                     draft.data = [...(draft.data || []), newComment]; // push comment mới
-                //                 }
-                //             )
-                //         );
-                //     } catch (err) {
-                //         console.error('Error updating cache comment:', err);
-                //     }
-                // },
             }
         ),
     }),

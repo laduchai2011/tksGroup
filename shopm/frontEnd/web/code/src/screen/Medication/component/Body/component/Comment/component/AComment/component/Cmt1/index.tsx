@@ -1,15 +1,69 @@
-import { FC, memo } from 'react';
+import { FC, memo, useState } from 'react';
 import style from './style.module.scss';
 import { BsThreeDots } from 'react-icons/bs';
 import { AiFillLike, AiFillDislike } from 'react-icons/ai';
 import { RiReplyFill } from 'react-icons/ri';
-import { IoMdSend } from 'react-icons/io';
-import { LIKE, DIS_LIKE, REPLY, COMMENT, SEND } from '@src/const/text';
+import { IoMdSend, IoMdClose } from 'react-icons/io';
+import { LIKE, DIS_LIKE, REPLY, COMMENT, SEND, CLOSE } from '@src/const/text';
 import Skeleton from '@src/component/Skeleton';
-import { MedicationCommentField } from '@src/dataStruct/medication';
+import { MedicationField, MedicationCommentField, CreateMedicationCommentBodyField } from '@src/dataStruct/medication';
+import { useCreateMedicationCommentMutation } from '@src/redux/query/medicationRTK';
+import { AppDispatch } from '@src/redux';
+import { useDispatch } from 'react-redux';
+import { setData_toastMessage, setNewCmt2 } from '@src/redux/slice/Medication';
+import { messageType_enum } from '@src/component/ToastMessage/type';
+import { unstable_batchedUpdates } from 'react-dom';
 
-const Cmt1: FC<{ isLoading: boolean; data: MedicationCommentField | undefined }> = ({ isLoading, data }) => {
-    const handleSend = () => {};
+const Cmt1: FC<{ isLoading: boolean; data: MedicationField; dataComment: MedicationCommentField }> = ({
+    isLoading,
+    data,
+    dataComment,
+}) => {
+    const dispatch = useDispatch<AppDispatch>();
+    const [isReply, setIsReply] = useState<boolean>(false);
+    const [newCmt, setNewCmt] = useState<string>('');
+    const [createMedicationComment] = useCreateMedicationCommentMutation();
+
+    const handleReply = () => {
+        setIsReply(true);
+    };
+
+    const handleCloseCmtInput = () => {
+        setIsReply(false);
+    };
+
+    const handleNewCmtChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setNewCmt(value);
+    };
+
+    const handleSend = () => {
+        const createMedicationCommentBody: CreateMedicationCommentBodyField = {
+            content: newCmt,
+            level: 1,
+            medicationCommentId: dataComment.id,
+            medicationId: data.id,
+            accountId: -1,
+        };
+
+        createMedicationComment(createMedicationCommentBody)
+            .then((res) => {
+                const resData = res.data;
+                if (resData?.isSuccess && resData.data) {
+                    const data2 = resData.data;
+                    unstable_batchedUpdates(() => {
+                        dispatch(
+                            setData_toastMessage({
+                                type: messageType_enum.SUCCESS,
+                                message: 'Bạn vừa đăng 1 bình luận !',
+                            })
+                        );
+                        dispatch(setNewCmt2(data2));
+                    });
+                }
+            })
+            .catch((err) => console.error(err));
+    };
 
     return (
         <div className={style.parent}>
@@ -35,7 +89,7 @@ const Cmt1: FC<{ isLoading: boolean; data: MedicationCommentField | undefined }>
                         {isLoading ? (
                             <Skeleton className={style.contentLoading} />
                         ) : (
-                            <div className={style.content}>{data?.content}</div>
+                            <div className={style.content}>{dataComment.content}</div>
                         )}
                         <div className={style.btnsContainer}>
                             <div className={style.btnContainer}>
@@ -47,7 +101,7 @@ const Cmt1: FC<{ isLoading: boolean; data: MedicationCommentField | undefined }>
                                 {isLoading ? (
                                     <Skeleton className={style.btnTxtLoading} />
                                 ) : (
-                                    <div className={style.btnTxt}>{data?.likeAmount}</div>
+                                    <div className={style.btnTxt}>{dataComment.likeAmount}</div>
                                 )}
                             </div>
                             <div className={style.btnContainer}>
@@ -59,14 +113,14 @@ const Cmt1: FC<{ isLoading: boolean; data: MedicationCommentField | undefined }>
                                 {isLoading ? (
                                     <Skeleton className={style.btnTxtLoading} />
                                 ) : (
-                                    <div className={style.btnTxt}>{data?.dislikeAmount}</div>
+                                    <div className={style.btnTxt}>{dataComment.dislikeAmount}</div>
                                 )}
                             </div>
                             <div className={style.btnContainer}>
                                 {isLoading ? (
                                     <Skeleton className={style.btnSvgLoading} />
                                 ) : (
-                                    <RiReplyFill className={style.btnSvg} title={REPLY} />
+                                    <RiReplyFill className={style.btnSvg} onClick={() => handleReply()} title={REPLY} />
                                 )}
                                 {/* {isLoading ? (
                                 <Skeleton className={style.btnTxtLoading} />
@@ -81,12 +135,15 @@ const Cmt1: FC<{ isLoading: boolean; data: MedicationCommentField | undefined }>
                     {isLoading ? <Skeleton className={style.menuLoading} /> : <BsThreeDots className={style.menu} />}
                 </div>
             </div>
-            <div className={style.replyContainer}>
-                <input placeholder={COMMENT} />
-                <div>
-                    <IoMdSend onClick={() => handleSend()} title={SEND} />
+            {isReply && (
+                <div className={style.replyContainer}>
+                    <input value={newCmt} onChange={(e) => handleNewCmtChange(e)} placeholder={COMMENT} />
+                    <div>
+                        <IoMdClose onClick={() => handleCloseCmtInput()} title={CLOSE} />
+                        <IoMdSend onClick={() => handleSend()} title={SEND} />
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };

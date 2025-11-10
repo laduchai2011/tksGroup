@@ -6,11 +6,12 @@ import Skeleton from '@src/component/Skeleton';
 import AComment from './component/AComment';
 import { MedicationField, CreateMedicationCommentBodyField, MedicationCommentField } from '@src/dataStruct/medication';
 import { useCreateMedicationCommentMutation } from '@src/redux/query/medicationRTK';
-import { AppDispatch } from '@src/redux';
-import { useDispatch } from 'react-redux';
-import { setData_toastMessage } from '@src/redux/slice/Medication';
+import { AppDispatch, RootState } from '@src/redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setData_toastMessage, setNewCmt1 } from '@src/redux/slice/Medication';
 import { messageType_enum } from '@src/component/ToastMessage/type';
 import { useGetMedicationCommentsQuery } from '@src/redux/query/medicationRTK';
+import { unstable_batchedUpdates } from 'react-dom';
 
 const Comment: FC<{ isLoading: boolean; data: MedicationField | undefined }> = ({ isLoading, data }) => {
     const dispatch = useDispatch<AppDispatch>();
@@ -19,6 +20,9 @@ const Comment: FC<{ isLoading: boolean; data: MedicationField | undefined }> = (
     const [newComment, setNewComment] = useState<string>('');
     const [comments, setComments] = useState<MedicationCommentField[]>([]);
     const [page, setPage] = useState<number>(1);
+    const newCmt1: MedicationCommentField | undefined = useSelector(
+        (state: RootState) => state.MedicationSlice.newCmt1
+    );
 
     const [createMedicationComment] = useCreateMedicationCommentMutation();
 
@@ -54,12 +58,6 @@ const Comment: FC<{ isLoading: boolean; data: MedicationField | undefined }> = (
     useEffect(() => {
         if (isError_medicationComments && error_medicationComments) {
             console.error(error_medicationComments);
-            // dispatch(
-            //     setData_toastMessage({
-            //         type: messageType_enum.SUCCESS,
-            //         message: 'Lấy dữ liệu KHÔNG thành công !',
-            //     })
-            // );
         }
     }, [dispatch, isError_medicationComments, error_medicationComments]);
     useEffect(() => {
@@ -68,11 +66,20 @@ const Comment: FC<{ isLoading: boolean; data: MedicationField | undefined }> = (
     useEffect(() => {
         const resData = data_medicationComments;
         if (resData?.isSuccess && resData.data) {
-            // const data1 = comments.concat(resData.data.items);
             const data1 = resData.data.items;
             setComments((pre) => pre.concat(data1));
         }
     }, [data_medicationComments, data]);
+
+    useEffect(() => {
+        if (newCmt1) {
+            setComments((pre) => [newCmt1, ...pre]);
+        }
+    }, [newCmt1]);
+
+    useEffect(() => {
+        console.log(1111, comments);
+    }, [comments]);
 
     const handleInputComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const value = e.target.value;
@@ -94,12 +101,16 @@ const Comment: FC<{ isLoading: boolean; data: MedicationField | undefined }> = (
             .then((res) => {
                 const resData = res.data;
                 if (resData?.isSuccess && resData.data) {
-                    dispatch(
-                        setData_toastMessage({
-                            type: messageType_enum.SUCCESS,
-                            message: 'Bạn vừa đăng 1 bình luận !',
-                        })
-                    );
+                    const data2 = resData.data;
+                    unstable_batchedUpdates(() => {
+                        dispatch(
+                            setData_toastMessage({
+                                type: messageType_enum.SUCCESS,
+                                message: 'Bạn vừa đăng 1 bình luận !',
+                            })
+                        );
+                        dispatch(setNewCmt1(data2));
+                    });
                 }
             })
             .catch((err) => console.error(err));
@@ -111,8 +122,8 @@ const Comment: FC<{ isLoading: boolean; data: MedicationField | undefined }> = (
 
     const list_comment = useMemo(() => {
         if (!data) return;
-        return comments.map((data1, index) => (
-            <AComment key={index} isLoading={isLoading} data={data} dataComment={data1} />
+        return comments.map((data1) => (
+            <AComment key={data1.id} isLoading={isLoading} data={data} dataComment={data1} />
         ));
     }, [data, comments, isLoading]);
 

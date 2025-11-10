@@ -84,7 +84,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE GetMedicationComments
+ALTER PROCEDURE GetMedicationComments
 	@page INT,
     @size INT,
 	@level INT,
@@ -95,7 +95,7 @@ BEGIN
 	-- Tập kết quả 1: dữ liệu phân trang
     WITH medicationComments AS (
         SELECT mc.*,
-			ROW_NUMBER() OVER (ORDER BY mc.id DESC) AS rn
+			ROW_NUMBER() OVER (ORDER BY mc.id ASC) AS rn
         FROM dbo.medication_comment AS mc
 		WHERE 
 			status = 'normal' 
