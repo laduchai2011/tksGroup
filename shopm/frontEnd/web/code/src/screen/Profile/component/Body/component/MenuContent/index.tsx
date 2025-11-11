@@ -1,6 +1,7 @@
 import style from './style.module.scss';
 import Diary_Post from './component/DiaryContainer/Diary_Post';
-import Diary from './component/DiaryContainer/Diary';
+// import Diary from './component/DiaryContainer/Diary';
+import Diarys from './component/DiaryContainer/Diarys';
 
 const MenuContent = () => {
     return (
@@ -10,7 +11,7 @@ const MenuContent = () => {
                     <Diary_Post />
                 </div>
                 <div>
-                    <Diary />
+                    <Diarys />
                 </div>
             </div>
         </div>

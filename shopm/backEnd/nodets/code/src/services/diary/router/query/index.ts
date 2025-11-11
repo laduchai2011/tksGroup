@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 import dotenv from 'dotenv';
 // import Handle_GetAMedication from './handle/GetAMedication';
-// import Handle_GetMedications from './handle/GetMedications';
+import Handle_GetDiarys from './handle/GetDiarys';
 // import Handle_GetAMedicationImage from './handle/GetAMedicationImage';
 // import Handle_GetAMedicationVideo from './handle/GetAMedicationVideo';
 // import Handle_GetAllMedicationImages from './handle/GetAllMedicationImages';
@@ -12,7 +12,7 @@ dotenv.config();
 const router_query_diary: Router = express.Router();
 
 // const handle_getAMedication = new Handle_GetAMedication();
-// const handle_getMedications = new Handle_GetMedications();
+const handle_getDiarys = new Handle_GetDiarys();
 // const handle_getAMedicationImage = new Handle_GetAMedicationImage();
 // const handle_getAMedicationVideo = new Handle_GetAMedicationVideo();
 // const handle_getAllMedicationImages = new Handle_GetAllMedicationImages();
@@ -21,7 +21,7 @@ const router_query_diary: Router = express.Router();
 
 // router_query_medication.post('/getAMedication', handle_getAMedication.main);
 
-// router_query_medication.post('/getMedications', handle_getMedications.main);
+router_query_diary.post('/getDiarys', handle_getDiarys.main);
 
 // router_query_medication.post('/getAMedicationImage', handle_getAMedicationImage.main);
 

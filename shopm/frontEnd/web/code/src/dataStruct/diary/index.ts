@@ -31,3 +31,15 @@ export interface CreateDiaryBodyField {
     images: DiaryImageField[];
     videos: DiaryVideoField[];
 }
+
+export interface DiaryBodyField {
+    page: number;
+    size: number;
+    accountId?: number;
+    id?: number;
+}
+
+export interface PagedDiaryField {
+    items: DiaryField[];
+    totalCount: number;
+}

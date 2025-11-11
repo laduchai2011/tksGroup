@@ -11,7 +11,7 @@ import { useCreateDiaryMutation } from '@src/redux/query/diaryRTK';
 import { AppDispatch } from '@src/redux';
 import { useDispatch } from 'react-redux';
 import { unstable_batchedUpdates } from 'react-dom';
-import { setData_toastMessage } from '@src/redux/slice/Profile';
+import { setData_toastMessage, setShow_dialogLoading } from '@src/redux/slice/Profile';
 import { messageType_enum } from '@src/component/ToastMessage/type';
 
 const Diary_Post = () => {
@@ -80,6 +80,7 @@ const Diary_Post = () => {
             videos: [],
         };
 
+        dispatch(setShow_dialogLoading(true));
         createDiary(createDiaryBody)
             .then((res) => {
                 const resData = res.data;
@@ -97,6 +98,9 @@ const Diary_Post = () => {
             })
             .catch((err) => {
                 console.error(err);
+            })
+            .finally(() => {
+                dispatch(setShow_dialogLoading(false));
             });
     };
 

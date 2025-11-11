@@ -1,0 +1,61 @@
+@use 'src/utility/style/mixin.scss' as *;
+
+.parent {
+    @include center-of-row;
+    justify-content: space-between;
+    height: 50px;
+    width: 100%;
+    box-sizing: border-box;
+    padding-bottom: 5px;
+    border-bottom: 1px solid gray;
+
+    > div {
+        height: 100%;
+        width: calc(100% / 3);
+    }
+
+    > div:nth-child(1) {
+        @include center-of-row;
+        width: 80%;
+
+        > img {
+            height: 100%;
+            aspect-ratio: 1 / 1;
+        }
+
+        > div {
+            > div:nth-child(1) {
+                font-size: 1.2rem;
+                font-weight: 600;
+                flex-grow: 1;
+                @include center-of-row;
+                margin: 0 10px;
+                @include line-clamp(1);
+            }
+
+            > div:nth-child(2) {
+                margin: 0 10px;
+                font-size: 0.8rem;
+                font-style: italic;
+                flex-grow: 1;
+            }
+        }
+    }
+
+    > div:nth-child(2) {
+        @include center-of-row;
+        justify-content: flex-end;
+        width: 20%;
+
+        > svg {
+            cursor: pointer;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+
+            &:hover {
+                background-color: rgb(226, 226, 226);
+            }
+        }
+    }
+}

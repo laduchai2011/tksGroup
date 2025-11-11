@@ -266,8 +266,9 @@ import postcss from 'rollup-plugin-postcss';
 import postcssPresetEnv from 'postcss-preset-env';
 import autoprefixer from 'autoprefixer';
 import url from '@rollup/plugin-url';
-// import nodePolyfills from 'rollup-plugin-node-polyfills';
-// import polyfillNode from 'rollup-plugin-polyfill-node';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 const getLocalIp = () => {
     const interfaces = os.networkInterfaces();
@@ -284,7 +285,11 @@ const getLocalIp = () => {
 const PORT = 3000;
 const HOST = getLocalIp();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const entries = [
+    { find: '@src', replacement: path.resolve(__dirname, 'src') },
     { find: '@src', replacement: 'src' },
     { find: 'stream', replacement: 'stream-browserify' },
 ];
