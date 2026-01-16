@@ -9,11 +9,13 @@
         "lint:fix": "npx eslint . --ext .js,.jsx,.ts,.tsx --fix",
         "lint:css": "npx stylelint '**/*.{css,pcss}'",
         "build:dev": "cross-env NODE_ENV=development rollup --config --watch",
+        "build:test": "cross-env NODE_ENV=test rollup --config --watch",
         "build:prod": "cross-env NODE_ENV=production rollup --config",
         "rollup:watch": "rollup -c --watch",
         "lint:dev": "concurrently \"npm run lint:fix\" \"npm run lint:css\" \"node watch-eslint.js\"",
         "re-lint:dev": "concurrently \"npm run lint:fix\" \"npm run lint:css\"",
         "dev": "run-p build:dev lint:dev lint:css",
+        "dev_test": "run-p build:test",
         "build": "npm run build:prod"
     },
     "keywords": [],

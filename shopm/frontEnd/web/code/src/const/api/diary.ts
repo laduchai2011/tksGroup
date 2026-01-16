@@ -1,9 +1,14 @@
-import { BASE_URL } from './baseUrl';
+import { getBaseUrl } from './baseUrl';
 
-const isProduct = process.env.NODE_ENV === 'production';
-const apiString = isProduct ? '' : '/api';
+// const isProduct = process.env.NODE_ENV === 'production';
+// const apiString = isProduct ? '' : '/api';
+
+// export const DIARY_API = {
+//     CREATE_DIARY: `${BASE_URL}${apiString}/service_diary/mutate/createDiary`,
+//     GET_DIARYS: `${BASE_URL}${apiString}/service_diary/query/getDiarys`,
+// };
 
 export const DIARY_API = {
-    CREATE_DIARY: `${BASE_URL}${apiString}/service_diary/mutate/createDiary`,
-    GET_DIARYS: `${BASE_URL}${apiString}/service_diary/query/getDiarys`,
+    CREATE_DIARY: `${getBaseUrl().api}/service_diary/mutate/createDiary`,
+    GET_DIARYS: `${getBaseUrl().api}/service_diary/query/getDiarys`,
 };

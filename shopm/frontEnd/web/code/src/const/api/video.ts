@@ -1,8 +1,12 @@
-import { BASE_URL } from './baseUrl';
+import { getBaseUrl } from './baseUrl';
 
-const isProduct = process.env.NODE_ENV === 'production';
-const apiString = isProduct ? '' : '/api';
+// const isProduct = process.env.NODE_ENV === 'production';
+// const apiString = isProduct ? '' : '/api';
+
+// export const VIDEO_API = {
+//     UPLOAD_MULTIPLE_VIDEOS: `${BASE_URL}${apiString}/service_video/mutate/uploadMultipleVideos`,
+// };
 
 export const VIDEO_API = {
-    UPLOAD_MULTIPLE_VIDEOS: `${BASE_URL}${apiString}/service_video/mutate/uploadMultipleVideos`,
+    UPLOAD_MULTIPLE_VIDEOS: `${getBaseUrl().upload}/service_video/mutate/uploadMultipleVideos`,
 };

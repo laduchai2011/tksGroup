@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE GetMedications
 	@page INT,
     @size INT,
-    @userId INT
+    @accountId INT
 AS
 BEGIN
 	-- Tập kết quả 1: dữ liệu phân trang
@@ -11,7 +11,7 @@ BEGIN
         FROM dbo.medication AS m
 		WHERE 
 			status = 'normal' 
-			AND (@userId IS NULL OR m.userId = @userId) 
+			AND (@accountId IS NULL OR m.accountId = @accountId) 
     )
     SELECT *
     FROM medications
@@ -22,7 +22,7 @@ BEGIN
 	FROM dbo.medication AS m
 		WHERE 
 			status = 'normal' 
-			AND (@userId IS NULL OR m.userId = @userId) 
+			AND (@accountId IS NULL OR m.accountId = @accountId) 
 END
 GO
 
@@ -34,7 +34,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE GetAllMedicationImages
+CREATE PROCEDURE GetAllMedicationImages
     @medicationId INT
 AS
 BEGIN
@@ -48,7 +48,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE GetAllMedicationVideos
+CREATE PROCEDURE GetAllMedicationVideos
     @medicationId INT
 AS
 BEGIN
@@ -84,7 +84,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE GetMedicationComments
+CREATE PROCEDURE GetMedicationComments
 	@page INT,
     @size INT,
 	@level INT,

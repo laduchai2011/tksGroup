@@ -1,4 +1,4 @@
-ALTER PROCEDURE CreateShoppingCart
+CREATE PROCEDURE CreateShoppingCart
 	@name NVARCHAR(255),
 	@accountId INT
 AS

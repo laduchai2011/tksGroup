@@ -22,10 +22,10 @@ import {
 import { AImageFileField, AVideoFileField } from '@src/dataStruct/photo';
 import { MyResponse } from '@src/dataStruct/response';
 import { useCreateMedicationMutation } from '@src/redux/query/medicationRTK';
-import { BASE_URL } from '@src/const/api/baseUrl';
+import { getBaseUrl } from '@src/const/api/baseUrl';
 import { IMAGE_API } from '@src/const/api/image';
 import { VIDEO_API } from '@src/const/api/video';
-import axiosInstance from '@src/api/axiosInstance';
+import { axiosInstanceUpload } from '@src/api/axiosInstance';
 
 const isProduct = process.env.NODE_ENV === 'production';
 const apiString = isProduct ? '' : '/api';
@@ -134,7 +134,7 @@ const Body = () => {
         });
 
         try {
-            const res = await axiosInstance.post<MyResponse<AImageFileField[]>>(
+            const res = await axiosInstanceUpload.post<MyResponse<AImageFileField[]>>(
                 IMAGE_API.UPLOAD_MULTIPLE_IMAGE, // hoặc vẫn là UPLOAD_AIMAGE nếu backend tự detect
                 formData,
                 {
@@ -167,7 +167,7 @@ const Body = () => {
         });
 
         try {
-            const res = await axiosInstance.post<MyResponse<AVideoFileField[]>>(
+            const res = await axiosInstanceUpload.post<MyResponse<AVideoFileField[]>>(
                 VIDEO_API.UPLOAD_MULTIPLE_VIDEOS,
                 formData,
                 {
@@ -258,7 +258,7 @@ const Body = () => {
         }
         const imageUrls: MedicationImageField[] = [];
         for (let i: number = 0; i < imageFiles.length; i++) {
-            const url = `${BASE_URL}${apiString}/service_image/store/${imageFiles[i].filename}`;
+            const url = `${getBaseUrl().upload}/service_image/store/${imageFiles[i].filename}`;
             const aImage: MedicationImageField = {
                 id: -1,
                 url: url,
@@ -287,7 +287,7 @@ const Body = () => {
         const videoUrls: MedicationVideoField[] = [];
         for (let i: number = 0; i < videoFiles.length; i++) {
             // const url = `${BASE_URL}${apiString}/service_video/store/watch?id=${videoFiles[i].savedName}`;
-            const url = `${BASE_URL}${apiString}/service_video/store/${videoFiles[i].savedName}`;
+            const url = `${getBaseUrl().upload}/service_video/store/${videoFiles[i].savedName}`;
             const aVideo: MedicationVideoField = {
                 id: -1,
                 url: url,

@@ -13,7 +13,7 @@ INSERT INTO
     )
 VALUES
     (
-        0,
+        1,
         'laduchai',
         '123',
         '0789860854',

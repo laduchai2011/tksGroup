@@ -1,17 +1,23 @@
 import axios from 'axios';
-import { BASE_URL } from '@src/const/api/baseUrl';
+import { getBaseUrl } from '@src/const/api/baseUrl';
 
+// const isProduct = process.env.NODE_ENV === 'production';
+// const apiString = isProduct ? "" : "/api"
 
-const isProduct = process.env.NODE_ENV === 'production';
-const apiString = isProduct ? "" : "/api"
-
-const axiosInstance = axios.create({
-    baseURL: `${BASE_URL}${apiString}`,
+export const axiosInstanceApi = axios.create({
+    baseURL: `${getBaseUrl().api}`,
     timeout: 5000,
     headers: {
         'Content-Type': 'application/json',
     },
-    withCredentials: true
+    withCredentials: true,
 });
 
-export default axiosInstance;
+export const axiosInstanceUpload = axios.create({
+    baseURL: `${getBaseUrl().upload}`,
+    timeout: 5000,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    withCredentials: true,
+});

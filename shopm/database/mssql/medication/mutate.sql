@@ -21,7 +21,7 @@ CREATE TYPE MedicationVideoType AS TABLE (
 );
 GO
 
-ALTER PROCEDURE CreateMedication
+CREATE PROCEDURE CreateMedication
 	@title NVARCHAR(255),
 	@type NVARCHAR(255),
 	@typeGroup NVARCHAR(255),
@@ -31,7 +31,7 @@ ALTER PROCEDURE CreateMedication
 	@amount INT,
 	@discount FLOAT,
 	@price FLOAT,
-	@userId INT,
+	@accountId INT,
 	@medicationImage MedicationImageType READONLY,
 	@medicationVideo MedicationVideoType READONLY
 AS
@@ -43,8 +43,8 @@ BEGIN
 		DECLARE @newMedicationId INT;
 
 		-- Thêm medication
-        INSERT INTO medication (title, type, typeGroup, information, averageRating, rateCount, amount, discount, price, status, userId, updateTime, createTime)
-        VALUES (@title, @type, @typeGroup, @information, @averageRating, @rateCount, @amount, @discount, @price, 'normal', @userId, SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET());
+        INSERT INTO medication (title, type, typeGroup, information, averageRating, rateCount, amount, discount, price, status, accountId, updateTime, createTime)
+        VALUES (@title, @type, @typeGroup, @information, @averageRating, @rateCount, @amount, @discount, @price, 'normal', @accountId, SYSDATETIMEOFFSET(), SYSDATETIMEOFFSET());
 
 		SET @newMedicationId = SCOPE_IDENTITY();
 
@@ -71,7 +71,7 @@ BEGIN
 END;
 GO
 
-ALTER PROCEDURE CreateMedicationComment
+CREATE PROCEDURE CreateMedicationComment
 	@content NVARCHAR(255),
 	@level INT,
 	@medicationCommentId INT,
