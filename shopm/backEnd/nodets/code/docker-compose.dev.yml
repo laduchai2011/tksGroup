@@ -1,0 +1,28 @@
+services:
+    api:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        container_name: nodeserver_container
+        hostname: nodeserver_container
+        restart: unless-stopped
+        networks:
+            - network_shopm
+        working_dir: /app
+        ports:
+            - '4000:4000'
+        volumes:
+            - .:/app
+            - node_modules:/app/node_modules
+        command: sh -c "npm install && npm run dev_legacy"
+        environment:
+            NODE_ENV: development
+            PORT: 4000
+            SERVICES: image,video,account,medication,order_medication,shoppingCart,diary
+
+networks:
+    network_shopm:
+        external: true
+
+volumes:
+    node_modules:

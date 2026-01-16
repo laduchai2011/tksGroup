@@ -7,7 +7,9 @@
         "build": "npx tsc",
         "start": "node dist/index.js",
         "dev": "nodemon",
-        "lint": "npx eslint . --fix src --ext .ts"
+        "dev_legacy": "nodemon --legacy-watch src/index.ts",
+        "lint": "npx eslint . --fix src --ext .ts",
+        "lint:watch": "nodemon --watch src --ext ts --exec \"npm run lint\""
     },
     "keywords": [],
     "author": "",

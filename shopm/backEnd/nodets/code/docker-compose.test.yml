@@ -1,0 +1,50 @@
+services:
+    api:
+        build:
+            context: .
+            dockerfile: Dockerfile.test
+        container_name: api_container
+        hostname: api_container
+        restart: unless-stopped
+        networks:
+            - network_shopm
+        working_dir: /app
+        ports:
+            - '4000:4000'
+        volumes:
+            - .:/app
+            - node_modules_api:/app/node_modules
+        command: sh -c "npm install && npm run dev_legacy"
+        environment:
+            NODE_ENV: test
+            PORT: 4000
+            SERVICES: account,medication,order_medication,shoppingCart,diary
+
+    upload:
+        build:
+            context: .
+            dockerfile: Dockerfile.test
+        container_name: upload_container
+        hostname: upload_container
+        restart: unless-stopped
+        networks:
+            - network_shopm
+        working_dir: /app
+        ports:
+            - '4001:4001'
+        volumes:
+            - .:/app
+            - node_modules_upload:/app/node_modules
+        command: sh -c "npm install && npm run dev_legacy"
+        environment:
+            NODE_ENV: test
+            PORT: 4001
+            SERVICES: image,video
+
+networks:
+    network_shopm:
+        external: true
+
+volumes:
+    node_modules_api:
+    node_modules_upload:

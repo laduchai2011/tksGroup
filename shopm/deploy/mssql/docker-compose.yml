@@ -1,0 +1,37 @@
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql_container
+    hostname: mssql_container
+    restart: unless-stopped
+
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "201195laducHai"
+      MSSQL_PID: "Evaluation"
+      MSSQL_MEMORY_LIMIT_MB: "3072"
+
+    ports:
+      - "1433:1433"
+
+    networks:
+      - network_shopm
+
+    volumes:
+      # - /root/sql_data:/var/opt/mssql
+      - sql_data:/var/opt/mssql
+
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: "1.0"
+    #       memory: 4G
+    mem_limit: 4g
+    cpus: 1.5
+
+networks:
+  network_shopm:
+    external: true
+
+volumes:
+  sql_data:
